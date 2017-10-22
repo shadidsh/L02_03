@@ -10,12 +10,12 @@ public class Main {
 	    System.out.println("Type exit to terminate program");
 		while(true) {
 		    try {
-		    	System.out.println("Provoid a question: ");
+		    	System.out.println("Provide a question: ");
 		    	question = bRead.readLine();
 		    	if(question.equals("exit")) {
 		    		System.exit(0);
 		    	}
-		    	System.out.println("Provoid an answer : ");
+		    	System.out.println("Provide an answer : ");
 		    	answer = bRead.readLine();
 		    	if(answer.equals("exit")) {
 		    		System.exit(0);

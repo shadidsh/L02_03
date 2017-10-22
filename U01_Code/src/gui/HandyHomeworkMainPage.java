@@ -60,21 +60,21 @@ public class HandyHomeworkMainPage extends JFrame {
 		contentPane.setLayout(sl_contentPane);
 		
 		JLabel lblWelcome = new JLabel("Choose one of the following:");
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcome, -159, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, lblWelcome, -152, SpringLayout.EAST, contentPane);
 		contentPane.add(lblWelcome);
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.setLayer(lblWelcome, 0);
 		
 		JButton buttonEnterQuestion = new JButton("Enter a question");
+		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonEnterQuestion, 132, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcome, -23, SpringLayout.NORTH, buttonEnterQuestion);
+		sl_contentPane.putConstraint(SpringLayout.EAST, lblWelcome, 0, SpringLayout.EAST, buttonEnterQuestion);
+		sl_contentPane.putConstraint(SpringLayout.EAST, buttonEnterQuestion, -166, SpringLayout.EAST, contentPane);
 		buttonEnterQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				new HHFormFrame().setVisible(true);
 			}
 		});
-		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonEnterQuestion, 18, SpringLayout.SOUTH, lblWelcome);
-		sl_contentPane.putConstraint(SpringLayout.WEST, buttonEnterQuestion, 172, SpringLayout.WEST, contentPane);
 		buttonEnterQuestion.setVerticalAlignment(SwingConstants.BOTTOM);
 		buttonEnterQuestion.setHorizontalAlignment(SwingConstants.RIGHT);
 	
@@ -82,10 +82,13 @@ public class HandyHomeworkMainPage extends JFrame {
 		contentPane.add(buttonEnterQuestion);
 		
 		JLabel lblWelcometoHH = new JLabel("Welcome to HandyHomework!");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblWelcometoHH, 32, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblWelcometoHH, 75, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcometoHH, -32, SpringLayout.NORTH, lblWelcome);
-		sl_contentPane.putConstraint(SpringLayout.EAST, lblWelcometoHH, -67, SpringLayout.EAST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, lblWelcometoHH, 26, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.WEST, lblWelcometoHH, 50, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcometoHH, -40, SpringLayout.NORTH, lblWelcome);
+		sl_contentPane.putConstraint(SpringLayout.EAST, lblWelcometoHH, -51, SpringLayout.EAST, contentPane);
+		lblWelcometoHH.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWelcometoHH.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblWelcometoHH.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblWelcometoHH.setFont(new Font("Georgia", Font.PLAIN, 25));
 		contentPane.add(lblWelcometoHH);
 	}
