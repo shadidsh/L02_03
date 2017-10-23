@@ -58,27 +58,24 @@ public class HandyHomeworkMainPage extends JFrame {
 		contentPane.setLayer(lblWelcome, 0);
 		
 		JButton buttonEnterQuestion = new JButton("Enter a question");
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcome, -23, SpringLayout.NORTH, buttonEnterQuestion);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcome, -27, SpringLayout.NORTH, buttonEnterQuestion);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonEnterQuestion, 126, SpringLayout.NORTH, contentPane);
 		buttonEnterQuestion.setMaximumSize(new Dimension(139, 23));
-		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonEnterQuestion, 132, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, buttonEnterQuestion, -166, SpringLayout.EAST, contentPane);
 		buttonEnterQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				new HHFormFrame().setVisible(true);
 			}
 		});
-		buttonEnterQuestion.setVerticalAlignment(SwingConstants.BOTTOM);
-		buttonEnterQuestion.setHorizontalAlignment(SwingConstants.RIGHT);
 	
 		buttonEnterQuestion.setFont(new Font("Tahoma", Font.BOLD, 13));
 		contentPane.add(buttonEnterQuestion);
 		
 		JLabel lblWelcometoHH = new JLabel("Welcome to HandyHomework!");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblWelcometoHH, 26, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblWelcometoHH, 50, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcometoHH, -40, SpringLayout.NORTH, lblWelcome);
-		sl_contentPane.putConstraint(SpringLayout.EAST, lblWelcometoHH, -51, SpringLayout.EAST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, lblWelcometoHH, 21, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.WEST, lblWelcometoHH, 52, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcometoHH, -24, SpringLayout.NORTH, lblWelcome);
+		sl_contentPane.putConstraint(SpringLayout.EAST, lblWelcometoHH, -49, SpringLayout.EAST, contentPane);
 		lblWelcometoHH.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcometoHH.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblWelcometoHH.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -86,9 +83,12 @@ public class HandyHomeworkMainPage extends JFrame {
 		contentPane.add(lblWelcometoHH);
 		
 		JButton savedQuestionsButton = new JButton("View Saved Questions");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, savedQuestionsButton, 24, SpringLayout.SOUTH, buttonEnterQuestion);
-		sl_contentPane.putConstraint(SpringLayout.WEST, savedQuestionsButton, -23, SpringLayout.WEST, lblWelcome);
+		sl_contentPane.putConstraint(SpringLayout.WEST, buttonEnterQuestion, 0, SpringLayout.WEST, savedQuestionsButton);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, buttonEnterQuestion, -12, SpringLayout.NORTH, savedQuestionsButton);
+		sl_contentPane.putConstraint(SpringLayout.EAST, buttonEnterQuestion, 0, SpringLayout.EAST, savedQuestionsButton);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, savedQuestionsButton, 180, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, savedQuestionsButton, -45, SpringLayout.SOUTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.WEST, savedQuestionsButton, -23, SpringLayout.WEST, lblWelcome);
 		sl_contentPane.putConstraint(SpringLayout.EAST, savedQuestionsButton, -121, SpringLayout.EAST, contentPane);
 		savedQuestionsButton.setPreferredSize(new Dimension(200, 23));
 		savedQuestionsButton.setMaximumSize(new Dimension(200, 23));
