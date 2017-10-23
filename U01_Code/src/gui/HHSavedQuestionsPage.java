@@ -1,18 +1,15 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
-import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
@@ -61,7 +58,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnMainMenu = new JButton("Main Menu");
-		btnMainMenu.setBounds(298, 216, 89, 23);
+		btnMainMenu.setBounds(298, 216, 120, 30);
 		contentPane.add(btnMainMenu);
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
