@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.EventQueue;
+import question.TextQuestion;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import question.TextQuestion;
 
 import javax.swing.SpringLayout;
 import javax.swing.JTextField;

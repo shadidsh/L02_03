@@ -1,7 +1,8 @@
 package gui;
+import question.TextQuestion;
+import db.DbConnection;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -9,6 +10,10 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -51,8 +56,26 @@ public class HHSavedQuestionsPage extends JFrame {
 		lblSavedQuestions.setBounds(232, 11, 175, 31);
 		contentPane.add(lblSavedQuestions);
 		
-		// when we can access the data base, check if there is anything in the db, if there is, use jLabel.setText("new Value"); to modify display
 		JLabel lblNewLabel = new JLabel("There are no saved questions");
+		
+		Connection conn = DbConnection.getConnection();
+		String res = "";
+		res = "<html>name question Answer<br>";
+			try {
+				PreparedStatement stat = conn.prepareStatement("SELECT * FROM textquestions;");
+				ResultSet Rs = stat.executeQuery();
+				
+				while (Rs.next()) {
+					res +=  Rs.getString(2) + "," +  Rs.getString(3) + "," + Rs.getString(4) + "<br>";
+				}	
+				
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			res += "</html>";
+		
+		// when we can access the data base, check if there is anything in the db, if there is, use jLabel.setText("new Value"); to modify display
+		lblNewLabel.setText(res);
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel.setBounds(10, 53, 397, 152);
 		contentPane.add(lblNewLabel);
