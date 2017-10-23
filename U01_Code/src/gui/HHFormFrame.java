@@ -2,7 +2,7 @@ package gui;
 
 import java.awt.EventQueue;
 import question.TextQuestion;
-
+import db.DbConnection;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -18,6 +18,10 @@ import javax.swing.JSpinner;
 import javax.swing.JScrollBar;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class HHFormFrame extends JFrame {
@@ -135,6 +139,28 @@ public class HHFormFrame extends JFrame {
 				else {	
 					TextQuestion question = new TextQuestion(name, questionContent, answer, value);
 					// add the question to database and produce successful/unsuccessful msg box
+					
+					Connection conn = DbConnection.getConnection();
+					
+					String insert = "INSERT INTO sware.textquestions " 
+					+ " VALUES(?, ?, ?, ?);";
+					try {
+						PreparedStatement seq = conn.prepareStatement("SELECT nextval('question_id') as bigint;");
+						ResultSet Rs = seq.executeQuery();
+						Rs.next();
+						Integer qid = Rs.getInt(1);
+						
+						PreparedStatement prepInsert = conn.prepareStatement(insert);
+						prepInsert.setInt(1, qid);
+						prepInsert.setString(2, name);
+						prepInsert.setString(3, questionContent);
+						prepInsert.setString(4, answer);
+						System.out.println(prepInsert.toString());
+						prepInsert.executeUpdate();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					
 					// confirm that the question was made
 					String message = question.getName() + "\nQuestion is: " + question.getQuestion();
 					message += "\nAnswer is: " + question.getAnswer() + "\nQuestion is worth " + question.getPoints() + " points";

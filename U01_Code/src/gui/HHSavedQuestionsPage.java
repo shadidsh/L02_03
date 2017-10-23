@@ -1,5 +1,4 @@
 package gui;
-import question.TextQuestion;
 import db.DbConnection;
 
 import java.awt.EventQueue;
@@ -62,18 +61,22 @@ public class HHSavedQuestionsPage extends JFrame {
 		String res = "";
 		res = "<html>name question Answer<br>";
 			try {
-				PreparedStatement stat = conn.prepareStatement("SELECT * FROM textquestions;");
+				PreparedStatement stat = conn.prepareStatement("SELECT * FROM sware.textquestions;");
 				ResultSet Rs = stat.executeQuery();
 				
 				while (Rs.next()) {
 					res +=  Rs.getString(2) + "," +  Rs.getString(3) + "," + Rs.getString(4) + "<br>";
-				}	
+				}
+				
+				Rs.close();
+				conn.close();
 				
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 			res += "</html>";
 		
+			
 		// when we can access the data base, check if there is anything in the db, if there is, use jLabel.setText("new Value"); to modify display
 		lblNewLabel.setText(res);
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
