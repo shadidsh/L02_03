@@ -25,6 +25,7 @@ import javax.swing.BoxLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
 import javax.swing.SpringLayout;
+import java.awt.Dimension;
 
 public class HandyHomeworkMainPage extends JFrame {
 
@@ -54,20 +55,24 @@ public class HandyHomeworkMainPage extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 300);
 		contentPane = new JLayeredPane();
+		contentPane.setMinimumSize(new Dimension(139, 23));
+		contentPane.setMaximumSize(new Dimension(139, 23));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		SpringLayout sl_contentPane = new SpringLayout();
 		contentPane.setLayout(sl_contentPane);
 		
 		JLabel lblWelcome = new JLabel("Choose one of the following:");
+		sl_contentPane.putConstraint(SpringLayout.WEST, lblWelcome, 156, SpringLayout.WEST, contentPane);
+		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		contentPane.add(lblWelcome);
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.setLayer(lblWelcome, 0);
 		
 		JButton buttonEnterQuestion = new JButton("Enter a question");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonEnterQuestion, 132, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcome, -23, SpringLayout.NORTH, buttonEnterQuestion);
-		sl_contentPane.putConstraint(SpringLayout.EAST, lblWelcome, 0, SpringLayout.EAST, buttonEnterQuestion);
+		buttonEnterQuestion.setMaximumSize(new Dimension(139, 23));
+		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonEnterQuestion, 132, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, buttonEnterQuestion, -166, SpringLayout.EAST, contentPane);
 		buttonEnterQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -78,7 +83,7 @@ public class HandyHomeworkMainPage extends JFrame {
 		buttonEnterQuestion.setVerticalAlignment(SwingConstants.BOTTOM);
 		buttonEnterQuestion.setHorizontalAlignment(SwingConstants.RIGHT);
 	
-		buttonEnterQuestion.setFont(new Font("Tahoma", Font.BOLD, 12));
+		buttonEnterQuestion.setFont(new Font("Tahoma", Font.BOLD, 13));
 		contentPane.add(buttonEnterQuestion);
 		
 		JLabel lblWelcometoHH = new JLabel("Welcome to HandyHomework!");
@@ -91,7 +96,22 @@ public class HandyHomeworkMainPage extends JFrame {
 		lblWelcometoHH.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblWelcometoHH.setFont(new Font("Georgia", Font.PLAIN, 25));
 		contentPane.add(lblWelcometoHH);
+		
+		JButton savedQuestionsButton = new JButton("View Saved Questions");
+		sl_contentPane.putConstraint(SpringLayout.NORTH, savedQuestionsButton, 24, SpringLayout.SOUTH, buttonEnterQuestion);
+		sl_contentPane.putConstraint(SpringLayout.WEST, savedQuestionsButton, -23, SpringLayout.WEST, lblWelcome);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, savedQuestionsButton, -45, SpringLayout.SOUTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, savedQuestionsButton, -121, SpringLayout.EAST, contentPane);
+		savedQuestionsButton.setPreferredSize(new Dimension(200, 23));
+		savedQuestionsButton.setMaximumSize(new Dimension(200, 23));
+		savedQuestionsButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+		savedQuestionsButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		contentPane.add(savedQuestionsButton);
+		savedQuestionsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent i) {
+				dispose();
+				new HHSavedQuestionsPage().setVisible(true);
+			}
+		});
 	}
-	
-
 }

@@ -32,10 +32,7 @@ public class HHFormFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField questionNameField;
 	private JTextField questionAnswerField;
-	private String name;
-	private String questionContent;
-	private String answer;
-	private int value;
+	
 
 	/**
 	 * Launch the application.
@@ -57,6 +54,7 @@ public class HHFormFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public HHFormFrame() {
+		setTitle("HandyHomework");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 500);
 		contentPane = new JPanel();
@@ -117,7 +115,7 @@ public class HHFormFrame extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.WEST, lblNumberOfMarks, 10, SpringLayout.WEST, contentPane);
 		contentPane.add(lblNumberOfMarks);
 		
-		JSpinner spinner = new JSpinner();///////////////
+		JSpinner spinner = new JSpinner();
 		sl_contentPane.putConstraint(SpringLayout.NORTH, spinner, -5, SpringLayout.NORTH, lblNumberOfMarks);
 		sl_contentPane.putConstraint(SpringLayout.WEST, spinner, 6, SpringLayout.EAST, lblNumberOfMarks);
 		contentPane.add(spinner);
@@ -132,21 +130,23 @@ public class HHFormFrame extends JFrame {
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					String name = String.valueOf(questionNameField.getText());
-					String questionContent = String.valueOf(questionContentField.getText());
-					String answer = String.valueOf(questionAnswerField.getText());
-					int value = (int) (spinner.getValue());
-				} catch (Exception emptyInput) {
-					System.out.println("One or more fields are empty");
+				String name = String.valueOf(questionNameField.getText());
+				String questionContent = String.valueOf(questionContentField.getText());
+				String answer = String.valueOf(questionAnswerField.getText());
+				int value = (int) (spinner.getValue());
+				System.out.println("question is :" + questionContent);
+				if (name.isEmpty() || questionContent.isEmpty() || answer.isEmpty()) {
+					JOptionPane.showMessageDialog(HHFormFrame.this, "One or more fields are empty");
 				}
-				TextQuestion question = new TextQuestion(name, questionContent, answer, value);
-				// add the question to database and produce successful/unsuccessful msg box
-				String message = question.getName() + "\nQuestion is: " + question.getQuestion();
-				message += "\nAnswer is: " + question.getAnswer() + "\nQuestion is worth " + question.getValue() + "points";
-				JOptionPane.showMessageDialog(HHFormFrame.this, message);
 				
-				// go to the confirmation page
+				else {	
+					TextQuestion question = new TextQuestion(name, questionContent, answer, value);
+					// add the question to database and produce successful/unsuccessful msg box
+					// confirm that the question was made
+					String message = question.getName() + "\nQuestion is: " + question.getQuestion();
+					message += "\nAnswer is: " + question.getAnswer() + "\nQuestion is worth " + question.getValue() + " points";
+					JOptionPane.showMessageDialog(HHFormFrame.this, message);
+				}
 			}
 		});
 		contentPane.add(btnSubmit);
