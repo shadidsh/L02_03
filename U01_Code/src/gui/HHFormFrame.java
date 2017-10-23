@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,12 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
-
-import net.codejava.swing.WaterApp;
 import question.TextQuestion;
 
 import javax.swing.SpringLayout;
@@ -144,7 +137,7 @@ public class HHFormFrame extends JFrame {
 					// add the question to database and produce successful/unsuccessful msg box
 					// confirm that the question was made
 					String message = question.getName() + "\nQuestion is: " + question.getQuestion();
-					message += "\nAnswer is: " + question.getAnswer() + "\nQuestion is worth " + question.getValue() + " points";
+					message += "\nAnswer is: " + question.getAnswer() + "\nQuestion is worth " + question.getPoints() + " points";
 					JOptionPane.showMessageDialog(HHFormFrame.this, message);
 				}
 			}

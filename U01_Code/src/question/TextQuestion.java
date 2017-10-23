@@ -1,15 +1,17 @@
 package question;
 
 public class TextQuestion extends QuestionAbstract<String>{
+	
 	private String name;
 	private String question;
 	private String answer;
-	private int value;
-	public TextQuestion(String name, String question, String answer, int value) {
+	private int points;
+	
+	public TextQuestion(String name, String question, String answer, int points) {
 		this.name = name;
 		this.question = question;
 		this.answer = answer;
-		this.value = value;
+		this.points = points;
 	}
 	public String getAnswer() {
 		return this.answer;
@@ -20,7 +22,7 @@ public class TextQuestion extends QuestionAbstract<String>{
 	public String getName() {
 		return this.name;
 	}
-	public int getValue() {
-		return this.value;
+	public int getPoints() {
+		return this.points;
 	}
 }
