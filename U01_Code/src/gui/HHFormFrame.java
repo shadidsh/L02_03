@@ -143,7 +143,7 @@ public class HHFormFrame extends JFrame {
 					Connection conn = DbConnection.getConnection();
 					
 					String insert = "INSERT INTO sware.textquestions " 
-					+ " VALUES(?, ?, ?, ?);";
+					+ " VALUES(?, ?, ?, ?, ?);";
 					try {
 						PreparedStatement seq = conn.prepareStatement("SELECT nextval('question_id') as bigint;");
 						ResultSet Rs = seq.executeQuery();
@@ -155,6 +155,7 @@ public class HHFormFrame extends JFrame {
 						prepInsert.setString(2, name);
 						prepInsert.setString(3, questionContent);
 						prepInsert.setString(4, answer);
+						prepInsert.setInt(5, value);
 						System.out.println(prepInsert.toString());
 						prepInsert.executeUpdate();
 					} catch (SQLException e1) {
