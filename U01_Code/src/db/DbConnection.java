@@ -30,12 +30,7 @@ public class DbConnection {
 		
 		try{
 			PreparedStatement stat = conn.prepareStatement("SELECT * FROM textquestions;");
-			
 			ResultSet Rs = stat.executeQuery();
-
-		//	while (Rs.next()) {
-		//		System.out.println(Rs.getInt(1) + " " + Rs.getString(2) + " " + Rs.getString(3) + " " + Rs.getString(4));
-		//	}
 			conn.close();
 		} catch(Exception ex) {
 			

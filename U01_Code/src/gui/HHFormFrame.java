@@ -159,6 +159,7 @@ public class HHFormFrame extends JFrame {
 						System.out.println(prepInsert.toString());
 						prepInsert.executeUpdate();
 					} catch (SQLException e1) {
+						System.out.println("Could not insert question into database."); 
 						e1.printStackTrace();
 					}
 					

@@ -1,5 +1,6 @@
 package gui;
 import db.DbConnection;
+import question.TextQuestion;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -22,17 +23,20 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.JTextField;
 
 public class HHSavedQuestionsPage extends JFrame {
 
 	private JPanel contentPane;
 	private JList listQuestion_1;
+	private JTextField questionAnswerField;
 
 	/**
 	 * Launch the application.
@@ -68,17 +72,17 @@ public class HHSavedQuestionsPage extends JFrame {
 		lblSavedQuestions.setBounds(150, 13, 175, 31);
 		contentPane.add(lblSavedQuestions);
 		
-		JLabel lblNewLabel = new JLabel("There are no saved questions");
+		JLabel lblQuestion = new JLabel("There are no saved questions");
+		JLabel lblPts = new JLabel("");
 		
 		Connection conn = DbConnection.getConnection();
 		String res = "";
+		
 		DefaultListModel<String> lstQuestion = new DefaultListModel<>();
-		
 		JList listQuestion = new JList<>(lstQuestion);
-
 		
-		res = "<html>name question Answer<br>";
-		ArrayList questions = new ArrayList();
+		//res = "<html>name question Answer<br>";
+		ArrayList<TextQuestion> questions = new ArrayList<TextQuestion>();
 			try {
 				PreparedStatement stat = conn.prepareStatement("SELECT * FROM sware.textquestions;");
 				ResultSet Rs = stat.executeQuery();				
@@ -88,15 +92,14 @@ public class HHSavedQuestionsPage extends JFrame {
 					String name = Rs.getString(2);
 					String questionContent = Rs.getString(3);
 					String answer = Rs.getString(4);
-					String value = Rs.getString(5);
+					Integer value = new Integer(Rs.getInt(5));
+					TextQuestion question = new TextQuestion(name, questionContent, answer, value);
 					
-					lstQuestion.addElement(name);
-					questions.add(name);
-					res +=  Rs.getString(2) + "," +  Rs.getString(3) + "," 
-							+ Rs.getString(4) + "," + Rs.getInt(5) +  "<br>";
+					lstQuestion.addElement(question.getName());
+					questions.add(question);
+					//res +=  Rs.getString(2) + "," +  Rs.getString(3) + "," 
+					//		+ Rs.getString(4) + "," + Rs.getInt(5) +  "<br>";
 				}
-				System.out.println(lstQuestion);
-				System.out.println(res);
 				
 				Rs.close();
 				conn.close();
@@ -104,28 +107,35 @@ public class HHSavedQuestionsPage extends JFrame {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			res += "</html>";
+			//res += "</html>";
 		
 			listQuestion.addListSelectionListener(new ListSelectionListener() {
 				public void valueChanged(ListSelectionEvent e) {
-					int ind = e.getFirstIndex();
-					System.out.println(questions.get(ind));
+					String res = "";
 					
+					JList list = (JList) e.getSource();
+					TextQuestion question = questions.get(list.getSelectedIndex());
+					
+					lblQuestion.setText(question.getQuestion());					
+					res = new Integer(question.getPoints()).toString();
+					lblPts.setText(res);
+					lblSavedQuestions.setText(question.getName());
+				
+					// need to pass this question into submit button, then check for answer
 					
 				}
 			});
-			listQuestion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);	
-
 			
 			
-		lblNewLabel.setText("");
-		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel.setBounds(181, 110, 397, 152);
-		contentPane.add(lblNewLabel);
-		
+			
+		listQuestion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);			
+		lblQuestion.setVerticalAlignment(SwingConstants.TOP);
+		lblQuestion.setBounds(150, 73, 201, 49);
+		contentPane.add(lblQuestion);		
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.setBounds(419, 307, 120, 30);
 		contentPane.add(btnMainMenu);
+		
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -134,7 +144,32 @@ public class HHSavedQuestionsPage extends JFrame {
 		});
 		
 		listQuestion.setBounds(12, 84, 100, 100);
-		contentPane.add(listQuestion);
+		contentPane.add(listQuestion);		
+		lblPts.setVerticalAlignment(SwingConstants.TOP);
+		lblPts.setBounds(277, 162, 190, 49);
+		contentPane.add(lblPts);
+		JButton btnView = new JButton("submit");
+		btnView.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String answer = String.valueOf(questionAnswerField.getText());
+				
+				if (answer.isEmpty()) {
+					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "One or more fields are empty");
+				}
+				else {
+					
+					//String message = "\nAnswer is: " + question.getAnswer() + "\nQuestion is worth " + question.getPoints() + " points";
+					
+					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, lblQuestion.getText());
+				}
+			}
+		});
+		btnView.setBounds(36, 257, 73, 25);
+		contentPane.add(btnView);		
+		questionAnswerField = new JTextField();
+		questionAnswerField.setColumns(10);
+		questionAnswerField.setBounds(163, 258, 234, 49);
+		contentPane.add(questionAnswerField);
 		
 		
 		
