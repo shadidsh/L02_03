@@ -37,6 +37,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	private JPanel contentPane;
 	private JList listQuestion_1;
 	private JTextField questionAnswerField;
+	private String questAnswer;
 
 	/**
 	 * Launch the application.
@@ -120,7 +121,7 @@ public class HHSavedQuestionsPage extends JFrame {
 					res = new Integer(question.getPoints()).toString();
 					lblPts.setText(res);
 					lblSavedQuestions.setText(question.getName());
-				
+					questAnswer = question.getAnswer();
 					// need to pass this question into submit button, then check for answer
 					
 				}
@@ -155,14 +156,18 @@ public class HHSavedQuestionsPage extends JFrame {
 				
 				if (answer.isEmpty()) {
 					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "One or more fields are empty");
+				} else if (lblQuestion.getText().length() == 0)  {
+						JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "One or more fields are empty");
+				} else if (questAnswer.compareTo(answer) == 0)  {
+					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Correct!!");
+				} else {
+					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Wrong!! Your answer is " + questAnswer + ", btw");
 				}
-				else {
 					
-					//String message = "\nAnswer is: " + question.getAnswer() + "\nQuestion is worth " + question.getPoints() + " points";
 					
-					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, lblQuestion.getText());
+					
+					
 				}
-			}
 		});
 		btnView.setBounds(36, 257, 73, 25);
 		contentPane.add(btnView);		
