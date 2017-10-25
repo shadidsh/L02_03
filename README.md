@@ -1,7 +1,11 @@
-# L02_03
-Welcome to the project repo for team SWare.
-## Team SWare
-[SWare's Team agreement](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_1/Project_Info.pdf) 
+# L02_03 - Team SWare
+Welcome to the Project Repo for Team SWare.
 
-# Backlog
-[User stories and Personas](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_2/Project_Backlog.pdf)
+[SWare's Team Agreement](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_1/Project_Info.pdf) 
+
+## Backlog
+[Project Backlog v1](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_3/Project_Backlog_v1.pdf)  
+[Sprint 01 Backlog](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_3/Sprint_01_Backlog.pdf)
+
+## Project Code
+[Source Folder](https://github.com/CSCC01F17/L02_03/tree/master/U01_Code/src)
