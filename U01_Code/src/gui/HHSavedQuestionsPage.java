@@ -31,6 +31,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextField;
+import javax.swing.JScrollBar;
+import java.awt.Component;
+import javax.swing.JScrollPane;
 
 public class HHSavedQuestionsPage extends JFrame {
 
@@ -73,8 +76,18 @@ public class HHSavedQuestionsPage extends JFrame {
 		lblSavedQuestions.setBounds(150, 13, 175, 31);
 		contentPane.add(lblSavedQuestions);
 		
-		JLabel lblQuestion = new JLabel("There are no saved questions");
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(36, 97, 190, 114);
+		contentPane.add(scrollPane);
+		
+		JLabel lblQuestion = new JLabel("Select a Question");
 		JLabel lblPts = new JLabel("");
+		lblPts.setAutoscrolls(true);
+		
+		JLabel questionTitle = new JLabel("");
+		questionTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
+		questionTitle.setBounds(266, 55, 175, 33);
+		contentPane.add(questionTitle);
 		
 		Connection conn = DbConnection.getConnection();
 		String res = "";
@@ -112,15 +125,15 @@ public class HHSavedQuestionsPage extends JFrame {
 		
 			listQuestion.addListSelectionListener(new ListSelectionListener() {
 				public void valueChanged(ListSelectionEvent e) {
-					String res = "";
+					String res = "<html>This question<br> is worth</html>";
 					
 					JList list = (JList) e.getSource();
 					TextQuestion question = questions.get(list.getSelectedIndex());
 					
 					lblQuestion.setText(question.getQuestion());					
-					res = new Integer(question.getPoints()).toString();
+					res = "<html>This question<br> is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;
 					lblPts.setText(res);
-					lblSavedQuestions.setText(question.getName());
+					questionTitle.setText(question.getName());
 					questAnswer = question.getAnswer();
 					// need to pass this question into submit button, then check for answer
 					
@@ -131,7 +144,7 @@ public class HHSavedQuestionsPage extends JFrame {
 			
 		listQuestion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);			
 		lblQuestion.setVerticalAlignment(SwingConstants.TOP);
-		lblQuestion.setBounds(150, 73, 201, 49);
+		lblQuestion.setBounds(266, 99, 201, 49);
 		contentPane.add(lblQuestion);		
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.setBounds(419, 307, 120, 30);
@@ -145,9 +158,9 @@ public class HHSavedQuestionsPage extends JFrame {
 		});
 		
 		listQuestion.setBounds(12, 84, 100, 100);
-		contentPane.add(listQuestion);		
+		scrollPane.setViewportView(listQuestion);
 		lblPts.setVerticalAlignment(SwingConstants.TOP);
-		lblPts.setBounds(277, 162, 190, 49);
+		lblPts.setBounds(10, 265, 120, 72);
 		contentPane.add(lblPts);
 		JButton btnView = new JButton("submit");
 		btnView.addActionListener(new ActionListener() {
@@ -169,12 +182,15 @@ public class HHSavedQuestionsPage extends JFrame {
 					
 				}
 		});
-		btnView.setBounds(36, 257, 73, 25);
+		btnView.setBounds(419, 265, 120, 31);
 		contentPane.add(btnView);		
 		questionAnswerField = new JTextField();
 		questionAnswerField.setColumns(10);
-		questionAnswerField.setBounds(163, 258, 234, 49);
+		questionAnswerField.setBounds(150, 258, 247, 79);
 		contentPane.add(questionAnswerField);
+		
+		
+		
 		
 		
 		
