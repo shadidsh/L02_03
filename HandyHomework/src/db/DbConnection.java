@@ -10,8 +10,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import com.sun.org.apache.bcel.internal.Constants;
-
 public class DbConnection {
 	private static String url = "jdbc:postgresql://swaredb.carzld1axpox.us-east-2.rds.amazonaws.com:5432/postgres";
 	private static String driverName = "org.postgresql.Driver"; 
