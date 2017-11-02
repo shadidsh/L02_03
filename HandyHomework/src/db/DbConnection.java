@@ -160,6 +160,34 @@ public class DbConnection {
     	}
     	
     }
+
+	/**
+	*
+	* @param forAssess id of the assessment for which this question is under
+	* @param name name of the question
+	* @param question the contents of the question
+	* @param points the number of points for this questions that contributes to this assessment 
+	*/
+	public static void insert_questions(int forAssess, String name, String question, int points) {
+		Connection conn = getConnection();
+
+		try{
+    		String insert = "INSERT INTO " + constants.Constants.DataConstants.QUESTIONS 
+    				+ "(name, aid, question, points) " +
+    				" VALUES(?,?,?,?)";
+			PreparedStatement stat = conn.prepareStatement(insert);
+			stat.setString(1, name);
+			stat.setInt(2, forAssess);
+			stat.setString(3, question);
+			stat.setInt(4, points);
+
+			ResultSet Rs = stat.executeQuery();
+			conn.close()			
+		} catch(Exception ex) {
+			conn.close()
+			System.out.println(ex.getMessage());  
+		}
+	}
     
 
 	public static void main(String[] args) {
