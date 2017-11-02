@@ -53,6 +53,7 @@ public class DbConnection {
     		
     		conn.close();
     	}catch(Exception ex) {
+			conn.close()
     		System.out.print(ex.getMessage());    		
     	}
     	
@@ -69,6 +70,7 @@ public class DbConnection {
     		
     		while (Rs.next()) {
     			// Create and return a list of question objects
+
     			String name = Rs.getString(3);
     			String question = Rs.getString(4);
     			Integer points = Rs.getInt(5);
@@ -77,14 +79,50 @@ public class DbConnection {
     		
     		conn.close();
     	}catch(Exception ex) {
+			conn.close()
     		System.out.println(ex.getMessage());    		
     	}
     	
     }
     
+
+	// in the future, something like assessments_for_course() will be used
+
+	 public static void all_assessments() {
+		Connection conn = getConnection();
+		String query = "Select * from " + constants.Constants.DataConstants.ASSESSMENTS
+
+		try {
+			PreparedStatement stat = conn.prepareStatement(query);
+			ResultSet Rs = stat.executeQuery();
+
+			while (Rs.next()) {
+    			// Create an assessment object
+			
+				String title = Rs.getString(2);
+				String name = Rs.getString(3);
+				Boolean isMult = Rs.getString(4);
+				Calender dueDate = Rs.getString(5); 
+				Boolean isOpt = Rs.getString(6);
+				float weight = Rs.getFloat(7);
+				System.out.println("title: " + title + ", name: " + name + ", ismult: " + isMult 
+					+ ", Due: " + dueDate + ", isOpt: " + isOpt + ", weight: " + weight);
+				}
+
+
+			conn.close()
+		} catch(Exception ex) {
+			conn.close()
+			System.out.println(ex.getMessage()); 
+		}
+	 }
+
+
+
     // insert a new assessment- assessment ids are randomly generated
+	// function overload can be used (if opt then exclude due or ismult, 
+	// and the isopt boolean, else include both)
     /**
-     * 
      * 
      * @param title the title of the assessment
      * @param name the name of the assessment
@@ -105,16 +143,10 @@ public class DbConnection {
     		PreparedStatement stat = conn.prepareStatement(insert);
     		stat.setString(1, title);
     		stat.setString(2, name);
-    			
 
-    		java.sql.Timestamp test = new java.sql.Timestamp(dueDate.getTimeInMillis());
-    		
-    		//java.sql.Date inDate = new java.sql.Date(dueDate.getInstance().getTime().getTime());
-    		
-    		//stat.setDate(3, inDate); 
-    		stat.setTimestamp(3, test);
-    		
-    		
+    		java.sql.Timestamp inDate = new java.sql.Timestamp(dueDate.getTimeInMillis());
+
+    		stat.setTimestamp(3, inDate);		
     		stat.setFloat(4, weight);
     		stat.setBoolean(5, isMult);
     		stat.setBoolean(6, isOpt);
@@ -123,12 +155,13 @@ public class DbConnection {
     		   		
     		conn.close();
     	}catch(Exception ex) {
+			conn.close()
     		System.out.println(ex.getMessage());    		
     	}
     	
     }
     
-    
+
 	public static void main(String[] args) {
 		 answers_for_question(1);		
 	
