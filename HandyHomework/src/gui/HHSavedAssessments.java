@@ -34,8 +34,7 @@ import question.TextQuestion;
 public class HHSavedAssessments extends JFrame {
 
 	private JPanel contentPane;
-	private JList listQuestion_1;
-	private JTextField questionAnswerField;
+	private JList list;
 	private String questAnswer;
 
 	/**
@@ -66,17 +65,17 @@ public class HHSavedAssessments extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblSavedQuestions = new JLabel("Saved Assessments");
-		lblSavedQuestions.setMaximumSize(new Dimension(100, 30));
-		lblSavedQuestions.setFont(new Font("Dialog", Font.ITALIC, 20));
-		lblSavedQuestions.setBounds(151, 13, 215, 31);
-		contentPane.add(lblSavedQuestions);
+		JLabel lblSavedAssessment = new JLabel("Saved Assessments");
+		lblSavedAssessment.setMaximumSize(new Dimension(100, 30));
+		lblSavedAssessment.setFont(new Font("Dialog", Font.ITALIC, 20));
+		lblSavedAssessment.setBounds(151, 13, 215, 31);
+		contentPane.add(lblSavedAssessment);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(36, 97, 190, 114);
+		scrollPane.setBounds(30, 97, 196, 240);
 		contentPane.add(scrollPane);
 		
-		JLabel lblQuestion = new JLabel("Select an Assessment");
+		JLabel lblAssessment = new JLabel("Select an Assessment");
 		JLabel lblPts = new JLabel("");
 		lblPts.setAutoscrolls(true);
 		
@@ -89,7 +88,6 @@ public class HHSavedAssessments extends JFrame {
 		String res = "";
 		
 		DefaultListModel<String> lstQuestion = new DefaultListModel<>();
-		JList listQuestion = new JList<>(lstQuestion);
 		
 		//res = "<html>name question Answer<br>";
 		ArrayList<TextQuestion> questions = new ArrayList<TextQuestion>();
@@ -117,31 +115,9 @@ public class HHSavedAssessments extends JFrame {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			//res += "</html>";
-		
-			listQuestion.addListSelectionListener(new ListSelectionListener() {
-				public void valueChanged(ListSelectionEvent e) {
-					String res = "<html>This question<br> is worth</html>";
-					
-					JList list = (JList) e.getSource();
-					TextQuestion question = questions.get(list.getSelectedIndex());
-					
-					lblQuestion.setText(question.getQuestion());					
-					res = "<html>This question<br> is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;
-					lblPts.setText(res);
-					assessmentTitle.setText(question.getName());
-					questAnswer = question.getAnswer();
-					// need to pass this question into submit button, then check for answer
-					
-				}
-			});
-			
-			
-			
-		listQuestion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);			
-		lblQuestion.setVerticalAlignment(SwingConstants.TOP);
-		lblQuestion.setBounds(266, 99, 201, 49);
-		contentPane.add(lblQuestion);		
+		lblAssessment.setVerticalAlignment(SwingConstants.TOP);
+		lblAssessment.setBounds(266, 99, 201, 139);
+		contentPane.add(lblAssessment);		
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.setBounds(419, 307, 120, 30);
 		contentPane.add(btnMainMenu);
@@ -152,39 +128,59 @@ public class HHSavedAssessments extends JFrame {
 				new HandyHomeworkMainPage().setVisible(true);
 			}
 		});
-		
-		listQuestion.setBounds(12, 84, 100, 100);
-		scrollPane.setViewportView(listQuestion);
 		lblPts.setVerticalAlignment(SwingConstants.TOP);
-		lblPts.setBounds(10, 265, 120, 72);
+		lblPts.setBounds(289, 265, 120, 72);
 		contentPane.add(lblPts);
 		JButton btnView = new JButton("Select");
 		btnView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String answer = String.valueOf(questionAnswerField.getText());
-				
-				if (answer.isEmpty()) {
-					JOptionPane.showMessageDialog(HHSavedAssessments.this, "One or more fields are empty");
-				} else if (lblQuestion.getText().length() == 0)  {
-						JOptionPane.showMessageDialog(HHSavedAssessments.this, "One or more fields are empty");
-				} else if (questAnswer.compareTo(answer) == 0)  {
-					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Correct!!");
-				} else {
-					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Wrong!! Your answer is " + questAnswer + ", btw");
-				}
-					
+//				
+//				String answer = String.valueOf(questionAnswerField.getText());
+//				////////////////////////////////// need to modify to pass info to view saved questions page
+//				if (answer.isEmpty()) {
+//					JOptionPane.showMessageDialog(HHSavedAssessments.this, "One or more fields are empty");
+//				} else if (lblAssessment.getText().length() == 0)  {
+//						JOptionPane.showMessageDialog(HHSavedAssessments.this, "One or more fields are empty");
+//				} else if (questAnswer.compareTo(answer) == 0)  {
+//					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Correct!!");
+//				} else {
+//					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Wrong!! Your answer is " + questAnswer + ", btw");
+//				}
+//					
 					
 					
 					
 				}
 		});
 		btnView.setBounds(419, 265, 120, 31);
-		contentPane.add(btnView);		
-		questionAnswerField = new JTextField();
-		questionAnswerField.setAlignmentY(Component.TOP_ALIGNMENT);
-		questionAnswerField.setColumns(10);
-		questionAnswerField.setBounds(150, 258, 247, 79);
-		contentPane.add(questionAnswerField);
+		contentPane.add(btnView);
+		JList listAssessment = new JList<>(lstQuestion);
+		contentPane.add(listAssessment);
+		//res += "</html>";
+		
+		listAssessment.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				String res = "<html>This question<br> is worth</html>";
+				////////////////////// needs to be modified when assessments class is added
+				JList list = (JList) e.getSource();
+				///
+				TextQuestion question = questions.get(list.getSelectedIndex());
+				
+				lblAssessment.setText(question.getQuestion());					
+				res = "<html>This question<br> is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;
+				lblPts.setText(res);
+				assessmentTitle.setText(question.getName());
+				questAnswer = question.getAnswer();
+				// need to pass this question into submit button, then check for answer
+				
+			}
+		});
+		
+		
+		
+		listAssessment.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);			
+		
+		listAssessment.setBounds(30, 97, 196, 239);
 		
 		
 		
