@@ -1,8 +1,5 @@
 package assessment;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import question.TextQuestion;
 
 public class Assessment {
