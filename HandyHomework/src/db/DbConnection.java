@@ -27,10 +27,16 @@ public class DbConnection {
 	
 	public static void main(String[] args) {
 		Connection conn = getConnection();
-		
+		String query = "Create table sware.textquestions(qid SERIAL NOT NULL PRIMARY KEY," +
+				"name varchar(255), question varchar(255), answer varchar(255), points int)";
 		try{
-			PreparedStatement stat = conn.prepareStatement("SELECT * FROM textquestions;");
-			ResultSet Rs = stat.executeQuery();
+			PreparedStatement st = conn.prepareStatement("DROP table sware.textquestions;");
+			ResultSet Rs = st.executeQuery();
+			
+			PreparedStatement stat = conn.prepareStatement(query);
+			
+			//PreparedStatement stat = conn.prepareStatement("SELECT * FROM textquestions;");
+			ResultSet rs = stat.executeQuery();
 			conn.close();
 		} catch(Exception ex) {
 			

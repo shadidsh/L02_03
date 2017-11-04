@@ -1,14 +1,10 @@
 package gui;
-import db.DbConnection;
-import question.TextQuestion;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -16,26 +12,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Vector;
-import java.awt.Dimension;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.AbstractListModel;
-import javax.swing.ListSelectionModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.JTextField;
-import javax.swing.JScrollBar;
-import java.awt.Component;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class HHSavedQuestionsPage extends JFrame {
+import db.DbConnection;
+import question.TextQuestion;
+
+public class HHSavedAssessments extends JFrame {
 
 	private JPanel contentPane;
 	private JList listQuestion_1;
@@ -49,7 +45,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
+					HHSavedAssessments frame = new HHSavedAssessments();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,7 +57,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HHSavedQuestionsPage() {
+	public HHSavedAssessments() {
 		setTitle("HandyHomework");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 569, 395);
@@ -70,24 +66,24 @@ public class HHSavedQuestionsPage extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblSavedQuestions = new JLabel("Saved Questions");
+		JLabel lblSavedQuestions = new JLabel("Saved Assessments");
 		lblSavedQuestions.setMaximumSize(new Dimension(100, 30));
 		lblSavedQuestions.setFont(new Font("Dialog", Font.ITALIC, 20));
-		lblSavedQuestions.setBounds(150, 13, 175, 31);
+		lblSavedQuestions.setBounds(151, 13, 215, 31);
 		contentPane.add(lblSavedQuestions);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(36, 97, 190, 114);
 		contentPane.add(scrollPane);
 		
-		JLabel lblQuestion = new JLabel("Select a Question");
+		JLabel lblQuestion = new JLabel("Select an Assessment");
 		JLabel lblPts = new JLabel("");
 		lblPts.setAutoscrolls(true);
 		
-		JLabel questionTitle = new JLabel("");
-		questionTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
-		questionTitle.setBounds(266, 55, 175, 33);
-		contentPane.add(questionTitle);
+		JLabel assessmentTitle = new JLabel("");
+		assessmentTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
+		assessmentTitle.setBounds(266, 55, 175, 33);
+		contentPane.add(assessmentTitle);
 		
 		Connection conn = DbConnection.getConnection();
 		String res = "";
@@ -133,7 +129,7 @@ public class HHSavedQuestionsPage extends JFrame {
 					lblQuestion.setText(question.getQuestion());					
 					res = "<html>This question<br> is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;
 					lblPts.setText(res);
-					questionTitle.setText(question.getName());
+					assessmentTitle.setText(question.getName());
 					questAnswer = question.getAnswer();
 					// need to pass this question into submit button, then check for answer
 					
@@ -162,19 +158,19 @@ public class HHSavedQuestionsPage extends JFrame {
 		lblPts.setVerticalAlignment(SwingConstants.TOP);
 		lblPts.setBounds(10, 265, 120, 72);
 		contentPane.add(lblPts);
-		JButton btnView = new JButton("submit");
+		JButton btnView = new JButton("Select");
 		btnView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String answer = String.valueOf(questionAnswerField.getText());
 				
 				if (answer.isEmpty()) {
-					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "One or more fields are empty");
+					JOptionPane.showMessageDialog(HHSavedAssessments.this, "One or more fields are empty");
 				} else if (lblQuestion.getText().length() == 0)  {
-						JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "One or more fields are empty");
+						JOptionPane.showMessageDialog(HHSavedAssessments.this, "One or more fields are empty");
 				} else if (questAnswer.compareTo(answer) == 0)  {
-					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Correct!!");
+					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Correct!!");
 				} else {
-					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Wrong!! Your answer is " + questAnswer + ", btw");
+					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Wrong!! Your answer is " + questAnswer + ", btw");
 				}
 					
 					
