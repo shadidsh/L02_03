@@ -51,7 +51,6 @@ public class DbConnection {
     		
     		conn.close();
     	}catch(Exception ex) {
-			conn.close()
     		System.out.print(ex.getMessage());    		
     	}
     	
@@ -77,7 +76,6 @@ public class DbConnection {
     		
     		conn.close();
     	}catch(Exception ex) {
-			conn.close()
     		System.out.println(ex.getMessage());    		
     	}
     	
@@ -88,8 +86,8 @@ public class DbConnection {
 
 	 public static void all_assessments() {
 		Connection conn = getConnection();
-		String query = "Select * from " + constants.Constants.DataConstants.ASSESSMENTS
-
+		String query = "Select * from " + constants.Constants.DataConstants.ASSESSMENTS;
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
 			PreparedStatement stat = conn.prepareStatement(query);
 			ResultSet Rs = stat.executeQuery();
@@ -99,18 +97,19 @@ public class DbConnection {
 			
 				String title = Rs.getString(2);
 				String name = Rs.getString(3);
-				Boolean isMult = Rs.getString(4);
-				Calender dueDate = Rs.getString(5); 
-				Boolean isOpt = Rs.getString(6);
+				Boolean isMult = Rs.getBoolean(4);
+				
+				java.sql.Timestamp dueDate = Rs.getTimestamp(6);
+				
+				Boolean isOpt = Rs.getBoolean(5);
 				float weight = Rs.getFloat(7);
 				System.out.println("title: " + title + ", name: " + name + ", ismult: " + isMult 
-					+ ", Due: " + dueDate + ", isOpt: " + isOpt + ", weight: " + weight);
+					+ ", Due: " + sdf.format(dueDate) + ", isOpt: " + isOpt + ", weight: " + weight);
 				}
 
 
-			conn.close()
+			conn.close();
 		} catch(Exception ex) {
-			conn.close()
 			System.out.println(ex.getMessage()); 
 		}
 	 }
@@ -142,7 +141,7 @@ public class DbConnection {
     		stat.setString(1, title);
     		stat.setString(2, name);
 
-    		java.sql.Timestamp inDate = new java.sql.Timestamp(dueDate.getTimeInMillis());
+    		java.sql.Timestamp inDate = new java.sql.Timestamp(  dueDate.getTimeInMillis());
 
     		stat.setTimestamp(3, inDate);		
     		stat.setFloat(4, weight);
@@ -153,7 +152,6 @@ public class DbConnection {
     		   		
     		conn.close();
     	}catch(Exception ex) {
-			conn.close()
     		System.out.println(ex.getMessage());    		
     	}
     	
@@ -180,9 +178,8 @@ public class DbConnection {
 			stat.setInt(4, points);
 
 			ResultSet Rs = stat.executeQuery();
-			conn.close()			
+			conn.close();		
 		} catch(Exception ex) {
-			conn.close()
 			System.out.println(ex.getMessage());  
 		}
 	}
@@ -196,6 +193,7 @@ public class DbConnection {
 		 due.set(2017, 9, 21, 10, 05, 30);
 			
 		insert_assessment("assessment 2", "Greedy Algorithms.",  new Boolean(false), due, new Boolean(false),  (float) 0.99);
-
+		all_assessments();
+		
 	}
 }
