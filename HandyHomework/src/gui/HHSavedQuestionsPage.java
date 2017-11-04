@@ -185,6 +185,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		btnView.setBounds(419, 265, 120, 31);
 		contentPane.add(btnView);		
 		questionAnswerField = new JTextField();
+		questionAnswerField.setAlignmentY(Component.TOP_ALIGNMENT);
 		questionAnswerField.setColumns(10);
 		questionAnswerField.setBounds(150, 258, 247, 79);
 		contentPane.add(questionAnswerField);

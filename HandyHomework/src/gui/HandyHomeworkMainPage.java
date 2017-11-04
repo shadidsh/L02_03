@@ -58,8 +58,11 @@ public class HandyHomeworkMainPage extends JFrame {
 		contentPane.setLayer(lblWelcome, 0);
 		
 		JButton buttonEnterQuestion = new JButton("Enter a question");
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcome, -27, SpringLayout.NORTH, buttonEnterQuestion);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonEnterQuestion, 126, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.WEST, buttonEnterQuestion, 133, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, buttonEnterQuestion, -83, SpringLayout.SOUTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, buttonEnterQuestion, -121, SpringLayout.EAST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcome, -27, SpringLayout.NORTH, buttonEnterQuestion);
 		buttonEnterQuestion.setMaximumSize(new Dimension(139, 23));
 		buttonEnterQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -83,22 +86,34 @@ public class HandyHomeworkMainPage extends JFrame {
 		contentPane.add(lblWelcometoHH);
 		
 		JButton savedQuestionsButton = new JButton("View Saved Questions");
-		sl_contentPane.putConstraint(SpringLayout.WEST, buttonEnterQuestion, 0, SpringLayout.WEST, savedQuestionsButton);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, buttonEnterQuestion, -12, SpringLayout.NORTH, savedQuestionsButton);
-		sl_contentPane.putConstraint(SpringLayout.EAST, buttonEnterQuestion, 0, SpringLayout.EAST, savedQuestionsButton);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, savedQuestionsButton, 180, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, savedQuestionsButton, -45, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, savedQuestionsButton, -23, SpringLayout.WEST, lblWelcome);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, savedQuestionsButton, 6, SpringLayout.SOUTH, buttonEnterQuestion);
+		sl_contentPane.putConstraint(SpringLayout.WEST, savedQuestionsButton, 0, SpringLayout.WEST, buttonEnterQuestion);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, savedQuestionsButton, -47, SpringLayout.SOUTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, savedQuestionsButton, -121, SpringLayout.EAST, contentPane);
 		savedQuestionsButton.setPreferredSize(new Dimension(200, 23));
 		savedQuestionsButton.setMaximumSize(new Dimension(200, 23));
 		savedQuestionsButton.setFont(new Font("Tahoma", Font.BOLD, 13));
 		savedQuestionsButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		contentPane.add(savedQuestionsButton);
+		
+		JButton btnViewSavedAssessments = new JButton("View Saved Assessments");
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnViewSavedAssessments, 6, SpringLayout.SOUTH, savedQuestionsButton);
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnViewSavedAssessments, 0, SpringLayout.WEST, buttonEnterQuestion);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnViewSavedAssessments, -5, SpringLayout.SOUTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnViewSavedAssessments, -122, SpringLayout.EAST, contentPane);
+		btnViewSavedAssessments.setFont(new Font("Tahoma", Font.BOLD, 13));
+		contentPane.add(btnViewSavedAssessments);
 		savedQuestionsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent i) {
 				dispose();
 				new HHSavedQuestionsPage().setVisible(true);
+			}
+		});
+		
+		btnViewSavedAssessments.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent i) {
+				dispose();
+				new HHSavedAssessments().setVisible(true);
 			}
 		});
 	}
