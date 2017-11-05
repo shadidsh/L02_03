@@ -4,7 +4,6 @@ import question.TextQuestion;
 
 public class Assessment {
 	
-	private int assessID;
 	private String title;
 	private String name;
 	private boolean is_mult;
@@ -12,16 +11,14 @@ public class Assessment {
 	private Calendar due;
 	private float weight;
 	
-	public Assessment(int assessID, String title, String name, boolean is_mult, boolean is_opt) {
-		this.assessID = assessID;
+	public Assessment(String title, String name, boolean is_mult, boolean is_opt) {
 		this.title = title;
 		this.name = name;
 		this.is_mult = is_mult;
 		this.is_opt = is_opt;
 	}
 	
-	public Assessment(int assessID, String title, String name, boolean is_mult, boolean is_opt, Calendar due, float weight) {
-		this.assessID = assessID;
+	public Assessment(String title, String name, boolean is_mult, boolean is_opt, Calendar due, float weight) {
 		this.title = title;
 		this.name = name;
 		this.is_mult = is_mult;
@@ -30,9 +27,6 @@ public class Assessment {
 		this.weight = weight;
 	}
 	
-	public int getAssessID() {
-		return this.assessID;
-	}
 	
 	public String getTitle() {
 		return this.title;

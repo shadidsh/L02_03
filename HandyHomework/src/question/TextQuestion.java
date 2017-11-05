@@ -3,13 +3,12 @@ package question;
 public class TextQuestion extends QuestionAbstract<String>{
 	
 	private int assessID;
-	private int questID;
 	private String name;
 	private String question;
 	public String answer;
 	private int points;
 	
-	public TextQuestion(int questID, int assessID, String name, String question, String answer, int points) {
+	public TextQuestion(int assessID, String name, String question, String answer, int points) {
 		this.name = name;
 		this.question = question;
 		this.answer = answer;
@@ -38,8 +37,5 @@ public class TextQuestion extends QuestionAbstract<String>{
 		return this.assessID;
 	}
 	
-	public int getQuestID() {
-		return this.questID;
-	}
 	
 }
