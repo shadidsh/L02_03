@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 		String question = "", answer = "", questionName = "";
 		int points = 0;
-		Assessment assessment = new Assessment();
+		//Assessment assessment = new Assessment();
 		InputStreamReader inRead = new InputStreamReader(System.in);
 	    BufferedReader bRead = new BufferedReader(inRead);
 	    System.out.println("Type exit to terminate program");
@@ -39,11 +39,11 @@ public class Main {
 		    } catch (IOException e) {
 		        System.out.println("Reading input error");
 		    }
-			TextQuestion TQ = new TextQuestion(question, answer, questionName, points);
-			System.out.println("This is the question: " +TQ.getQuestion());
-			System.out.println("This is the answer: " +TQ.getAnswer());
-			assessment.AddQuestion(TQ);
-			System.out.println(assessment.getAssessment());
+			//TextQuestion TQ = new TextQuestion(question, answer, questionName, points);
+		//	System.out.println("This is the question: " +TQ.getQuestion());
+			//System.out.println("This is the answer: " +TQ.getAnswer());
+			//assessment.AddQuestion(TQ);
+			//System.out.println(assessment.getAssessment());
 		}
 
 	}

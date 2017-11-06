@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -67,6 +68,8 @@ public class DbConnection {
     		
     		while (Rs.next()) {
     			// Create and return a list of question objects
+    			
+    			// assessID, String name, String question, String answer, int points
 
     			String name = Rs.getString(3);
     			String question = Rs.getString(4);
@@ -129,13 +132,14 @@ public class DbConnection {
      * @param isMult boolean representing whether this question has multiple choices or not
      * @param isOpt boolean representing whether this question is optional or not
      */
-    public static void insert_assessment(String title, String name, Boolean isMult, Calendar dueDate, Boolean isOpt, float weight) {
+    public static int insert_assessment(String title, String name, Boolean isMult, Calendar dueDate, Boolean isOpt, float weight) {
     	Connection conn = getConnection();
+    	int result = -1;
     	
     	try{
     		String insert = "INSERT INTO " + constants.Constants.DataConstants.ASSESSMENTS 
     				+ "(title, name, due_date, weight, is_mult, is_opt) " +
-    				" VALUES(?,?,?,?,?,?)";
+    				" VALUES(?,?,?,?,?,?) RETURNING aid";
     		
     		PreparedStatement stat = conn.prepareStatement(insert);
     		stat.setString(1, title);
@@ -146,14 +150,18 @@ public class DbConnection {
     		stat.setTimestamp(3, inDate);		
     		stat.setFloat(4, weight);
     		stat.setBoolean(5, isMult);
-    		stat.setBoolean(6, isOpt);
-    		    		
+    		stat.setBoolean(6, isOpt);   		
+    		
     		ResultSet Rs = stat.executeQuery();
-    		   		
+    		Rs.next();
+    		result =  Rs.getInt(1); 
     		conn.close();
+    		
     	}catch(Exception ex) {
     		System.out.println(ex.getMessage());    		
     	}
+    	
+    	return result;
     	
     }
 
@@ -178,6 +186,8 @@ public class DbConnection {
 			stat.setInt(4, points);
 
 			ResultSet Rs = stat.executeQuery();
+			
+					
 			conn.close();		
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());  
@@ -191,8 +201,8 @@ public class DbConnection {
 		 
 		 Calendar due = Calendar.getInstance();
 		 due.set(2017, 9, 21, 10, 05, 30);
-			
-		insert_assessment("assessment 2", "Greedy Algorithms.",  new Boolean(false), due, new Boolean(false),  (float) 0.99);
+		int res = insert_assessment("assessment 2", "Divide ",  new Boolean(false), due, new Boolean(false),  (float) 0.99);
+		System.out.println(res);
 		all_assessments();
 		
 	}

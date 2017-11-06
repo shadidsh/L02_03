@@ -1,33 +1,64 @@
 package assessment;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
+import question.TextQuestion;
+import db.DbConnection;
+
 public class Assessment {
-	
+	private int aid;
 	private String title;
 	private String name;
-	private boolean is_mult;
-	private boolean is_opt;
+	private boolean isMult;
+	private boolean isOpt;
 	private Calendar due;
 	private float weight;
+	private ArrayList<TextQuestion> questions;
 	
-	public Assessment(String title, String name, boolean is_mult, boolean is_opt) {
+	/**
+	 * 
+	 * Use this if isOpt is false
+	 */
+	public Assessment(String title, String name, boolean isMult) {
 		this.title = title;
 		this.name = name;
-		this.is_mult = is_mult;
-		this.is_opt = is_opt;
+		this.isMult = isMult;
+		this.aid = DbConnection.insert_assessment(title, name, isMult, due,  isMult, weight);		
+	} 
+	
+	public Assessment(String title, String name, boolean isMult, boolean isOpt, Calendar due, float weight) {
+		this.title = title;
+		this.name = name;
+		this.isMult = isMult;
+		this.isOpt = isOpt;
+		this.due = due;
+		this.weight = weight;
+		this.aid = DbConnection.insert_assessment( title,  name,  isMult,  due, isOpt,  weight);
+		
 	}
 	
-	public Assessment(String title, String name, boolean is_mult, boolean is_opt, Calendar due, float weight) {
+	
+	public Assessment(int aid,String title, String name, boolean isMult, boolean isOpt, Calendar due, float weight) {
+		this.aid = aid;
 		this.title = title;
 		this.name = name;
-		this.is_mult = is_mult;
-		this.is_opt = is_opt;
+		this.isMult = isMult;
+		this.isOpt = isOpt;
 		this.due = due;
 		this.weight = weight;
 	}
+	/*
+	public void queryQuestions(TextQuestion ts) {
+		questions_for_assessments(this.aid);
+		questions.add(ts);
+	} */
 	
 	
+	public int getAid() {
+		return aid;
+	}
+
 	public String getTitle() {
 		return this.title;
 	}
@@ -37,11 +68,11 @@ public class Assessment {
 	}
 	
 	public boolean getISMult() {
-		return this.is_mult;
+		return this.isMult;
 	}
 	
 	public boolean getIsOpt() {
-		return this.is_opt;
+		return this.isOpt;
 	}
 	
 	public Calendar getDue() {
@@ -50,6 +81,10 @@ public class Assessment {
 	
 	public float getWeight() {
 		return this.weight;
+	}
+	
+	public void addQuestions(TextQuestion ts) {
+		questions.add(ts);
 	}
 
 }

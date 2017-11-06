@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -28,6 +29,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import assessment.Assessment;
 import db.DbConnection;
 import question.TextQuestion;
 
@@ -36,6 +38,7 @@ public class HHSavedAssessments extends JFrame {
 	private JPanel contentPane;
 	private JList list;
 	private String questAnswer;
+	private Assessment selectedAs;
 
 	/**
 	 * Launch the application.
@@ -72,7 +75,7 @@ public class HHSavedAssessments extends JFrame {
 		contentPane.add(lblSavedAssessment);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(30, 97, 196, 240);
+		scrollPane.setBounds(0, 307, 196, 240);
 		contentPane.add(scrollPane);
 		
 		JLabel lblAssessment = new JLabel("Select an Assessment");
@@ -87,26 +90,35 @@ public class HHSavedAssessments extends JFrame {
 		Connection conn = DbConnection.getConnection();
 		String res = "";
 		
-		DefaultListModel<String> lstQuestion = new DefaultListModel<>();
-		
-		//res = "<html>name question Answer<br>";
-		ArrayList<TextQuestion> questions = new ArrayList<TextQuestion>();
+		DefaultListModel<String> lstAssess = new DefaultListModel<>();
+		ArrayList<Assessment> assess = new ArrayList<Assessment>();
+		ArrayList<Integer> aids = new ArrayList<Integer>();
 			try {
-				PreparedStatement stat = conn.prepareStatement("SELECT * FROM sware.textquestions;");
+				PreparedStatement stat = conn.prepareStatement("SELECT * FROM public.assessments;");
 				ResultSet Rs = stat.executeQuery();				
 				
 				while (Rs.next()) {
 					
-					String name = Rs.getString(2);
-					String questionContent = Rs.getString(3);
-					String answer = Rs.getString(4);
-					Integer value = new Integer(Rs.getInt(5));
-					TextQuestion question = new TextQuestion(name, questionContent, answer, value);
+					Integer aid = Rs.getInt(1);
+					String title = Rs.getString(2);
+					String name = Rs.getString(3);
+					Boolean isMult = Rs.getBoolean(4);
+					Boolean isOpt = Rs.getBoolean(5);
+					java.sql.Timestamp dueDate = Rs.getTimestamp(6);
+					float weight = Rs.getFloat(7);
+					Calendar due = Calendar.getInstance();
+					due.setTimeInMillis(dueDate.getTime());
 					
-					lstQuestion.addElement(question.getName());
-					questions.add(question);
-					//res +=  Rs.getString(2) + "," +  Rs.getString(3) + "," 
-					//		+ Rs.getString(4) + "," + Rs.getInt(5) +  "<br>";
+					Assessment as = new Assessment(aid, title, name, isMult, isOpt, due, weight);
+					
+					lstAssess.addElement(name);
+					assess.add(as);
+					
+					res =  aid + "," + title + "," +  name + "," + isMult + "," + 
+							isOpt + dueDate + " VS " + due.getTime() +  " ," + weight +  ",";
+					
+					System.out.println(res);
+					
 				}
 				
 				Rs.close();
@@ -119,7 +131,7 @@ public class HHSavedAssessments extends JFrame {
 		lblAssessment.setBounds(266, 99, 201, 139);
 		contentPane.add(lblAssessment);		
 		JButton btnMainMenu = new JButton("Main Menu");
-		btnMainMenu.setBounds(419, 307, 120, 30);
+		btnMainMenu.setBounds(419, 16, 120, 30);
 		contentPane.add(btnMainMenu);
 		
 		btnMainMenu.addActionListener(new ActionListener() {
@@ -134,8 +146,14 @@ public class HHSavedAssessments extends JFrame {
 		JButton btnView = new JButton("Select");
 		btnView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				
-//				String answer = String.valueOf(questionAnswerField.getText());
+				if (selectedAs == null ) {
+					JOptionPane.showMessageDialog(HHSavedAssessments.this, "please select an assessment");
+				} else {
+					SharedAssessment.setAssess(selectedAs);
+					
+					dispose();
+					new HHSavedQuestionsPage().setVisible(true);
+				}
 //				////////////////////////////////// need to modify to pass info to view saved questions page
 //				if (answer.isEmpty()) {
 //					JOptionPane.showMessageDialog(HHSavedAssessments.this, "One or more fields are empty");
@@ -152,34 +170,35 @@ public class HHSavedAssessments extends JFrame {
 					
 				}
 		});
-		btnView.setBounds(419, 265, 120, 31);
+		
+		
+		btnView.setBounds(419, 306, 120, 31);
 		contentPane.add(btnView);
-		JList listAssessment = new JList<>(lstQuestion);
+		JList listAssessment = new JList<>(lstAssess);
 		contentPane.add(listAssessment);
 		//res += "</html>";
 		
 		listAssessment.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				String res = "<html>This question<br> is worth</html>";
-				////////////////////// needs to be modified when assessments class is added
+				
+				
+				/* needs to be modified when assessments class is added */
 				JList list = (JList) e.getSource();
-				///
-				TextQuestion question = questions.get(list.getSelectedIndex());
+				Assessment as = assess.get(list.getSelectedIndex());
 				
-				lblAssessment.setText(question.getQuestion());					
-				res = "<html>This question<br> is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;
+				lblAssessment.setText(as.getName());					
+				res = "<html>This assessment's id:" + as.getAid() + ", its name is " + as.getName() 
+					+  ", and it is weighted " + as.getWeight() + "</html>" ;
+				
 				lblPts.setText(res);
-				assessmentTitle.setText(question.getName());
-				questAnswer = question.getAnswer();
-				// need to pass this question into submit button, then check for answer
-				
+				assessmentTitle.setText(as.getTitle());
+				selectedAs = as;				
 			}
-		});
+		});	
 		
 		
-		
-		listAssessment.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);			
-		
+		listAssessment.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);		
 		listAssessment.setBounds(30, 97, 196, 239);
 		
 		

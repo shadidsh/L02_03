@@ -2,7 +2,9 @@ package gui;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
-import net.miginfocom.swing.MigLayout;
+
+//import net.miginfocom.swing.MigLayout;
+
 import question.QuestionAbstract;
 
 import javax.swing.JLabel;
@@ -18,8 +20,8 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
-import com.toedter.calendar.JDateChooser;
-import com.toedter.components.JSpinField;
+//import com.toedter.calendar.JDateChooser;
+//import com.toedter.components.JSpinField;
 
 import assessment.Assessment;
 
@@ -38,6 +40,7 @@ import javax.swing.JSpinner;
 import javax.swing.JCheckBox;
 import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerDateModel;
 
 public class HHCreateAssessmentForm {
 
@@ -93,7 +96,7 @@ public class HHCreateAssessmentForm {
 		titleField = new JTextField();
 		titleField.setColumns(10);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		//JDateChooser dateChooser = new JDateChooser();
 		
 		JSpinner spinner = new JSpinner();
 		
@@ -155,23 +158,27 @@ public class HHCreateAssessmentForm {
 				// get the fields
 				String name = String.valueOf(assessmentNameField.getText()); 
 				String title = String.valueOf(titleField.getText());
+				
 				// get date thing? TODO
-				Date due = dateChooser.getDate();
-				Calendar c = new GregorianCalendar();
-				c.setTime(due);
+				// Date due = dateChooser.getDate();
+				//Calendar c = new GregorianCalendar();
+				//c.setTime(due);
 				// points
+				
 				int totalPoints = (int) (spinner.getValue());
 				// booleans
+				
 				boolean mult = chckbxContainsMCQ.isSelected();
 				boolean opt = chckbxOptionalAssessment.isSelected();
+				
 				System.out.println("Assessment name is :" + name);
 				if (name.isEmpty() || title.isEmpty()) {
 					JOptionPane.showInputDialog(HHCreateAssessmentForm.this, "One or more required fields are empty");
 				} else {
 					if (totalPoints == 0){
-						Assessment a1 = new Assessment(name, title, mult, opt);
+						//Assessment a1 = new Assessment(name, title, mult, opt);
 					} else{
-						Assessment a1 = new Assessment(name, title, mult, opt, c, totalPoints);
+						//Assessment a1 = new Assessment(name, title, mult, opt, c, totalPoints);
 					}
 				// TODO
 				// add assessment to DB and return success/fail msg
@@ -207,7 +214,8 @@ public class HHCreateAssessmentForm {
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblDueDate)
 									.addGap(18)
-									.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									//.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblTotalPointsAwarded)
 									.addGap(18)
@@ -244,7 +252,8 @@ public class HHCreateAssessmentForm {
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblDueDate)
-						.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						//.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTotalPointsAwarded)
@@ -265,7 +274,10 @@ public class HHCreateAssessmentForm {
 		);
 		
 		
-		
+		JSpinner timeSpinner = new JSpinner( new SpinnerDateModel() );
+		JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm:ss");
+		timeSpinner.setEditor(timeEditor);
+		timeSpinner.setValue(new Date()); // will only show the current time
 		
 //		JList<QuestionAbstract> list = new JList();
 //		splitPane.setLeftComponent(list);

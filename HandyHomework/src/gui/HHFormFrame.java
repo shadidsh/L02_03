@@ -147,7 +147,7 @@ public class HHFormFrame extends JFrame {
 					try {
 						PreparedStatement seq = conn.prepareStatement("SELECT nextval('question_id') as bigint;");
 						ResultSet Rs = seq.executeQuery();
-						Rs.next();
+						/* Rs.next();
 						Integer qid = Rs.getInt(1);
 						
 						PreparedStatement prepInsert = conn.prepareStatement(insert);
@@ -164,7 +164,7 @@ public class HHFormFrame extends JFrame {
 						// confirm that the question was made
 						String message = question.getName() + "\nQuestion is: " + question.getQuestion();
 						message += "\nAnswer is: " + question.getAnswer() + "\nQuestion is worth " + question.getPoints() + " points";
-						JOptionPane.showMessageDialog(HHFormFrame.this, message);
+						JOptionPane.showMessageDialog(HHFormFrame.this, message); */
 						
 					} catch (SQLException e1) {
 						System.out.println("Could not insert question into database."); 

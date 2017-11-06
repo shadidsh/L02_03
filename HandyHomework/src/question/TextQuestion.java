@@ -5,20 +5,14 @@ public class TextQuestion extends QuestionAbstract<String>{
 	private int assessID;
 	private String name;
 	private String question;
-	public String answer;
 	private int points;
 	
-	public TextQuestion(int assessID, String name, String question, String answer, int points) {
-		this.name = name;
+	public TextQuestion(int assessID, String name, String question, int points) {
 		this.question = question;
-		this.answer = answer;
+		this.name = name;
 		this.points = points;
 		this.assessID = assessID;
 		//this.questID = questID;
-	}
-	
-	public String getAnswer() {
-		return this.answer;
 	}
 	
 	public String getQuestion() {
