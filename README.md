@@ -12,5 +12,7 @@ Welcome to the Project Repo for Team SWare.
 ## Project Code
 [Source Folder](https://github.com/CSCC01F17/L02_03/tree/master/U01_Code/src)  
 **Instructions to Run Code:**
-* Install the WindowBuilder plugin on your IDE
-* Make sure you configure the run settings: Build Path -> Add External Jar files, namely the JGoodies and MigLayout jar files.
+1. Install the WindowBuilder plugin on your IDE
+2. Install postgresql-42.1.4 jar file from https://jdbc.postgresql.org/
+3. Make sure you configure the run settings: Build Path -> Add External Jar files, namely the JGoodies and MigLayout jar files.
+
