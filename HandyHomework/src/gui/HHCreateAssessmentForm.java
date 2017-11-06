@@ -37,6 +37,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JSpinner;
 import javax.swing.JCheckBox;
 import javax.swing.JSplitPane;
+import javax.swing.ListSelectionModel;
 
 public class HHCreateAssessmentForm {
 
@@ -100,13 +101,45 @@ public class HHCreateAssessmentForm {
 
 		JCheckBox chckbxOptionalAssessment = new JCheckBox("Optional Assessment");
 		
+		JSplitPane splitPane = new JSplitPane();
+
 		JButton btnAddQuestion = new JButton("Add Question");
 		btnAddQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//frame.setVisible(false);
-				new HHFormFrame().setVisible(true);
+				HHFormFrame newQuestion = new HHFormFrame();
+				newQuestion.setVisible(true);
+				newQuestion.setAlwaysOnTop(true);
 			}
 		});
+		
+		// JList for questions
+		JList list = new JList();
+		list.setModel(new AbstractListModel() {
+			QuestionAbstract[] values = new QuestionAbstract[] {};
+			public int getSize() {
+				return values.length;
+			}
+			public QuestionAbstract getElementAt(int index) {
+				return values[index];
+			}
+			public void addQuestion(QuestionAbstract q){
+				values[values.length] = q;
+			}
+		});
+		
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		splitPane.setLeftComponent(list);
+		
+		JLabel lblSelectedQuestion = new JLabel("No questions in assessment");
+		
+		if (list.getModel().getSize() != 0 && list.isSelectionEmpty()){
+			lblSelectedQuestion = new JLabel("No questions selected");
+		} else if (! list.isSelectionEmpty()) {
+			lblSelectedQuestion = new JLabel(list.getSelectedValue().toString());
+		}
+		
+		splitPane.setRightComponent(lblSelectedQuestion);
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
@@ -119,8 +152,6 @@ public class HHCreateAssessmentForm {
 		JButton btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// WHERE IS ID FROM
-				int ID = 0;
 				// get the fields
 				String name = String.valueOf(assessmentNameField.getText()); 
 				String title = String.valueOf(titleField.getText());
@@ -128,7 +159,7 @@ public class HHCreateAssessmentForm {
 				Date due = dateChooser.getDate();
 				Calendar c = new GregorianCalendar();
 				c.setTime(due);
-				
+				// points
 				int totalPoints = (int) (spinner.getValue());
 				// booleans
 				boolean mult = chckbxContainsMCQ.isSelected();
@@ -138,9 +169,9 @@ public class HHCreateAssessmentForm {
 					JOptionPane.showInputDialog(HHCreateAssessmentForm.this, "One or more required fields are empty");
 				} else {
 					if (totalPoints == 0){
-						Assessment a1 = new Assessment(ID, name, title, mult, opt);
+						Assessment a1 = new Assessment(name, title, mult, opt);
 					} else{
-						Assessment a1 = new Assessment(ID, name, title, mult, opt, c, totalPoints);
+						Assessment a1 = new Assessment(name, title, mult, opt, c, totalPoints);
 					}
 				// TODO
 				// add assessment to DB and return success/fail msg
@@ -151,7 +182,6 @@ public class HHCreateAssessmentForm {
 			}
 		});		
 		
-		JSplitPane splitPane = new JSplitPane();
 		
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -235,21 +265,27 @@ public class HHCreateAssessmentForm {
 		);
 		
 		
-		JList list = new JList();
-		splitPane.setLeftComponent(list);
-		// LIST MUST ADD QUESTIONS AS THEY ARE CREATED
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"No questions added"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
 		
-		JLabel lblselectedQuestion = new JLabel(list.getName());
-		splitPane.setRightComponent(lblselectedQuestion);
+		
+//		JList<QuestionAbstract> list = new JList();
+//		splitPane.setLeftComponent(list);
+//		// LIST MUST ADD QUESTIONS AS THEY ARE CREATED
+//		list.setModel(new AbstractListModel() {
+//			public int getSize() {
+//				return values.length;
+//			}
+//			public Object getElementAt(int index) {
+//				return values[index];
+//			}
+//		});
+//		
+//		JLabel lblselectedQuestion = new JLabel("No question selected"); 
+//		if (){
+//			JLabel lblselectedQuestion = new JLabel("No questions in this assessment");
+//		} else if (! list.isSelectionEmpty()){
+//			lblselectedQuestion = new JLabel(list.getSelectedValue().toString());
+//		}
+//		splitPane.setRightComponent(lblselectedQuestion);
 		
 		frame.getContentPane().setLayout(groupLayout);
 	}

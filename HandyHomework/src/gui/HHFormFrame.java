@@ -137,7 +137,7 @@ public class HHFormFrame extends JFrame {
 				}
 				
 				else {	
-					TextQuestion question = new TextQuestion(name, questionContent, answer, value);
+					
 					// add the question to database and produce successful/unsuccessful msg box
 					
 					Connection conn = DbConnection.getConnection();
@@ -158,25 +158,29 @@ public class HHFormFrame extends JFrame {
 						prepInsert.setInt(5, value);
 						System.out.println(prepInsert.toString());
 						prepInsert.executeUpdate();
+						
+						// moved question obj creation here because qid doesn't exist elsewhere
+						TextQuestion question = new TextQuestion(qid, name, questionContent, answer, value);
+						// confirm that the question was made
+						String message = question.getName() + "\nQuestion is: " + question.getQuestion();
+						message += "\nAnswer is: " + question.getAnswer() + "\nQuestion is worth " + question.getPoints() + " points";
+						JOptionPane.showMessageDialog(HHFormFrame.this, message);
+						
 					} catch (SQLException e1) {
 						System.out.println("Could not insert question into database."); 
 						e1.printStackTrace();
+						JOptionPane.showMessageDialog(HHFormFrame.this, "Could not save question - please check your connection and try again.");
 					}
-					
-					// confirm that the question was made
-					String message = question.getName() + "\nQuestion is: " + question.getQuestion();
-					message += "\nAnswer is: " + question.getAnswer() + "\nQuestion is worth " + question.getPoints() + " points";
-					JOptionPane.showMessageDialog(HHFormFrame.this, message);
+				
 				}
 			}
 		});
 		contentPane.add(btnSubmit);
 		
-		JButton btnCancel = new JButton("Main Menu");
+		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new HandyHomeworkMainPage().setVisible(true);;
 			}
 		});
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnCancel, 114, SpringLayout.SOUTH, questionContentField);
