@@ -1,4 +1,4 @@
-package src;
+package answer;
 
 public class TextAnswer {
 	private String answer;
