@@ -6,5 +6,4 @@ public abstract class QuestionAbstract<T> {
 	abstract String getName();
 	abstract int getPoints();
 	abstract int getAssessID();
-	abstract int getQuestID();
 }

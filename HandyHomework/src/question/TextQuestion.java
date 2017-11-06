@@ -14,7 +14,6 @@ public class TextQuestion extends QuestionAbstract<String>{
 		this.answer = answer;
 		this.points = points;
 		this.assessID = assessID;
-		//this.questID = questID;
 	}
 	
 	public String getAnswer() {
