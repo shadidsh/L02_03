@@ -25,6 +25,7 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 
@@ -145,6 +146,11 @@ public class HHCreateAssessmentFrame extends JFrame {
 				if (name.isEmpty() || title.isEmpty()) {
 					// msg box to say mand fields are empty
 				} else {
+					Calendar due = Calendar.getInstance();
+					 due.set(2017, 9, 25, 10, 05, 30);					
+					db.DbConnection.insertAssessment(title, name, due, false, totalPoints);
+					
+					
 					if (totalPoints == 0){
 						//Assessment a1 = new Assessment(name, title, mult, opt);
 					} else{
