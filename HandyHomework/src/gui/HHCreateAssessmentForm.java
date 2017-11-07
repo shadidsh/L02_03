@@ -55,8 +55,8 @@ public class HHCreateAssessmentForm extends JFrame  {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//HHCreateAssessmentForm window = new HHCreateAssessmentForm();
-					//frame.setVisible(true);
+					HHCreateAssessmentForm frame = new HHCreateAssessmentForm();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -175,6 +175,12 @@ public class HHCreateAssessmentForm extends JFrame  {
 				if (name.isEmpty() || title.isEmpty()) {
 					JOptionPane.showInputDialog(HHCreateAssessmentForm.this, "One or more required fields are empty");
 				} else {
+					Calendar due = Calendar.getInstance();
+					 due.set(2017, 9, 25, 10, 05, 30);					
+					db.DbConnection.insertAssessment(title, name, due, false, totalPoints);
+					
+					
+					
 					if (totalPoints == 0){
 						//Assessment a1 = new Assessment(name, title, mult, opt);
 					} else{
