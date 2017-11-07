@@ -3,14 +3,16 @@ package answer;
 public class TextAnswer {
 	private String answer;
 	private int questID;
+	private boolean isCorrect;
 
-	public TextAnswer(int questID, String answer) {
+	public TextAnswer(int questID, String answer, boolean isCorrect) {
 		this.answer = answer;
 		this.questID = questID;
+		this.setCorrect(isCorrect);
 	}
 	
 	public boolean isCorrect(String userAnswer) {
-		return this.answer.equals(userAnswer);
+		return this.answer.equals(userAnswer) && this.isCorrect();
 	}
 	
 	public String getAnswer() {
@@ -19,6 +21,14 @@ public class TextAnswer {
 	
 	public int getQuestID() {
 		return this.questID;
+	}
+
+	public boolean isCorrect() {
+		return isCorrect;
+	}
+
+	public void setCorrect(boolean isCorrect) {
+		this.isCorrect = isCorrect;
 	}
 	
 }

@@ -42,7 +42,7 @@ import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerDateModel;
 
-public class HHCreateAssessmentForm {
+public class HHCreateAssessmentForm extends JFrame  {
 
 	private JFrame frame;
 	private JTextField assessmentNameField;
@@ -55,8 +55,8 @@ public class HHCreateAssessmentForm {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HHCreateAssessmentForm window = new HHCreateAssessmentForm();
-					window.frame.setVisible(true);
+					//HHCreateAssessmentForm window = new HHCreateAssessmentForm();
+					//frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

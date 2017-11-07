@@ -20,30 +20,26 @@ public class Assessment {
 	 * 
 	 * Use this if isOpt is false
 	 */
-	public Assessment(String title, String name, boolean isMult) {
+	public Assessment(String title, String name) {
 		this.title = title;
 		this.name = name;
 		this.isMult = isMult;
-		this.aid = DbConnection.insert_assessment(title, name, isMult, due,  isMult, weight);		
+		this.aid = DbConnection.insertAssessment(title, name, due,  isMult, weight);		
 	} 
 	
-	public Assessment(String title, String name, boolean isMult, boolean isOpt, Calendar due, float weight) {
+	public Assessment(String title, String name, boolean isOpt, Calendar due, float weight) {
 		this.title = title;
 		this.name = name;
-		this.isMult = isMult;
 		this.isOpt = isOpt;
 		this.due = due;
 		this.weight = weight;
-		this.aid = DbConnection.insert_assessment( title,  name,  isMult,  due, isOpt,  weight);
-		
+		this.aid = DbConnection.insertAssessment( title,  name,   due, isOpt,  weight);
 	}
-	
-	
-	public Assessment(int aid,String title, String name, boolean isMult, boolean isOpt, Calendar due, float weight) {
+
+	public Assessment(int aid,String title, String name, boolean isOpt, Calendar due, float weight) {
 		this.aid = aid;
 		this.title = title;
 		this.name = name;
-		this.isMult = isMult;
 		this.isOpt = isOpt;
 		this.due = due;
 		this.weight = weight;
@@ -52,8 +48,7 @@ public class Assessment {
 	public void queryQuestions(TextQuestion ts) {
 		questions_for_assessments(this.aid);
 		questions.add(ts);
-	} */
-	
+	} */	
 	
 	public int getAid() {
 		return aid;
