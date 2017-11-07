@@ -39,6 +39,10 @@ public class HHSavedAssessments extends JFrame {
 	private JList list;
 	private String questAnswer;
 	private Assessment selectedAs;
+	/**
+	 * @wbp.nonvisual location=253,414
+	 */
+	private final JPanel panel = new JPanel();
 
 	/**
 	 * Launch the application.
@@ -102,20 +106,22 @@ public class HHSavedAssessments extends JFrame {
 					Integer aid = Rs.getInt(1);
 					String title = Rs.getString(2);
 					String name = Rs.getString(3);
-					Boolean isMult = Rs.getBoolean(4);
-					Boolean isOpt = Rs.getBoolean(5);
-					java.sql.Timestamp dueDate = Rs.getTimestamp(6);
-					float weight = Rs.getFloat(7);
+					Boolean isOpt = Rs.getBoolean(4);
+					java.sql.Timestamp dueDate = Rs.getTimestamp(5);
+					float weight = Rs.getFloat(6);
 					Calendar due = Calendar.getInstance();
-					due.setTimeInMillis(dueDate.getTime());
 					
-					Assessment as = new Assessment(aid, title, name, isMult, isOpt, due, weight);
+					if (dueDate != null) {
+						due.setTimeInMillis(dueDate.getTime());
+					}
+					
+					
+					Assessment as = new Assessment(aid, title, name, isOpt, due, weight);
 					
 					lstAssess.addElement(name);
 					assess.add(as);
 					
-					res =  aid + "," + title + "," +  name + "," + isMult + "," + 
-							isOpt + dueDate + " VS " + due.getTime() +  " ," + weight +  ",";
+					res =  aid + "," + title + "," +  name + "," + isOpt + dueDate + " VS " + due.getTime() +  " ," + weight +  ",";
 					
 					System.out.println(res);
 					
@@ -150,7 +156,6 @@ public class HHSavedAssessments extends JFrame {
 					JOptionPane.showMessageDialog(HHSavedAssessments.this, "please select an assessment");
 				} else {
 					SharedAssessment.setAssess(selectedAs);
-					
 					dispose();
 					new HHSavedQuestionsPage().setVisible(true);
 				}
@@ -165,9 +170,6 @@ public class HHSavedAssessments extends JFrame {
 //					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Wrong!! Your answer is " + questAnswer + ", btw");
 //				}
 //					
-					
-					
-					
 				}
 		});
 		
@@ -176,7 +178,6 @@ public class HHSavedAssessments extends JFrame {
 		contentPane.add(btnView);
 		JList listAssessment = new JList<>(lstAssess);
 		contentPane.add(listAssessment);
-		//res += "</html>";
 		
 		listAssessment.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -200,6 +201,16 @@ public class HHSavedAssessments extends JFrame {
 		
 		listAssessment.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);		
 		listAssessment.setBounds(30, 97, 196, 239);
+		
+		JButton btnNewAssessment = new JButton("New Assessment");
+		btnNewAssessment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new HHCreateAssessmentForm().setVisible(true);
+			}
+		});
+		btnNewAssessment.setBounds(386, 265, 153, 31);
+		contentPane.add(btnNewAssessment);
 		
 		
 		

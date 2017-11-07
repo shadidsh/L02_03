@@ -6,6 +6,10 @@ import db.DbConnection;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import answer.TextAnswer;
+import assessment.Assessment;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -134,20 +138,25 @@ public class HHFormFrame extends JFrame {
 				System.out.println("question is :" + questionContent);
 				if (name.isEmpty() || questionContent.isEmpty() || answer.isEmpty()) {
 					JOptionPane.showMessageDialog(HHFormFrame.this, "One or more fields are empty");
-				}
-				
+				} else if (!SharedAssessment.isSelected()) {
+					JOptionPane.showMessageDialog(HHFormFrame.this, "Assessment incorrectly selected");
+				}				
 				else {	
 					
 					// add the question to database and produce successful/unsuccessful msg box
+					//Connection conn = DbConnection.getConnection();
+					//String insert = "INSERT INTO sware.textquestions " 	+ " VALUES(?, ?, ?, ?, ?);";
 					
-					Connection conn = DbConnection.getConnection();
+					Assessment as = SharedAssessment.getAssess();
+					int qid = db.DbConnection.insertQuestions(as.getAid(), name, questionContent, value);
+					db.DbConnection.insertAnswers(qid,  true,  answer);
 					
-					String insert = "INSERT INTO sware.textquestions " 
-					+ " VALUES(?, ?, ?, ?, ?);";
-					try {
-						PreparedStatement seq = conn.prepareStatement("SELECT nextval('question_id') as bigint;");
+					
+					//TextAnswer t = new TextAnswer(qid,  answer,  true);
+					/* try {
+					  PreparedStatement seq = conn.prepareStatement("SELECT nextval('question_id') as bigint;");
 						ResultSet Rs = seq.executeQuery();
-						/* Rs.next();
+						 Rs.next();
 						Integer qid = Rs.getInt(1);
 						
 						PreparedStatement prepInsert = conn.prepareStatement(insert);
@@ -165,22 +174,23 @@ public class HHFormFrame extends JFrame {
 						String message = question.getName() + "\nQuestion is: " + question.getQuestion();
 						message += "\nAnswer is: " + question.getAnswer() + "\nQuestion is worth " + question.getPoints() + " points";
 						JOptionPane.showMessageDialog(HHFormFrame.this, message); */
-						
+					/*	
 					} catch (SQLException e1) {
 						System.out.println("Could not insert question into database."); 
 						e1.printStackTrace();
 						JOptionPane.showMessageDialog(HHFormFrame.this, "Could not save question - please check your connection and try again.");
-					}
+					} */
 				
 				}
 			}
 		});
 		contentPane.add(btnSubmit);
 		
-		JButton btnCancel = new JButton("Cancel");
+		JButton btnCancel = new JButton("Back");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				new HHSavedQuestionsPage().setVisible(true);
 			}
 		});
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnCancel, 114, SpringLayout.SOUTH, questionContentField);

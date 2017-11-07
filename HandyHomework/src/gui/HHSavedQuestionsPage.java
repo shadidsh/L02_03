@@ -30,6 +30,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.event.ListSelectionListener;
 
+import answer.TextAnswer;
 import assessment.Assessment;
 
 import javax.swing.event.ListSelectionEvent;
@@ -40,10 +41,14 @@ import javax.swing.JScrollPane;
 
 public class HHSavedQuestionsPage extends JFrame {
 
+	private JFrame frame;
 	private JPanel contentPane;
 	private JList listQuestion_1;
 	private JTextField questionAnswerField;
-	private String questAnswer;
+	private TextAnswer questAnswer;
+	
+	private TextQuestion selQuestion;
+	
 
 	/**
 	 * Launch the application.
@@ -112,23 +117,30 @@ public class HHSavedQuestionsPage extends JFrame {
 				stat.setInt(1, as.getAid());
 				aid = as.getAid();
 			} else {
-				//JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No Assessments have been selected, displaying all questions");
+				//JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No Assessments have been selected, displaying question for assessment 3");
 				stat = conn.prepareStatement("SELECT * FROM "	
 						+ constants.Constants.DataConstants.QUESTIONS + ";");
-				aid = -1;
+				aid = 3;
 			}
 				System.out.println(stat);
 				ResultSet Rs = stat.executeQuery();				
 				
 				while (Rs.next()) {
 					
-					String name = Rs.getString(3);
-					String questionContent = Rs.getString(4);
-					Integer points = new Integer(Rs.getInt(5));
+					int qid = Rs.getInt(1);
+					String name = Rs.getString(4);
+					String questionContent = Rs.getString(5);
+					Integer points = new Integer(Rs.getInt(6));
 					
-					TextQuestion question = new TextQuestion(aid, name, questionContent, points);					
+					TextQuestion question = new TextQuestion(aid, name, questionContent, points);
+					
+					ArrayList<TextAnswer> ans = db.DbConnection.answers_for_question(qid);
+					question.addList(ans);
+					
+					
 					lstQuestion.addElement(question.getName());
 					questions.add(question);
+					
 			}
 				
 			Rs.close();
@@ -154,13 +166,28 @@ public class HHSavedQuestionsPage extends JFrame {
 		lblPts.setBounds(10, 265, 120, 72);
 		contentPane.add(lblPts);
 		JButton btnView = new JButton("Submit");
+
 		btnView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String answer = String.valueOf(questionAnswerField.getText());
 				
 				if (answer.isEmpty()) {
 					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "One or more fields are empty");
-				}					
+				} else if (selQuestion == null) {
+					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No questions selected");
+				} else {
+					questAnswer = selQuestion.getCorrectAnswer();
+					if (questAnswer == null) {
+						JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Question doesn't have a corresponding answer");
+					} else {
+						if (questAnswer.isCorrect(answer.toString())) {
+							JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Correct!!");
+						} else {
+							JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "incorrect!!");
+						}
+						
+					}
+				}				
 			}
 		});
 		btnView.setBounds(419, 307, 120, 31);
@@ -176,7 +203,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		listQuestion.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				String res = "<html>This question<br> is worth</html>";
-				System.out.println(res);
+				//System.out.println(res);
 					
 				JList list = (JList) e.getSource();
 				TextQuestion question = questions.get(list.getSelectedIndex());
@@ -185,24 +212,26 @@ public class HHSavedQuestionsPage extends JFrame {
 				res = "<html>This question<br> is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;
 				lblPts.setText(res);
 				questionTitle.setText(question.getName());
-					/*questAnswer = question.getAnswer(); */
+				
+				selQuestion = question;
+				//System.out.println(selQuestion.getAssessID());
+				//questAnswer = question.getCorrectAnswer();
+				/*questAnswer = question.getAnswer(); */
 					// need to pass this question into submit button, then check for answer
 					
 			}
 		});
 		
 		
-		
-		listQuestion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);			
-		
+		listQuestion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listQuestion.setBounds(29, 84, 188, 112);
 		
 		JButton btnAdd = new JButton("Add Question");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//SharedQuestion.setQuestion(selQuestion);
 				dispose();
 				new HHFormFrame().setVisible(true);
-				
 			}
 		});
 		btnAdd.setMaximumSize(new Dimension(139, 23));

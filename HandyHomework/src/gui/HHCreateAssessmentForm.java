@@ -42,7 +42,7 @@ import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerDateModel;
 
-public class HHCreateAssessmentForm {
+public class HHCreateAssessmentForm extends JFrame  {
 
 	private JFrame frame;
 	private JTextField assessmentNameField;
@@ -55,8 +55,8 @@ public class HHCreateAssessmentForm {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HHCreateAssessmentForm window = new HHCreateAssessmentForm();
-					window.frame.setVisible(true);
+					HHCreateAssessmentForm frame = new HHCreateAssessmentForm();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -175,6 +175,12 @@ public class HHCreateAssessmentForm {
 				if (name.isEmpty() || title.isEmpty()) {
 					JOptionPane.showInputDialog(HHCreateAssessmentForm.this, "One or more required fields are empty");
 				} else {
+					Calendar due = Calendar.getInstance();
+					 due.set(2017, 9, 25, 10, 05, 30);					
+					db.DbConnection.insertAssessment(title, name, due, false, totalPoints);
+					
+					
+					
 					if (totalPoints == 0){
 						//Assessment a1 = new Assessment(name, title, mult, opt);
 					} else{
