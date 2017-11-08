@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.AbstractListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import net.miginfocom.swing.MigLayout;
+//import net.miginfocom.swing.MigLayout;
 import question.QuestionAbstract;
 
 import javax.swing.JLabel;
@@ -148,15 +148,19 @@ public class HHCreateAssessmentFrame extends JFrame {
 					JOptionPane.showMessageDialog(HHCreateAssessmentFrame.this, "One or more mandatory fields are empty.");
 				} else {
 					Calendar due = Calendar.getInstance();
-					 due.set(2017, 9, 25, 10, 05, 30);					
-					db.DbConnection.insertAssessment(title, name, due, false, totalPoints);
+					 due.set(2017, 9, 25, 10, 05, 30);	
+						if (totalPoints > 100){
+							JOptionPane.showMessageDialog(HHCreateAssessmentFrame.this, "Weight of an assessment can only be 100%");
+							//Assessment a1 = new Assessment(name, title, mult, opt);
+						} else{
+							db.DbConnection.insertAssessment(title, name, due, false,  ((float) totalPoints/100));
+							//Assessment a1 = new Assessment(name, title, mult, opt, c, totalPoints);
+						}
+					 													// Weight of assessment not points and shud be less than 1 (0 to 1)
 					
 					
-					if (totalPoints == 0){
-						//Assessment a1 = new Assessment(name, title, mult, opt);
-					} else{
-						//Assessment a1 = new Assessment(name, title, mult, opt, c, totalPoints);
-					}
+					
+
 				// TODO
 				// add assessment to DB and return success/fail msg
 				}
