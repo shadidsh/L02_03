@@ -64,12 +64,12 @@ public class HHCreateAssessmentFrame extends JFrame {
 		JLabel lblCreateAssessmentForm = new JLabel("Create Assessment Form");
 		lblCreateAssessmentForm.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		
-		JLabel lblAssessmentName = new JLabel("Assessment Name:");
+		JLabel lblAssessmentName = new JLabel("* Assessment Name:");
 		
 		assessmentNameField = new JTextField();
 		assessmentNameField.setColumns(10);
 		
-		JLabel lblAssessmentTitle = new JLabel("Assessment Title:");
+		JLabel lblAssessmentTitle = new JLabel("* Assessment Title:");
 		
 		titleField = new JTextField();
 		titleField.setColumns(10);
@@ -145,6 +145,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 				System.out.println("Assessment name is :" + name);
 				if (name.isEmpty() || title.isEmpty()) {
 					// msg box to say mand fields are empty
+					JOptionPane.showMessageDialog(HHCreateAssessmentFrame.this, "One or more mandatory fields are empty.");
 				} else {
 					Calendar due = Calendar.getInstance();
 					 due.set(2017, 9, 25, 10, 05, 30);					

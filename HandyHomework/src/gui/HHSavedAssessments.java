@@ -206,7 +206,7 @@ public class HHSavedAssessments extends JFrame {
 		btnNewAssessment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new HHCreateAssessmentForm().setVisible(true);
+				new HHCreateAssessmentFrame().setVisible(true);
 			}
 		});
 		btnNewAssessment.setBounds(386, 265, 153, 31);

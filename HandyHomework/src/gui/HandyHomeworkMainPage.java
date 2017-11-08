@@ -52,27 +52,26 @@ public class HandyHomeworkMainPage extends JFrame {
 		
 		JLabel lblWelcome = new JLabel("Choose one of the following:");
 		sl_contentPane.putConstraint(SpringLayout.WEST, lblWelcome, 156, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcome, -174, SpringLayout.SOUTH, contentPane);
 		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		contentPane.add(lblWelcome);
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.setLayer(lblWelcome, 0);
 		
-		JButton buttonEnterQuestion = new JButton("Enter a question");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonEnterQuestion, 126, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, buttonEnterQuestion, 133, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, buttonEnterQuestion, -83, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, buttonEnterQuestion, -121, SpringLayout.EAST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcome, -27, SpringLayout.NORTH, buttonEnterQuestion);
-		buttonEnterQuestion.setMaximumSize(new Dimension(139, 23));
-		buttonEnterQuestion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new HHFormFrame().setVisible(true);
-			}
-		});
-	
-		buttonEnterQuestion.setFont(new Font("Tahoma", Font.BOLD, 13));
-		contentPane.add(buttonEnterQuestion);
+//		JButton buttonEnterQuestion = new JButton("Enter a question");
+//		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonEnterQuestion, 8, SpringLayout.SOUTH, lblWelcome);
+//		sl_contentPane.putConstraint(SpringLayout.SOUTH, buttonEnterQuestion, -128, SpringLayout.SOUTH, contentPane);
+//		sl_contentPane.putConstraint(SpringLayout.EAST, buttonEnterQuestion, -121, SpringLayout.EAST, contentPane);
+//		buttonEnterQuestion.setMaximumSize(new Dimension(139, 23));
+//		buttonEnterQuestion.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				dispose();
+//				new HHFormFrame().setVisible(true);
+//			}
+//		});
+//	
+//		buttonEnterQuestion.setFont(new Font("Tahoma", Font.BOLD, 13));
+//		contentPane.add(buttonEnterQuestion);
 		
 		JLabel lblWelcometoHH = new JLabel("Welcome to HandyHomework!");
 		sl_contentPane.putConstraint(SpringLayout.NORTH, lblWelcometoHH, 21, SpringLayout.NORTH, contentPane);
@@ -86,23 +85,38 @@ public class HandyHomeworkMainPage extends JFrame {
 		contentPane.add(lblWelcometoHH);
 		
 		JButton savedQuestionsButton = new JButton("View Saved Questions");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, savedQuestionsButton, 6, SpringLayout.SOUTH, buttonEnterQuestion);
-		sl_contentPane.putConstraint(SpringLayout.WEST, savedQuestionsButton, 0, SpringLayout.WEST, buttonEnterQuestion);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, savedQuestionsButton, -47, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, savedQuestionsButton, -121, SpringLayout.EAST, contentPane);
-		savedQuestionsButton.setPreferredSize(new Dimension(200, 23));
-		savedQuestionsButton.setMaximumSize(new Dimension(200, 23));
+		sl_contentPane.putConstraint(SpringLayout.WEST, savedQuestionsButton, 143, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, savedQuestionsButton, -157, SpringLayout.EAST, contentPane);
+		savedQuestionsButton.setPreferredSize(new Dimension(200, 20));
+		savedQuestionsButton.setMaximumSize(new Dimension(200, 20));
 		savedQuestionsButton.setFont(new Font("Tahoma", Font.BOLD, 13));
 		savedQuestionsButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		contentPane.add(savedQuestionsButton);
 		
 		JButton btnViewSavedAssessments = new JButton("View Saved Assessments");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnViewSavedAssessments, 6, SpringLayout.SOUTH, savedQuestionsButton);
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnViewSavedAssessments, 0, SpringLayout.WEST, buttonEnterQuestion);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnViewSavedAssessments, -5, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnViewSavedAssessments, -122, SpringLayout.EAST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, savedQuestionsButton, -11, SpringLayout.NORTH, btnViewSavedAssessments);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnViewSavedAssessments, -28, SpringLayout.SOUTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnViewSavedAssessments, 194, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnViewSavedAssessments, 143, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnViewSavedAssessments, -147, SpringLayout.EAST, contentPane);
 		btnViewSavedAssessments.setFont(new Font("Tahoma", Font.BOLD, 13));
 		contentPane.add(btnViewSavedAssessments);
+		
+		JButton btnCreateAnAssessment = new JButton("Create an Assessment");
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnCreateAnAssessment, 143, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnCreateAnAssessment, -157, SpringLayout.EAST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, savedQuestionsButton, 1, SpringLayout.SOUTH, btnCreateAnAssessment);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnCreateAnAssessment, 6, SpringLayout.SOUTH, lblWelcome);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnCreateAnAssessment, 47, SpringLayout.SOUTH, lblWelcome);
+		btnCreateAnAssessment.setFont(new Font("Tahoma", Font.BOLD, 13));
+//		sl_contentPane.putConstraint(SpringLayout.EAST, btnCreateAnAssessment, 236, SpringLayout.WEST, buttonEnterQuestion);
+		btnCreateAnAssessment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new HHCreateAssessmentFrame().setVisible(true);
+				dispose();
+			}
+		});
+		contentPane.add(btnCreateAnAssessment);
 		savedQuestionsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent i) {
 				dispose();
