@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import question.TextQuestion;
 import db.DbConnection;
@@ -21,6 +22,8 @@ import javax.swing.JTextArea;
 import javax.swing.JSpinner;
 import javax.swing.JScrollBar;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -121,12 +124,10 @@ public class HHFormFrame extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.WEST, spinner, 6, SpringLayout.EAST, lblNumberOfMarks);
 		contentPane.add(spinner);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setValueIsAdjusting(true);
-		sl_contentPane.putConstraint(SpringLayout.WEST, scrollBar, 6, SpringLayout.EAST, lblQuestionForm);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, scrollBar, 10, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, scrollBar, 241, SpringLayout.SOUTH, contentPane);
-		contentPane.add(scrollBar);
+		JComponent field = ((JSpinner.DefaultEditor) spinner.getEditor());
+	    Dimension prefSize = field.getPreferredSize();
+	    prefSize = new Dimension(40, prefSize.height);
+	    field.setPreferredSize(prefSize);
 		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
@@ -137,20 +138,27 @@ public class HHFormFrame extends JFrame {
 				int value = (int) (spinner.getValue());
 				System.out.println("question is :" + questionContent);
 				if (name.isEmpty() || questionContent.isEmpty() || answer.isEmpty()) {
-					JOptionPane.showMessageDialog(HHFormFrame.this, "One or more fields are empty");
+					JOptionPane.showMessageDialog(HHFormFrame.this, "One or more fields are empty.");
 				} else if (!SharedAssessment.isSelected()) {
-					JOptionPane.showMessageDialog(HHFormFrame.this, "Assessment incorrectly selected");
+					JOptionPane.showMessageDialog(HHFormFrame.this, "No assessment selected.");
 				}				
 				else {	
 					
 					// add the question to database and produce successful/unsuccessful msg box
 					//Connection conn = DbConnection.getConnection();
 					//String insert = "INSERT INTO sware.textquestions " 	+ " VALUES(?, ?, ?, ?, ?);";
-					
-					Assessment as = SharedAssessment.getAssess();
-					int qid = db.DbConnection.insertQuestions(as.getAid(), name, questionContent, value);
-					db.DbConnection.insertAnswers(qid,  true,  answer);
-					
+					try {
+						Assessment as = SharedAssessment.getAssess();
+						int qid = db.DbConnection.insertQuestions(as.getAid(), name, questionContent, value);
+						db.DbConnection.insertAnswers(qid,  true,  answer);
+						
+						String message = name + "\nQuestion is: " + questionContent + "\nSuccessfully added.";
+						JOptionPane.showMessageDialog(HHFormFrame.this, message);
+					} catch (NullPointerException e1){
+						System.out.println("Could not insert question into database."); 
+						e1.printStackTrace();
+						JOptionPane.showMessageDialog(HHFormFrame.this, "Could not save question - please check your connection and try again.");
+					}
 					
 					//TextAnswer t = new TextAnswer(qid,  answer,  true);
 					/* try {

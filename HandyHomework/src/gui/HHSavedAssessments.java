@@ -39,10 +39,6 @@ public class HHSavedAssessments extends JFrame {
 	private JList list;
 	private String questAnswer;
 	private Assessment selectedAs;
-	/**
-	 * @wbp.nonvisual location=253,414
-	 */
-	private final JPanel panel = new JPanel();
 
 	/**
 	 * Launch the application.
@@ -74,15 +70,9 @@ public class HHSavedAssessments extends JFrame {
 		
 		JLabel lblSavedAssessment = new JLabel("Saved Assessments");
 		lblSavedAssessment.setMaximumSize(new Dimension(100, 30));
-		lblSavedAssessment.setFont(new Font("Dialog", Font.ITALIC, 20));
-		lblSavedAssessment.setBounds(151, 13, 215, 31);
+		lblSavedAssessment.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
+		lblSavedAssessment.setBounds(294, 13, 245, 30);
 		contentPane.add(lblSavedAssessment);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 307, 196, 240);
-		contentPane.add(scrollPane);
-		
-		JLabel lblAssessment = new JLabel("Select an Assessment");
 		JLabel lblPts = new JLabel("");
 		lblPts.setAutoscrolls(true);
 		
@@ -132,12 +122,21 @@ public class HHSavedAssessments extends JFrame {
 				
 			} catch (SQLException e1) {
 				e1.printStackTrace();
+				JOptionPane.showMessageDialog(HHSavedAssessments.this, "Could not access database - " + "\nplease check your connection and try again.");
+			} catch (NullPointerException e2){
+				e2.printStackTrace();
+				JOptionPane.showMessageDialog(HHSavedAssessments.this, "Could not access database - " + "\nplease check your connection and try again.");
 			}
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(266, 99, 201, 139);
+		contentPane.add(scrollPane_1);
+		
+		JLabel lblAssessment = new JLabel("Select an Assessment");
+		scrollPane_1.setViewportView(lblAssessment);
 		lblAssessment.setVerticalAlignment(SwingConstants.TOP);
-		lblAssessment.setBounds(266, 99, 201, 139);
-		contentPane.add(lblAssessment);		
 		JButton btnMainMenu = new JButton("Main Menu");
-		btnMainMenu.setBounds(419, 16, 120, 30);
+		btnMainMenu.setBounds(266, 306, 120, 30);
 		contentPane.add(btnMainMenu);
 		
 		btnMainMenu.addActionListener(new ActionListener() {
@@ -147,13 +146,13 @@ public class HHSavedAssessments extends JFrame {
 			}
 		});
 		lblPts.setVerticalAlignment(SwingConstants.TOP);
-		lblPts.setBounds(289, 265, 120, 72);
+		lblPts.setBounds(266, 127, 120, 72);
 		contentPane.add(lblPts);
 		JButton btnView = new JButton("Select");
 		btnView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (selectedAs == null ) {
-					JOptionPane.showMessageDialog(HHSavedAssessments.this, "please select an assessment");
+					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment.");
 				} else {
 					SharedAssessment.setAssess(selectedAs);
 					dispose();
@@ -176,8 +175,12 @@ public class HHSavedAssessments extends JFrame {
 		
 		btnView.setBounds(419, 306, 120, 31);
 		contentPane.add(btnView);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(30, 97, 196, 239);
+		contentPane.add(scrollPane_2);
 		JList listAssessment = new JList<>(lstAssess);
-		contentPane.add(listAssessment);
+		scrollPane_2.setViewportView(listAssessment);
 		
 		listAssessment.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -199,18 +202,21 @@ public class HHSavedAssessments extends JFrame {
 		});	
 		
 		
-		listAssessment.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);		
-		listAssessment.setBounds(30, 97, 196, 239);
+		listAssessment.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		JButton btnNewAssessment = new JButton("New Assessment");
+		JButton btnNewAssessment = new JButton("Create New Assessment");
 		btnNewAssessment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				new HHCreateAssessmentFrame().setVisible(true);
 			}
 		});
-		btnNewAssessment.setBounds(386, 265, 153, 31);
+		btnNewAssessment.setBounds(266, 265, 195, 29);
 		contentPane.add(btnNewAssessment);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(30, 97, 196, 240);
+		contentPane.add(scrollPane);
 		
 		
 		

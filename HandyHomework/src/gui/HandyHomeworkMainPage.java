@@ -112,8 +112,13 @@ public class HandyHomeworkMainPage extends JFrame {
 //		sl_contentPane.putConstraint(SpringLayout.EAST, btnCreateAnAssessment, 236, SpringLayout.WEST, buttonEnterQuestion);
 		btnCreateAnAssessment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new HHCreateAssessmentFrame().setVisible(true);
-				dispose();
+				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
+				frame.setVisible(true);
+				frame.setAlwaysOnTop(true);
+				if (frame.isDisplayable()){
+					dispose();
+				}
+				
 			}
 		});
 		contentPane.add(btnCreateAnAssessment);

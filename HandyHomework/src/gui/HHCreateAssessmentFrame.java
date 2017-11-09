@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -24,7 +25,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerDateModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
@@ -56,7 +61,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 	 */
 	public HHCreateAssessmentFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 500);
+		setBounds(100, 100, 450, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -80,44 +85,49 @@ public class HHCreateAssessmentFrame extends JFrame {
 		
 		JSpinner spinner = new JSpinner();
 		
-		JSplitPane splitPane = new JSplitPane();
+		JComponent field = ((JSpinner.DefaultEditor) spinner.getEditor());
+	    Dimension prefSize = field.getPreferredSize();
+	    prefSize = new Dimension(40, prefSize.height);
+	    field.setPreferredSize(prefSize);
 		
-		// JList for questions
-		JList list = new JList();
-		list.setModel(new AbstractListModel() {
-			QuestionAbstract[] values = new QuestionAbstract[] {};
-			public int getSize() {
-				return values.length;
-			}
-			public QuestionAbstract getElementAt(int index) {
-				return values[index];
-			}
-			public void addQuestion(QuestionAbstract q){
-				values[values.length] = q;
-			}
-		});
+//		JSplitPane splitPane = new JSplitPane();
+//		
+//		JList<QuestionAbstract> list = new JList<QuestionAbstract>();
+//		
+//		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		splitPane.setLeftComponent(list);
+//		
+//		JLabel lblSelectedQuestion = new JLabel("No questions in assessment");
+//		
+//		if (list.getModel().getSize() != 0 && list.isSelectionEmpty()){
+//			lblSelectedQuestion = new JLabel("No questions selected");
+//		} else if (! list.isSelectionEmpty()) {
+//			lblSelectedQuestion = new JLabel(list.getSelectedValue().toString());
+//		}
+//		
+//		splitPane.setRightComponent(lblSelectedQuestion);
+//		
+//		JButton btnAddQuestion = new JButton("Add Question");
+//		btnAddQuestion.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				HHFormFrame newQuestion = new HHFormFrame();
+//				newQuestion.setVisible(true);
+//				newQuestion.setAlwaysOnTop(true);
+//				newQuestion.addWindowListener(new WindowListener(){
+//					@Override
+//					public void windowClosed(WindowEvent e) {
+//						// TODO Auto-generated method stub
+//						System.out.print(newQuestion.q.getName());
+//						if (newQuestion.q.getAssessID() != 0 && newQuestion.q.getName() !=  "None" 
+//								&& newQuestion.q.getPoints() != 0 && newQuestion.q.getQuestion() != "None"){
+//							list.add(new JLabel(newQuestion.q.getName()), newQuestion.q);
+//						}
+//					}
+//
+//				});
+//			}
+//		});
 		
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		splitPane.setLeftComponent(list);
-		
-		JLabel lblSelectedQuestion = new JLabel("No questions in assessment");
-		
-		if (list.getModel().getSize() != 0 && list.isSelectionEmpty()){
-			lblSelectedQuestion = new JLabel("No questions selected");
-		} else if (! list.isSelectionEmpty()) {
-			lblSelectedQuestion = new JLabel(list.getSelectedValue().toString());
-		}
-		
-		splitPane.setRightComponent(lblSelectedQuestion);
-		
-		JButton btnAddQuestion = new JButton("Add Question");
-		btnAddQuestion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				HHFormFrame newQuestion = new HHFormFrame();
-				newQuestion.setVisible(true);
-				newQuestion.setAlwaysOnTop(true);
-			}
-		});
 		
 		JCheckBox chckbxContainsMCQ = new JCheckBox("Contains multiple choice");
 		
@@ -150,10 +160,17 @@ public class HHCreateAssessmentFrame extends JFrame {
 					Calendar due = Calendar.getInstance();
 					 due.set(2017, 9, 25, 10, 05, 30);	
 						if (totalPoints > 100){
-							JOptionPane.showMessageDialog(HHCreateAssessmentFrame.this, "Weight of an assessment can only be 100%");
+							JOptionPane.showMessageDialog(HHCreateAssessmentFrame.this, "Maximum assessment weight is 100.");
 							//Assessment a1 = new Assessment(name, title, mult, opt);
-						} else{
-							db.DbConnection.insertAssessment(title, name, due, false,  ((float) totalPoints/100));
+						} else {
+							try {
+								db.DbConnection.insertAssessment(title, name, due, false,  ((float) totalPoints/100));
+							} catch (NullPointerException e1){
+								System.out.println("Could not access database."); 
+								e1.printStackTrace();
+								JOptionPane.showMessageDialog(HHCreateAssessmentFrame.this, "Could not access the database -" + "\nplease check your connection and try again.");
+							}
+							
 							//Assessment a1 = new Assessment(name, title, mult, opt, c, totalPoints);
 						}
 					 													// Weight of assessment not points and shud be less than 1 (0 to 1)
@@ -188,8 +205,8 @@ public class HHCreateAssessmentFrame extends JFrame {
 						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 							.addGap(25)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(splitPane, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-								.addComponent(btnAddQuestion, Alignment.LEADING)
+								//.addComponent(splitPane, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+								//.addComponent(btnAddQuestion, Alignment.LEADING)
 								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 									.addComponent(lblTotalPointsAwarded)
 									.addPreferredGap(ComponentPlacement.RELATED)
@@ -237,9 +254,9 @@ public class HHCreateAssessmentFrame extends JFrame {
 						.addComponent(lblTotalPointsAwarded)
 						.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
-					.addComponent(splitPane, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+					//.addComponent(splitPane, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnAddQuestion)
+					//.addComponent(btnAddQuestion)
 					.addGap(18)
 					.addComponent(chckbxContainsMCQ)
 					.addGap(18)
