@@ -28,6 +28,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import assessment.Assessment;
+import assessment.SharedAssessment;
 import db.DbConnection;
 import java.awt.SystemColor;
 

@@ -1,6 +1,4 @@
-package gui;
-
-import assessment.Assessment;
+package assessment;
 
 public class SharedAssessment {
 	 public static Assessment selectedAs = null;

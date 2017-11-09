@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import answer.TextAnswer;
 import assessment.Assessment;
+import assessment.SharedAssessment;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;

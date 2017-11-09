@@ -32,6 +32,7 @@ import javax.swing.event.ListSelectionListener;
 
 import answer.TextAnswer;
 import assessment.Assessment;
+import assessment.SharedAssessment;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextField;
