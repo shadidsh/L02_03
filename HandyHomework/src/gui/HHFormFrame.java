@@ -205,8 +205,11 @@ public class HHFormFrame extends JFrame {
 		JButton btnCancel = new JButton("Back");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new HHSavedQuestionsPage().setVisible(true);
+				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
+				frame.setVisible(true);
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
 		});
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnCancel, 114, SpringLayout.SOUTH, questionContentField);

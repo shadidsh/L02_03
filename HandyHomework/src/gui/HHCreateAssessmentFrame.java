@@ -156,6 +156,12 @@ public class HHCreateAssessmentFrame extends JFrame {
 						} else {
 							try {
 								db.DbConnection.insertAssessment(title, name, due, false,  ((float) totalPoints/100));
+								// Upon confirmation, open the saved assessments!!
+								HHSavedAssessments frame = new HHSavedAssessments();
+								frame.setVisible(true);
+								if (frame.isShowing()){
+									dispose();
+								}
 							} catch (NullPointerException e1){
 								System.out.println("Could not access database."); 
 								e1.printStackTrace();
@@ -172,17 +178,18 @@ public class HHCreateAssessmentFrame extends JFrame {
 				// TODO
 				// add assessment to DB and return success/fail msg
 				}
-				// Upon confirmation, open the saved assessments!!
-				new HHSavedAssessments().setVisible(true);
-				dispose();
+				
 			}
 		});		
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new HandyHomeworkMainPage().setVisible(true);
+				HHSavedAssessments frame = new HHSavedAssessments();
+				frame.setVisible(true);
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

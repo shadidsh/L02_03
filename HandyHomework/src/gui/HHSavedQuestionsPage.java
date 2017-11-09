@@ -203,8 +203,11 @@ public class HHSavedQuestionsPage extends JFrame {
 		
 		btnback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new HHSavedAssessments().setVisible(true);
+				HHSavedAssessments frame = new HHSavedAssessments();
+				frame.setVisible(true);				
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
 		});
 		JButton btnView = new JButton("Submit Answer");
@@ -277,8 +280,11 @@ public class HHSavedQuestionsPage extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//SharedQuestion.setQuestion(selQuestion);
-				dispose();
-				new HHFormFrame().setVisible(true);
+				HHFormFrame frame = new HHFormFrame();
+				frame.setVisible(true);				
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
 		});
 		btnAdd.setMaximumSize(new Dimension(139, 23));

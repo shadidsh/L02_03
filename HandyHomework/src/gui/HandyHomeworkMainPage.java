@@ -111,8 +111,11 @@ public class HandyHomeworkMainPage extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnViewSavedAssessments, 0, SpringLayout.EAST, lblWelcome);
 		btnViewSavedAssessments.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent i) {
-				dispose();
-				new HHSavedAssessments().setVisible(true);
+				HHSavedAssessments frame = new HHSavedAssessments();
+				frame.setVisible(true);
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
 		});
 		btnViewSavedAssessments.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
@@ -130,8 +133,7 @@ public class HandyHomeworkMainPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
 				frame.setVisible(true);
-				frame.setAlwaysOnTop(true);
-				if (frame.isDisplayable()){
+				if (frame.isShowing()){
 					dispose();
 				}
 				

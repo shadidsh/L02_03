@@ -157,8 +157,12 @@ public class HHSavedAssessments extends JFrame {
 		
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new HandyHomeworkMainPage().setVisible(true);
+				HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
+				frame.setVisible(true);				
+				if (frame.isShowing()){
+					dispose();
+				}
+
 			}
 		});
 		JButton btnView = new JButton("Select");
@@ -168,8 +172,11 @@ public class HHSavedAssessments extends JFrame {
 					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment.");
 				} else {
 					SharedAssessment.setAssess(selectedAs);
-					dispose();
-					new HHSavedQuestionsPage().setVisible(true);
+					HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
+					frame.setVisible(true);				
+					if (frame.isShowing()){
+						dispose();
+					}
 				}
 //				////////////////////////////////// need to modify to pass info to view saved questions page
 //				if (answer.isEmpty()) {
@@ -219,8 +226,11 @@ public class HHSavedAssessments extends JFrame {
 		JButton btnNewAssessment = new JButton("Create New Assessment");
 		btnNewAssessment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new HHCreateAssessmentFrame().setVisible(true);
+				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
+				frame.setVisible(true);				
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
 		});
 		btnNewAssessment.setBounds(266, 265, 195, 29);
