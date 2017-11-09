@@ -158,7 +158,8 @@ public class HHSavedAssessments extends JFrame {
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
-				frame.setVisible(true);				
+				frame.setVisible(true);	
+				frame.setResizable(false);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -173,7 +174,8 @@ public class HHSavedAssessments extends JFrame {
 				} else {
 					SharedAssessment.setAssess(selectedAs);
 					HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-					frame.setVisible(true);				
+					frame.setVisible(true);	
+					frame.setResizable(false);
 					if (frame.isShowing()){
 						dispose();
 					}
@@ -227,7 +229,8 @@ public class HHSavedAssessments extends JFrame {
 		btnNewAssessment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
-				frame.setVisible(true);				
+				frame.setVisible(true);	
+				frame.setResizable(false);
 				if (frame.isShowing()){
 					dispose();
 				}

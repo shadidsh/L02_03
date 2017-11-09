@@ -113,6 +113,7 @@ public class HandyHomeworkMainPage extends JFrame {
 			public void actionPerformed(ActionEvent i) {
 				HHSavedAssessments frame = new HHSavedAssessments();
 				frame.setVisible(true);
+				frame.setResizable(false);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -133,6 +134,7 @@ public class HandyHomeworkMainPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
 				frame.setVisible(true);
+				frame.setResizable(false);
 				if (frame.isShowing()){
 					dispose();
 				}

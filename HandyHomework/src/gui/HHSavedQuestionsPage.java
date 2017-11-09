@@ -204,7 +204,8 @@ public class HHSavedQuestionsPage extends JFrame {
 		btnback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();
-				frame.setVisible(true);				
+				frame.setVisible(true);		
+				frame.setResizable(false);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -281,7 +282,8 @@ public class HHSavedQuestionsPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//SharedQuestion.setQuestion(selQuestion);
 				HHFormFrame frame = new HHFormFrame();
-				frame.setVisible(true);				
+				frame.setVisible(true);	
+				frame.setResizable(false);
 				if (frame.isShowing()){
 					dispose();
 				}

@@ -207,6 +207,7 @@ public class HHFormFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
 				frame.setVisible(true);
+				frame.setResizable(false);
 				if (frame.isShowing()){
 					dispose();
 				}

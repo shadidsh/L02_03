@@ -159,6 +159,8 @@ public class HHCreateAssessmentFrame extends JFrame {
 								// Upon confirmation, open the saved assessments!!
 								HHSavedAssessments frame = new HHSavedAssessments();
 								frame.setVisible(true);
+								frame.setResizable(false);
+								frame.setResizable(false);
 								if (frame.isShowing()){
 									dispose();
 								}
@@ -187,6 +189,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();
 				frame.setVisible(true);
+				frame.setResizable(false);
 				if (frame.isShowing()){
 					dispose();
 				}
