@@ -1,7 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -22,7 +20,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -31,7 +29,7 @@ import javax.swing.event.ListSelectionListener;
 
 import assessment.Assessment;
 import db.DbConnection;
-import question.TextQuestion;
+import java.awt.SystemColor;
 
 public class HHSavedAssessments extends JFrame {
 
@@ -49,6 +47,7 @@ public class HHSavedAssessments extends JFrame {
 				try {
 					HHSavedAssessments frame = new HHSavedAssessments();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -62,23 +61,36 @@ public class HHSavedAssessments extends JFrame {
 	public HHSavedAssessments() {
 		setTitle("HandyHomework");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 569, 395);
+		setBounds(100, 100, 560, 395);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(273, 158, 232, 103);
+		scrollPane.setBorder(null);
+		contentPane.add(scrollPane);
+		JLabel lblPts = new JLabel("");
+		lblPts.setVisible(true);
+		scrollPane.setViewportView(lblPts);
+		lblPts.setBorder(null);
+		lblPts.setAutoscrolls(true);
+		lblPts.setVerticalAlignment(SwingConstants.TOP);
+		
 		JLabel lblSavedAssessment = new JLabel("Saved Assessments");
 		lblSavedAssessment.setMaximumSize(new Dimension(100, 30));
 		lblSavedAssessment.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
-		lblSavedAssessment.setBounds(294, 13, 245, 30);
+		lblSavedAssessment.setBounds(273, 22, 245, 30);
 		contentPane.add(lblSavedAssessment);
-		JLabel lblPts = new JLabel("");
-		lblPts.setAutoscrolls(true);
 		
-		JLabel assessmentTitle = new JLabel("");
+		JTextArea assessmentTitle = new JTextArea("");
+		assessmentTitle.setBackground(SystemColor.window);
+		assessmentTitle.setEditable(false);
 		assessmentTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
-		assessmentTitle.setBounds(266, 55, 175, 33);
+		assessmentTitle.setBounds(266, 82, 239, 33);
+		assessmentTitle.setLineWrap(true);
+		assessmentTitle.setWrapStyleWord(true);
 		contentPane.add(assessmentTitle);
 		
 		Connection conn = DbConnection.getConnection();
@@ -129,10 +141,13 @@ public class HHSavedAssessments extends JFrame {
 			}
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(266, 99, 201, 139);
+		scrollPane_1.setBounds(273, 122, 232, 139);
+		scrollPane_1.setBorder(null);
 		contentPane.add(scrollPane_1);
 		
 		JLabel lblAssessment = new JLabel("Select an Assessment");
+		lblAssessment.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
+		lblAssessment.setBorder(null);
 		scrollPane_1.setViewportView(lblAssessment);
 		lblAssessment.setVerticalAlignment(SwingConstants.TOP);
 		JButton btnMainMenu = new JButton("Main Menu");
@@ -145,9 +160,6 @@ public class HHSavedAssessments extends JFrame {
 				new HandyHomeworkMainPage().setVisible(true);
 			}
 		});
-		lblPts.setVerticalAlignment(SwingConstants.TOP);
-		lblPts.setBounds(266, 127, 120, 72);
-		contentPane.add(lblPts);
 		JButton btnView = new JButton("Select");
 		btnView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -177,7 +189,7 @@ public class HHSavedAssessments extends JFrame {
 		contentPane.add(btnView);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(30, 97, 196, 239);
+		scrollPane_2.setBounds(30, 97, 215, 239);
 		contentPane.add(scrollPane_2);
 		JList listAssessment = new JList<>(lstAssess);
 		scrollPane_2.setViewportView(listAssessment);
@@ -192,8 +204,7 @@ public class HHSavedAssessments extends JFrame {
 				Assessment as = assess.get(list.getSelectedIndex());
 				
 				lblAssessment.setText(as.getName());					
-				res = "<html>This assessment's id:" + as.getAid() + ", its name is " + as.getName() 
-					+  ", and it is weighted " + as.getWeight() + "</html>" ;
+				res = "This assessment is worth " + as.getWeight() + "%";
 				
 				lblPts.setText(res);
 				assessmentTitle.setText(as.getTitle());
@@ -213,14 +224,6 @@ public class HHSavedAssessments extends JFrame {
 		});
 		btnNewAssessment.setBounds(266, 265, 195, 29);
 		contentPane.add(btnNewAssessment);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(30, 97, 196, 240);
-		contentPane.add(scrollPane);
-		
-		
-		
-		
 		
 		
 	}

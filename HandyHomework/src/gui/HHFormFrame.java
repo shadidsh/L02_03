@@ -47,6 +47,7 @@ public class HHFormFrame extends JFrame {
 				try {
 					HHFormFrame frame = new HHFormFrame();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -66,6 +66,7 @@ public class HHSavedQuestionsPage extends JFrame {
 				try {
 					HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -92,7 +93,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		lblAssessmentName.setBackground(SystemColor.window);
 		lblAssessmentName.setMaximumSize(new Dimension(100, 30));
 		lblAssessmentName.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
-		lblAssessmentName.setBounds(29, 32, 376, 40);
+		lblAssessmentName.setBounds(138, 30, 376, 40);
 		contentPane.add(lblAssessmentName);
 		
 		JPanel panel = new JPanel();

@@ -28,6 +28,7 @@ public class HandyHomeworkMainPage extends JFrame {
 				try {
 					HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
