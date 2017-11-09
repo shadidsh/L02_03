@@ -70,7 +70,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 		titleField = new JTextField();
 		titleField.setColumns(10);
 		
-		JLabel lblDueDate = new JLabel("Due Date:");
+//		JLabel lblDueDate = new JLabel("Due Date:");
 		
 		JLabel lblTotalPointsAwarded = new JLabel("Total Points Awarded:");
 		
@@ -202,7 +202,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 									.addComponent(lblTotalPointsAwarded)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblDueDate, Alignment.LEADING)
+								//.addComponent(lblDueDate, Alignment.LEADING)
 								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 									.addComponent(lblAssessmentTitle)
 									.addGap(18)
@@ -239,7 +239,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 						.addComponent(lblAssessmentTitle)
 						.addComponent(titleField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(11)
-					.addComponent(lblDueDate)
+					//.addComponent(lblDueDate)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTotalPointsAwarded)
