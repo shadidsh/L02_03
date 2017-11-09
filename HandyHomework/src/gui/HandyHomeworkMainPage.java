@@ -51,9 +51,8 @@ public class HandyHomeworkMainPage extends JFrame {
 		contentPane.setLayout(sl_contentPane);
 		
 		JLabel lblWelcome = new JLabel("Choose one of the following:");
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblWelcome, 156, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcome, -174, SpringLayout.SOUTH, contentPane);
-		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		sl_contentPane.putConstraint(SpringLayout.EAST, lblWelcome, -147, SpringLayout.EAST, contentPane);
+		lblWelcome.setFont(new Font("Lucida Grande", Font.ITALIC, 15));
 		contentPane.add(lblWelcome);
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.setLayer(lblWelcome, 0);
@@ -84,31 +83,47 @@ public class HandyHomeworkMainPage extends JFrame {
 		lblWelcometoHH.setFont(new Font("Georgia", Font.PLAIN, 25));
 		contentPane.add(lblWelcometoHH);
 		
-		JButton savedQuestionsButton = new JButton("View Saved Questions");
-		sl_contentPane.putConstraint(SpringLayout.WEST, savedQuestionsButton, 143, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, savedQuestionsButton, -157, SpringLayout.EAST, contentPane);
-		savedQuestionsButton.setPreferredSize(new Dimension(200, 20));
-		savedQuestionsButton.setMaximumSize(new Dimension(200, 20));
-		savedQuestionsButton.setFont(new Font("Tahoma", Font.BOLD, 13));
-		savedQuestionsButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		contentPane.add(savedQuestionsButton);
+//		JButton savedQuestionsButton = new JButton("View Saved Questions");
+//		savedQuestionsButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent i) {
+//				dispose();
+//				new HHSavedQuestionsPage().setVisible(true);
+//			}
+//		});
+
+//		sl_contentPane.putConstraint(SpringLayout.NORTH, savedQuestionsButton, 6, SpringLayout.SOUTH, btnViewSavedAssessments);
+//		sl_contentPane.putConstraint(SpringLayout.WEST, savedQuestionsButton, 0, SpringLayout.WEST, btnViewSavedAssessments);
+//		sl_contentPane.putConstraint(SpringLayout.EAST, savedQuestionsButton, 0, SpringLayout.EAST, btnViewSavedAssessments);
+//		sl_contentPane.putConstraint(SpringLayout.WEST, lblWelcome, 0, SpringLayout.WEST, savedQuestionsButton);
+//		sl_contentPane.putConstraint(SpringLayout.SOUTH, savedQuestionsButton, -28, SpringLayout.SOUTH, contentPane);
+//		savedQuestionsButton.setPreferredSize(new Dimension(200, 20));
+//		savedQuestionsButton.setMaximumSize(new Dimension(200, 20));
+//		savedQuestionsButton.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+//		savedQuestionsButton.setHorizontalTextPosition(SwingConstants.CENTER);
+//		contentPane.add(savedQuestionsButton);
 		
 		JButton btnViewSavedAssessments = new JButton("View Saved Assessments");
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, savedQuestionsButton, -11, SpringLayout.NORTH, btnViewSavedAssessments);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnViewSavedAssessments, -28, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnViewSavedAssessments, 194, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnViewSavedAssessments, 178, SpringLayout.NORTH, contentPane);
+		
 		sl_contentPane.putConstraint(SpringLayout.WEST, btnViewSavedAssessments, 143, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnViewSavedAssessments, -147, SpringLayout.EAST, contentPane);
-		btnViewSavedAssessments.setFont(new Font("Tahoma", Font.BOLD, 13));
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnViewSavedAssessments, -39, SpringLayout.SOUTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnViewSavedAssessments, 0, SpringLayout.EAST, lblWelcome);
+		btnViewSavedAssessments.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent i) {
+				dispose();
+				new HHSavedAssessments().setVisible(true);
+			}
+		});
+		btnViewSavedAssessments.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		contentPane.add(btnViewSavedAssessments);
 		
 		JButton btnCreateAnAssessment = new JButton("Create an Assessment");
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcome, -23, SpringLayout.NORTH, btnCreateAnAssessment);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnCreateAnAssessment, 117, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.WEST, btnCreateAnAssessment, 143, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnCreateAnAssessment, -157, SpringLayout.EAST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, savedQuestionsButton, 1, SpringLayout.SOUTH, btnCreateAnAssessment);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnCreateAnAssessment, 6, SpringLayout.SOUTH, lblWelcome);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnCreateAnAssessment, 47, SpringLayout.SOUTH, lblWelcome);
-		btnCreateAnAssessment.setFont(new Font("Tahoma", Font.BOLD, 13));
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnCreateAnAssessment, -20, SpringLayout.NORTH, btnViewSavedAssessments);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnCreateAnAssessment, 0, SpringLayout.EAST, lblWelcome);
+		btnCreateAnAssessment.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 //		sl_contentPane.putConstraint(SpringLayout.EAST, btnCreateAnAssessment, 236, SpringLayout.WEST, buttonEnterQuestion);
 		btnCreateAnAssessment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -122,18 +137,5 @@ public class HandyHomeworkMainPage extends JFrame {
 			}
 		});
 		contentPane.add(btnCreateAnAssessment);
-		savedQuestionsButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent i) {
-				dispose();
-				new HHSavedQuestionsPage().setVisible(true);
-			}
-		});
-		
-		btnViewSavedAssessments.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent i) {
-				dispose();
-				new HHSavedAssessments().setVisible(true);
-			}
-		});
 	}
 }

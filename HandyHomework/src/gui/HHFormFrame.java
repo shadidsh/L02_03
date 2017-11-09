@@ -154,6 +154,11 @@ public class HHFormFrame extends JFrame {
 						
 						String message = name + "\nQuestion is: " + questionContent + "\nSuccessfully added.";
 						JOptionPane.showMessageDialog(HHFormFrame.this, message);
+						questionContentField.setText("");
+						questionNameField.setText("");
+						questionAnswerField.setText("");
+						spinner.setValue(0);
+						
 					} catch (NullPointerException e1){
 						System.out.println("Could not insert question into database."); 
 						e1.printStackTrace();
