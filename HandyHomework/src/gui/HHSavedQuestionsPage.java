@@ -85,11 +85,15 @@ public class HHSavedQuestionsPage extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblSavedQuestions = new JLabel("Saved Questions");
-		lblSavedQuestions.setMaximumSize(new Dimension(100, 30));
-		lblSavedQuestions.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
-		lblSavedQuestions.setBounds(297, 30, 207, 30);
-		contentPane.add(lblSavedQuestions);
+		JTextArea lblAssessmentName = new JTextArea("Saved Questions");
+		lblAssessmentName.setEditable(false);
+		lblAssessmentName.setWrapStyleWord(true);
+		lblAssessmentName.setLineWrap(true);
+		lblAssessmentName.setBackground(SystemColor.window);
+		lblAssessmentName.setMaximumSize(new Dimension(100, 30));
+		lblAssessmentName.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
+		lblAssessmentName.setBounds(29, 32, 376, 40);
+		contentPane.add(lblAssessmentName);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(229, 84, 307, 152);
@@ -152,33 +156,33 @@ public class HHSavedQuestionsPage extends JFrame {
 				Assessment as = SharedAssessment.getAssess();
 				stat.setInt(1, as.getAid());
 				aid = as.getAid();
+				lblAssessmentName.setText(as.getName());
 			} else {
 				//JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No Assessments have been selected, displaying question for assessment 3");
 				stat = conn.prepareStatement("SELECT * FROM "	
 						+ constants.Constants.DataConstants.QUESTIONS + ";");
 				aid = 3;
 			}
-				System.out.println(stat);
-				ResultSet Rs = stat.executeQuery();				
+			System.out.println(stat);
+			ResultSet Rs = stat.executeQuery();				
+			
+			while (Rs.next()) {
 				
-				while (Rs.next()) {
-					
-					int qid = Rs.getInt(1);
-					String name = Rs.getString(4);
-					String questionContent = Rs.getString(5);
-					Integer points = new Integer(Rs.getInt(6));
-					
-					TextQuestion question = new TextQuestion(aid, name, questionContent, points);
-					
-					ArrayList<TextAnswer> ans = db.DbConnection.answers_for_question(qid);
-					question.addList(ans);
-					
-					
-					lstQuestion.addElement(question.getName());
-					questions.add(question);
-					
-			}
+				int qid = Rs.getInt(1);
+				String name = Rs.getString(4);
+				String questionContent = Rs.getString(5);
+				Integer points = new Integer(Rs.getInt(6));
 				
+				TextQuestion question = new TextQuestion(aid, name, questionContent, points);
+				
+				ArrayList<TextAnswer> ans = db.DbConnection.answers_for_question(qid);
+				question.addList(ans);
+				
+				
+				lstQuestion.addElement(question.getName());
+				questions.add(question);
+					
+			}	
 			Rs.close();
 			conn.close();
 				
