@@ -48,12 +48,11 @@ public class HandyHomeworkMainPage extends JFrame {
 		contentPane.setMaximumSize(new Dimension(139, 23));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		SpringLayout sl_contentPane = new SpringLayout();
-		contentPane.setLayout(sl_contentPane);
+		contentPane.setLayout(null);
 		
 		JLabel lblWelcome = new JLabel("Choose one of the following:");
-		sl_contentPane.putConstraint(SpringLayout.EAST, lblWelcome, -147, SpringLayout.EAST, contentPane);
-		lblWelcome.setFont(new Font("Lucida Grande", Font.ITALIC, 15));
+		lblWelcome.setBounds(140, 80, 208, 19);
+		lblWelcome.setFont(new Font("Lucida Grande", Font.ITALIC, 14));
 		contentPane.add(lblWelcome);
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.setLayer(lblWelcome, 0);
@@ -74,10 +73,7 @@ public class HandyHomeworkMainPage extends JFrame {
 //		contentPane.add(buttonEnterQuestion);
 		
 		JLabel lblWelcometoHH = new JLabel("Welcome to HandyHomework!");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblWelcometoHH, 21, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblWelcometoHH, 52, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcometoHH, -24, SpringLayout.NORTH, lblWelcome);
-		sl_contentPane.putConstraint(SpringLayout.EAST, lblWelcometoHH, -49, SpringLayout.EAST, contentPane);
+		lblWelcometoHH.setBounds(57, 26, 389, 30);
 		lblWelcometoHH.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcometoHH.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblWelcometoHH.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -103,13 +99,9 @@ public class HandyHomeworkMainPage extends JFrame {
 //		savedQuestionsButton.setHorizontalTextPosition(SwingConstants.CENTER);
 //		contentPane.add(savedQuestionsButton);
 		
-		JButton btnViewSavedAssessments = new JButton("View Saved Assessments");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnViewSavedAssessments, 178, SpringLayout.NORTH, contentPane);
-		
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnViewSavedAssessments, 143, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnViewSavedAssessments, -39, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnViewSavedAssessments, 0, SpringLayout.EAST, lblWelcome);
-		btnViewSavedAssessments.addActionListener(new ActionListener() {
+		JButton btnViewAssessments = new JButton("View Assessments");
+		btnViewAssessments.setBounds(148, 148, 187, 47);
+		btnViewAssessments.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent i) {
 				HHSavedAssessments frame = new HHSavedAssessments();
 				frame.setVisible(true);
@@ -119,15 +111,11 @@ public class HandyHomeworkMainPage extends JFrame {
 				}
 			}
 		});
-		btnViewSavedAssessments.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		contentPane.add(btnViewSavedAssessments);
+		btnViewAssessments.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		contentPane.add(btnViewAssessments);
 		
 		JButton btnCreateAnAssessment = new JButton("Create an Assessment");
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblWelcome, -23, SpringLayout.NORTH, btnCreateAnAssessment);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnCreateAnAssessment, 117, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnCreateAnAssessment, 143, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnCreateAnAssessment, -20, SpringLayout.NORTH, btnViewSavedAssessments);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnCreateAnAssessment, 0, SpringLayout.EAST, lblWelcome);
+		btnCreateAnAssessment.setBounds(150, 105, 187, 47);
 		btnCreateAnAssessment.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 //		sl_contentPane.putConstraint(SpringLayout.EAST, btnCreateAnAssessment, 236, SpringLayout.WEST, buttonEnterQuestion);
 		btnCreateAnAssessment.addActionListener(new ActionListener() {
@@ -142,5 +130,20 @@ public class HandyHomeworkMainPage extends JFrame {
 			}
 		});
 		contentPane.add(btnCreateAnAssessment);
+		
+		JButton btnViewCourses = new JButton("View Courses");
+		btnViewCourses.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HHViewCoursesPage frame = new HHViewCoursesPage();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
+			}
+		});
+		btnViewCourses.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		btnViewCourses.setBounds(146, 195, 187, 47);
+		contentPane.add(btnViewCourses);
 	}
 }
