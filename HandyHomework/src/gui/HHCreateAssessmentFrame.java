@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import course.SelectedCourse;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -153,9 +156,14 @@ public class HHCreateAssessmentFrame extends JFrame {
 						if (totalPoints > 100){
 							JOptionPane.showMessageDialog(HHCreateAssessmentFrame.this, "Maximum assessment weight is 100.");
 							//Assessment a1 = new Assessment(name, title, mult, opt);
-						} else {
+						} else if (!SelectedCourse.isSelected()) {
+							JOptionPane.showMessageDialog(HHCreateAssessmentFrame.this, 
+									"Attempting to insert Assessment without a course being selected");
+						}	else {
 							try {
-								db.DbConnection.insertAssessment(title, name, due, false,  ((float) totalPoints/100));
+								
+								db.DbConnection.insertAssessment(title,
+										SelectedCourse.getCourse().getcID(), name, due, false,  ((float) totalPoints/100));
 								// Upon confirmation, open the saved assessments!!
 								HHSavedAssessments frame = new HHSavedAssessments();
 								frame.setVisible(true);
@@ -172,9 +180,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 							
 							//Assessment a1 = new Assessment(name, title, mult, opt, c, totalPoints);
 						}
-					 													// Weight of assessment not points and shud be less than 1 (0 to 1)
-					
-					
+					 	// Weight of assessment not points and shud be less than 1 (0 to 1)
 					
 
 				// TODO

@@ -6,10 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import net.miginfocom.swing.MigLayout;
+//import net.miginfocom.swing.MigLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import course.SelectedCourse;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,10 +28,11 @@ import java.awt.event.ActionEvent;
 public class HHCreateCoursePage extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField courseCodeField;
-	private JTextField courseTitleField;
+	private JTextField txtCourseCode;
+	private JTextField txtCourseName;
 	private JButton btnCreate;
 	private JButton btnCancel;
+	private JTextField txtCourseTerm;
 
 	/**
 	 * Launch the application.
@@ -62,28 +66,32 @@ public class HHCreateCoursePage extends JFrame {
 		lblCreateCourse.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 24));
 		
 		JLabel lblCourseCode = new JLabel("Course Code:");
-		lblCourseCode.setBounds(31, 87, 84, 16);
+		lblCourseCode.setBounds(31, 97, 84, 16);
 		
-		JLabel lblCourseTitle = new JLabel("Course Title: ");
+		JLabel lblCourseTitle = new JLabel("Course Name:");
 		lblCourseTitle.setBounds(31, 131, 84, 16);
 		
-		courseCodeField = new JTextField();
-		courseCodeField.setBounds(120, 82, 130, 26);
-		courseCodeField.setColumns(10);
+		txtCourseCode = new JTextField();
+		txtCourseCode.setBounds(120, 92, 130, 26);
+		txtCourseCode.setColumns(10);
 		
-		courseTitleField = new JTextField();
-		courseTitleField.setBounds(120, 126, 130, 26);
-		courseTitleField.setColumns(10);
+		txtCourseName = new JTextField();
+		txtCourseName.setBounds(120, 126, 130, 26);
+		txtCourseName.setColumns(10);
 		contentPane.setLayout(null);
 		
 		btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (courseCodeField.getText().isEmpty() || courseTitleField.getText().isEmpty()){
+				String name = txtCourseName.getText();
+				String courseCode = txtCourseCode.getText();
+				String courseTerm = txtCourseTerm.getText();
+				
+				if (name.isEmpty() || courseCode.isEmpty() || courseTerm.isEmpty()){
 					JOptionPane.showMessageDialog(HHCreateCoursePage.this, "One or more fields are empty.");
 				} else {
-					// TODO
-					// insert course into DB here
+					
+					db.DbConnection.insertCourses(courseCode, name, courseTerm);
 					
 					HHViewCoursesPage frame = new HHViewCoursesPage();
 					frame.setVisible(true);
@@ -97,9 +105,9 @@ public class HHCreateCoursePage extends JFrame {
 		btnCreate.setBounds(133, 174, 96, 29);
 		contentPane.add(btnCreate);
 		contentPane.add(lblCourseCode);
-		contentPane.add(courseCodeField);
+		contentPane.add(txtCourseCode);
 		contentPane.add(lblCourseTitle);
-		contentPane.add(courseTitleField);
+		contentPane.add(txtCourseName);
 		contentPane.add(lblCreateCourse);
 		
 		btnCancel = new JButton("Cancel");
@@ -115,5 +123,14 @@ public class HHCreateCoursePage extends JFrame {
 		});
 		btnCancel.setBounds(229, 174, 103, 29);
 		contentPane.add(btnCancel);
+		
+		txtCourseTerm = new JTextField();
+		txtCourseTerm.setColumns(10);
+		txtCourseTerm.setBounds(120, 51, 130, 26);
+		contentPane.add(txtCourseTerm);
+		
+		JLabel lblCourseTerm = new JLabel("Course Term:");
+		lblCourseTerm.setBounds(31, 56, 84, 16);
+		contentPane.add(lblCourseTerm);
 	}
 }
