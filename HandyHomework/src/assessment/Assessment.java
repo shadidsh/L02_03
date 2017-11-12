@@ -7,7 +7,7 @@ import question.TextQuestion;
 import db.DbConnection;
 
 public class Assessment {
-	private int aid;
+	private int cid;
 	private String title;
 	private String name;
 	private boolean isMult;
@@ -20,11 +20,11 @@ public class Assessment {
 	 * 
 	 * Use this if isOpt is false
 	 */
-	public Assessment(String title, String name) {
+	/*public Assessment(String title, String name) {
 		this.title = title;
 		this.name = name;
-		this.isMult = isMult;
-		this.aid = DbConnection.insertAssessment(title, name, due,  isMult, weight);		
+		//this.isMult = isMult;
+		this.cid = DbConnection.insertAssessment(title, name, due,  isMult, weight);		
 	} 
 	
 	public Assessment(String title, String name, boolean isOpt, Calendar due, float weight) {
@@ -33,25 +33,21 @@ public class Assessment {
 		this.isOpt = isOpt;
 		this.due = due;
 		this.weight = weight;
-		this.aid = DbConnection.insertAssessment( title,  name,   due, isOpt,  weight);
+		this.cid = DbConnection.insertAssessment( title,  name,   due, isOpt,  weight);
 	}
+	*/
 
-	public Assessment(int aid,String title, String name, boolean isOpt, Calendar due, float weight) {
-		this.aid = aid;
+	public Assessment(int cid,String title, String name, boolean isOpt, Calendar due, float weight) {
+		this.cid = cid;
 		this.title = title;
 		this.name = name;
 		this.isOpt = isOpt;
 		this.due = due;
 		this.weight = weight;
 	}
-	/*
-	public void queryQuestions(TextQuestion ts) {
-		questions_for_assessments(this.aid);
-		questions.add(ts);
-	} */	
 	
 	public int getAid() {
-		return aid;
+		return cid;
 	}
 
 	public String getTitle() {
