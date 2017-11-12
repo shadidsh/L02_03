@@ -1,19 +1,33 @@
 package login;
 
-public class ProfessorLogin extends LoginAbstract {
+import java.util.ArrayList;
+import db.DbConnection;
+import course.Course;
 
-	private String userName;
-	private String password;
-	public ProfessorLogin(String userName, String password) {
+public class ProfessorLogin extends LoginAbstract {
+	
+    String userName;
+	String password;
+	int pID;
+	public ProfessorLogin(int pID, String userName, String password) {
+		this.pID = pID;
 		this.userName = userName;
 		this.password = password;
 	}
-	String getUserName() {
+	
+	public String getUserName() {
 		return this.userName;
 	}
 
-	String getPassword() {
+	public String getPassword() {
 		return this.password;
 	}
-
+	
+	public int getpID() {
+		return this.pID;
+	}
+	
+	public void addCourse(Course course) {
+		
+	}
 }

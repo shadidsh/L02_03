@@ -1,9 +1,15 @@
 package login;
 
+import java.util.ArrayList;
+import db.DbConnection;
+import course.Course;
+
 public class StudentLogin extends LoginAbstract{
-	private String userName;
-	private String password;
-	public StudentLogin(String userName, String password) {
+	String userName;
+	String password;
+	int sID;
+	public StudentLogin(int sID, String userName, String password) {
+		this.sID = sID;
 		this.userName = userName;
 		this.password = password;
 	}
@@ -15,4 +21,11 @@ public class StudentLogin extends LoginAbstract{
 		return this.password;
 	}
 	
+	public int getsID() {
+		return this.sID;
+	}
+	
+	public void addCourse(Course course) {
+		
+	}
 }
