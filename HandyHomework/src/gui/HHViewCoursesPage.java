@@ -112,7 +112,7 @@ public class HHViewCoursesPage extends JFrame {
 		
 		
 		JButton btnSelectCourse = new JButton("Select Course");
-		btnSelectCourse.setBounds(91, 205, 129, 29);
+		btnSelectCourse.setBounds(94, 229, 129, 29);
 		btnSelectCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (listCourses.isSelectionEmpty()){
@@ -136,7 +136,7 @@ public class HHViewCoursesPage extends JFrame {
 		});
 		
 		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(238, 205, 75, 29);
+		btnBack.setBounds(239, 229, 75, 29);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
@@ -152,5 +152,19 @@ public class HHViewCoursesPage extends JFrame {
 		contentPane.add(btnBack);
 		contentPane.add(listCourses);
 		contentPane.add(lblCourses);
+		
+		JButton btnAddCourse = new JButton("Add Course");
+		btnAddCourse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HHCreateCoursePage frame = new HHCreateCoursePage();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
+			}
+		});
+		btnAddCourse.setBounds(157, 199, 117, 29);
+		contentPane.add(btnAddCourse);
 	}
 }

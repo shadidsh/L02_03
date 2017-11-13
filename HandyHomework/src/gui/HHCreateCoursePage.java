@@ -62,21 +62,21 @@ public class HHCreateCoursePage extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblCreateCourse = new JLabel("Create Course");
-		lblCreateCourse.setBounds(138, 23, 189, 30);
+		lblCreateCourse.setBounds(133, 18, 189, 30);
 		lblCreateCourse.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 24));
 		
 		JLabel lblCourseCode = new JLabel("Course Code:");
-		lblCourseCode.setBounds(31, 97, 84, 16);
+		lblCourseCode.setBounds(41, 103, 84, 16);
 		
 		JLabel lblCourseTitle = new JLabel("Course Name:");
-		lblCourseTitle.setBounds(31, 131, 84, 16);
+		lblCourseTitle.setBounds(41, 141, 88, 16);
 		
 		txtCourseCode = new JTextField();
-		txtCourseCode.setBounds(120, 92, 130, 26);
+		txtCourseCode.setBounds(133, 98, 130, 26);
 		txtCourseCode.setColumns(10);
 		
 		txtCourseName = new JTextField();
-		txtCourseName.setBounds(120, 126, 130, 26);
+		txtCourseName.setBounds(133, 136, 130, 26);
 		txtCourseName.setColumns(10);
 		contentPane.setLayout(null);
 		
@@ -126,11 +126,11 @@ public class HHCreateCoursePage extends JFrame {
 		
 		txtCourseTerm = new JTextField();
 		txtCourseTerm.setColumns(10);
-		txtCourseTerm.setBounds(120, 51, 130, 26);
+		txtCourseTerm.setBounds(133, 60, 130, 26);
 		contentPane.add(txtCourseTerm);
 		
 		JLabel lblCourseTerm = new JLabel("Course Term:");
-		lblCourseTerm.setBounds(31, 56, 84, 16);
+		lblCourseTerm.setBounds(41, 65, 84, 16);
 		contentPane.add(lblCourseTerm);
 	}
 }
