@@ -198,7 +198,7 @@ public class HHSavedQuestionsPage extends JFrame {
 			JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Could not access database - " + "\nplease check your connection and try again.");
 		}
 		JButton btnback = new JButton("Back to Assessments");
-		btnback.setBounds(163, 248, 177, 29);
+		btnback.setBounds(163, 248, 177, 30);
 		contentPane.add(btnback);
 		
 		btnback.addActionListener(new ActionListener() {
@@ -238,11 +238,6 @@ public class HHSavedQuestionsPage extends JFrame {
 		});
 		btnView.setBounds(277, 307, 120, 31);
 		contentPane.add(btnView);		
-		questionAnswerField = new JTextField();
-		questionAnswerField.setAlignmentY(Component.TOP_ALIGNMENT);
-		questionAnswerField.setColumns(10);
-		questionAnswerField.setBounds(29, 293, 247, 57);
-		contentPane.add(questionAnswerField);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(29, 84, 188, 155);
@@ -290,9 +285,19 @@ public class HHSavedQuestionsPage extends JFrame {
 			}
 		});
 		btnAdd.setMaximumSize(new Dimension(139, 23));
-		btnAdd.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnAdd.setBounds(29, 247, 136, 31);
+		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnAdd.setBounds(29, 248, 136, 30);
 		contentPane.add(btnAdd);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 359, 266, -73);
+		contentPane.add(scrollPane_1);
+		questionAnswerField = new JTextField();
+		questionAnswerField.setAlignmentY(Component.TOP_ALIGNMENT);
+		questionAnswerField.setColumns(10);
+		questionAnswerField.setBounds(29, 293, 247, 57);
+		scrollPane_1.add(questionAnswerField);
+		
 		
 		
 		

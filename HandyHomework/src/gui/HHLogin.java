@@ -63,17 +63,19 @@ public class HHLogin extends JFrame {
 		contentPane.add(passwordField);
 		
 		lblUsername = new JLabel("USERNAME");
-		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblUsername.setBounds(215, 25, 75, 20);
+		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblUsername);
 		
 		lblPassword = new JLabel("PASSWORD\r\n");
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblPassword.setBounds(215, 100, 80, 20);
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblPassword);
 		
 		JButton btnNewButton = new JButton("Login");
+		btnNewButton.setBounds(200, 175, 90, 50);
 		JCheckBox chckbxStudent = new JCheckBox("Student");
+		chckbxStudent.setBounds(200, 231, 97, 23);
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -84,7 +86,7 @@ public class HHLogin extends JFrame {
 					JOptionPane.showMessageDialog(HHLogin.this, "Username and password cannot be empty.");
 				}
 				else {
-					if(!is_student) {
+					if(is_student) {
 						HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
 						frame.setVisible(true);
 						frame.setResizable(false);
@@ -93,7 +95,8 @@ public class HHLogin extends JFrame {
 						}
 					}
 					else {
-						HHViewCoursesPage frame = new HHViewCoursesPage();
+						// need to check to make login
+						HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
 						frame.setVisible(true);
 						frame.setResizable(false);
 						if (frame.isShowing()){
@@ -104,10 +107,7 @@ public class HHLogin extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton.setBounds(200, 175, 90, 50);
 		contentPane.add(btnNewButton);
-		
-		chckbxStudent.setBounds(200, 231, 97, 23);
 		contentPane.add(chckbxStudent);
 	}
 }
