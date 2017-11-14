@@ -65,32 +65,27 @@ public class DbConnection {
     
     // select all questions for a specific assessment - assessment ids are randomly generated
     public static void questions_for_assessments(int assessId) {
-    	Connection conn = getConnection();
-    	
+    	Connection conn = getConnection();    	
     	try{
     		PreparedStatement stat = conn.prepareStatement("SELECT * FROM "	+ constants.Constants.DataConstants.QUESTIONS + " where aid = ?;");
     		stat.setInt(1, assessId);
-    		ResultSet Rs = stat.executeQuery();
-    		
+    		ResultSet Rs = stat.executeQuery();    		
     		while (Rs.next()) {
-    			// Create and return a list of question objects
-    			
+    			// Create and return a list of question objects    			
     			// assessID, String name, String question, String answer, int points
-
     			String name = Rs.getString(3);
     			String question = Rs.getString(4);
     			Integer points = Rs.getInt(5);
     			System.out.println("question name: " + name + ", question: " + question + ", for " + points + " points");    
-    		}
-    		
+    		}    		
     		conn.close();
     	}catch(Exception ex) {
     		System.out.println(ex.getMessage());    		
-    	}
-    	
+    	}    	
     }
     
-
+    
+    
 	// in the future, something like assessments_for_course() will be used
 	 public static void all_assessments() {
 		Connection conn = getConnection();
@@ -130,6 +125,7 @@ public class DbConnection {
     /**
      * 
      * @param title the title of the assessment
+     * @param cid the id of the course this assessment belongs to
      * @param name the name of the assessment
      * @param weight the float representing the weight of the assessment, 
      * 	can only be 0 to 1 (0 to 100%). Required if assessment is not optional (db returns error).
@@ -137,24 +133,25 @@ public class DbConnection {
      * @param isMult boolean representing whether this question has multiple choices or not
      * @param isOpt boolean representing whether this question is optional or not
      */
-    public static int insertAssessment(String title, String name, Calendar dueDate, Boolean isOpt, float weight) {
+    public static int insertAssessment(String title, int cId, String name, Calendar dueDate, Boolean isOpt, float weight) {
     	Connection conn = getConnection();
-    	int result = -1;
-    	
+    	int result = -1;    	
     	try{
     		String insert = "INSERT INTO " + constants.Constants.DataConstants.ASSESSMENTS 
-    				+ "(title, name, due_date, weight, is_opt) " +
-    				" VALUES(?,?,?,?,?) RETURNING aid";
+    				+ "(title, cid, name, due_date, weight, is_opt) " +
+    				" VALUES(?,?,?,?,?,?) RETURNING cid";
     		
     		PreparedStatement stat = conn.prepareStatement(insert);
     		stat.setString(1, title);
-    		stat.setString(2, name);
+    		stat.setInt(2, cId);
+    		
+    		stat.setString(3, name);
 
     		java.sql.Timestamp inDate = new java.sql.Timestamp(  dueDate.getTimeInMillis());
 
-    		stat.setTimestamp(3, inDate);		
-    		stat.setFloat(4, weight);
-    		stat.setBoolean(5, isOpt);   		
+    		stat.setTimestamp(4, inDate);		
+    		stat.setFloat(5, weight);
+    		stat.setBoolean(6, isOpt);	
     		
     		ResultSet Rs = stat.executeQuery();
     		Rs.next();
@@ -163,10 +160,8 @@ public class DbConnection {
     		
     	}catch(Exception ex) {
     		System.out.println(ex.getMessage());    		
-    	}
-    	
-    	return result;
-    	
+    	}    	
+    	return result;    	
     }
 
 	/**
@@ -241,4 +236,29 @@ public class DbConnection {
 	//all_assessments();
 		
 	}
+
+	public static int insertCourses( String courseCode, String name, String term) {
+    	Connection conn = getConnection();
+    	int result = -1;    	
+    	try{
+    		String insert = "INSERT INTO " + constants.Constants.DataConstants.COURSES 
+    				+ "(courseCode, name, term) " +
+    				" VALUES(?,?,?) RETURNING cid";
+    		
+    		PreparedStatement stat = conn.prepareStatement(insert);
+    		stat.setString(1, courseCode);
+    		stat.setString(2, name);
+    		stat.setString(3, term);
+
+    		ResultSet Rs = stat.executeQuery();
+    		Rs.next();
+    		result =  Rs.getInt(1); 
+    		conn.close();
+    		
+    	}catch(Exception ex) {
+    		System.out.println(ex.getMessage());    		
+    	}    	
+    	return result;    
+	}
+		
 }

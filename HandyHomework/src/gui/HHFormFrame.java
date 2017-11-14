@@ -2,13 +2,10 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import question.TextQuestion;
-import db.DbConnection;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import answer.TextAnswer;
 import assessment.Assessment;
 import assessment.SharedAssessment;
 

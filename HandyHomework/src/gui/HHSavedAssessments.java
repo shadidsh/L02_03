@@ -29,6 +29,8 @@ import javax.swing.event.ListSelectionListener;
 
 import assessment.Assessment;
 import assessment.SharedAssessment;
+import course.Course;
+import course.SelectedCourse;
 import db.DbConnection;
 import java.awt.SystemColor;
 
@@ -73,11 +75,12 @@ public class HHSavedAssessments extends JFrame {
 		scrollPane.setBorder(null);
 		contentPane.add(scrollPane);
 		JLabel lblPts = new JLabel("");
+		lblPts.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPts.setVerticalAlignment(SwingConstants.TOP);
 		lblPts.setVisible(true);
 		scrollPane.setViewportView(lblPts);
 		lblPts.setBorder(null);
 		lblPts.setAutoscrolls(true);
-		lblPts.setVerticalAlignment(SwingConstants.TOP);
 		
 		JLabel lblSavedAssessment = new JLabel("Saved Assessments");
 		lblSavedAssessment.setBounds(273, 22, 245, 30);
@@ -99,25 +102,45 @@ public class HHSavedAssessments extends JFrame {
 		
 		DefaultListModel<String> lstAssess = new DefaultListModel<>();
 		ArrayList<Assessment> assess = new ArrayList<Assessment>();
-		ArrayList<Integer> aids = new ArrayList<Integer>();
 			try {
-				PreparedStatement stat = conn.prepareStatement("SELECT * FROM public.assessments;");
+				PreparedStatement stat;
+				int cid;
+				
+				if (SelectedCourse.isSelected()) {
+					
+					stat = conn.prepareStatement("SELECT * FROM "	
+							+ constants.Constants.DataConstants.ASSESSMENTS + " where cid = ?;");
+					
+					Course as = SelectedCourse.getCourse();
+					stat.setInt(1, as.getcID());
+					//cid = as.getcID();
+					
+				} else {
+					JOptionPane.showMessageDialog(HHSavedAssessments.this, 
+							"No Courses have been selected, displaying assessments, (DANGEROUS!)");
+					stat = conn.prepareStatement("SELECT * FROM "	
+							+ constants.Constants.DataConstants.ASSESSMENTS);
+					//cid = 1;
+				}
+				
+				System.out.println(stat);
+				
 				ResultSet Rs = stat.executeQuery();				
 				
 				while (Rs.next()) {
 					
 					Integer aid = Rs.getInt(1);
-					String title = Rs.getString(2);
-					String name = Rs.getString(3);
-					Boolean isOpt = Rs.getBoolean(4);
-					java.sql.Timestamp dueDate = Rs.getTimestamp(5);
-					float weight = Rs.getFloat(6);
+					cid = Rs.getInt(2);
+					String title = Rs.getString(3);
+					String name = Rs.getString(4);
+					Boolean isOpt = Rs.getBoolean(5);
+					java.sql.Timestamp dueDate = Rs.getTimestamp(6);
+					float weight = Rs.getFloat(7);
 					Calendar due = Calendar.getInstance();
 					
 					if (dueDate != null) {
 						due.setTimeInMillis(dueDate.getTime());
-					}
-					
+					}					
 					
 					Assessment as = new Assessment(aid, title, name, isOpt, due, weight);
 					
@@ -181,17 +204,6 @@ public class HHSavedAssessments extends JFrame {
 						dispose();
 					}
 				}
-//				////////////////////////////////// need to modify to pass info to view saved questions page
-//				if (answer.isEmpty()) {
-//					JOptionPane.showMessageDialog(HHSavedAssessments.this, "One or more fields are empty");
-//				} else if (lblAssessment.getText().length() == 0)  {
-//						JOptionPane.showMessageDialog(HHSavedAssessments.this, "One or more fields are empty");
-//				} else if (questAnswer.compareTo(answer) == 0)  {
-//					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Correct!!");
-//				} else {
-//					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Wrong!! Your answer is " + questAnswer + ", btw");
-//				}
-//					
 				}
 		});
 		contentPane.add(btnView);
@@ -204,16 +216,15 @@ public class HHSavedAssessments extends JFrame {
 		
 		listAssessment.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				String res = "<html>This question<br> is worth</html>";
-				
-				
-				/* needs to be modified when assessments class is added */
+				String res;// = "<html>This question<br> is worth</html>";
 				JList list = (JList) e.getSource();
-				Assessment as = assess.get(list.getSelectedIndex());
+				Assessment as = assess.get(list.getSelectedIndex());	
 				
-				lblAssessment.setText(as.getName());					
-				res = "This assessment is worth " + as.getWeight() + "%";
 				
+				// POINTS GETS OVERWRITen
+				res =  String.valueOf(as.getWeight()); //"<html>This assessment is worth " + String.valueOf(as.getWeight())  + "%</html>";
+				
+				lblAssessment.setText(as.getName());
 				lblPts.setText(res);
 				assessmentTitle.setText(as.getTitle());
 				selectedAs = as;				

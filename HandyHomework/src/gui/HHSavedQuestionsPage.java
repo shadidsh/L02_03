@@ -142,10 +142,8 @@ public class HHSavedQuestionsPage extends JFrame {
 		Connection conn = DbConnection.getConnection();
 		String res = "";
 		
-		DefaultListModel<String> lstQuestion = new DefaultListModel<>();
-		
+		DefaultListModel<String> lstQuestion = new DefaultListModel<>();		
 		ArrayList<TextQuestion> questions = new ArrayList<TextQuestion>();
-
 		
 		try {
 			PreparedStatement stat;
@@ -178,8 +176,7 @@ public class HHSavedQuestionsPage extends JFrame {
 				TextQuestion question = new TextQuestion(aid, name, questionContent, points);
 				
 				ArrayList<TextAnswer> ans = db.DbConnection.answers_for_question(qid);
-				question.addList(ans);
-				
+				question.addList(ans);				
 				
 				lstQuestion.addElement(question.getName());
 				questions.add(question);

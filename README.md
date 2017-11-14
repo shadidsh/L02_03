@@ -14,5 +14,5 @@ Welcome to the Project Repo for Team SWare.
 **Instructions to Run Code:**
 1. Install the WindowBuilder plugin on your IDE
 2. Install postgresql-42.1.4 jar file from https://jdbc.postgresql.org/
-3. Make sure you configure the run settings: Build Path -> Add External Jar files, namely the JGoodies and MigLayout jar files.
+3. Add the postgres jar file by configuring the run settings: Build Path -> Add External Jar files
 

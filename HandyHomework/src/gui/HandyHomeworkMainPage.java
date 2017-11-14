@@ -101,6 +101,7 @@ public class HandyHomeworkMainPage extends JFrame {
 		
 		JButton btnViewAssessments = new JButton("View Assessments");
 		btnViewAssessments.setBounds(150, 148, 187, 47);
+		//btnViewAssessments.setBounds(150, 111, 187, 47);
 		btnViewAssessments.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent i) {
 				HHSavedAssessments frame = new HHSavedAssessments();
@@ -114,22 +115,22 @@ public class HandyHomeworkMainPage extends JFrame {
 		btnViewAssessments.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		contentPane.add(btnViewAssessments);
 		
-		JButton btnCreateAnAssessment = new JButton("Create an Assessment");
-		btnCreateAnAssessment.setBounds(150, 105, 187, 47);
-		btnCreateAnAssessment.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-//		sl_contentPane.putConstraint(SpringLayout.EAST, btnCreateAnAssessment, 236, SpringLayout.WEST, buttonEnterQuestion);
-		btnCreateAnAssessment.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
-				}
-				
-			}
-		});
-		contentPane.add(btnCreateAnAssessment);
+//		JButton btnCreateAnAssessment = new JButton("Create an Assessment");
+//		btnCreateAnAssessment.setBounds(150, 105, 187, 47);
+//		btnCreateAnAssessment.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+////		sl_contentPane.putConstraint(SpringLayout.EAST, btnCreateAnAssessment, 236, SpringLayout.WEST, buttonEnterQuestion);
+//		btnCreateAnAssessment.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
+//				frame.setVisible(true);
+//				frame.setResizable(false);
+//				if (frame.isShowing()){
+//					dispose();
+//				}
+//				
+//			}
+//		});
+//		contentPane.add(btnCreateAnAssessment);
 		
 		JButton btnViewCourses = new JButton("View Courses");
 		btnViewCourses.addActionListener(new ActionListener() {
@@ -144,6 +145,7 @@ public class HandyHomeworkMainPage extends JFrame {
 		});
 		btnViewCourses.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		btnViewCourses.setBounds(150, 192, 187, 47);
+	//	btnViewCourses.setBounds(150, 167, 187, 47);
 		contentPane.add(btnViewCourses);
 		
 		JButton btnLogOut = new JButton("Log Out");
