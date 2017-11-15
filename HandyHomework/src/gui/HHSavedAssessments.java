@@ -28,7 +28,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import assessment.Assessment;
-import assessment.SharedAssessment;
+import assessment.SelectedAssessment;
 import course.Course;
 import course.SelectedCourse;
 import db.DbConnection;
@@ -196,7 +196,7 @@ public class HHSavedAssessments extends JFrame {
 				if (selectedAs == null ) {
 					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment.");
 				} else {
-					SharedAssessment.setAssess(selectedAs);
+					SelectedAssessment.setAssess(selectedAs);
 					HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
 					frame.setVisible(true);	
 					frame.setResizable(false);

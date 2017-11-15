@@ -11,6 +11,8 @@ import assessment.Assessment;
 import course.Course;
 import course.SelectedCourse;
 import db.DbConnection;
+import login.ProfessorLogin;
+import login.SelectedProf;
 
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
@@ -34,8 +36,9 @@ import javax.swing.event.ListSelectionEvent;
 public class HHViewCoursesPage extends JFrame {
 
 	private Course selectedCourse;
-	
 	private JPanel contentPane;
+	
+	private ArrayList<Course> courses;
 
 	/**
 	 * Launch the application.
@@ -71,7 +74,29 @@ public class HHViewCoursesPage extends JFrame {
 		
 		Connection conn = DbConnection.getConnection();
 		DefaultListModel<String> lstCourses = new DefaultListModel<>();
-		ArrayList<Course> courses = new ArrayList<Course>();
+		 // = new ArrayList<Course>();
+		
+		
+
+		if (SelectedProf.getUser() == null) {
+			JOptionPane.showMessageDialog(HHViewCoursesPage.this, "No user logged in");
+		} else {
+			Integer pfId = SelectedProf.getUser().getpID();
+			courses = db.DbConnection.courses_for_user(pfId);
+			
+			if (courses == null) {
+				JOptionPane.showMessageDialog(HHViewCoursesPage.this, "prof has no courses");
+			}
+			
+			for (Course cse : courses) {
+				lstCourses.addElement(cse.getCourseCode() + ":" + cse.getTerm());
+			}
+			
+		}
+		
+
+		
+		/*
 		try {
 			PreparedStatement stat = conn.prepareStatement("SELECT * FROM public.courses;");
 			ResultSet Rs = stat.executeQuery();	
@@ -96,7 +121,9 @@ public class HHViewCoursesPage extends JFrame {
 			e1.printStackTrace();
 			JOptionPane.showMessageDialog(HHViewCoursesPage.this, "Could not access database - " 
 					+ "\nplease check your connection and try again.");
-		}		
+		}	
+		
+		*/
 		
 		JList listCourses = new JList<>(lstCourses);
 		listCourses.setBounds(66, 68, 304, 119);

@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import assessment.Assessment;
-import assessment.SharedAssessment;
+import assessment.SelectedAssessment;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -139,7 +139,7 @@ public class HHFormFrame extends JFrame {
 				System.out.println("question is :" + questionContent);
 				if (name.isEmpty() || questionContent.isEmpty() || answer.isEmpty()) {
 					JOptionPane.showMessageDialog(HHFormFrame.this, "One or more fields are empty.");
-				} else if (!SharedAssessment.isSelected()) {
+				} else if (!SelectedAssessment.isSelected()) {
 					JOptionPane.showMessageDialog(HHFormFrame.this, "No assessment selected.");
 				}				
 				else {	
@@ -148,7 +148,7 @@ public class HHFormFrame extends JFrame {
 					//Connection conn = DbConnection.getConnection();
 					//String insert = "INSERT INTO sware.textquestions " 	+ " VALUES(?, ?, ?, ?, ?);";
 					try {
-						Assessment as = SharedAssessment.getAssess();
+						Assessment as = SelectedAssessment.getAssess();
 						int qid = db.DbConnection.insertQuestions(as.getAid(), name, questionContent, value);
 						db.DbConnection.insertAnswers(qid,  true,  answer);
 						

@@ -32,7 +32,7 @@ import javax.swing.event.ListSelectionListener;
 
 import answer.TextAnswer;
 import assessment.Assessment;
-import assessment.SharedAssessment;
+import assessment.SelectedAssessment;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextField;
@@ -149,11 +149,11 @@ public class HHSavedQuestionsPage extends JFrame {
 			PreparedStatement stat;
 			int aid;
 			
-			if (SharedAssessment.isSelected()) {				
+			if (SelectedAssessment.isSelected()) {				
 				//JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Assessment is selected");
 				stat = conn.prepareStatement("SELECT * FROM "	
 						+ constants.Constants.DataConstants.QUESTIONS + " where aid = ?;");
-				Assessment as = SharedAssessment.getAssess();
+				Assessment as = SelectedAssessment.getAssess();
 				stat.setInt(1, as.getAid());
 				aid = as.getAid();
 				lblAssessmentName.setText(as.getName());

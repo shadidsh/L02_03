@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import db.DbConnection;
 import course.Course;
 
-public class ProfessorLogin extends LoginAbstract {
+public class ProfessorLogin {
 	
     String userName;
 	String password;
@@ -25,9 +25,5 @@ public class ProfessorLogin extends LoginAbstract {
 	
 	public int getpID() {
 		return this.pID;
-	}
-	
-	public void addCourse(Course course) {
-		
 	}
 }

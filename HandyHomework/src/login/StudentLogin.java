@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import db.DbConnection;
 import course.Course;
 
-public class StudentLogin extends LoginAbstract{
+public class StudentLogin {
 	String userName;
 	String password;
 	int sID;

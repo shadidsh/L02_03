@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import answer.TextAnswer;
+import course.Course;
+import login.ProfessorLogin;
 
 public class DbConnection {
 	private static String url = "jdbc:postgresql://swaredb.carzld1axpox.us-east-2.rds.amazonaws.com:5432/postgres";
@@ -33,6 +35,62 @@ public class DbConnection {
             System.out.println("Driver not found."); 
         }
         return con;
+    }
+    
+    public static ArrayList<Course> courses_for_user(int uid) {
+    	Connection conn = getConnection();
+    	ArrayList<Course> cs =  new ArrayList<Course>();
+    	
+    	try {
+    		String query = "Select c.cid, c.courseCode, c.name, c.term from " 
+    				+ constants.Constants.DataConstants.Management + " m," 
+    				+ constants.Constants.DataConstants.COURSES + " c where m.user_id = ? "
+    						+ " and m.cid = c.cid;";
+    		PreparedStatement stat = conn.prepareStatement(query);
+    		stat.setInt(1, uid);
+    		ResultSet Rs = stat.executeQuery();    	
+    		while (Rs.next()) { 
+    			Integer cId = Rs.getInt(1);
+    			String courseCode = Rs.getString(2);
+    			String name = Rs.getString(3);
+    			String term = Rs.getString(4);    			
+    			Course course = new Course(cId, name, courseCode, term);
+    			cs.add(course);
+    			
+    			System.out.println(cId);
+    		}     		
+    		conn.close();
+    		return cs;
+    	} catch(Exception ex) {
+    		System.out.print(ex.getMessage());    		
+    	}    	
+		return cs;
+    }
+    
+    public static ProfessorLogin checkUser(String username, String password) {
+    	Connection conn = getConnection();
+    	try { 
+    		
+    		String query = "select * from " + constants.Constants.DataConstants.USERS 
+    				+  " where username = ? and password = ?";
+    		PreparedStatement stat = conn.prepareStatement(query);
+    		stat.setString(1, username);
+    		stat.setString(2, password);
+    		ResultSet Rs = stat.executeQuery(); 
+    		while (Rs.next()) { 
+    			Integer userId = Rs.getInt(1);
+    			String user = Rs.getString(2);
+    			String pass = Rs.getString(3);
+    			String email = Rs.getString(5);    			
+    			ProfessorLogin pf = new ProfessorLogin(userId, user, pass);
+    			System.out.println(userId);
+    			return pf;
+    		}     
+    	} catch(Exception ex) {
+    		System.out.print(ex.getMessage());    		
+    	}    
+    	
+    	return null;    	
     }
     
     // select all answers for a specific question - quest ids are randomly generated
@@ -219,23 +277,6 @@ public class DbConnection {
 		}
 		return res;
 	}
-	
-	public static void main(String[] args) {
-		answers_for_question(1);
-		answers_for_question(2); 
-		answers_for_question(3);		
-		 answers_for_question(4);
-		 answers_for_question(5);
-		 answers_for_question(6);
-		 answers_for_question(7);
-		 
-		// Calendar due = Calendar.getInstance();
-		// due.set(2017, 9, 21, 10, 05, 30);
-	//	int res = insert_assessment("assessment 2", "Divide ",  new Boolean(false), due, new Boolean(false),  (float) 0.99);
-		//System.out.println(res);
-	//all_assessments();
-		
-	}
 
 	public static int insertCourses( String courseCode, String name, String term) {
     	Connection conn = getConnection();
@@ -259,6 +300,18 @@ public class DbConnection {
     		System.out.println(ex.getMessage());    		
     	}    	
     	return result;    
+	}
+	
+	
+	public static void main(String[] args) {
+		//checkUser("use");
+		//checkUser("user", "pass");
+		//ProfessorLogin pf = checkUser("user", "pass");
+		//System.out.println(pf == null); 
+		//System.out.println(pf.equals(null)); 
+		//courses_for_user(1);
+		
+		
 	}
 		
 }

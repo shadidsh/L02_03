@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import login.ProfessorLogin;
+import login.SelectedProf;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
@@ -16,6 +20,8 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JCheckBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HHLogin extends JFrame {
 
@@ -73,6 +79,10 @@ public class HHLogin extends JFrame {
 		contentPane.add(lblPassword);
 		
 		JButton btnNewButton = new JButton("Login");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(200, 175, 90, 50);
 		JCheckBox chckbxStudent = new JCheckBox("Student");
 		chckbxStudent.setBounds(200, 231, 97, 23);
@@ -96,12 +106,26 @@ public class HHLogin extends JFrame {
 					}
 					else {
 						// need to check to make login
-						HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
-						frame.setVisible(true);
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
+						ProfessorLogin pf =  db.DbConnection.checkUser(userName, password);
+						
+						if (pf == null) {
+							System.out.println("'user':'pass'");
+							JOptionPane.showMessageDialog(HHLogin.this, 
+									"Username or password for username is incorrect .");
+						} else {						
+							// Change to superclass
+							SelectedProf.setUser(pf);
+							
+							HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
+							frame.setVisible(true);
+							frame.setResizable(false);
+							if (frame.isShowing()){
+								dispose();
+							}
 						}
+							
+						
+
 					}
 				}
 			}
