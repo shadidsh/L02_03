@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import assessment.Assessment;
 import db.DbConnection;
-import question.TextQuestion;
 
 public class Course {
 	int cID;

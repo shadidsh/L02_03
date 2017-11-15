@@ -1,6 +1,6 @@
 package login;
 
-public class UserLogin {
+public abstract class UserLogin {
     private String userName;
 	private String password;
 	private int uID;
@@ -21,4 +21,7 @@ public class UserLogin {
 	public int getId() {
 		return uID;
 	}
+	
+	public abstract boolean isProf();
+	
 }

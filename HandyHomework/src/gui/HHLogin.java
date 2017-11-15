@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import login.ProfessorLogin;
-import login.SelectedProf;
+import login.SelectedUser;
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -114,7 +114,7 @@ public class HHLogin extends JFrame {
 									"Username or password for username is incorrect .");
 						} else {						
 							// Change to superclass
-							SelectedProf.setUser(pf);
+							SelectedUser.setUser(pf);
 							
 							HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
 							frame.setVisible(true);

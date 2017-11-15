@@ -37,7 +37,7 @@ public class DbConnection {
         return con;
     }
     
-    public static ArrayList<Course> courses_for_user(int uid) {
+    public static ArrayList<Course> managedCourses(int uid) {
     	Connection conn = getConnection();
     	ArrayList<Course> cs =  new ArrayList<Course>();
     	
@@ -81,7 +81,7 @@ public class DbConnection {
     			Integer userId = Rs.getInt(1);
     			String user = Rs.getString(2);
     			String pass = Rs.getString(3);
-    			String email = Rs.getString(5);    			
+    			//String email = Rs.getString(5);    			
     			ProfessorLogin pf = new ProfessorLogin(userId, user, pass);
     			System.out.println(userId);
     			return pf;

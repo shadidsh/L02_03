@@ -140,7 +140,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		lblPts.setVerticalAlignment(SwingConstants.TOP);
 		
 		Connection conn = DbConnection.getConnection();
-		String res = "";
+		//String res = "";
 		
 		DefaultListModel<String> lstQuestion = new DefaultListModel<>();		
 		ArrayList<TextQuestion> questions = new ArrayList<TextQuestion>();

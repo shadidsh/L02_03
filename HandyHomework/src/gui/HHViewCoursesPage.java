@@ -11,8 +11,8 @@ import assessment.Assessment;
 import course.Course;
 import course.SelectedCourse;
 import db.DbConnection;
-import login.ProfessorLogin;
-import login.SelectedProf;
+import login.SelectedUser;
+import login.UserLogin;
 
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
@@ -70,34 +70,34 @@ public class HHViewCoursesPage extends JFrame {
 		lblCourses.setBounds(161, 20, 101, 30);
 		lblCourses.setFont(new Font("Lucida Grande", Font.BOLD, 24));		
 
-		String res = "";		
-		
-		Connection conn = DbConnection.getConnection();
+		//Connection conn = DbConnection.getConnection();
 		DefaultListModel<String> lstCourses = new DefaultListModel<>();
 		 // = new ArrayList<Course>();
 		
-		
-
-		if (SelectedProf.getUser() == null) {
+		if (!SelectedUser.isSelected()) {
 			JOptionPane.showMessageDialog(HHViewCoursesPage.this, "No user logged in");
 		} else {
-			Integer pfId = SelectedProf.getUser().getId();
-			courses = db.DbConnection.courses_for_user(pfId);
-			
-			if (courses == null) {
-				JOptionPane.showMessageDialog(HHViewCoursesPage.this, "prof has no courses");
-			}
+			UserLogin user = SelectedUser.getUser();
+			if (user.isProf()) {
+				Integer pfId = SelectedUser.getUser().getId();
+				courses = db.DbConnection.managedCourses(pfId);
+				
+				if (courses == null) {
+					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "prof has no courses");
+				} else {
+					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "prof seleced");
+				}
+			} else {
+				
+			}			
+
 			
 			for (Course cse : courses) {
 				lstCourses.addElement(cse.getCourseCode() + ":" + cse.getTerm());
 			}
-			
 		}
 		
-
-		
-		/*
-		try {
+		/*try {
 			PreparedStatement stat = conn.prepareStatement("SELECT * FROM public.courses;");
 			ResultSet Rs = stat.executeQuery();	
 			
@@ -121,9 +121,7 @@ public class HHViewCoursesPage extends JFrame {
 			e1.printStackTrace();
 			JOptionPane.showMessageDialog(HHViewCoursesPage.this, "Could not access database - " 
 					+ "\nplease check your connection and try again.");
-		}	
-		
-		*/
+		}*/
 		
 		JList listCourses = new JList<>(lstCourses);
 		listCourses.setBounds(66, 68, 304, 119);
