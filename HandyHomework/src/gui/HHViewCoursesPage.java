@@ -81,7 +81,7 @@ public class HHViewCoursesPage extends JFrame {
 		if (SelectedProf.getUser() == null) {
 			JOptionPane.showMessageDialog(HHViewCoursesPage.this, "No user logged in");
 		} else {
-			Integer pfId = SelectedProf.getUser().getpID();
+			Integer pfId = SelectedProf.getUser().getId();
 			courses = db.DbConnection.courses_for_user(pfId);
 			
 			if (courses == null) {

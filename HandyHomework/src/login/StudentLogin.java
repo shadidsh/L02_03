@@ -12,7 +12,4 @@ public class StudentLogin extends UserLogin {
 		super(sID, userName, password);
 	}
 	
-	public void addCourse(Course course) {
-		
-	}
 }

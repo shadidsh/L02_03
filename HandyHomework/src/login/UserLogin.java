@@ -1,9 +1,9 @@
 package login;
 
 public class UserLogin {
-    String userName;
-	String password;
-	int uID;
+    private String userName;
+	private String password;
+	private int uID;
 	public UserLogin(int uID, String userName, String password) {
 		this.uID = uID;
 		this.userName = userName;
@@ -11,14 +11,14 @@ public class UserLogin {
 	}
 	
 	String getUserName() {
-		return this.userName;
+		return userName;
 	}
 
 	String getPassword() {
-		return this.password;
+		return password;
 	}
 	
-	public int getsID() {
-		return this.uID;
+	public int getId() {
+		return uID;
 	}
 }

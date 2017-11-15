@@ -13,4 +13,5 @@ public class ProfessorLogin extends UserLogin {
 		super(pID, userName, password);
 	}
 	
+	
 }
