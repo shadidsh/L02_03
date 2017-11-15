@@ -4,26 +4,13 @@ import java.util.ArrayList;
 import db.DbConnection;
 import course.Course;
 
-public class ProfessorLogin {
+public class ProfessorLogin extends UserLogin {
 	
     String userName;
 	String password;
 	int pID;
 	public ProfessorLogin(int pID, String userName, String password) {
-		this.pID = pID;
-		this.userName = userName;
-		this.password = password;
+		super(pID, userName, password);
 	}
 	
-	public String getUserName() {
-		return this.userName;
-	}
-
-	public String getPassword() {
-		return this.password;
-	}
-	
-	public int getpID() {
-		return this.pID;
-	}
 }
