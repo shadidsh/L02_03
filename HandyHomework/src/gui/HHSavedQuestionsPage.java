@@ -1,5 +1,6 @@
 package gui;
 import db.DbConnection;
+import login.SelectedUser;
 import question.TextQuestion;
 
 import java.awt.EventQueue;
@@ -37,6 +38,8 @@ import assessment.SharedAssessment;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextField;
 import javax.swing.JScrollBar;
+
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -208,33 +211,7 @@ public class HHSavedQuestionsPage extends JFrame {
 				}
 			}
 		});
-		JButton btnView = new JButton("Submit Answer");
-
-		btnView.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String answer = String.valueOf(questionAnswerField.getText());
-				
-				if (selQuestion == null) {
-					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No questions selected.");
-				} else if (answer.isEmpty()) {
-					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Answer field is empty.");
-				} else {
-					questAnswer = selQuestion.getCorrectAnswer();
-					if (questAnswer == null) {
-						JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Question doesn't have a corresponding answer.");
-					} else {
-						if (questAnswer.isCorrect(answer.toString())) {
-							JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Correct!");
-						} else {
-							JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Incorrect!");
-						}
-						
-					}
-				}				
-			}
-		});
-		btnView.setBounds(277, 307, 120, 31);
-		contentPane.add(btnView);		
+		
 		questionAnswerField = new JTextField();
 		questionAnswerField.setAlignmentY(Component.TOP_ALIGNMENT);
 		questionAnswerField.setColumns(10);
@@ -291,10 +268,44 @@ public class HHSavedQuestionsPage extends JFrame {
 		btnAdd.setBounds(29, 247, 136, 31);
 		contentPane.add(btnAdd);
 		
-		
-		
-		
-		
+		if (! SelectedUser.getUser().isProf()) {
+			// create answer field
+			questionAnswerField = new JTextField();
+			contentPane.add(questionAnswerField);
+			questionAnswerField.setBackground(Color.WHITE);
+			questionAnswerField.setAlignmentY(Component.TOP_ALIGNMENT);
+			questionAnswerField.setColumns(10);
+			questionAnswerField.setBounds(29, 310, 247, 57);
+			questionAnswerField.setFont(new Font("Dialog", Font.PLAIN, 14));
+			questionAnswerField.setSelectedTextColor(Color.black);
+			// Submit button
+			JButton btnView = new JButton("Submit Answer");
+			btnView.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String answer = String.valueOf(questionAnswerField.getText());
+					
+					if (selQuestion == null) {
+						JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No questions selected.");
+					} else if (answer.isEmpty()) {
+						JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Answer field is empty.");
+					} else {
+						questAnswer = selQuestion.getCorrectAnswer();
+						if (questAnswer == null) {
+							JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Question doesn't have a corresponding answer.");
+						} else {
+							if (questAnswer.isCorrect(answer.toString())) {
+								JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Correct!");
+							} else {
+								JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Incorrect!");
+							}
+							
+						}
+					}				
+				}
+			});
+			btnView.setBounds(282, 293, 120, 31);
+			contentPane.add(btnView);	
+		}
 		
 	}
 }
