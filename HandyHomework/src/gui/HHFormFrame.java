@@ -60,68 +60,54 @@ public class HHFormFrame extends JFrame {
 	public HHFormFrame() {
 		setTitle("HandyHomework");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 500);
+		setBounds(100, 100, 475, 325);
 		contentPane = new JPanel();
 		contentPane.setAutoscrolls(true);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		SpringLayout sl_contentPane = new SpringLayout();
-		contentPane.setLayout(sl_contentPane);
+		contentPane.setLayout(null);
 		
 		JLabel lblQuestionForm = new JLabel("Question Form  ");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblQuestionForm, 10, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblQuestionForm, 79, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, lblQuestionForm, -23, SpringLayout.EAST, contentPane);
+		lblQuestionForm.setBounds(10, 40, 150, 26);
 		lblQuestionForm.setFont(new Font("Menlo", Font.ITALIC, 20));
 		lblQuestionForm.setHorizontalAlignment(SwingConstants.RIGHT);
 		contentPane.add(lblQuestionForm);
 		
 		JLabel lblQuestionName = new JLabel("Question Name:");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblQuestionName, 21, SpringLayout.SOUTH, lblQuestionForm);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblQuestionName, 10, SpringLayout.WEST, contentPane);
+		lblQuestionName.setBounds(20, 75, 90, 14);
 		lblQuestionName.setVerticalAlignment(SwingConstants.TOP);
 		contentPane.add(lblQuestionName);
 		
 		questionNameField = new JTextField();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, questionNameField, -5, SpringLayout.NORTH, lblQuestionName);
-		sl_contentPane.putConstraint(SpringLayout.WEST, questionNameField, 6, SpringLayout.EAST, lblQuestionName);
-		sl_contentPane.putConstraint(SpringLayout.EAST, questionNameField, 124, SpringLayout.EAST, lblQuestionName);
+		questionNameField.setBounds(115, 72, 118, 20);
 		contentPane.add(questionNameField);
 		questionNameField.setColumns(10);
 		
 		JLabel lblEnterYourQuestion = new JLabel("Enter your question here: ");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblEnterYourQuestion, 26, SpringLayout.SOUTH, lblQuestionName);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblEnterYourQuestion, 10, SpringLayout.WEST, contentPane);
+		lblEnterYourQuestion.setBounds(20, 102, 150, 14);
 		contentPane.add(lblEnterYourQuestion);
 		
 		JTextArea questionContentField = new JTextArea();
+		questionContentField.setBounds(20, 123, 426, 81);
 		questionContentField.setWrapStyleWord(true);
 		questionContentField.setLineWrap(true);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, questionContentField, 7, SpringLayout.SOUTH, lblEnterYourQuestion);
-		sl_contentPane.putConstraint(SpringLayout.WEST, questionContentField, 15, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, questionContentField, 88, SpringLayout.SOUTH, lblEnterYourQuestion);
 		contentPane.add(questionContentField);
 		
 		JLabel lblFinalAnswer = new JLabel("Final Answer: ");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblFinalAnswer, 12, SpringLayout.SOUTH, questionContentField);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblFinalAnswer, 10, SpringLayout.WEST, contentPane);
+		lblFinalAnswer.setBounds(20, 225, 90, 14);
 		contentPane.add(lblFinalAnswer);
 		
 		questionAnswerField = new JTextField();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, questionAnswerField, -5, SpringLayout.NORTH, lblFinalAnswer);
-		sl_contentPane.putConstraint(SpringLayout.WEST, questionAnswerField, 6, SpringLayout.EAST, lblFinalAnswer);
-		sl_contentPane.putConstraint(SpringLayout.EAST, questionAnswerField, 81, SpringLayout.EAST, lblFinalAnswer);
+		questionAnswerField.setBounds(100, 222, 150, 20);
 		questionAnswerField.setColumns(10);
 		contentPane.add(questionAnswerField);
 		
 		JLabel lblNumberOfMarks = new JLabel("Number of Marks Awarded: ");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblNumberOfMarks, 26, SpringLayout.SOUTH, questionAnswerField);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblNumberOfMarks, 10, SpringLayout.WEST, contentPane);
+		lblNumberOfMarks.setBounds(20, 257, 180, 14);
 		contentPane.add(lblNumberOfMarks);
 		
 		JSpinner spinner = new JSpinner();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, spinner, -5, SpringLayout.NORTH, lblNumberOfMarks);
-		sl_contentPane.putConstraint(SpringLayout.WEST, spinner, 6, SpringLayout.EAST, lblNumberOfMarks);
+		spinner.setBounds(180, 252, 110, 20);
 		contentPane.add(spinner);
 		
 		JComponent field = ((JSpinner.DefaultEditor) spinner.getEditor());
@@ -130,6 +116,8 @@ public class HHFormFrame extends JFrame {
 	    field.setPreferredSize(prefSize);
 		
 		JButton btnSubmit = new JButton("Submit");
+		contentPane.getRootPane().setDefaultButton(btnSubmit);
+		btnSubmit.setBounds(325, 220, 100, 50);
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String name = String.valueOf(questionNameField.getText());
@@ -199,7 +187,8 @@ public class HHFormFrame extends JFrame {
 		});
 		contentPane.add(btnSubmit);
 		
-		JButton btnCancel = new JButton("Back");
+		JButton btnCancel = new JButton("\u2190 Back");
+		btnCancel.setBounds(15, 10, 100, 25);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
@@ -210,11 +199,6 @@ public class HHFormFrame extends JFrame {
 				}
 			}
 		});
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnCancel, 114, SpringLayout.SOUTH, questionContentField);
-		sl_contentPane.putConstraint(SpringLayout.EAST, questionContentField, 0, SpringLayout.EAST, btnCancel);
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnCancel, 386, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnSubmit, 0, SpringLayout.NORTH, btnCancel);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnSubmit, -6, SpringLayout.WEST, btnCancel);
 		contentPane.add(btnCancel);
 	}
 }

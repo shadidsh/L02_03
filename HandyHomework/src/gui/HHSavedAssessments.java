@@ -1,3 +1,4 @@
+
 package gui;
 
 import java.awt.Dimension;
@@ -190,7 +191,7 @@ public class HHSavedAssessments extends JFrame {
 			}
 		});
 		JButton btnView = new JButton("Select");
-		btnView.setBounds(419, 306, 120, 30);
+		btnView.setBounds(265, 306, 120, 30);
 		btnView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (selectedAs == null ) {

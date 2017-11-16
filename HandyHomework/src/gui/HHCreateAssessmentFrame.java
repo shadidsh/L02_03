@@ -61,23 +61,30 @@ public class HHCreateAssessmentFrame extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblCreateAssessmentForm = new JLabel("Create Assessment Form");
+		lblCreateAssessmentForm.setBounds(10, 40, 225, 26);
 		lblCreateAssessmentForm.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		
 		JLabel lblAssessmentName = new JLabel("* Assessment Name:");
+		lblAssessmentName.setBounds(30, 85, 150, 14);
 		
 		assessmentNameField = new JTextField();
+		assessmentNameField.setBounds(160, 80, 150, 20);
 		assessmentNameField.setColumns(10);
 		
 		JLabel lblAssessmentTitle = new JLabel("* Assessment Title:");
+		lblAssessmentTitle.setBounds(30, 120, 150, 14);
 		
 		titleField = new JTextField();
+		titleField.setBounds(160, 115, 150, 20);
 		titleField.setColumns(10);
 		
 //		JLabel lblDueDate = new JLabel("Due Date:");
 		
 		JLabel lblTotalPointsAwarded = new JLabel("Total Points Awarded:");
+		lblTotalPointsAwarded.setBounds(30, 154, 150, 14);
 		
 		JSpinner spinner = new JSpinner();
+		spinner.setBounds(160, 150, 150, 20);
 		
 		JComponent field = ((JSpinner.DefaultEditor) spinner.getEditor());
 	    Dimension prefSize = field.getPreferredSize();
@@ -124,10 +131,14 @@ public class HHCreateAssessmentFrame extends JFrame {
 		
 		
 		JCheckBox chckbxContainsMCQ = new JCheckBox("Contains multiple choice");
+		chckbxContainsMCQ.setBounds(30, 195, 190, 23);
 		
 		JCheckBox chckbxOptionalAssessment = new JCheckBox("Optional Assessment");
+		chckbxOptionalAssessment.setBounds(30, 230, 160, 23);
 		
 		JButton btnCreate = new JButton("Create");
+		btnCreate.setBounds(250, 205, 125, 40);
+		contentPane.getRootPane().setDefaultButton(btnCreate);
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// get the fields
@@ -190,7 +201,8 @@ public class HHCreateAssessmentFrame extends JFrame {
 			}
 		});		
 		
-		JButton btnCancel = new JButton("Cancel");
+		JButton btnCancel = new JButton("\u2190Back");
+		btnCancel.setBounds(10, 10, 75, 25);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();
@@ -201,80 +213,18 @@ public class HHCreateAssessmentFrame extends JFrame {
 				}
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblCreateAssessmentForm))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGap(25)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								//.addComponent(splitPane, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-								//.addComponent(btnAddQuestion, Alignment.LEADING)
-								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-									.addComponent(lblTotalPointsAwarded)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								//.addComponent(lblDueDate, Alignment.LEADING)
-								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-									.addComponent(lblAssessmentTitle)
-									.addGap(18)
-									.addComponent(titleField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-									.addComponent(lblAssessmentName)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(assessmentNameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-					.addContainerGap(25, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(33)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(chckbxOptionalAssessment)
-						.addComponent(chckbxContainsMCQ))
-					.addContainerGap(218, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(210, Short.MAX_VALUE)
-					.addComponent(btnCreate)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnCancel)
-					.addGap(48))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(23)
-					.addComponent(lblCreateAssessmentForm)
-					.addGap(28)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblAssessmentName)
-						.addComponent(assessmentNameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblAssessmentTitle)
-						.addComponent(titleField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(11)
-					//.addComponent(lblDueDate)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTotalPointsAwarded)
-						.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					//.addComponent(splitPane, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					//.addComponent(btnAddQuestion)
-					.addGap(18)
-					.addComponent(chckbxContainsMCQ)
-					.addGap(18)
-					.addComponent(chckbxOptionalAssessment)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnCancel)
-						.addComponent(btnCreate))
-					.addContainerGap())
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(lblCreateAssessmentForm);
+		contentPane.add(lblTotalPointsAwarded);
+		contentPane.add(spinner);
+		contentPane.add(lblAssessmentTitle);
+		contentPane.add(titleField);
+		contentPane.add(lblAssessmentName);
+		contentPane.add(assessmentNameField);
+		contentPane.add(chckbxOptionalAssessment);
+		contentPane.add(chckbxContainsMCQ);
+		contentPane.add(btnCreate);
+		contentPane.add(btnCancel);
 		
 		
 		JSpinner timeSpinner = new JSpinner( new SpinnerDateModel() );

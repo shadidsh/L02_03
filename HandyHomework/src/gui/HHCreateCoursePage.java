@@ -84,6 +84,7 @@ public class HHCreateCoursePage extends JFrame {
 		contentPane.setLayout(null);
 		
 		btnCreate = new JButton("Create");
+		contentPane.getRootPane().setDefaultButton(btnCreate);
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String name = txtCourseName.getText();
@@ -107,7 +108,7 @@ public class HHCreateCoursePage extends JFrame {
 				}
 			}
 		});
-		btnCreate.setBounds(133, 174, 96, 29);
+		btnCreate.setBounds(133, 170, 96, 30);
 		contentPane.add(btnCreate);
 		contentPane.add(lblCourseCode);
 		contentPane.add(txtCourseCode);
@@ -115,7 +116,7 @@ public class HHCreateCoursePage extends JFrame {
 		contentPane.add(txtCourseName);
 		contentPane.add(lblCreateCourse);
 		
-		btnCancel = new JButton("Cancel");
+		btnCancel = new JButton("\u2190 Back");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHViewCoursesPage frame = new HHViewCoursesPage();
@@ -126,7 +127,7 @@ public class HHCreateCoursePage extends JFrame {
 				}
 			}
 		});
-		btnCancel.setBounds(229, 174, 103, 29);
+		btnCancel.setBounds(30, 15, 90, 29);
 		contentPane.add(btnCancel);
 		
 		txtCourseTerm = new JTextField();

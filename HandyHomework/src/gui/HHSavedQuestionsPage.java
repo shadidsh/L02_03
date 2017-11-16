@@ -207,8 +207,8 @@ public class HHSavedQuestionsPage extends JFrame {
 			System.out.println("Could not access database."); 
 			JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Could not access database - " + "\nplease check your connection and try again.");
 		}
-		JButton btnback = new JButton("Back to Assessments");
-		btnback.setBounds(163, 248, 177, 30);
+		JButton btnback = new JButton("\u2190 Back");
+		btnback.setBounds(15, 35, 115, 30);
 		contentPane.add(btnback);
 		
 		btnback.addActionListener(new ActionListener() {
