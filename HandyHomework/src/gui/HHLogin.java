@@ -17,8 +17,6 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 
 import javax.swing.JButton;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -79,16 +77,12 @@ public class HHLogin extends JFrame {
 		contentPane.add(lblPassword);
 		
 		JButton btnNewButton = new JButton("Login");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnNewButton.setBounds(200, 186, 102, 43);
 		JCheckBox chckbxStudent = new JCheckBox("Student");
 		chckbxStudent.setBounds(211, 236, 97, 23);
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		contentPane.getRootPane().setDefaultButton(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				boolean is_student = chckbxStudent.isSelected();
 				String userName = String.valueOf(usernameField.getText());
 				String password = String.valueOf(passwordField.getPassword());
