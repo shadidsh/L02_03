@@ -1,5 +1,6 @@
 package gui;
 import db.DbConnection;
+import login.SelectedUser;
 import question.TextQuestion;
 
 import java.awt.EventQueue;
@@ -46,6 +47,9 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.SystemColor;
 import javax.swing.DropMode;
+import javax.swing.GroupLayout.Alignment;
+
+import java.awt.Color;
 
 public class HHSavedQuestionsPage extends JFrame {
 
@@ -53,6 +57,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	private JPanel contentPane;
 	private JList listQuestion_1;
 	private JTextField questionAnswerField;
+	private JLabel ans;
 	private TextAnswer questAnswer;
 	
 	private TextQuestion selQuestion;
@@ -102,9 +107,9 @@ public class HHSavedQuestionsPage extends JFrame {
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{307, 0};
-		gbl_panel.rowHeights = new int[]{30, 49, 57, 0};
+		gbl_panel.rowHeights = new int[]{30, 49, 57, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		JLabel questionTitle = new JLabel("");
@@ -130,15 +135,23 @@ public class HHSavedQuestionsPage extends JFrame {
 		gbc_questionText.gridy = 1;
 		questionText.setSize(gbl_panel.columnWidths[0], gbl_panel.rowHeights[1]);
 		panel.add(questionText, gbc_questionText);
+		
 		JLabel lblPts = new JLabel("");
 		GridBagConstraints gbc_lblPts = new GridBagConstraints();
-		gbc_lblPts.fill = GridBagConstraints.BOTH;
+		gbc_lblPts.fill = GridBagConstraints.VERTICAL;
 		gbc_lblPts.gridx = 0;
 		gbc_lblPts.gridy = 2;
 		panel.add(lblPts, gbc_lblPts);
 		lblPts.setAutoscrolls(true);
 		lblPts.setVerticalAlignment(SwingConstants.TOP);
 		
+		JLabel lblAnswer = new JLabel("");
+		GridBagConstraints gbc_lblAnswer = new GridBagConstraints();
+		gbc_lblAnswer.gridx = 0;
+		gbc_lblAnswer.gridy = 3;
+		gbc_lblAnswer.fill = GridBagConstraints.VERTICAL;
+		panel.add(lblAnswer, gbc_lblAnswer);
+				
 		Connection conn = DbConnection.getConnection();
 		//String res = "";
 		
@@ -208,34 +221,7 @@ public class HHSavedQuestionsPage extends JFrame {
 				}
 			}
 		});
-		JButton btnView = new JButton("Submit Answer");
-
-		btnView.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String answer = String.valueOf(questionAnswerField.getText());
-				
-				if (selQuestion == null) {
-					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No questions selected.");
-				} else if (answer.isEmpty()) {
-					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Answer field is empty.");
-				} else {
-					questAnswer = selQuestion.getCorrectAnswer();
-					if (questAnswer == null) {
-						JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Question doesn't have a corresponding answer.");
-					} else {
-						if (questAnswer.isCorrect(answer.toString())) {
-							JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Correct!");
-						} else {
-							JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Incorrect!");
-						}
-						
-					}
-				}				
-			}
-		});
-		btnView.setBounds(277, 307, 120, 31);
-		contentPane.add(btnView);		
-		
+			
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(29, 84, 188, 155);
 		contentPane.add(scrollPane);
@@ -258,47 +244,100 @@ public class HHSavedQuestionsPage extends JFrame {
 				questionTitle.setSize(questionTitle.getPreferredSize());
 				
 				selQuestion = question;
-				//System.out.println(selQuestion.getAssessID());
-				//questAnswer = question.getCorrectAnswer();
-				/*questAnswer = question.getAnswer(); */
-					// need to pass this question into submit button, then check for answer
-					
+				// Professor side - ans must change every time a new q is selected
+				if (selQuestion != null && SelectedUser.getUser().isProf()) {
+					questAnswer = selQuestion.getCorrectAnswer();
+					if (questAnswer == null) {
+						JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Question doesn't have a corresponding answer.");
+					} else {
+						String answer = "Answer: " + questAnswer.getAnswer();
+						lblAnswer.setText(answer);
+//						contentPane.add(ans);
+//						ans.setBackground(Color.WHITE);
+//						ans.setAlignmentY(Component.CENTER_ALIGNMENT);
+//						ans.setBounds(229, 84, 307, 72);
+//						ans.setFont(new Font("Dialog", Font.PLAIN, 14));
+					}
+				} 
 			}
 		});
 		
 		
 		listQuestion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		JButton btnAdd = new JButton("Add Question");
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//SharedQuestion.setQuestion(selQuestion);
-				HHFormFrame frame = new HHFormFrame();
-				frame.setVisible(true);	
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
+		//String answer = null;
+		
+		if (SelectedUser.getUser().isProf()){
+			// Add question button
+			JButton btnAdd = new JButton("Add Question");
+			btnAdd.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					//SharedQuestion.setQuestion(selQuestion);
+					HHFormFrame frame = new HHFormFrame();
+					frame.setVisible(true);	
+					frame.setResizable(false);
+					if (frame.isShowing()){
+						dispose();
+					}
 				}
-			}
-		});
-		btnAdd.setMaximumSize(new Dimension(139, 23));
-		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnAdd.setBounds(29, 248, 136, 30);
-		contentPane.add(btnAdd);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 359, 266, -73);
-		contentPane.add(scrollPane_1);
-		questionAnswerField = new JTextField();
-		questionAnswerField.setAlignmentY(Component.TOP_ALIGNMENT);
-		questionAnswerField.setColumns(10);
-		questionAnswerField.setBounds(29, 293, 247, 57);
-		scrollPane_1.add(questionAnswerField);
-		
-		
-		
-		
-		
+			});
+			btnAdd.setMaximumSize(new Dimension(139, 23));
+			btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			btnAdd.setBounds(29, 248, 136, 30);
+			contentPane.add(btnAdd);
+			// Display answer 
+//			if (selQuestion != null){
+//				questAnswer = selQuestion.getCorrectAnswer();
+//				if (questAnswer == null) {
+//					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Question doesn't have a corresponding answer.");
+//				} else {
+//					answer = "Answer:" + questAnswer.getAnswer();
+//					ans = new JLabel(answer);
+//					contentPane.add(ans);
+//					ans.setBackground(Color.WHITE);
+//					ans.setAlignmentY(Component.TOP_ALIGNMENT);
+//					ans.setBounds(29, 310, 247, 57);
+//					ans.setFont(new Font("Dialog", Font.PLAIN, 14));
+//				}
+//			}
+		} else {
+			// create answer field
+			questionAnswerField = new JTextField();
+			contentPane.add(questionAnswerField);
+			questionAnswerField.setBackground(Color.WHITE);
+			questionAnswerField.setAlignmentY(Component.TOP_ALIGNMENT);
+			questionAnswerField.setColumns(10);
+			questionAnswerField.setBounds(29, 310, 247, 57);
+			questionAnswerField.setFont(new Font("Dialog", Font.PLAIN, 14));
+			questionAnswerField.setSelectedTextColor(Color.black);
+			// Submit button
+			JButton btnView = new JButton("Submit Answer");
+			btnView.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String answer = String.valueOf(questionAnswerField.getText());
+					
+					if (selQuestion == null) {
+						JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No questions selected.");
+					} else if (answer.isEmpty()) {
+						JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Answer field is empty.");
+					} else {
+						questAnswer = selQuestion.getCorrectAnswer();
+						if (questAnswer == null) {
+							JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Question doesn't have a corresponding answer.");
+						} else {
+							if (questAnswer.isCorrect(answer.toString())) {
+								JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Correct!");
+							} else {
+								JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Incorrect!");
+							}
+							
+						}
+					}				
+				}
+			});
+			btnView.setBounds(282, 293, 120, 31);
+			contentPane.add(btnView);	
+		}
 		
 		
 	}
