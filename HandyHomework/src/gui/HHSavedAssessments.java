@@ -32,6 +32,8 @@ import assessment.SharedAssessment;
 import course.Course;
 import course.SelectedCourse;
 import db.DbConnection;
+import login.SelectedUser;
+
 import java.awt.SystemColor;
 
 public class HHSavedAssessments extends JFrame {
@@ -236,19 +238,22 @@ public class HHSavedAssessments extends JFrame {
 		
 		listAssessment.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		JButton btnNewAssessment = new JButton("Create New Assessment");
-		btnNewAssessment.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
-				frame.setVisible(true);	
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
+		if (SelectedUser.getUser().isProf()){
+			JButton btnNewAssessment = new JButton("Create New Assessment");
+			btnNewAssessment.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
+					frame.setVisible(true);	
+					frame.setResizable(false);
+					if (frame.isShowing()){
+						dispose();
+					}
 				}
-			}
-		});
-		btnNewAssessment.setBounds(266, 265, 195, 29);
-		contentPane.add(btnNewAssessment);
+			});
+			btnNewAssessment.setBounds(266, 265, 195, 29);
+			contentPane.add(btnNewAssessment);
+		}
+		
 		
 		
 	}
