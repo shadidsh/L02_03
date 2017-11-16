@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
+
+import login.SelectedUser;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -100,6 +103,7 @@ public class HandyHomeworkMainPage extends JFrame {
 //		contentPane.add(savedQuestionsButton);
 		
 		JButton btnViewAssessments = new JButton("View Assessments");
+		btnViewAssessments.setEnabled(false);
 		btnViewAssessments.setBounds(150, 148, 187, 47);
 		//btnViewAssessments.setBounds(150, 111, 187, 47);
 		btnViewAssessments.addActionListener(new ActionListener() {
@@ -154,6 +158,8 @@ public class HandyHomeworkMainPage extends JFrame {
 		contentPane.add(btnLogOut);
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				SelectedUser.setUser(null);
+				
 				HHLogin frame = new HHLogin();
 				frame.setVisible(true);
 				frame.setResizable(false);

@@ -43,7 +43,7 @@ public class DbConnection {
     	
     	try {
     		String query = "Select c.cid, c.courseCode, c.name, c.term from " 
-    				+ constants.Constants.DataConstants.Management + " m," 
+    				+ constants.Constants.DataConstants.COURSECONTROL + " m," 
     				+ constants.Constants.DataConstants.COURSES + " c where m.user_id = ? "
     						+ " and m.cid = c.cid;";
     		PreparedStatement stat = conn.prepareStatement(query);
@@ -278,7 +278,7 @@ public class DbConnection {
 		return res;
 	}
 
-	public static int insertCourses( String courseCode, String name, String term) {
+	public static int insertCourses(int pid, String courseCode, String name, String term) {
     	Connection conn = getConnection();
     	int result = -1;    	
     	try{
@@ -293,7 +293,9 @@ public class DbConnection {
 
     		ResultSet Rs = stat.executeQuery();
     		Rs.next();
-    		result =  Rs.getInt(1); 
+    		result =  Rs.getInt(1);
+    		
+    		int rid = insertManagedCourses(pid, result); 
     		conn.close();
     		
     	}catch(Exception ex) {
@@ -301,6 +303,30 @@ public class DbConnection {
     	}    	
     	return result;    
 	}
+	
+	public static int insertManagedCourses(int pid, int cid) {
+    	Connection conn = getConnection();
+    	int result = -1;    	
+    	try{
+    		String insert = "INSERT INTO " + constants.Constants.DataConstants.COURSECONTROL 
+    				+ "(user_id, cid) " +
+    				" VALUES(?,?) RETURNING user_id";
+    		
+    		PreparedStatement stat = conn.prepareStatement(insert);
+    		stat.setInt(1, pid);
+    		stat.setInt(2, cid);
+
+    		ResultSet Rs = stat.executeQuery();
+    		Rs.next();
+    		result =  Rs.getInt(1);    		
+    		conn.close();
+    		
+    	}catch(Exception ex) {
+    		System.out.println(ex.getMessage());    		
+    	}    	
+    	return result;    
+	}
+	
 	
 	
 	public static void main(String[] args) {

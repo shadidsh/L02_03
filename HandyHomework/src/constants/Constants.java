@@ -10,7 +10,7 @@ public class Constants {
 		 public static final String ANSWERS   = "answers";
 		 public static final String USERS   = "users";
 		 
-		 public static final String Management   = "management";
+		 public static final String COURSECONTROL   = "courseControl";
 		 
 	 }
 	

@@ -85,7 +85,6 @@ public class HHViewCoursesPage extends JFrame {
 				if (courses == null) {
 					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "prof has no courses");
 				} else {
-					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "prof seleced");
 				}
 			} else {
 				
@@ -96,32 +95,6 @@ public class HHViewCoursesPage extends JFrame {
 				lstCourses.addElement(cse.getCourseCode() + ":" + cse.getTerm());
 			}
 		}
-		
-		/*try {
-			PreparedStatement stat = conn.prepareStatement("SELECT * FROM public.courses;");
-			ResultSet Rs = stat.executeQuery();	
-			
-			while (Rs.next()) { 
-				Integer cId = Rs.getInt(1);
-				String course = Rs.getString(2);
-				String name = Rs.getString(3);
-				String term = Rs.getString(4);
-				Course cs = new Course(cId, course, name, term);				
-				lstCourses.addElement(course + ":" + term);
-				courses.add(cs);
-				
-				res =  cId + "," + course + "," +  name + "," + name + "," +  term;
-				System.out.println(res);	
-				
-			}			
-			Rs.close();
-			conn.close();
-			
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-			JOptionPane.showMessageDialog(HHViewCoursesPage.this, "Could not access database - " 
-					+ "\nplease check your connection and try again.");
-		}*/
 		
 		JList listCourses = new JList<>(lstCourses);
 		listCourses.setBounds(66, 68, 304, 119);

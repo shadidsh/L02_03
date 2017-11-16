@@ -37,7 +37,7 @@ import java.awt.SystemColor;
 public class HHSavedAssessments extends JFrame {
 
 	private JPanel contentPane;
-	private JList list;
+	private JList<?> list;
 	private String questAnswer;
 	private Assessment selectedAs;
 
@@ -175,7 +175,7 @@ public class HHSavedAssessments extends JFrame {
 		scrollPane_1.setViewportView(lblAssessment);
 		lblAssessment.setVerticalAlignment(SwingConstants.TOP);
 		JButton btnMainMenu = new JButton("Main Menu");
-		btnMainMenu.setBounds(265, 306, 120, 30);
+		btnMainMenu.setBounds(12, 54, 120, 30);
 		contentPane.add(btnMainMenu);
 		
 		btnMainMenu.addActionListener(new ActionListener() {
@@ -211,15 +211,14 @@ public class HHSavedAssessments extends JFrame {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(30, 97, 215, 239);
 		contentPane.add(scrollPane_2);
-		JList listAssessment = new JList<>(lstAssess);
+		JList<String> listAssessment = new JList<>(lstAssess);
 		scrollPane_2.setViewportView(listAssessment);
 		
 		listAssessment.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				String res;// = "<html>This question<br> is worth</html>";
-				JList list = (JList) e.getSource();
+				String res;
+				JList<?> list = (JList<?>) e.getSource();
 				Assessment as = assess.get(list.getSelectedIndex());	
-				
 				
 				// POINTS GETS OVERWRITen
 				res =  String.valueOf(as.getWeight()); //"<html>This assessment is worth " + String.valueOf(as.getWeight())  + "%</html>";
@@ -229,8 +228,7 @@ public class HHSavedAssessments extends JFrame {
 				assessmentTitle.setText(as.getTitle());
 				selectedAs = as;				
 			}
-		});	
-		
+		});			
 		
 		listAssessment.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
@@ -252,6 +250,20 @@ public class HHSavedAssessments extends JFrame {
 		lblTitle.setBounds(255, 90, 46, 14);
 		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		contentPane.add(lblTitle);
+		
+		JButton btnBack = new JButton("Back to Courses");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {				
+				HHViewCoursesPage frame = new HHViewCoursesPage();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
+			}
+		});
+		btnBack.setBounds(12, 13, 140, 30);
+		contentPane.add(btnBack);
 		
 		
 	}

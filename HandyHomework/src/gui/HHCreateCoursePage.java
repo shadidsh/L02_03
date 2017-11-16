@@ -12,6 +12,9 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import course.SelectedCourse;
+import login.ProfessorLogin;
+import login.SelectedUser;
+import login.UserLogin;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
@@ -90,8 +93,10 @@ public class HHCreateCoursePage extends JFrame {
 				if (name.isEmpty() || courseCode.isEmpty() || courseTerm.isEmpty()){
 					JOptionPane.showMessageDialog(HHCreateCoursePage.this, "One or more fields are empty.");
 				} else {
+					ProfessorLogin prof = (ProfessorLogin) SelectedUser.getUser();
+					int pid = prof.getId();
 					
-					db.DbConnection.insertCourses(courseCode, name, courseTerm);
+					db.DbConnection.insertCourses(pid, courseCode, name, courseTerm);
 					
 					HHViewCoursesPage frame = new HHViewCoursesPage();
 					frame.setVisible(true);

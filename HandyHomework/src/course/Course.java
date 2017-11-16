@@ -20,12 +20,12 @@ public class Course {
 	}
 	
 	
-	public Course(String name, String courseCode, String term) {
+	public Course(String name, String courseCode, String term, int uid) {
 		this.courseCode = courseCode;
 		this.name = name;
 		this.term = term;
 		
-		this.cID = DbConnection.insertCourses(courseCode, name, term);	
+		this.cID = DbConnection.insertCourses(uid, courseCode, name, term);	
 	} 
 	
 	
