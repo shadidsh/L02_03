@@ -60,21 +60,21 @@ public class HHLogin extends JFrame {
 		contentPane.setLayout(null);
 		
 		usernameField = new JTextField();
-		usernameField.setBounds(125, 50, 250, 25);
+		usernameField.setBounds(125, 69, 250, 25);
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(125, 125, 250, 25);
+		passwordField.setBounds(125, 144, 250, 25);
 		contentPane.add(passwordField);
 		
 		lblUsername = new JLabel("USERNAME");
-		lblUsername.setBounds(215, 25, 75, 20);
+		lblUsername.setBounds(211, 38, 75, 20);
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblUsername);
 		
-		lblPassword = new JLabel("PASSWORD\r\n");
-		lblPassword.setBounds(215, 100, 80, 20);
+		lblPassword = new JLabel("ENTER PASSWORD\r\n");
+		lblPassword.setBounds(181, 113, 136, 19);
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblPassword);
 		
@@ -83,9 +83,9 @@ public class HHLogin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(200, 175, 90, 50);
+		btnNewButton.setBounds(200, 186, 102, 43);
 		JCheckBox chckbxStudent = new JCheckBox("Student");
-		chckbxStudent.setBounds(200, 231, 97, 23);
+		chckbxStudent.setBounds(211, 236, 97, 23);
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
