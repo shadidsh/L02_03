@@ -20,6 +20,9 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class HHLogin extends JFrame {
 
@@ -78,19 +81,16 @@ public class HHLogin extends JFrame {
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.setBounds(200, 186, 102, 43);
-		JCheckBox chckbxStudent = new JCheckBox("Student");
-		chckbxStudent.setBounds(211, 236, 97, 23);
 		contentPane.getRootPane().setDefaultButton(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean is_student = chckbxStudent.isSelected();
 				String userName = String.valueOf(usernameField.getText());
 				String password = String.valueOf(passwordField.getPassword());
 				if (password.isEmpty() || userName.isEmpty()) {
 					JOptionPane.showMessageDialog(HHLogin.this, "Username and password cannot be empty.");
 				}
 				else {
-					if(is_student) {
+					if(true) {
 						HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
 						frame.setVisible(true);
 						frame.setResizable(false);
@@ -126,6 +126,30 @@ public class HHLogin extends JFrame {
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(btnNewButton);
-		contentPane.add(chckbxStudent);
+		
+		JLabel lblNewLabel = new JLabel("Login");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblNewLabel.setForeground(Color.CYAN);
+		lblNewLabel.setBounds(220, 5, 125, 30);
+		contentPane.add(lblNewLabel);
+		
+		JButton btnRegister = new JButton("Register");
+		btnRegister.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				HHRegister frame = new HHRegister();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
+			}
+		});
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnRegister.setBounds(350, 14, 102, 43);
+		contentPane.add(btnRegister);
 	}
 }
