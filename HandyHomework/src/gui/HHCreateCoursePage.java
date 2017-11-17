@@ -11,10 +11,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
-import course.SelectedCourse;
 import login.ProfessorLogin;
 import login.SelectedUser;
-import login.UserLogin;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;

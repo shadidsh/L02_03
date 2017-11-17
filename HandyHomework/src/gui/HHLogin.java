@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import login.ProfessorLogin;
 import login.SelectedUser;
 import login.UserLogin;
 

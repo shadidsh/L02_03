@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import question.TextQuestion;
-import db.DbConnection;
+
 
 public class Assessment {
 	private int cid;

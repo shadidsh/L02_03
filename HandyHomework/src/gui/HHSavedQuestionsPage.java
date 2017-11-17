@@ -17,7 +17,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Vector;
 import java.awt.Dimension;
 
 import javax.swing.DefaultListModel;
@@ -25,10 +24,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.event.ListSelectionListener;
 
 import answer.TextAnswer;
@@ -37,17 +33,13 @@ import assessment.SelectedAssessment;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextField;
-import javax.swing.JScrollBar;
 import java.awt.Component;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.border.TitledBorder;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.SystemColor;
-import javax.swing.DropMode;
-import javax.swing.GroupLayout.Alignment;
 
 import java.awt.Color;
 
@@ -55,7 +47,6 @@ public class HHSavedQuestionsPage extends JFrame {
 
 	private JFrame frame;
 	private JPanel contentPane;
-	private JList listQuestion_1;
 	private JTextField questionAnswerField;
 	private JLabel ans;
 	private TextAnswer questAnswer;
@@ -225,7 +216,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(29, 84, 188, 155);
 		contentPane.add(scrollPane);
-		JList listQuestion = new JList<>(lstQuestion);
+		JList<String> listQuestion = new JList<>(lstQuestion);
 		scrollPane.setViewportView(listQuestion);
 		
 		listQuestion.addListSelectionListener(new ListSelectionListener() {
