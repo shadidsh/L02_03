@@ -7,10 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import assessment.Assessment;
 import course.Course;
 import course.SelectedCourse;
-import db.DbConnection;
 import login.SelectedUser;
 import login.UserLogin;
 

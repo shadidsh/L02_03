@@ -23,10 +23,6 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JFormattedTextField;
 
@@ -131,10 +127,6 @@ public class HHFormFrame extends JFrame {
 					JOptionPane.showMessageDialog(HHFormFrame.this, "No assessment selected.");
 				}				
 				else {	
-					
-					// add the question to database and produce successful/unsuccessful msg box
-					//Connection conn = DbConnection.getConnection();
-					//String insert = "INSERT INTO sware.textquestions " 	+ " VALUES(?, ?, ?, ?, ?);";
 					try {
 						Assessment as = SelectedAssessment.getAssess();
 						int qid = db.DbConnection.insertQuestions(as.getAid(), name, questionContent, value);
@@ -152,36 +144,6 @@ public class HHFormFrame extends JFrame {
 						e1.printStackTrace();
 						JOptionPane.showMessageDialog(HHFormFrame.this, "Could not save question - please check your connection and try again.");
 					}
-					
-					//TextAnswer t = new TextAnswer(qid,  answer,  true);
-					/* try {
-					  PreparedStatement seq = conn.prepareStatement("SELECT nextval('question_id') as bigint;");
-						ResultSet Rs = seq.executeQuery();
-						 Rs.next();
-						Integer qid = Rs.getInt(1);
-						
-						PreparedStatement prepInsert = conn.prepareStatement(insert);
-						prepInsert.setInt(1, qid);
-						prepInsert.setString(2, name);
-						prepInsert.setString(3, questionContent);
-						prepInsert.setString(4, answer);
-						prepInsert.setInt(5, value);
-						System.out.println(prepInsert.toString());
-						prepInsert.executeUpdate();
-						
-						// moved question obj creation here because qid doesn't exist elsewhere
-						TextQuestion question = new TextQuestion(qid, name, questionContent, answer, value);
-						// confirm that the question was made
-						String message = question.getName() + "\nQuestion is: " + question.getQuestion();
-						message += "\nAnswer is: " + question.getAnswer() + "\nQuestion is worth " + question.getPoints() + " points";
-						JOptionPane.showMessageDialog(HHFormFrame.this, message); */
-					/*	
-					} catch (SQLException e1) {
-						System.out.println("Could not insert question into database."); 
-						e1.printStackTrace();
-						JOptionPane.showMessageDialog(HHFormFrame.this, "Could not save question - please check your connection and try again.");
-					} */
-				
 				}
 			}
 		});

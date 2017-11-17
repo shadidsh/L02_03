@@ -60,21 +60,6 @@ public class HandyHomeworkMainPage extends JFrame {
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.setLayer(lblWelcome, 0);
 		
-//		JButton buttonEnterQuestion = new JButton("Enter a question");
-//		sl_contentPane.putConstraint(SpringLayout.NORTH, buttonEnterQuestion, 8, SpringLayout.SOUTH, lblWelcome);
-//		sl_contentPane.putConstraint(SpringLayout.SOUTH, buttonEnterQuestion, -128, SpringLayout.SOUTH, contentPane);
-//		sl_contentPane.putConstraint(SpringLayout.EAST, buttonEnterQuestion, -121, SpringLayout.EAST, contentPane);
-//		buttonEnterQuestion.setMaximumSize(new Dimension(139, 23));
-//		buttonEnterQuestion.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				dispose();
-//				new HHFormFrame().setVisible(true);
-//			}
-//		});
-//	
-//		buttonEnterQuestion.setFont(new Font("Tahoma", Font.BOLD, 13));
-//		contentPane.add(buttonEnterQuestion);
-		
 		JLabel lblWelcometoHH = new JLabel("Welcome to HandyHomework!");
 		lblWelcometoHH.setBounds(57, 26, 389, 30);
 		lblWelcometoHH.setHorizontalAlignment(SwingConstants.CENTER);
@@ -82,25 +67,6 @@ public class HandyHomeworkMainPage extends JFrame {
 		lblWelcometoHH.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblWelcometoHH.setFont(new Font("Georgia", Font.PLAIN, 25));
 		contentPane.add(lblWelcometoHH);
-		
-//		JButton savedQuestionsButton = new JButton("View Saved Questions");
-//		savedQuestionsButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent i) {
-//				dispose();
-//				new HHSavedQuestionsPage().setVisible(true);
-//			}
-//		});
-
-//		sl_contentPane.putConstraint(SpringLayout.NORTH, savedQuestionsButton, 6, SpringLayout.SOUTH, btnViewSavedAssessments);
-//		sl_contentPane.putConstraint(SpringLayout.WEST, savedQuestionsButton, 0, SpringLayout.WEST, btnViewSavedAssessments);
-//		sl_contentPane.putConstraint(SpringLayout.EAST, savedQuestionsButton, 0, SpringLayout.EAST, btnViewSavedAssessments);
-//		sl_contentPane.putConstraint(SpringLayout.WEST, lblWelcome, 0, SpringLayout.WEST, savedQuestionsButton);
-//		sl_contentPane.putConstraint(SpringLayout.SOUTH, savedQuestionsButton, -28, SpringLayout.SOUTH, contentPane);
-//		savedQuestionsButton.setPreferredSize(new Dimension(200, 20));
-//		savedQuestionsButton.setMaximumSize(new Dimension(200, 20));
-//		savedQuestionsButton.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-//		savedQuestionsButton.setHorizontalTextPosition(SwingConstants.CENTER);
-//		contentPane.add(savedQuestionsButton);
 		
 		JButton btnViewAssessments = new JButton("View Assessments");
 		btnViewAssessments.setEnabled(false);
@@ -119,23 +85,6 @@ public class HandyHomeworkMainPage extends JFrame {
 		btnViewAssessments.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		contentPane.add(btnViewAssessments);
 		
-//		JButton btnCreateAnAssessment = new JButton("Create an Assessment");
-//		btnCreateAnAssessment.setBounds(150, 105, 187, 47);
-//		btnCreateAnAssessment.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-////		sl_contentPane.putConstraint(SpringLayout.EAST, btnCreateAnAssessment, 236, SpringLayout.WEST, buttonEnterQuestion);
-//		btnCreateAnAssessment.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
-//				frame.setVisible(true);
-//				frame.setResizable(false);
-//				if (frame.isShowing()){
-//					dispose();
-//				}
-//				
-//			}
-//		});
-//		contentPane.add(btnCreateAnAssessment);
-		
 		JButton btnViewCourses = new JButton("View Courses");
 		btnViewCourses.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -149,7 +98,6 @@ public class HandyHomeworkMainPage extends JFrame {
 		});
 		btnViewCourses.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		btnViewCourses.setBounds(150, 192, 187, 47);
-	//	btnViewCourses.setBounds(150, 167, 187, 47);
 		contentPane.add(btnViewCourses);
 		
 		JButton btnLogOut = new JButton("Log Out");

@@ -320,7 +320,9 @@ public class DbConnection {
     		Rs.next();
     		result =  Rs.getInt(1);
     		
-    		int rid = insertManagedCourses(pid, result); 
+    		int user = insertManagedCourses(pid, result); 
+    		
+    		
     		conn.close();
     		
     	}catch(Exception ex) {

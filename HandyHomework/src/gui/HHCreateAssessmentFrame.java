@@ -78,8 +78,6 @@ public class HHCreateAssessmentFrame extends JFrame {
 		titleField.setBounds(160, 115, 150, 20);
 		titleField.setColumns(10);
 		
-//		JLabel lblDueDate = new JLabel("Due Date:");
-		
 		JLabel lblTotalPointsAwarded = new JLabel("Total Points Awarded:");
 		lblTotalPointsAwarded.setBounds(30, 154, 150, 14);
 		
@@ -90,46 +88,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 	    Dimension prefSize = field.getPreferredSize();
 	    prefSize = new Dimension(40, prefSize.height);
 	    field.setPreferredSize(prefSize);
-		
-//		JSplitPane splitPane = new JSplitPane();
-//		
-//		JList<QuestionAbstract> list = new JList<QuestionAbstract>();
-//		
-//		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//		splitPane.setLeftComponent(list);
-//		
-//		JLabel lblSelectedQuestion = new JLabel("No questions in assessment");
-//		
-//		if (list.getModel().getSize() != 0 && list.isSelectionEmpty()){
-//			lblSelectedQuestion = new JLabel("No questions selected");
-//		} else if (! list.isSelectionEmpty()) {
-//			lblSelectedQuestion = new JLabel(list.getSelectedValue().toString());
-//		}
-//		
-//		splitPane.setRightComponent(lblSelectedQuestion);
-//		
-//		JButton btnAddQuestion = new JButton("Add Question");
-//		btnAddQuestion.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				HHFormFrame newQuestion = new HHFormFrame();
-//				newQuestion.setVisible(true);
-//				newQuestion.setAlwaysOnTop(true);
-//				newQuestion.addWindowListener(new WindowListener(){
-//					@Override
-//					public void windowClosed(WindowEvent e) {
-//						// TODO Auto-generated method stub
-//						System.out.print(newQuestion.q.getName());
-//						if (newQuestion.q.getAssessID() != 0 && newQuestion.q.getName() !=  "None" 
-//								&& newQuestion.q.getPoints() != 0 && newQuestion.q.getQuestion() != "None"){
-//							list.add(new JLabel(newQuestion.q.getName()), newQuestion.q);
-//						}
-//					}
-//
-//				});
-//			}
-//		});
-		
-		
+	    
 		JCheckBox chckbxContainsMCQ = new JCheckBox("Contains multiple choice");
 		chckbxContainsMCQ.setBounds(30, 195, 190, 23);
 		
@@ -175,6 +134,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 								
 								db.DbConnection.insertAssessment(title,
 										SelectedCourse.getCourse().getcID(), name, due, false,  ((float) totalPoints/100));
+								
 								// Upon confirmation, open the saved assessments!!
 								HHSavedAssessments frame = new HHSavedAssessments();
 								frame.setVisible(true);
@@ -188,14 +148,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 								e1.printStackTrace();
 								JOptionPane.showMessageDialog(HHCreateAssessmentFrame.this, "Could not access the database -" + "\nplease check your connection and try again.");
 							}
-							
-							//Assessment a1 = new Assessment(name, title, mult, opt, c, totalPoints);
 						}
-					 	// Weight of assessment not points and shud be less than 1 (0 to 1)
-					
-
-				// TODO
-				// add assessment to DB and return success/fail msg
 				}
 				
 			}
@@ -224,8 +177,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 		contentPane.add(chckbxOptionalAssessment);
 		contentPane.add(chckbxContainsMCQ);
 		contentPane.add(btnCreate);
-		contentPane.add(btnCancel);
-		
+		contentPane.add(btnCancel);		
 		
 		JSpinner timeSpinner = new JSpinner( new SpinnerDateModel() );
 		JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm:ss");

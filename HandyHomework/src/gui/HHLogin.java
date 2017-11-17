@@ -109,7 +109,6 @@ public class HHLogin extends JFrame {
 							dispose();
 						}
 					}
-					
 				}
 			}
 		});

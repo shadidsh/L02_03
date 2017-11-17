@@ -285,21 +285,7 @@ public class HHSavedQuestionsPage extends JFrame {
 			btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			btnAdd.setBounds(29, 248, 136, 30);
 			contentPane.add(btnAdd);
-			// Display answer 
-//			if (selQuestion != null){
-//				questAnswer = selQuestion.getCorrectAnswer();
-//				if (questAnswer == null) {
-//					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Question doesn't have a corresponding answer.");
-//				} else {
-//					answer = "Answer:" + questAnswer.getAnswer();
-//					ans = new JLabel(answer);
-//					contentPane.add(ans);
-//					ans.setBackground(Color.WHITE);
-//					ans.setAlignmentY(Component.TOP_ALIGNMENT);
-//					ans.setBounds(29, 310, 247, 57);
-//					ans.setFont(new Font("Dialog", Font.PLAIN, 14));
-//				}
-//			}
+			
 		} else {
 			// create answer field
 			questionAnswerField = new JTextField();

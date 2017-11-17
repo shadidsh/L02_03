@@ -105,8 +105,7 @@ public class HHSavedAssessments extends JFrame {
 		ArrayList<Assessment> assess = new ArrayList<Assessment>();
 			try {
 				PreparedStatement stat;
-				int cid;
-				
+				int cid;				
 				if (SelectedCourse.isSelected()) {
 					
 					stat = conn.prepareStatement("SELECT * FROM "	
@@ -115,7 +114,6 @@ public class HHSavedAssessments extends JFrame {
 					Course as = SelectedCourse.getCourse();
 					stat.setInt(1, as.getcID());
 					//cid = as.getcID();
-					
 				} else {
 					JOptionPane.showMessageDialog(HHSavedAssessments.this, 
 							"No Courses have been selected, displaying assessments, (DANGEROUS!)");
@@ -146,8 +144,7 @@ public class HHSavedAssessments extends JFrame {
 					Assessment as = new Assessment(aid, title, name, isOpt, due, weight);
 					
 					lstAssess.addElement(name);
-					assess.add(as);
-					
+					assess.add(as);					
 					res =  aid + "," + title + "," +  name + "," + isOpt + dueDate + " VS " + due.getTime() +  " ," + weight +  ",";
 					
 					System.out.println(res);
@@ -220,8 +217,6 @@ public class HHSavedAssessments extends JFrame {
 				String res;
 				JList<?> list = (JList<?>) e.getSource();
 				Assessment as = assess.get(list.getSelectedIndex());	
-				
-				// POINTS GETS OVERWRITen
 				res =  String.valueOf(as.getWeight()); //"<html>This assessment is worth " + String.valueOf(as.getWeight())  + "%</html>";
 				
 				lblAssessment.setText(as.getName());
