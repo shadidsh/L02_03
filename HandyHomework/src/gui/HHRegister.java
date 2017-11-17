@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import login.ProfessorLogin;
 import login.SelectedUser;
+import login.UserLogin;
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -80,55 +81,33 @@ public class HHRegister extends JFrame {
 		
 		JButton btnNewButton = new JButton("Register");
 		btnNewButton.setBounds(200, 186, 102, 43);
-		JCheckBox chckbxStudent = new JCheckBox("Student");
-		chckbxStudent.setBounds(211, 236, 97, 23);
+		JCheckBox chckbxFaculty = new JCheckBox("Faculty Login");
+		chckbxFaculty.setBounds(200, 232, 106, 23);
 		contentPane.getRootPane().setDefaultButton(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean is_student = chckbxStudent.isSelected();
+				boolean isProf = chckbxFaculty.isSelected();
 				String userName = String.valueOf(usernameField.getText());
 				String password = String.valueOf(passwordField.getPassword());
 				if (password.isEmpty() || userName.isEmpty()) {
 					JOptionPane.showMessageDialog(HHRegister.this, "Username and password cannot be empty.");
 				}
 				else {
-					if(is_student) {
-						HHLogin frame = new HHLogin();
-						frame.setVisible(true);
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
-						}
-					}
-					else {
-						// need to check to make login
-						ProfessorLogin pf =  db.DbConnection.checkUser(userName, password);
-						
-						if (pf == null) {
-							System.out.println("'user':'pass'");
-							JOptionPane.showMessageDialog(HHRegister.this, 
-									"Username or password for username is incorrect .");
-						} else {						
-							// Change to superclass
-							SelectedUser.setUser(pf);
-							
-							HHLogin frame = new HHLogin();
-							frame.setVisible(true);
-							frame.setResizable(false);
-							if (frame.isShowing()){
-								dispose();
-							}
-						}
-							
-						
-
+					//return error
+					db.DbConnection.addUser(userName, password, isProf);
+					
+					HHLogin frame = new HHLogin();
+					frame.setVisible(true);
+					frame.setResizable(false);
+					if (frame.isShowing()){
+						dispose();
 					}
 				}
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(btnNewButton);
-		contentPane.add(chckbxStudent);
+		contentPane.add(chckbxFaculty);
 		
 		lblRegister = new JLabel("REGISTER");
 		lblRegister.setForeground(Color.GREEN);

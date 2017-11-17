@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import login.ProfessorLogin;
 import login.SelectedUser;
+import login.UserLogin;
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -90,7 +91,17 @@ public class HHLogin extends JFrame {
 					JOptionPane.showMessageDialog(HHLogin.this, "Username and password cannot be empty.");
 				}
 				else {
-					if(true) {
+					// need to check to make login
+					UserLogin uf =  db.DbConnection.checkUser(userName, password);
+					
+					if (uf == null) {
+						System.out.println("'user':'pass'");
+						JOptionPane.showMessageDialog(HHLogin.this, 
+								"Username or password for username is incorrect .");
+					} else {						
+						// Change to superclass
+						SelectedUser.setUser(uf);
+						
 						HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
 						frame.setVisible(true);
 						frame.setResizable(false);
@@ -98,29 +109,7 @@ public class HHLogin extends JFrame {
 							dispose();
 						}
 					}
-					else {
-						// need to check to make login
-						ProfessorLogin pf =  db.DbConnection.checkUser(userName, password);
-						
-						if (pf == null) {
-							System.out.println("'user':'pass'");
-							JOptionPane.showMessageDialog(HHLogin.this, 
-									"Username or password for username is incorrect .");
-						} else {						
-							// Change to superclass
-							SelectedUser.setUser(pf);
-							
-							HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
-							frame.setVisible(true);
-							frame.setResizable(false);
-							if (frame.isShowing()){
-								dispose();
-							}
-						}
-							
-						
-
-					}
+					
 				}
 			}
 		});

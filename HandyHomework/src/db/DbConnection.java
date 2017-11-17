@@ -15,6 +15,8 @@ import java.util.Calendar;
 import answer.TextAnswer;
 import course.Course;
 import login.ProfessorLogin;
+import login.StudentLogin;
+import login.UserLogin;
 
 public class DbConnection {
 	private static String url = "jdbc:postgresql://swaredb.carzld1axpox.us-east-2.rds.amazonaws.com:5432/postgres";
@@ -67,7 +69,31 @@ public class DbConnection {
 		return cs;
     }
     
-    public static ProfessorLogin checkUser(String username, String password) {
+    /**Should raise Unable to insert user error.*/
+    public static void addUser(String username, String password, boolean isProf) {
+    	Connection conn = getConnection();
+    	//int result = -1;   
+    	try {
+    		String insert = "INSERT INTO " + constants.Constants.DataConstants.USERS 
+    				+ "(username, password, is_prof) " +
+    				" VALUES(?,?,?) RETURNING user_id";
+    		PreparedStatement stat = conn.prepareStatement(insert);
+    		stat.setString(1, username);
+    		stat.setString(2, password);
+    		stat.setBoolean(3, isProf);
+    		
+    		ResultSet Rs = stat.executeQuery();
+    		//Rs.next();
+    		////result =  Rs.getInt(1); 
+    		conn.close();
+    	} catch(Exception ex) {
+    		System.out.print(ex.getMessage());    		
+    	}
+	//	return result;    
+    	
+    }
+    
+    public static UserLogin checkUser(String username, String password) {
     	Connection conn = getConnection();
     	try { 
     		
@@ -77,19 +103,24 @@ public class DbConnection {
     		stat.setString(1, username);
     		stat.setString(2, password);
     		ResultSet Rs = stat.executeQuery(); 
+    		UserLogin userLog;
     		while (Rs.next()) { 
     			Integer userId = Rs.getInt(1);
     			String user = Rs.getString(2);
     			String pass = Rs.getString(3);
-    			//String email = Rs.getString(5);    			
-    			ProfessorLogin pf = new ProfessorLogin(userId, user, pass);
+    			boolean isProf = Rs.getBoolean(4);
+    			//String email = Rs.getString(5);   
+    			if (isProf) {
+    				userLog = new ProfessorLogin(userId, user, pass);
+    			} else {
+    				userLog = new StudentLogin(userId, user, pass);
+    			}
     			System.out.println(userId);
-    			return pf;
-    		}     
+    			return userLog;
+    		} 
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
-    	}    
-    	
+    	}
     	return null;    	
     }
     
@@ -142,8 +173,6 @@ public class DbConnection {
     	}    	
     }
     
-    
-    
 	// in the future, something like assessments_for_course() will be used
 	 public static void all_assessments() {
 		Connection conn = getConnection();
@@ -176,10 +205,6 @@ public class DbConnection {
 	 }
 
 
-
-    // insert a new assessment- assessment ids are randomly generated
-	// function overload can be used (if opt then exclude due or ismult, 
-	// and the isopt boolean, else include both)
     /**
      * 
      * @param title the title of the assessment
