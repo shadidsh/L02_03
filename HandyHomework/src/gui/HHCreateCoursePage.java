@@ -93,10 +93,8 @@ public class HHCreateCoursePage extends JFrame {
 					JOptionPane.showMessageDialog(HHCreateCoursePage.this, "One or more fields are empty.");
 				} else {
 					ProfessorLogin prof = (ProfessorLogin) SelectedUser.getUser();
-					int pid = prof.getId();
-					
+					int pid = prof.getId();					
 					db.DbConnection.insertCourses(pid, courseCode, name, courseTerm);
-					
 					HHViewCoursesPage frame = new HHViewCoursesPage();
 					frame.setVisible(true);
 					frame.setResizable(false);

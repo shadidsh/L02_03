@@ -131,11 +131,11 @@ public class HHLogin extends JFrame {
 					dispose();
 				}
 			}
-		});
-		btnRegister.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+			});
+			btnRegister.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+				}
+			});
 		btnRegister.setBounds(350, 14, 102, 43);
 		contentPane.add(btnRegister);
 	}

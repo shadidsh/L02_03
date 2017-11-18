@@ -111,7 +111,7 @@ public class HHViewCoursesPage extends JFrame {
 						JOptionPane.showMessageDialog(HHViewCoursesPage.this, "Please select a course.");
 					} else {
 						SelectedCourse.setCourse(selectedCourse);
-						System.out.println(selectedCourse.getCourseCode());
+						//System.out.println(selectedCourse.getCourseCode());
 						HHSavedAssessments frame = new HHSavedAssessments();
 						frame.setVisible(true);
 						frame.setResizable(false);

@@ -7,7 +7,7 @@ import question.TextQuestion;
 
 
 public class Assessment {
-	private int cid;
+	private int aid;
 	private String title;
 	private String name;
 	private boolean isMult;
@@ -37,8 +37,8 @@ public class Assessment {
 	}
 	*/
 
-	public Assessment(int cid,String title, String name, boolean isOpt, Calendar due, float weight) {
-		this.cid = cid;
+	public Assessment(int aid, String title, String name, boolean isOpt, Calendar due, float weight) {
+		this.aid = aid;
 		this.title = title;
 		this.name = name;
 		this.isOpt = isOpt;
@@ -47,7 +47,7 @@ public class Assessment {
 	}
 	
 	public int getAid() {
-		return cid;
+		return aid;
 	}
 
 	public String getTitle() {

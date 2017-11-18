@@ -40,7 +40,7 @@ public class HHRegister extends JFrame {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
+			 }  
 		});
 	}
 

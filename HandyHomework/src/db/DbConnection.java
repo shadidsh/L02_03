@@ -199,8 +199,24 @@ public class DbConnection {
 			System.out.println(ex.getMessage()); 
 		}
 	 }
+	 
+	 // Raise error on unable to remove?
+	 public static void removeAssessment(int aid) { 
+		 Connection conn = getConnection();
+		 try{
+	    		String insert = "DELETE FROM " + constants.Constants.DataConstants.ASSESSMENTS + " WHERE aid = ?";
+	    		PreparedStatement stat = conn.prepareStatement(insert);
+	    		
+	    		stat.setInt(1, aid);
+	    		System.out.println(insert);
+	    		ResultSet Rs = stat.executeQuery();
+	    		conn.close();
+		 }catch(Exception ex) {
+	    		System.out.println(ex.getMessage());    		
+	    	}		 
+	 }
 
-
+	 
     /**
      * 
      * @param title the title of the assessment
@@ -316,8 +332,7 @@ public class DbConnection {
     		Rs.next();
     		result =  Rs.getInt(1);
     		
-    		int user = insertManagedCourses(pid, result); 
-    		
+    		int user = insertManagedCourses(pid, result);    		
     		
     		conn.close();
     		

@@ -41,6 +41,7 @@ public class HHSavedAssessments extends JFrame {
 	private JList<?> list;
 	private String questAnswer;
 	private Assessment selectedAs;
+	private int selInd;
 
 	/**
 	 * Launch the application.
@@ -141,14 +142,12 @@ public class HHSavedAssessments extends JFrame {
 						due.setTimeInMillis(dueDate.getTime());
 					}					
 					
-					Assessment as = new Assessment(aid, title, name, isOpt, due, weight);
-					
+					Assessment as = new Assessment(aid, title, name, isOpt, due, weight);					
 					lstAssess.addElement(name);
 					assess.add(as);					
 					res =  aid + "," + title + "," +  name + "," + isOpt + dueDate + " VS " + due.getTime() +  " ," + weight +  ",";
 					
-					System.out.println(res);
-					
+					System.out.println(res);					
 				}
 				
 				Rs.close();
@@ -187,8 +186,8 @@ public class HHSavedAssessments extends JFrame {
 
 			}
 		});
-		JButton btnView = new JButton("Select");
-		btnView.setBounds(265, 306, 120, 30);
+		JButton btnView = new JButton("Select Assessment");
+		btnView.setBounds(254, 306, 148, 30);
 		btnView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (selectedAs == null ) {
@@ -216,13 +215,19 @@ public class HHSavedAssessments extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				String res;
 				JList<?> list = (JList<?>) e.getSource();
-				Assessment as = assess.get(list.getSelectedIndex());	
-				res =  String.valueOf(as.getWeight()); //"<html>This assessment is worth " + String.valueOf(as.getWeight())  + "%</html>";
-				
-				lblAssessment.setText(as.getName());
-				lblPts.setText(res);
-				assessmentTitle.setText(as.getTitle());
-				selectedAs = as;				
+				int index = list.getSelectedIndex();
+				if (index != -1) {
+					Assessment as = assess.get(list.getSelectedIndex());
+					res =  String.valueOf(as.getWeight()); //"<html>This assessment is worth " + String.valueOf(as.getWeight())  + "%</html>";
+					
+					lblAssessment.setText(as.getName());
+					lblPts.setText(res);
+					assessmentTitle.setText(as.getTitle());
+					selectedAs = as;
+					selInd = list.getSelectedIndex();
+					
+				}	
+
 			}
 		});			
 		
@@ -260,6 +265,32 @@ public class HHSavedAssessments extends JFrame {
 		});
 		btnBack.setBounds(12, 13, 140, 30);
 		contentPane.add(btnBack);
+		
+		JButton btnRemove = new JButton("Remove ");
+		btnRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selectedAs == null || selInd < 0 ) {
+					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment to remove.");
+				} else {
+					db.DbConnection.removeAssessment(selectedAs.getAid());
+					
+					System.out.println(selInd);
+					lstAssess.remove(selInd);
+					//assess.remove(selInd);	
+					
+					// re-query this assessment - workaround to just load the page again
+					 HHSavedAssessments frame = new HHSavedAssessments();
+					frame.setVisible(true);	
+					frame.setResizable(false);
+					if (frame.isShowing()){
+						dispose();
+					} 
+				}
+			} 
+		}); 	
+		
+		btnRemove.setBounds(414, 309, 120, 30);
+		contentPane.add(btnRemove);
 		
 		
 	}
