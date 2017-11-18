@@ -68,23 +68,24 @@ public class HandyHomeworkMainPage extends JFrame {
 		lblWelcometoHH.setFont(new Font("Georgia", Font.PLAIN, 25));
 		contentPane.add(lblWelcometoHH);
 		
-		JButton btnViewAssessments = new JButton("View Assessments");
-		btnViewAssessments.setEnabled(false);
-		btnViewAssessments.setBounds(150, 148, 187, 47);
-		//btnViewAssessments.setBounds(150, 111, 187, 47);
-		btnViewAssessments.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent i) {
-				HHSavedAssessments frame = new HHSavedAssessments();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
-				}
-			}
-		});
-		btnViewAssessments.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		contentPane.add(btnViewAssessments);
-		
+//		/// Is this section for profs?
+//		JButton btnViewAssessments = new JButton("View Assessments");
+//		btnViewAssessments.setEnabled(false);
+//		btnViewAssessments.setBounds(150, 148, 187, 47);
+//		//btnViewAssessments.setBounds(150, 111, 187, 47);
+//		btnViewAssessments.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent i) {
+//				HHSavedAssessments frame = new HHSavedAssessments();
+//				frame.setVisible(true);
+//				frame.setResizable(false);
+//				if (frame.isShowing()){
+//					dispose();
+//				}
+//			}
+//		});
+//		btnViewAssessments.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+//		contentPane.add(btnViewAssessments);
+//		
 		JButton btnViewCourses = new JButton("View Courses");
 		btnViewCourses.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

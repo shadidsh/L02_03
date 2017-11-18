@@ -75,9 +75,15 @@ public class HHViewCoursesPage extends JFrame {
 				if (courses == null) {
 					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "prof has no courses");
 				} else {
+					// What is the point of this section
 				}
 			} else {
+				Integer sId = SelectedUser.getUser().getId();
+				courses = db.DbConnection.managedCourses(sId);
 				
+				if (courses == null) {
+					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "This student has no courses");
+				}
 			}			
 
 			
@@ -141,19 +147,21 @@ public class HHViewCoursesPage extends JFrame {
 		contentPane.add(listCourses);
 		contentPane.add(lblCourses);
 		
-		JButton btnAddCourse = new JButton("Add Course");
-		contentPane.getRootPane().setDefaultButton(btnAddCourse);
-		btnAddCourse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				HHCreateCoursePage frame = new HHCreateCoursePage();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
+		if (SelectedUser.getUser().isProf()) {
+			JButton btnAddCourse = new JButton("Add Course");
+			contentPane.getRootPane().setDefaultButton(btnAddCourse);
+			btnAddCourse.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					HHCreateCoursePage frame = new HHCreateCoursePage();
+					frame.setVisible(true);
+					frame.setResizable(false);
+					if (frame.isShowing()){
+						dispose();
+					}
 				}
-			}
-		});
-		btnAddCourse.setBounds(157, 199, 117, 45);
-		contentPane.add(btnAddCourse);
+			});
+			btnAddCourse.setBounds(157, 199, 117, 45);
+			contentPane.add(btnAddCourse);
+		}
 	}
 }

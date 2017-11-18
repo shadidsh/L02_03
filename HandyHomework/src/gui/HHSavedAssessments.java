@@ -33,6 +33,8 @@ import assessment.SelectedAssessment;
 import course.Course;
 import course.SelectedCourse;
 import db.DbConnection;
+import login.SelectedUser;
+
 import java.awt.SystemColor;
 
 public class HHSavedAssessments extends JFrame {
@@ -73,7 +75,7 @@ public class HHSavedAssessments extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(273, 206, 232, 55);
+		scrollPane.setBounds(373, 221, 120, 20);
 		scrollPane.setBorder(null);
 		contentPane.add(scrollPane);
 		JLabel lblPts = new JLabel("");
@@ -91,7 +93,7 @@ public class HHSavedAssessments extends JFrame {
 		contentPane.add(lblSavedAssessment);
 		
 		JTextArea assessmentTitle = new JTextArea("");
-		assessmentTitle.setBounds(311, 82, 194, 33);
+		assessmentTitle.setBounds(311, 82, 194, 46);
 		assessmentTitle.setBackground(SystemColor.window);
 		assessmentTitle.setEditable(false);
 		assessmentTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -162,7 +164,7 @@ public class HHSavedAssessments extends JFrame {
 			}
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(311, 122, 207, 30);
+		scrollPane_1.setBounds(311, 138, 207, 30);
 		scrollPane_1.setBorder(null);
 		contentPane.add(scrollPane_1);
 		
@@ -187,7 +189,7 @@ public class HHSavedAssessments extends JFrame {
 			}
 		});
 		JButton btnView = new JButton("Select Assessment");
-		btnView.setBounds(254, 306, 148, 30);
+		btnView.setBounds(254, 309, 160, 30);
 		btnView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (selectedAs == null ) {
@@ -233,8 +235,12 @@ public class HHSavedAssessments extends JFrame {
 		
 		listAssessment.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		JButton btnNewAssessment = new JButton("Create New Assessment");
-		btnNewAssessment.setBounds(265, 265, 269, 29);
+		JButton btnNewAssessment = new JButton("New Assessment");
+		if (SelectedUser.getUser().isProf()) {
+			btnNewAssessment.setBounds(254, 269, 160, 30);
+		} else {
+			btnNewAssessment.setBounds(254, 269, 275, 30);
+		}
 		btnNewAssessment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
@@ -289,8 +295,19 @@ public class HHSavedAssessments extends JFrame {
 			} 
 		}); 	
 		
-		btnRemove.setBounds(414, 309, 120, 30);
+		btnRemove.setBounds(420, 309, 120, 30);
 		contentPane.add(btnRemove);
+		
+		JLabel lblTotalMarks = new JLabel("Total Marks:");
+		lblTotalMarks.setBounds(299, 221, 71, 20);
+		contentPane.add(lblTotalMarks);
+		
+		if (SelectedUser.getUser().isProf()) {
+			JButton btnAddStudents = new JButton("Add Students");
+			btnAddStudents.setBounds(420, 269, 120, 30);
+			contentPane.add(btnAddStudents);
+		}
+		
 		
 		
 	}
