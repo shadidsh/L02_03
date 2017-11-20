@@ -20,22 +20,6 @@ public class Assessment {
 	 * 
 	 * Use this if isOpt is false
 	 */
-	/*public Assessment(String title, String name) {
-		this.title = title;
-		this.name = name;
-		//this.isMult = isMult;
-		this.cid = DbConnection.insertAssessment(title, name, due,  isMult, weight);		
-	} 
-	
-	public Assessment(String title, String name, boolean isOpt, Calendar due, float weight) {
-		this.title = title;
-		this.name = name;
-		this.isOpt = isOpt;
-		this.due = due;
-		this.weight = weight;
-		this.cid = DbConnection.insertAssessment( title,  name,   due, isOpt,  weight);
-	}
-	*/
 
 	public Assessment(int aid, String title, String name, boolean isOpt, Calendar due, float weight) {
 		this.aid = aid;

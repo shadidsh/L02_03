@@ -12,7 +12,7 @@ public interface QuestionDAO {
 	
 	public int insertQuestions(int aid, String name, String question, int points);
 
-	public List<TextAnswer> ansForQuestion(int questID);
+	public TextAnswer singleAnswerQuestion(int questID);
 	public int insertAnswers(int forQuest, boolean isCorrect, String answer);
 
 	

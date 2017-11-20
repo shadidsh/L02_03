@@ -37,8 +37,6 @@ public class Main {
 		    } catch (IOException e) {
 		        System.out.println("Reading input error");
 		    }
-		    
 		}
-
 	}
 }

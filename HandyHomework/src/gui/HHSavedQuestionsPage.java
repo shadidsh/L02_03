@@ -198,8 +198,8 @@ public class HHSavedQuestionsPage extends JFrame {
 				TextQuestion question = new TextQuestion(aid, name, questionContent, points);
 				DbQuestions dbQuest = new DbQuestions();
 				
-				List<TextAnswer> ans = dbQuest.ansForQuestion(qid); // db.DbConnection.answers_for_question(qid);
-				question.addList(ans);				
+				TextAnswer ans = dbQuest.singleAnswerQuestion(qid); // db.DbConnection.answers_for_question(qid);
+				question.setAnswer(ans);				
 				
 				lstQuestion.addElement(question.getName());
 				questions.add(question);

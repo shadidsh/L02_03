@@ -42,8 +42,34 @@ public class DbUser extends DbConnection implements UserDAO  {
 
 	@Override
 	public UserLogin getUser(int id) {
-		// TODO Auto-generated method stub
-		return null;
+    	Connection conn = getConnection();
+    	try { 
+    		
+    		String query = "select * from " + constants.Constants.DataConstants.USERS 
+    				+  " where user_id = ?";
+    		PreparedStatement stat = conn.prepareStatement(query);
+    		stat.setInt(1, id);
+    		
+    		ResultSet Rs = stat.executeQuery(); 
+    		UserLogin userLog;
+    		if (Rs.next()) { 
+    			Integer userId = Rs.getInt(1);
+    			String username = Rs.getString(2);
+    			String password = Rs.getString(3);
+    			boolean isProf = Rs.getBoolean(4);
+    			//String email = Rs.getString(5);
+    			
+    			if (isProf) {
+    				userLog = new ProfessorLogin(userId, username, password);
+    			} else {
+    				userLog = new StudentLogin(userId, username, password);
+    			}
+    			return userLog;
+    		} 
+    	} catch(Exception ex) {
+    		System.out.print(ex.getMessage());    		
+    	}
+    	return null; 
 	}
 
 	@Override
@@ -58,7 +84,7 @@ public class DbUser extends DbConnection implements UserDAO  {
     		stat.setString(2, pass);
     		ResultSet Rs = stat.executeQuery(); 
     		UserLogin userLog;
-    		while (Rs.next()) { 
+    		if (Rs.next()) { 
     			Integer userId = Rs.getInt(1);
     			String username = Rs.getString(2);
     			String password = Rs.getString(3);

@@ -18,17 +18,6 @@ public class Course {
 		this.courseCode = courseCode;
 		this.term = term;
 	}
-	
-	/*
-	public Course(String name, String courseCode, String term, int uid) {
-		this.courseCode = courseCode;
-		this.name = name;
-		this.term = term;
-		
-		this.cID = DbConnection.insertCourses(uid, courseCode, name, term);	
-	} 
-	
-	*/
 	public String getCourseCode() {
 		return this.courseCode;
 	}
@@ -45,7 +34,7 @@ public class Course {
 		return this.cID;
 	}
 	
-	public void addQuestions(Assessment assess) {
+	public void addAssessment(Assessment assess) {
 		as.add(assess);
 	}
 	

@@ -42,7 +42,7 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 		}
 		return res;
 	}
-
+	/*
 	@Override
 	public List<TextAnswer> ansForQuestion(int questID) {
     	Connection conn = getConnection();
@@ -69,6 +69,32 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
     	}
 		return at;
 	}
+	*/
+	
+	@Override
+	public TextAnswer singleAnswerQuestion(int questID) {
+    	Connection conn = getConnection();
+    	try{
+    		String query = "SELECT * FROM "	+ constants.Constants.DataConstants.ANSWERS + " where qid = ?;";
+    		PreparedStatement stat = conn.prepareStatement(query);
+    		stat.setInt(1, questID);
+    		ResultSet Rs = stat.executeQuery();    		
+    		
+    		if (Rs.next()) {
+    			// Create and return a list of answer objects
+    			
+    			Boolean isCorrect = Rs.getBoolean(3);
+    			String answer = Rs.getString(4);    			
+    			TextAnswer ans = new TextAnswer(questID, answer, isCorrect);
+    			return ans;
+    		}
+    		conn.close();
+    	}catch(Exception ex) {
+    		System.out.print(ex.getMessage());    		
+    	}
+		return null;
+	}
+	
 
 	@Override
 	public int insertAnswers(int forQuest, boolean isCorrect, String answer) {
