@@ -112,7 +112,7 @@ public class HHViewCoursesPage extends JFrame {
 		
 		
 		JButton btnSelectCourse = new JButton("Select Course");
-		btnSelectCourse.setBounds(285, 20, 129, 35);
+		btnSelectCourse.setBounds(300, 209, 129, 35);
 		btnSelectCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (listCourses.isSelectionEmpty()){
@@ -153,7 +153,7 @@ public class HHViewCoursesPage extends JFrame {
 		contentPane.add(listCourses);
 		contentPane.add(lblCourses);
 		
-		JButton btnRemove = new JButton("Remove ");
+		JButton btnRemove = new JButton("Remove Course");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(SelectedCourse.isSelected());
@@ -175,8 +175,7 @@ public class HHViewCoursesPage extends JFrame {
 				}
 			}
 		});
-		btnRemove.setBounds(12, 212, 100, 30);
-		contentPane.add(btnRemove);
+		
 		
 		if (SelectedUser.getUser().isProf()) {
 			JButton btnAddCourse = new JButton("Add Course");
@@ -191,8 +190,11 @@ public class HHViewCoursesPage extends JFrame {
 					}
 				}
 			});
-			btnAddCourse.setBounds(157, 199, 117, 45);
+			btnAddCourse.setBounds(157, 209, 131, 35);
 			contentPane.add(btnAddCourse);
+			
+			btnRemove.setBounds(15, 209, 141, 35);
+			contentPane.add(btnRemove);
 		}
 	}
 }

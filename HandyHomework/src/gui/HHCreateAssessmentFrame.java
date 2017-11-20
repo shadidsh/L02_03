@@ -53,14 +53,14 @@ public class HHCreateAssessmentFrame extends JFrame {
 	 */
 	public HHCreateAssessmentFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 400);
+		setBounds(100, 100, 415, 370);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblCreateAssessmentForm = new JLabel("Create Assessment Form");
-		lblCreateAssessmentForm.setBounds(10, 40, 225, 26);
-		lblCreateAssessmentForm.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		JLabel lblCreateAssessmentForm = new JLabel("Assessment Form");
+		lblCreateAssessmentForm.setBounds(170, 22, 230, 28);
+		lblCreateAssessmentForm.setFont(new Font("Menlo", Font.BOLD | Font.ITALIC, 23));
 		
 		JLabel lblAssessmentName = new JLabel("* Assessment Name:");
 		lblAssessmentName.setBounds(30, 85, 150, 14);
@@ -80,7 +80,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 		lblTotalPointsAwarded.setBounds(30, 154, 150, 14);
 		
 		JSpinner spinner = new JSpinner();
-		spinner.setBounds(160, 150, 150, 20);
+		spinner.setBounds(170, 151, 150, 20);
 		
 		JComponent field = ((JSpinner.DefaultEditor) spinner.getEditor());
 	    Dimension prefSize = field.getPreferredSize();
@@ -91,10 +91,10 @@ public class HHCreateAssessmentFrame extends JFrame {
 		chckbxContainsMCQ.setBounds(30, 195, 190, 23);
 		
 		JCheckBox chckbxOptionalAssessment = new JCheckBox("Optional Assessment");
-		chckbxOptionalAssessment.setBounds(30, 230, 160, 23);
+		chckbxOptionalAssessment.setBounds(30, 230, 166, 23);
 		
-		JButton btnCreate = new JButton("Create");
-		btnCreate.setBounds(250, 205, 125, 40);
+		JButton btnCreate = new JButton("Create Question");
+		btnCreate.setBounds(230, 273, 125, 40);
 		contentPane.getRootPane().setDefaultButton(btnCreate);
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -153,7 +153,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 		});		
 		
 		JButton btnCancel = new JButton("\u2190Back");
-		btnCancel.setBounds(10, 10, 75, 25);
+		btnCancel.setBounds(6, 26, 86, 28);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();

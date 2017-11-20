@@ -44,7 +44,7 @@ public class HandyHomeworkMainPage extends JFrame {
 	public HandyHomeworkMainPage() {
 		setTitle("HandyHomework");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 339);
+		setBounds(100, 100, 500, 300);
 		contentPane = new JLayeredPane();
 		contentPane.setMinimumSize(new Dimension(139, 23));
 		contentPane.setMaximumSize(new Dimension(139, 23));
@@ -97,12 +97,12 @@ public class HandyHomeworkMainPage extends JFrame {
 			}
 		});
 		btnViewCourses.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		btnViewCourses.setBounds(150, 192, 187, 47);
+		btnViewCourses.setBounds(150, 121, 187, 47);
 		contentPane.add(btnViewCourses);
 		
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.setFont(new Font("Dialog", Font.PLAIN, 14));
-		btnLogOut.setBounds(150, 231, 187, 47);
+		btnLogOut.setBounds(150, 180, 187, 47);
 		contentPane.add(btnLogOut);
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

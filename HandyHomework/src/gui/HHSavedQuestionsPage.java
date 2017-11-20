@@ -99,9 +99,9 @@ public class HHSavedQuestionsPage extends JFrame {
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{307, 0};
-		gbl_panel.rowHeights = new int[]{30, 49, 57, 0, 0};
+		gbl_panel.rowHeights = new int[]{30, 0, 49, 57, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		JLabel questionTitle = new JLabel("");
@@ -113,22 +113,22 @@ public class HHSavedQuestionsPage extends JFrame {
 		panel.add(questionTitle, gbc_questionTitle);
 		questionTitle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		
-		JLabel labelTitle = new JLabel("Title: ");
+		JLabel labelTitle = new JLabel("");
 		GridBagConstraints gbc_labelTitle = new GridBagConstraints();
 		gbc_labelTitle.fill = GridBagConstraints.BOTH;
-		gbc_labelTitle.insets = new Insets(0, 0, 0, 0);
+		gbc_labelTitle.insets = new Insets(0, 0, 5, 0);
 		gbc_labelTitle.gridx = 0;
 		gbc_labelTitle.gridy = 0;
 		panel.add(labelTitle, gbc_labelTitle);
 		questionTitle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		
-		JLabel labelQuestion = new JLabel("Question: ");
-		GridBagConstraints gbc_labelQuestion = new GridBagConstraints();
-		gbc_labelQuestion.fill = GridBagConstraints.BOTH;
-		gbc_labelQuestion.gridx = 0;
-		gbc_labelQuestion.gridy = 1;
-		panel.add(labelQuestion, gbc_labelQuestion);
-		labelQuestion.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+//		JLabel labelQuestion = new JLabel("");
+//		GridBagConstraints gbc_labelQuestion = new GridBagConstraints();
+//		gbc_labelQuestion.fill = GridBagConstraints.BOTH;
+//		gbc_labelQuestion.gridx = 0;
+//		gbc_labelQuestion.gridy = 1;
+//		panel.add(labelQuestion, gbc_labelQuestion);
+//		labelQuestion.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		
 		JTextArea questionText = new JTextArea("Select a Question");
 		questionText.setWrapStyleWord(true);
@@ -138,16 +138,19 @@ public class HHSavedQuestionsPage extends JFrame {
 		
 		//lblQuestion.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_questionText = new GridBagConstraints();
-		gbc_questionText.anchor = GridBagConstraints.WEST;
+		gbc_questionText.gridheight = 2;
+		gbc_questionText.fill = GridBagConstraints.HORIZONTAL;
 		gbc_questionText.insets = new Insets(0, 0, 5, 0);
 		gbc_questionText.gridx = 0;
-		gbc_questionText.gridy = 2;
+		gbc_questionText.gridy = 1;
 		questionText.setSize(gbl_panel.columnWidths[0], gbl_panel.rowHeights[2]);
 		panel.add(questionText, gbc_questionText);
 		
 		JLabel lblPts = new JLabel("");
 		GridBagConstraints gbc_lblPts = new GridBagConstraints();
-		gbc_lblPts.fill = GridBagConstraints.VERTICAL;
+		gbc_lblPts.insets = new Insets(0, 0, 5, 0);
+		gbc_lblPts.gridheight = 2;
+		gbc_lblPts.fill = GridBagConstraints.BOTH;
 		gbc_lblPts.gridx = 0;
 		gbc_lblPts.gridy = 3;
 		panel.add(lblPts, gbc_lblPts);
@@ -157,8 +160,8 @@ public class HHSavedQuestionsPage extends JFrame {
 		JLabel lblAnswer = new JLabel("");
 		GridBagConstraints gbc_lblAnswer = new GridBagConstraints();
 		gbc_lblAnswer.gridx = 0;
-		gbc_lblAnswer.gridy = 4;
-		gbc_lblAnswer.fill = GridBagConstraints.VERTICAL;
+		gbc_lblAnswer.gridy = 5;
+		gbc_lblAnswer.fill = GridBagConstraints.BOTH;
 		panel.add(lblAnswer, gbc_lblAnswer);
 				
 		Connection conn = DbConnection.getConnection();
@@ -178,7 +181,7 @@ public class HHSavedQuestionsPage extends JFrame {
 				Assessment as = SelectedAssessment.getAssess();
 				stat.setInt(1, as.getAid());
 				aid = as.getAid();
-				lblAssessmentName.setText(as.getName());
+				lblAssessmentName.setText("Assessment Name: "+ as.getName());
 			} else {
 				//JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No Assessments have been selected, displaying question for assessment 3");
 				stat = conn.prepareStatement("SELECT * FROM "	
@@ -246,11 +249,11 @@ public class HHSavedQuestionsPage extends JFrame {
 				JList list = (JList) e.getSource();
 				TextQuestion question = questions.get(list.getSelectedIndex());
 					
-				questionText.setText(question.getQuestion());	
+				questionText.setText("Q: " + question.getQuestion());	
 				questionText.setSize(questionText.getPreferredSize());
 				res = "<html>This question is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;
 				lblPts.setText(res);
-				questionTitle.setText(question.getName());
+				questionTitle.setText("Title: " + question.getName());
 				questionTitle.setSize(questionTitle.getPreferredSize());
 				
 				selQuestion = question;

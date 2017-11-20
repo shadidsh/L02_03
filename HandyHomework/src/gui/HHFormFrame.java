@@ -62,23 +62,23 @@ public class HHFormFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblQuestionForm = new JLabel("Question Form  ");
-		lblQuestionForm.setBounds(10, 40, 150, 26);
-		lblQuestionForm.setFont(new Font("Menlo", Font.ITALIC, 20));
+		lblQuestionForm.setBounds(223, 22, 219, 24);
+		lblQuestionForm.setFont(new Font("Menlo", Font.ITALIC, 23));
 		lblQuestionForm.setHorizontalAlignment(SwingConstants.RIGHT);
 		contentPane.add(lblQuestionForm);
 		
 		JLabel lblQuestionName = new JLabel("Question Name:");
-		lblQuestionName.setBounds(20, 75, 90, 14);
+		lblQuestionName.setBounds(20, 75, 101, 16);
 		lblQuestionName.setVerticalAlignment(SwingConstants.TOP);
 		contentPane.add(lblQuestionName);
 		
 		questionNameField = new JTextField();
-		questionNameField.setBounds(115, 72, 118, 20);
+		questionNameField.setBounds(122, 73, 118, 20);
 		contentPane.add(questionNameField);
 		questionNameField.setColumns(10);
 		
 		JLabel lblEnterYourQuestion = new JLabel("Enter your question here: ");
-		lblEnterYourQuestion.setBounds(20, 102, 150, 14);
+		lblEnterYourQuestion.setBounds(20, 102, 162, 16);
 		contentPane.add(lblEnterYourQuestion);
 		
 		JTextArea questionContentField = new JTextArea();
@@ -92,7 +92,7 @@ public class HHFormFrame extends JFrame {
 		contentPane.add(lblFinalAnswer);
 		
 		questionAnswerField = new JTextField();
-		questionAnswerField.setBounds(100, 222, 150, 20);
+		questionAnswerField.setBounds(109, 222, 150, 20);
 		questionAnswerField.setColumns(10);
 		contentPane.add(questionAnswerField);
 		
@@ -101,7 +101,7 @@ public class HHFormFrame extends JFrame {
 		contentPane.add(lblNumberOfMarks);
 		
 		JSpinner spinner = new JSpinner();
-		spinner.setBounds(180, 252, 110, 20);
+		spinner.setBounds(192, 254, 90, 20);
 		contentPane.add(spinner);
 		
 		JComponent field = ((JSpinner.DefaultEditor) spinner.getEditor());
@@ -111,7 +111,7 @@ public class HHFormFrame extends JFrame {
 		
 		JButton btnSubmit = new JButton("Submit");
 		contentPane.getRootPane().setDefaultButton(btnSubmit);
-		btnSubmit.setBounds(325, 220, 100, 50);
+		btnSubmit.setBounds(315, 225, 100, 50);
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String name = String.valueOf(questionNameField.getText());
@@ -150,7 +150,7 @@ public class HHFormFrame extends JFrame {
 		contentPane.add(btnSubmit);
 		
 		JButton btnCancel = new JButton("\u2190 Back");
-		btnCancel.setBounds(15, 10, 100, 25);
+		btnCancel.setBounds(20, 26, 100, 25);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();

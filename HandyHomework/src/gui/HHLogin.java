@@ -54,33 +54,33 @@ public class HHLogin extends JFrame {
 	public HHLogin() {
 		setTitle("HandyHomework");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 300);
+		setBounds(100, 100, 420, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		usernameField = new JTextField();
-		usernameField.setBounds(125, 69, 250, 25);
+		usernameField.setBounds(80, 70, 250, 25);
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(125, 144, 250, 25);
+		passwordField.setBounds(80, 145, 250, 25);
 		contentPane.add(passwordField);
 		
 		lblUsername = new JLabel("USERNAME");
-		lblUsername.setBounds(211, 38, 75, 20);
+		lblUsername.setBounds(166, 39, 75, 20);
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblUsername);
 		
 		lblPassword = new JLabel("ENTER PASSWORD\r\n");
-		lblPassword.setBounds(181, 113, 136, 19);
+		lblPassword.setBounds(136, 114, 136, 19);
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblPassword);
 		
 		JButton btnNewButton = new JButton("Login");
-		btnNewButton.setBounds(200, 186, 102, 43);
+		btnNewButton.setBounds(90, 193, 102, 43);
 		contentPane.getRootPane().setDefaultButton(btnNewButton);
 		
 		btnNewButton.addActionListener(new ActionListener() {
@@ -117,7 +117,7 @@ public class HHLogin extends JFrame {
 		JLabel lblNewLabel = new JLabel("Login");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		lblNewLabel.setForeground(Color.CYAN);
-		lblNewLabel.setBounds(220, 5, 125, 30);
+		lblNewLabel.setBounds(175, 6, 125, 30);
 		contentPane.add(lblNewLabel);
 		
 		JButton btnRegister = new JButton("Register");
@@ -132,7 +132,7 @@ public class HHLogin extends JFrame {
 				}
 			}
 			});
-		btnRegister.setBounds(350, 14, 102, 43);
+		btnRegister.setBounds(212, 194, 102, 43);
 		contentPane.add(btnRegister);
 	}
 }
