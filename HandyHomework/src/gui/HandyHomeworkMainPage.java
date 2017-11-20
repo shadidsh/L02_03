@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingConstants;
 import java.awt.Component;
-import javax.swing.SpringLayout;
 import java.awt.Dimension;
 
 public class HandyHomeworkMainPage extends JFrame {

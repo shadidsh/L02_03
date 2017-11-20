@@ -1,27 +1,20 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import assessment.Assessment;
 import course.Course;
 import course.SelectedCourse;
 import db.DbConnection;
-import login.SelectedUser;
-
 import javax.swing.DefaultListModel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -154,20 +147,20 @@ public class HHViewCoursesPage extends JFrame {
 		contentPane.add(listCourses);
 		contentPane.add(lblCourses);
 		
-		if (SelectedUser.getUser().isProf()){
-			JButton btnAddCourse = new JButton("Add Course");
-			btnAddCourse.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					HHCreateCoursePage frame = new HHCreateCoursePage();
-					frame.setVisible(true);
-					frame.setResizable(false);
-					if (frame.isShowing()){
-						dispose();
-					}
+
+		JButton btnAddCourse = new JButton("Add Course");
+		btnAddCourse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HHCreateCoursePage frame = new HHCreateCoursePage();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
 				}
-			});
-			btnAddCourse.setBounds(157, 199, 117, 29);
-			contentPane.add(btnAddCourse);
-		}
+			}
+		});
+		btnAddCourse.setBounds(157, 199, 117, 29);
+		contentPane.add(btnAddCourse);
 	}
 }
+
