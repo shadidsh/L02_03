@@ -1,14 +1,38 @@
 package login;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class ProfessorTest {
+class ProfessorTest {
+	private ProfessorLogin prof;
+	@BeforeEach
+	void setUp() throws Exception {
+		prof = new ProfessorLogin(0, "bestProf", "userIsTrue");
+	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	void testIsProf() {
+		assertEquals(true, prof.isProf());
+	}
+
+	@Test
+	void testGetUserName() {
+		String user = prof.getUserName();
+		assertEquals("bestProf", user);
+	}
+
+	@Test
+	void testGetPassword() {
+		String pass = prof.getPassword();
+		assertEquals("userIsTrue", pass);
+	}
+
+	@Test
+	void testGetId() {
+		int id = prof.getId();
+		assertEquals(0, id);
 	}
 
 }
