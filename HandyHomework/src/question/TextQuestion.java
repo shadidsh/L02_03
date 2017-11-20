@@ -21,6 +21,7 @@ public class TextQuestion extends Question{
 		this.textAns = ans;
 		
 	}
+
 	/*
 	f
 	or (TextAnswer t : this.textAns) {
