@@ -80,7 +80,7 @@ public class HHRegister extends JFrame {
 		JButton btnNewButton = new JButton("Register");
 		btnNewButton.setBounds(200, 186, 102, 43);
 		JCheckBox chckbxFaculty = new JCheckBox("Faculty Login");
-		chckbxFaculty.setBounds(200, 232, 106, 23);
+		chckbxFaculty.setBounds(200, 232, 116, 23);
 		contentPane.getRootPane().setDefaultButton(btnNewButton);
 		
 		btnNewButton.addActionListener(new ActionListener() {
