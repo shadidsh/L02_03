@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,17 +10,15 @@ import javax.swing.border.EmptyBorder;
 //import com.jgoodies.forms.layout.ColumnSpec;
 //import com.jgoodies.forms.layout.RowSpec;
 
+import dao.DbCourse;
 import login.ProfessorLogin;
 import login.SelectedUser;
 
 //import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -94,7 +91,8 @@ public class HHCreateCoursePage extends JFrame {
 				} else {
 					ProfessorLogin prof = (ProfessorLogin) SelectedUser.getUser();
 					int pid = prof.getId();					
-					db.DbConnection.insertCourses(pid, courseCode, name, courseTerm);
+					DbCourse dbCourse = new DbCourse();
+					dbCourse.insertCourses(pid, courseCode, name, courseTerm);
 					HHViewCoursesPage frame = new HHViewCoursesPage();
 					frame.setVisible(true);
 					frame.setResizable(false);

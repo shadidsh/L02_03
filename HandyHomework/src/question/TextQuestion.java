@@ -1,6 +1,7 @@
 package question;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import answer.TextAnswer;
 
@@ -28,7 +29,7 @@ public class TextQuestion extends QuestionAbstract<String>{
 		return null;
 	}
 	
-	public void addList(ArrayList<TextAnswer> at) {
+	public void addList(List<TextAnswer> at) {
 		if (at != null) {
 			textAns.addAll(at);
 		}

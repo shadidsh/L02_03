@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import dao.DbUser;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
@@ -80,6 +82,7 @@ public class HHRegister extends JFrame {
 		JCheckBox chckbxFaculty = new JCheckBox("Faculty Login");
 		chckbxFaculty.setBounds(200, 232, 106, 23);
 		contentPane.getRootPane().setDefaultButton(btnNewButton);
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean isProf = chckbxFaculty.isSelected();
@@ -89,15 +92,20 @@ public class HHRegister extends JFrame {
 					JOptionPane.showMessageDialog(HHRegister.this, "Username and password cannot be empty.");
 				}
 				else {
-					//return error
-					db.DbConnection.addUser(userName, password, isProf);
-					
-					HHLogin frame = new HHLogin();
-					frame.setVisible(true);
-					frame.setResizable(false);
-					if (frame.isShowing()){
-						dispose();
+					DbUser db = new DbUser();
+					if (db.userExists(userName)) {
+						JOptionPane.showMessageDialog(HHRegister.this, "Username already exists");
+					} else {
+						db.addUser(userName, password, isProf);
+						HHLogin frame = new HHLogin();
+						frame.setVisible(true);
+						frame.setResizable(false);
+						if (frame.isShowing()){
+							dispose();
+						}
 					}
+					
+
 				}
 			}
 		});
@@ -110,5 +118,20 @@ public class HHRegister extends JFrame {
 		lblRegister.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		lblRegister.setBounds(200, 5, 125, 30);
 		contentPane.add(lblRegister);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HHLogin frame = new HHLogin();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
+			}
+		});
+		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnBack.setBounds(12, 12, 85, 35);
+		contentPane.add(btnBack);
 	}
 }

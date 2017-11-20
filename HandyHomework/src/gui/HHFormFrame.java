@@ -8,23 +8,21 @@ import javax.swing.border.EmptyBorder;
 
 import assessment.Assessment;
 import assessment.SelectedAssessment;
+import dao.DbQuestions;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-import javax.swing.SpringLayout;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JSpinner;
-import javax.swing.JScrollBar;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JFormattedTextField;
 
 public class HHFormFrame extends JFrame {
 
@@ -129,8 +127,10 @@ public class HHFormFrame extends JFrame {
 				else {	
 					try {
 						Assessment as = SelectedAssessment.getAssess();
-						int qid = db.DbConnection.insertQuestions(as.getAid(), name, questionContent, value);
-						db.DbConnection.insertAnswers(qid,  true,  answer);
+						DbQuestions dbQuest = new DbQuestions();
+						
+						int qid = dbQuest.insertQuestions(as.getAid(), name, questionContent, value);
+						dbQuest.insertAnswers(qid,  true,  answer);
 						
 						String message = name + "\nQuestion is: " + questionContent + "\nSuccessfully added.";
 						JOptionPane.showMessageDialog(HHFormFrame.this, message);

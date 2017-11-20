@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -32,6 +33,7 @@ import assessment.Assessment;
 import assessment.SelectedAssessment;
 import course.Course;
 import course.SelectedCourse;
+import dao.DbAssessment;
 import db.DbConnection;
 import login.SelectedUser;
 
@@ -101,67 +103,31 @@ public class HHSavedAssessments extends JFrame {
 		assessmentTitle.setWrapStyleWord(true);
 		contentPane.add(assessmentTitle);
 		
-		Connection conn = DbConnection.getConnection();
 		String res = "";
 		
 		DefaultListModel<String> lstAssess = new DefaultListModel<>();
 		ArrayList<Assessment> assess = new ArrayList<Assessment>();
-			try {
-				PreparedStatement stat;
-				int cid;				
-				if (SelectedCourse.isSelected()) {
-					
-					stat = conn.prepareStatement("SELECT * FROM "	
-							+ constants.Constants.DataConstants.ASSESSMENTS + " where cid = ?;");
-					
-					Course as = SelectedCourse.getCourse();
-					stat.setInt(1, as.getcID());
-					//cid = as.getcID();
-				} else {
-					JOptionPane.showMessageDialog(HHSavedAssessments.this, 
-							"No Courses have been selected, displaying assessments, (DANGEROUS!)");
-					stat = conn.prepareStatement("SELECT * FROM "	
-							+ constants.Constants.DataConstants.ASSESSMENTS);
-					//cid = 1;
-				}
-				
-				System.out.println(stat);
-				
-				ResultSet Rs = stat.executeQuery();				
-				
-				while (Rs.next()) {
-					
-					Integer aid = Rs.getInt(1);
-					cid = Rs.getInt(2);
-					String title = Rs.getString(3);
-					String name = Rs.getString(4);
-					Boolean isOpt = Rs.getBoolean(5);
-					java.sql.Timestamp dueDate = Rs.getTimestamp(6);
-					float weight = Rs.getFloat(7);
-					Calendar due = Calendar.getInstance();
-					
-					if (dueDate != null) {
-						due.setTimeInMillis(dueDate.getTime());
-					}					
-					
-					Assessment as = new Assessment(aid, title, name, isOpt, due, weight);					
-					lstAssess.addElement(name);
-					assess.add(as);					
-					res =  aid + "," + title + "," +  name + "," + isOpt + dueDate + " VS " + due.getTime() +  " ," + weight +  ",";
-					
-					System.out.println(res);					
-				}
-				
-				Rs.close();
-				conn.close();
-				
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-				JOptionPane.showMessageDialog(HHSavedAssessments.this, "Could not access database - " + "\nplease check your connection and try again.");
-			} catch (NullPointerException e2){
-				e2.printStackTrace();
-				JOptionPane.showMessageDialog(HHSavedAssessments.this, "Could not access database - " + "\nplease check your connection and try again.");
+		DbAssessment dbAssess = new DbAssessment();
+		
+		System.out.println(SelectedCourse.isSelected());
+		if (SelectedCourse.isSelected()) {
+			Course cs = SelectedCourse.getCourse();
+			List<Assessment> as = dbAssess.getAssessmentForCourse(cs.getcID());
+			
+			for (Assessment ase : as) {
+				lstAssess.addElement(ase.getName());
+				assess.add(ase);			
 			}
+		} else {
+			JOptionPane.showMessageDialog(HHSavedAssessments.this, 
+					"No Courses have been selected, Logging out ");
+			HHLogin frame = new HHLogin();
+			frame.setVisible(true);
+			frame.setResizable(false);
+			if (frame.isShowing()){
+				dispose();
+			}
+		}
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(311, 138, 207, 30);
@@ -278,7 +244,7 @@ public class HHSavedAssessments extends JFrame {
 				if (selectedAs == null || selInd < 0 ) {
 					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment to remove.");
 				} else {
-					db.DbConnection.removeAssessment(selectedAs.getAid());
+					dbAssess.removeAssessment(selectedAs.getAid());
 					
 					System.out.println(selInd);
 					lstAssess.remove(selInd);

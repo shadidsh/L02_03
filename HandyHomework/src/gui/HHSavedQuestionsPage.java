@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -17,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.Dimension;
 
 import javax.swing.DefaultListModel;
@@ -30,6 +30,7 @@ import javax.swing.event.ListSelectionListener;
 import answer.TextAnswer;
 import assessment.Assessment;
 import assessment.SelectedAssessment;
+import dao.DbQuestions;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextField;
@@ -195,8 +196,9 @@ public class HHSavedQuestionsPage extends JFrame {
 				Integer points = new Integer(Rs.getInt(6));
 				
 				TextQuestion question = new TextQuestion(aid, name, questionContent, points);
+				DbQuestions dbQuest = new DbQuestions();
 				
-				ArrayList<TextAnswer> ans = db.DbConnection.answers_for_question(qid);
+				List<TextAnswer> ans = dbQuest.ansForQuestion(qid); // db.DbConnection.answers_for_question(qid);
 				question.addList(ans);				
 				
 				lstQuestion.addElement(question.getName());

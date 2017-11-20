@@ -8,11 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import course.SelectedCourse;
+import dao.DbAssessment;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
@@ -131,9 +129,9 @@ public class HHCreateAssessmentFrame extends JFrame {
 									"Attempting to insert Assessment without a course being selected");
 						}	else {
 							try {
-								
-								db.DbConnection.insertAssessment(title,
-										SelectedCourse.getCourse().getcID(), name, due, false,  ((float) totalPoints/100));
+								DbAssessment dbAssess = new DbAssessment();
+								dbAssess.insertAssessment(title, SelectedCourse.getCourse().getcID(),
+										name, due, false,  ((float) totalPoints/100));
 								
 								// Upon confirmation, open the saved assessments!!
 								HHSavedAssessments frame = new HHSavedAssessments();

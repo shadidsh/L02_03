@@ -35,92 +35,8 @@ public class DbConnection {
         return con;
     }
     
-    public static ArrayList<Course> managedCourses(int uid) {
-    	Connection conn = getConnection();
-    	ArrayList<Course> cs =  new ArrayList<Course>();
-    	
-    	try {
-    		String query = "Select c.cid, c.courseCode, c.name, c.term from " 
-    				+ constants.Constants.DataConstants.COURSECONTROL + " m," 
-    				+ constants.Constants.DataConstants.COURSES + " c where m.user_id = ? "
-    						+ " and m.cid = c.cid;";
-    		PreparedStatement stat = conn.prepareStatement(query);
-    		stat.setInt(1, uid);
-    		ResultSet Rs = stat.executeQuery();    	
-    		while (Rs.next()) { 
-    			Integer cId = Rs.getInt(1);
-    			String courseCode = Rs.getString(2);
-    			String name = Rs.getString(3);
-    			String term = Rs.getString(4);    			
-    			Course course = new Course(cId, name, courseCode, term);
-    			cs.add(course);
-    			
-    			System.out.println(cId);
-    		}     		
-    		conn.close();
-    		return cs;
-    	} catch(Exception ex) {
-    		System.out.print(ex.getMessage());    		
-    	}    	
-		return cs;
-    }
-    
-    /**Should raise Unable to insert user error.*/
-    public static void addUser(String username, String password, boolean isProf) {
-    	Connection conn = getConnection();
-    	//int result = -1;   
-    	try {
-    		String insert = "INSERT INTO " + constants.Constants.DataConstants.USERS 
-    				+ "(username, password, is_prof) " +
-    				" VALUES(?,?,?) RETURNING user_id";
-    		PreparedStatement stat = conn.prepareStatement(insert);
-    		stat.setString(1, username);
-    		stat.setString(2, password);
-    		stat.setBoolean(3, isProf);
-    		
-    		ResultSet Rs = stat.executeQuery();
-    		//Rs.next();
-    		////result =  Rs.getInt(1); 
-    		conn.close();
-    	} catch(Exception ex) {
-    		System.out.print(ex.getMessage());    		
-    	}
-	//	return result;    
-    	
-    }
-    
-    public static UserLogin checkUser(String username, String password) {
-    	Connection conn = getConnection();
-    	try { 
-    		
-    		String query = "select * from " + constants.Constants.DataConstants.USERS 
-    				+  " where username = ? and password = ?";
-    		PreparedStatement stat = conn.prepareStatement(query);
-    		stat.setString(1, username);
-    		stat.setString(2, password);
-    		ResultSet Rs = stat.executeQuery(); 
-    		UserLogin userLog;
-    		while (Rs.next()) { 
-    			Integer userId = Rs.getInt(1);
-    			String user = Rs.getString(2);
-    			String pass = Rs.getString(3);
-    			boolean isProf = Rs.getBoolean(4);
-    			//String email = Rs.getString(5);   
-    			if (isProf) {
-    				userLog = new ProfessorLogin(userId, user, pass);
-    			} else {
-    				userLog = new StudentLogin(userId, user, pass);
-    			}
-    			System.out.println(userId);
-    			return userLog;
-    		} 
-    	} catch(Exception ex) {
-    		System.out.print(ex.getMessage());    		
-    	}
-    	return null;    	
-    }
-    
     // select all answers for a specific question - quest ids are randomly generated
+  /*
     public static ArrayList<TextAnswer> answers_for_question(int questID) {
     	Connection conn = getConnection();
     	ArrayList<TextAnswer>  at =  new ArrayList<TextAnswer>();
@@ -147,8 +63,10 @@ public class DbConnection {
 		return at;
     	
     }
+    */
     
     // select all questions for a specific assessment - assessment ids are randomly generated
+    /*
     public static void questions_for_assessments(int assessId) {
     	Connection conn = getConnection();    	
     	try{
@@ -168,55 +86,7 @@ public class DbConnection {
     		System.out.println(ex.getMessage());    		
     	}    	
     }
-    
-	// in the future, something like assessments_for_course() will be used
-	 public static void all_assessments() {
-		Connection conn = getConnection();
-		String query = "Select * from " + constants.Constants.DataConstants.ASSESSMENTS;
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		try {
-			PreparedStatement stat = conn.prepareStatement(query);
-			ResultSet Rs = stat.executeQuery();
-
-			while (Rs.next()) {
-    			// Create an assessment object
-			
-				String title = Rs.getString(2);
-				String name = Rs.getString(3);
-				Boolean isMult = Rs.getBoolean(4);
-				
-				java.sql.Timestamp dueDate = Rs.getTimestamp(6);
-				
-				Boolean isOpt = Rs.getBoolean(5);
-				float weight = Rs.getFloat(7);
-				System.out.println("title: " + title + ", name: " + name + ", ismult: " + isMult 
-					+ ", Due: " + sdf.format(dueDate) + ", isOpt: " + isOpt + ", weight: " + weight);
-				}
-
-
-			conn.close();
-		} catch(Exception ex) {
-			System.out.println(ex.getMessage()); 
-		}
-	 }
-	 
-	 // Raise error on unable to remove?
-	 public static void removeAssessment(int aid) { 
-		 Connection conn = getConnection();
-		 try{
-	    		String insert = "DELETE FROM " + constants.Constants.DataConstants.ASSESSMENTS + " WHERE aid = ?";
-	    		PreparedStatement stat = conn.prepareStatement(insert);
-	    		
-	    		stat.setInt(1, aid);
-	    		System.out.println(insert);
-	    		ResultSet Rs = stat.executeQuery();
-	    		conn.close();
-		 }catch(Exception ex) {
-	    		System.out.println(ex.getMessage());    		
-	    	}		 
-	 }
-
-	 
+	*/	 
     /**
      * 
      * @param title the title of the assessment
@@ -228,7 +98,7 @@ public class DbConnection {
      * @param isMult boolean representing whether this question has multiple choices or not
      * @param isOpt boolean representing whether this question is optional or not
      */
-    public static int insertAssessment(String title, int cId, String name, Calendar dueDate, Boolean isOpt, float weight) {
+  /*  public static int insertAssessment(String title, int cId, String name, Calendar dueDate, Boolean isOpt, float weight) {
     	Connection conn = getConnection();
     	int result = -1;    	
     	try{
@@ -258,6 +128,7 @@ public class DbConnection {
     	}    	
     	return result;    	
     }
+*/
 
 	/**
 	*
@@ -266,31 +137,11 @@ public class DbConnection {
 	* @param question the contents of the question
 	* @param points the number of points for this questions that contributes to this assessment 
 	*/
-	public static int insertQuestions(int forAssess, String name, String question, int points) {
-		Connection conn = getConnection();
-		int res = -1;
-		try{
-    		String insert = "INSERT INTO " + constants.Constants.DataConstants.QUESTIONS 
-    				+ "(name, aid, question, points, is_mult) " +
-    				" VALUES(?,?,?,?,?) RETURNING qid";
-			PreparedStatement stat = conn.prepareStatement(insert);
-			stat.setString(1, name);
-			stat.setInt(2, forAssess);
-			stat.setString(3, question);
-			stat.setInt(4, points);
-			stat.setBoolean(5, false);
+	/*
+	     public static int insertQuestions(int forAssess, String name, String question, int points) {
+*/
 
-			ResultSet Rs = stat.executeQuery();
-			Rs.next();
-			res =  Rs.getInt(1); 
-    		
-			conn.close();		
-		} catch(Exception ex) {
-			System.out.println(ex.getMessage());  
-		}
-		return res;
-	}
-
+    /*
 	public static int insertAnswers(int forQuest, boolean isCorrect, String answer) {
 		Connection conn = getConnection();
 		int res = -1;
@@ -314,8 +165,9 @@ public class DbConnection {
 		}
 		return res;
 	}
+	/*
 
-	public static int insertCourses(int pid, String courseCode, String name, String term) {
+/*	public static int insertCourses(int pid, String courseCode, String name, String term) {
     	Connection conn = getConnection();
     	int result = -1;    	
     	try{
@@ -341,7 +193,8 @@ public class DbConnection {
     	}    	
     	return result;    
 	}
-	
+	*/
+	/*
 	public static int insertManagedCourses(int pid, int cid) {
     	Connection conn = getConnection();
     	int result = -1;    	
@@ -364,7 +217,7 @@ public class DbConnection {
     	}    	
     	return result;    
 	}
-	
+	*/
 	
 	
 	public static void main(String[] args) {

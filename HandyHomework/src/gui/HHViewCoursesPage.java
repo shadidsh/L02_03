@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 
 import course.Course;
 import course.SelectedCourse;
+import dao.DbCourse;
+import dao.DbUser;
 import login.SelectedUser;
 import login.UserLogin;
 
@@ -19,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
@@ -28,7 +31,7 @@ public class HHViewCoursesPage extends JFrame {
 	private Course selectedCourse;
 	private JPanel contentPane;
 	
-	private ArrayList<Course> courses;
+	private List<Course> courses;
 
 	/**
 	 * Launch the application.
@@ -60,7 +63,6 @@ public class HHViewCoursesPage extends JFrame {
 		lblCourses.setBounds(161, 20, 101, 30);
 		lblCourses.setFont(new Font("Lucida Grande", Font.BOLD, 24));		
 
-		//Connection conn = DbConnection.getConnection();
 		DefaultListModel<String> lstCourses = new DefaultListModel<>();
 		 // = new ArrayList<Course>();
 		
@@ -68,28 +70,27 @@ public class HHViewCoursesPage extends JFrame {
 			JOptionPane.showMessageDialog(HHViewCoursesPage.this, "No user logged in");
 		} else {
 			UserLogin user = SelectedUser.getUser();
-			if (user.isProf()) {
-				Integer pfId = SelectedUser.getUser().getId();
-				courses = db.DbConnection.managedCourses(pfId);
-				
-				if (courses == null) {
-					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "prof has no courses");
-				} else {
-					// What is the point of this section
-				}
-			} else {
-				Integer sId = SelectedUser.getUser().getId();
-				courses = db.DbConnection.managedCourses(sId);
-				
-				if (courses == null) {
-					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "This student has no courses");
-				}
-			}			
-
+			int uid = SelectedUser.getUser().getId();
+			DbCourse dbCourse = new DbCourse();
+			courses = dbCourse.managedCourses(uid);
 			
 			for (Course cse : courses) {
 				lstCourses.addElement(cse.getCourseCode() + ":" + cse.getTerm());
 			}
+			
+			/*if (user.isProf()) {
+				Integer pfId = SelectedUser.getUser().getId();
+				courses = db.DbConnection.managedCourses(pfId);				
+				if (courses == null) {
+					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "prof has no courses");
+				}
+			} else {
+				Integer sId = SelectedUser.getUser().getId();
+				courses = db.DbConnection.managedCourses(sId);
+				if (courses == null) {
+					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "This student has no courses");
+				}
+			}			*/
 		}
 		
 		JList listCourses = new JList<>(lstCourses);
@@ -99,7 +100,6 @@ public class HHViewCoursesPage extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				JList list = (JList) e.getSource();
 				Course as = courses.get(list.getSelectedIndex());
-				
 				selectedCourse = as;
 			}
 		});

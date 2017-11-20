@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import dao.DbUser;
 import login.SelectedUser;
 import login.UserLogin;
 
@@ -17,7 +18,6 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -82,6 +82,7 @@ public class HHLogin extends JFrame {
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.setBounds(200, 186, 102, 43);
 		contentPane.getRootPane().setDefaultButton(btnNewButton);
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String userName = String.valueOf(usernameField.getText());
@@ -90,15 +91,14 @@ public class HHLogin extends JFrame {
 					JOptionPane.showMessageDialog(HHLogin.this, "Username and password cannot be empty.");
 				}
 				else {
-					// need to check to make login
-					UserLogin uf =  db.DbConnection.checkUser(userName, password);
+					DbUser db = new DbUser();
+					UserLogin uf =  db.getUser(userName, password); //db.DbConnection.checkUser(userName, password);
 					
 					if (uf == null) {
 						System.out.println("'user':'pass'");
 						JOptionPane.showMessageDialog(HHLogin.this, 
 								"Username or password for username is incorrect .");
-					} else {						
-						// Change to superclass
+					} else {					
 						SelectedUser.setUser(uf);
 						
 						HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
@@ -131,10 +131,6 @@ public class HHLogin extends JFrame {
 					dispose();
 				}
 			}
-			});
-			btnRegister.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-				}
 			});
 		btnRegister.setBounds(350, 14, 102, 43);
 		contentPane.add(btnRegister);
