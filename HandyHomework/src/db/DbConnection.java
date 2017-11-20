@@ -5,14 +5,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import answer.TextAnswer;
+import course.Course;
+import login.ProfessorLogin;
+import login.StudentLogin;
+import login.UserLogin;
 
 public class DbConnection {
 	private static String url = "jdbc:postgresql://swaredb.carzld1axpox.us-east-2.rds.amazonaws.com:5432/postgres";
@@ -36,6 +36,7 @@ public class DbConnection {
     }
     
     // select all answers for a specific question - quest ids are randomly generated
+  /*
     public static ArrayList<TextAnswer> answers_for_question(int questID) {
     	Connection conn = getConnection();
     	ArrayList<TextAnswer>  at =  new ArrayList<TextAnswer>();
@@ -62,8 +63,10 @@ public class DbConnection {
 		return at;
     	
     }
+    */
     
     // select all questions for a specific assessment - assessment ids are randomly generated
+    /*
     public static void questions_for_assessments(int assessId) {
     	Connection conn = getConnection();    	
     	try{
@@ -83,45 +86,7 @@ public class DbConnection {
     		System.out.println(ex.getMessage());    		
     	}    	
     }
-    
-    
-    
-	// in the future, something like assessments_for_course() will be used
-	 public static void all_assessments() {
-		Connection conn = getConnection();
-		String query = "Select * from " + constants.Constants.DataConstants.ASSESSMENTS;
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		try {
-			PreparedStatement stat = conn.prepareStatement(query);
-			ResultSet Rs = stat.executeQuery();
-
-			while (Rs.next()) {
-    			// Create an assessment object
-			
-				String title = Rs.getString(2);
-				String name = Rs.getString(3);
-				Boolean isMult = Rs.getBoolean(4);
-				
-				java.sql.Timestamp dueDate = Rs.getTimestamp(6);
-				
-				Boolean isOpt = Rs.getBoolean(5);
-				float weight = Rs.getFloat(7);
-				System.out.println("title: " + title + ", name: " + name + ", ismult: " + isMult 
-					+ ", Due: " + sdf.format(dueDate) + ", isOpt: " + isOpt + ", weight: " + weight);
-				}
-
-
-			conn.close();
-		} catch(Exception ex) {
-			System.out.println(ex.getMessage()); 
-		}
-	 }
-
-
-
-    // insert a new assessment- assessment ids are randomly generated
-	// function overload can be used (if opt then exclude due or ismult, 
-	// and the isopt boolean, else include both)
+	*/	 
     /**
      * 
      * @param title the title of the assessment
@@ -133,7 +98,7 @@ public class DbConnection {
      * @param isMult boolean representing whether this question has multiple choices or not
      * @param isOpt boolean representing whether this question is optional or not
      */
-    public static int insertAssessment(String title, int cId, String name, Calendar dueDate, Boolean isOpt, float weight) {
+  /*  public static int insertAssessment(String title, int cId, String name, Calendar dueDate, Boolean isOpt, float weight) {
     	Connection conn = getConnection();
     	int result = -1;    	
     	try{
@@ -163,6 +128,7 @@ public class DbConnection {
     	}    	
     	return result;    	
     }
+*/
 
 	/**
 	*
@@ -171,31 +137,11 @@ public class DbConnection {
 	* @param question the contents of the question
 	* @param points the number of points for this questions that contributes to this assessment 
 	*/
-	public static int insertQuestions(int forAssess, String name, String question, int points) {
-		Connection conn = getConnection();
-		int res = -1;
-		try{
-    		String insert = "INSERT INTO " + constants.Constants.DataConstants.QUESTIONS 
-    				+ "(name, aid, question, points, is_mult) " +
-    				" VALUES(?,?,?,?,?) RETURNING qid";
-			PreparedStatement stat = conn.prepareStatement(insert);
-			stat.setString(1, name);
-			stat.setInt(2, forAssess);
-			stat.setString(3, question);
-			stat.setInt(4, points);
-			stat.setBoolean(5, false);
+	/*
+	     public static int insertQuestions(int forAssess, String name, String question, int points) {
+*/
 
-			ResultSet Rs = stat.executeQuery();
-			Rs.next();
-			res =  Rs.getInt(1); 
-    		
-			conn.close();		
-		} catch(Exception ex) {
-			System.out.println(ex.getMessage());  
-		}
-		return res;
-	}
-
+    /*
 	public static int insertAnswers(int forQuest, boolean isCorrect, String answer) {
 		Connection conn = getConnection();
 		int res = -1;
@@ -219,25 +165,9 @@ public class DbConnection {
 		}
 		return res;
 	}
-	
-	public static void main(String[] args) {
-		answers_for_question(1);
-		answers_for_question(2); 
-		answers_for_question(3);		
-		 answers_for_question(4);
-		 answers_for_question(5);
-		 answers_for_question(6);
-		 answers_for_question(7);
-		 
-		// Calendar due = Calendar.getInstance();
-		// due.set(2017, 9, 21, 10, 05, 30);
-	//	int res = insert_assessment("assessment 2", "Divide ",  new Boolean(false), due, new Boolean(false),  (float) 0.99);
-		//System.out.println(res);
-	//all_assessments();
-		
-	}
+	/*
 
-	public static int insertCourses( String courseCode, String name, String term) {
+/*	public static int insertCourses(int pid, String courseCode, String name, String term) {
     	Connection conn = getConnection();
     	int result = -1;    	
     	try{
@@ -252,13 +182,53 @@ public class DbConnection {
 
     		ResultSet Rs = stat.executeQuery();
     		Rs.next();
-    		result =  Rs.getInt(1); 
+    		result =  Rs.getInt(1);
+    		
+    		int user = insertManagedCourses(pid, result);    		
+    		
     		conn.close();
     		
     	}catch(Exception ex) {
     		System.out.println(ex.getMessage());    		
     	}    	
     	return result;    
+	}
+	*/
+	/*
+	public static int insertManagedCourses(int pid, int cid) {
+    	Connection conn = getConnection();
+    	int result = -1;    	
+    	try{
+    		String insert = "INSERT INTO " + constants.Constants.DataConstants.COURSECONTROL 
+    				+ "(user_id, cid) " +
+    				" VALUES(?,?) RETURNING user_id";
+    		
+    		PreparedStatement stat = conn.prepareStatement(insert);
+    		stat.setInt(1, pid);
+    		stat.setInt(2, cid);
+
+    		ResultSet Rs = stat.executeQuery();
+    		Rs.next();
+    		result =  Rs.getInt(1);    		
+    		conn.close();
+    		
+    	}catch(Exception ex) {
+    		System.out.println(ex.getMessage());    		
+    	}    	
+    	return result;    
+	}
+	*/
+	
+	
+	public static void main(String[] args) {
+		//checkUser("use");
+		//checkUser("user", "pass");
+		//ProfessorLogin pf = checkUser("user", "pass");
+		//System.out.println(pf == null); 
+		//System.out.println(pf.equals(null)); 
+		//courses_for_user(1);
+		
+		
 	}
 		
 }

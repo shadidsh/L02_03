@@ -8,11 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import course.SelectedCourse;
+import dao.DbAssessment;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
@@ -55,79 +53,49 @@ public class HHCreateAssessmentFrame extends JFrame {
 	 */
 	public HHCreateAssessmentFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 400);
+		setBounds(100, 100, 415, 370);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblCreateAssessmentForm = new JLabel("Create Assessment Form");
-		lblCreateAssessmentForm.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		JLabel lblCreateAssessmentForm = new JLabel("Assessment Form");
+		lblCreateAssessmentForm.setBounds(170, 22, 230, 28);
+		lblCreateAssessmentForm.setFont(new Font("Menlo", Font.BOLD | Font.ITALIC, 23));
 		
 		JLabel lblAssessmentName = new JLabel("* Assessment Name:");
+		lblAssessmentName.setBounds(30, 85, 150, 14);
 		
 		assessmentNameField = new JTextField();
+		assessmentNameField.setBounds(160, 80, 150, 20);
 		assessmentNameField.setColumns(10);
 		
 		JLabel lblAssessmentTitle = new JLabel("* Assessment Title:");
+		lblAssessmentTitle.setBounds(30, 120, 150, 14);
 		
 		titleField = new JTextField();
+		titleField.setBounds(160, 115, 150, 20);
 		titleField.setColumns(10);
 		
-//		JLabel lblDueDate = new JLabel("Due Date:");
-		
 		JLabel lblTotalPointsAwarded = new JLabel("Total Points Awarded:");
+		lblTotalPointsAwarded.setBounds(30, 154, 150, 14);
 		
 		JSpinner spinner = new JSpinner();
+		spinner.setBounds(170, 151, 150, 20);
 		
 		JComponent field = ((JSpinner.DefaultEditor) spinner.getEditor());
 	    Dimension prefSize = field.getPreferredSize();
 	    prefSize = new Dimension(40, prefSize.height);
 	    field.setPreferredSize(prefSize);
-		
-//		JSplitPane splitPane = new JSplitPane();
-//		
-//		JList<QuestionAbstract> list = new JList<QuestionAbstract>();
-//		
-//		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//		splitPane.setLeftComponent(list);
-//		
-//		JLabel lblSelectedQuestion = new JLabel("No questions in assessment");
-//		
-//		if (list.getModel().getSize() != 0 && list.isSelectionEmpty()){
-//			lblSelectedQuestion = new JLabel("No questions selected");
-//		} else if (! list.isSelectionEmpty()) {
-//			lblSelectedQuestion = new JLabel(list.getSelectedValue().toString());
-//		}
-//		
-//		splitPane.setRightComponent(lblSelectedQuestion);
-//		
-//		JButton btnAddQuestion = new JButton("Add Question");
-//		btnAddQuestion.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				HHFormFrame newQuestion = new HHFormFrame();
-//				newQuestion.setVisible(true);
-//				newQuestion.setAlwaysOnTop(true);
-//				newQuestion.addWindowListener(new WindowListener(){
-//					@Override
-//					public void windowClosed(WindowEvent e) {
-//						// TODO Auto-generated method stub
-//						System.out.print(newQuestion.q.getName());
-//						if (newQuestion.q.getAssessID() != 0 && newQuestion.q.getName() !=  "None" 
-//								&& newQuestion.q.getPoints() != 0 && newQuestion.q.getQuestion() != "None"){
-//							list.add(new JLabel(newQuestion.q.getName()), newQuestion.q);
-//						}
-//					}
-//
-//				});
-//			}
-//		});
-		
-		
+	    
 		JCheckBox chckbxContainsMCQ = new JCheckBox("Contains multiple choice");
+		chckbxContainsMCQ.setBounds(30, 195, 190, 23);
 		
 		JCheckBox chckbxOptionalAssessment = new JCheckBox("Optional Assessment");
+		chckbxOptionalAssessment.setBounds(30, 230, 166, 23);
 		
-		JButton btnCreate = new JButton("Create");
+		JButton btnCreate = new JButton("Create Question");
+		btnCreate.setBounds(230, 273, 125, 40);
+		contentPane.getRootPane().setDefaultButton(btnCreate);
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// get the fields
@@ -161,9 +129,10 @@ public class HHCreateAssessmentFrame extends JFrame {
 									"Attempting to insert Assessment without a course being selected");
 						}	else {
 							try {
+								DbAssessment dbAssess = new DbAssessment();
+								dbAssess.insertAssessment(title, SelectedCourse.getCourse().getcID(),
+										name, due, false,  ((float) totalPoints/100));
 								
-								db.DbConnection.insertAssessment(title,
-										SelectedCourse.getCourse().getcID(), name, due, false,  ((float) totalPoints/100));
 								// Upon confirmation, open the saved assessments!!
 								HHSavedAssessments frame = new HHSavedAssessments();
 								frame.setVisible(true);
@@ -177,20 +146,14 @@ public class HHCreateAssessmentFrame extends JFrame {
 								e1.printStackTrace();
 								JOptionPane.showMessageDialog(HHCreateAssessmentFrame.this, "Could not access the database -" + "\nplease check your connection and try again.");
 							}
-							
-							//Assessment a1 = new Assessment(name, title, mult, opt, c, totalPoints);
 						}
-					 	// Weight of assessment not points and shud be less than 1 (0 to 1)
-					
-
-				// TODO
-				// add assessment to DB and return success/fail msg
 				}
 				
 			}
 		});		
 		
-		JButton btnCancel = new JButton("Cancel");
+		JButton btnCancel = new JButton("\u2190Back");
+		btnCancel.setBounds(6, 26, 86, 28);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();
@@ -201,81 +164,18 @@ public class HHCreateAssessmentFrame extends JFrame {
 				}
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblCreateAssessmentForm))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGap(25)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								//.addComponent(splitPane, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-								//.addComponent(btnAddQuestion, Alignment.LEADING)
-								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-									.addComponent(lblTotalPointsAwarded)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								//.addComponent(lblDueDate, Alignment.LEADING)
-								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-									.addComponent(lblAssessmentTitle)
-									.addGap(18)
-									.addComponent(titleField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-									.addComponent(lblAssessmentName)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(assessmentNameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-					.addContainerGap(25, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(33)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(chckbxOptionalAssessment)
-						.addComponent(chckbxContainsMCQ))
-					.addContainerGap(218, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(210, Short.MAX_VALUE)
-					.addComponent(btnCreate)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnCancel)
-					.addGap(48))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(23)
-					.addComponent(lblCreateAssessmentForm)
-					.addGap(28)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblAssessmentName)
-						.addComponent(assessmentNameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblAssessmentTitle)
-						.addComponent(titleField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(11)
-					//.addComponent(lblDueDate)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTotalPointsAwarded)
-						.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					//.addComponent(splitPane, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					//.addComponent(btnAddQuestion)
-					.addGap(18)
-					.addComponent(chckbxContainsMCQ)
-					.addGap(18)
-					.addComponent(chckbxOptionalAssessment)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnCancel)
-						.addComponent(btnCreate))
-					.addContainerGap())
-		);
-		contentPane.setLayout(gl_contentPane);
-		
+		contentPane.setLayout(null);
+		contentPane.add(lblCreateAssessmentForm);
+		contentPane.add(lblTotalPointsAwarded);
+		contentPane.add(spinner);
+		contentPane.add(lblAssessmentTitle);
+		contentPane.add(titleField);
+		contentPane.add(lblAssessmentName);
+		contentPane.add(assessmentNameField);
+		contentPane.add(chckbxOptionalAssessment);
+		contentPane.add(chckbxContainsMCQ);
+		contentPane.add(btnCreate);
+		contentPane.add(btnCancel);		
 		
 		JSpinner timeSpinner = new JSpinner( new SpinnerDateModel() );
 		JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm:ss");

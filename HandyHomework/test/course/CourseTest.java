@@ -1,0 +1,14 @@
+package course;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class CourseTest {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

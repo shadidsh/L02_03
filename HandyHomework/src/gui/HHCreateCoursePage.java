@@ -1,26 +1,24 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 //import net.miginfocom.swing.MigLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
+//import com.jgoodies.forms.layout.FormLayout;
+//import com.jgoodies.forms.layout.ColumnSpec;
+//import com.jgoodies.forms.layout.RowSpec;
 
-import course.SelectedCourse;
+import dao.DbCourse;
+import login.ProfessorLogin;
+import login.SelectedUser;
 
-import com.jgoodies.forms.layout.FormSpecs;
+//import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -81,6 +79,7 @@ public class HHCreateCoursePage extends JFrame {
 		contentPane.setLayout(null);
 		
 		btnCreate = new JButton("Create");
+		contentPane.getRootPane().setDefaultButton(btnCreate);
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String name = txtCourseName.getText();
@@ -90,9 +89,10 @@ public class HHCreateCoursePage extends JFrame {
 				if (name.isEmpty() || courseCode.isEmpty() || courseTerm.isEmpty()){
 					JOptionPane.showMessageDialog(HHCreateCoursePage.this, "One or more fields are empty.");
 				} else {
-					
-					db.DbConnection.insertCourses(courseCode, name, courseTerm);
-					
+					ProfessorLogin prof = (ProfessorLogin) SelectedUser.getUser();
+					int pid = prof.getId();					
+					DbCourse dbCourse = new DbCourse();
+					dbCourse.insertCourses(pid, courseCode, name, courseTerm);
 					HHViewCoursesPage frame = new HHViewCoursesPage();
 					frame.setVisible(true);
 					frame.setResizable(false);
@@ -102,7 +102,7 @@ public class HHCreateCoursePage extends JFrame {
 				}
 			}
 		});
-		btnCreate.setBounds(133, 174, 96, 29);
+		btnCreate.setBounds(133, 170, 96, 30);
 		contentPane.add(btnCreate);
 		contentPane.add(lblCourseCode);
 		contentPane.add(txtCourseCode);
@@ -110,7 +110,7 @@ public class HHCreateCoursePage extends JFrame {
 		contentPane.add(txtCourseName);
 		contentPane.add(lblCreateCourse);
 		
-		btnCancel = new JButton("Cancel");
+		btnCancel = new JButton("\u2190 Back");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHViewCoursesPage frame = new HHViewCoursesPage();
@@ -121,7 +121,7 @@ public class HHCreateCoursePage extends JFrame {
 				}
 			}
 		});
-		btnCancel.setBounds(229, 174, 103, 29);
+		btnCancel.setBounds(30, 15, 90, 29);
 		contentPane.add(btnCancel);
 		
 		txtCourseTerm = new JTextField();
