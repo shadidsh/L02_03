@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import assessment.Assessment;
 import db.DbConnection;
-import question.TextQuestion;
 
 public class Course {
 	int cID;
@@ -19,17 +18,6 @@ public class Course {
 		this.courseCode = courseCode;
 		this.term = term;
 	}
-	
-	
-	public Course(String name, String courseCode, String term) {
-		this.courseCode = courseCode;
-		this.name = name;
-		this.term = term;
-		
-		this.cID = DbConnection.insertCourses(courseCode, name, term);	
-	} 
-	
-	
 	public String getCourseCode() {
 		return this.courseCode;
 	}
@@ -46,7 +34,7 @@ public class Course {
 		return this.cID;
 	}
 	
-	public void addQuestions(Assessment assess) {
+	public void addAssessment(Assessment assess) {
 		as.add(assess);
 	}
 	

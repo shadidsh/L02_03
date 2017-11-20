@@ -1,6 +1,6 @@
 package assessment;
 
-public class SharedAssessment {
+public class SelectedAssessment {
 	 public static Assessment selectedAs = null;
 	 
 	 public static void setAssess(Assessment selected) {

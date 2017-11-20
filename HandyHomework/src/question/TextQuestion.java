@@ -1,56 +1,42 @@
 package question;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import answer.TextAnswer;
 
-public class TextQuestion extends QuestionAbstract<String>{
-	
-	private int assessID;
-	private String name;
-	private String question;
-	private int points;
-	ArrayList<TextAnswer> textAns = new ArrayList<>();
+public class TextQuestion extends Question{
+
+	TextAnswer textAns;
 	
 	public TextQuestion(int assessID, String name, String question, int points) {
-		this.question = question;
-		this.name = name;
-		this.points = points;
-		this.assessID = assessID;
+		super(assessID, name, question,  points);
 	}
 	
 	public TextAnswer getCorrectAnswer() {
-		for (TextAnswer t : this.textAns) {
-			if (t.isCorrect()) {
-				return t;
-			}
-		}
-		return null;
+		return textAns;
 	}
 	
-	public void addList(ArrayList<TextAnswer> at) {
-		if (at != null) {
-			textAns.addAll(at);
-		}
+	public void setAnswer(TextAnswer ans) {
+		this.textAns = ans;
 		
 	}
-	
-	
-	public String getQuestion() {
-		return this.question;
+
+	/*
+	f
+	or (TextAnswer t : this.textAns) {
+		if (t.isCorrect()) {
+			return t;
+		}
 	}
+	return null;
+	*/
 	
-	public String getName() {
-		return this.name;
-	}
-	
-	public int getPoints() {
-		return this.points;
-	}
-	
-	public int getAssessID() {
-		return this.assessID;
-	}
-	
-	
+	/*
+	public void addList(List<TextAnswer> at) {
+		if (at != null) {
+			textAns.addAll(at);
+		}	
+	}	
+	*/
 }
