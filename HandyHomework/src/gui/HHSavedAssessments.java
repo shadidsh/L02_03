@@ -192,10 +192,8 @@ public class HHSavedAssessments extends JFrame {
 					lblPts.setText(res);
 					assessmentTitle.setText(as.getTitle());
 					selectedAs = as;
-					selInd = list.getSelectedIndex();
-					
-				}	
-
+					selInd = index;
+				}
 			}
 		});			
 		
@@ -251,12 +249,14 @@ public class HHSavedAssessments extends JFrame {
 					//assess.remove(selInd);	
 					
 					// re-query this assessment - workaround to just load the page again
-					 HHSavedAssessments frame = new HHSavedAssessments();
+					/*
+					HHSavedAssessments frame = new HHSavedAssessments();
 					frame.setVisible(true);	
 					frame.setResizable(false);
 					if (frame.isShowing()){
 						dispose();
 					} 
+					*/
 				}
 			} 
 		}); 	

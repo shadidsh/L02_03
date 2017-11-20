@@ -30,8 +30,9 @@ public class HHViewCoursesPage extends JFrame {
 
 	private Course selectedCourse;
 	private JPanel contentPane;
-	
+	private JList<?> list;
 	private List<Course> courses;
+	private int selInd;
 
 	/**
 	 * Launch the application.
@@ -99,8 +100,13 @@ public class HHViewCoursesPage extends JFrame {
 		listCourses.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				JList list = (JList) e.getSource();
-				Course as = courses.get(list.getSelectedIndex());
-				selectedCourse = as;
+				int index = list.getSelectedIndex();
+				if (index != -1) {
+					Course as = courses.get(list.getSelectedIndex());
+					selectedCourse = as;
+					selInd = index;
+					
+				}				
 			}
 		});
 		
@@ -117,7 +123,7 @@ public class HHViewCoursesPage extends JFrame {
 						JOptionPane.showMessageDialog(HHViewCoursesPage.this, "Please select a course.");
 					} else {
 						SelectedCourse.setCourse(selectedCourse);
-						//System.out.println(selectedCourse.getCourseCode());
+						
 						HHSavedAssessments frame = new HHSavedAssessments();
 						frame.setVisible(true);
 						frame.setResizable(false);
@@ -146,6 +152,31 @@ public class HHViewCoursesPage extends JFrame {
 		contentPane.add(btnBack);
 		contentPane.add(listCourses);
 		contentPane.add(lblCourses);
+		
+		JButton btnRemove = new JButton("Remove ");
+		btnRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(SelectedCourse.isSelected());
+				System.out.println(selInd);
+				if (selectedCourse == null || selInd < 0 ) {
+					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "Please select a course to remove.");
+				} else {
+					DbCourse dbcourse = new DbCourse();
+					dbcourse.removeManagedCourses(SelectedUser.getUser().getId(), selectedCourse.getcID());
+					lstCourses.remove(selInd);
+					
+					/*
+					HHViewCoursesPage frame = new HHViewCoursesPage();
+					frame.setVisible(true);	
+					frame.setResizable(false);
+					if (frame.isShowing()){
+						dispose();
+					} */
+				}
+			}
+		});
+		btnRemove.setBounds(12, 212, 100, 30);
+		contentPane.add(btnRemove);
 		
 		if (SelectedUser.getUser().isProf()) {
 			JButton btnAddCourse = new JButton("Add Course");
