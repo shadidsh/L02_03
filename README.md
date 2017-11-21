@@ -19,8 +19,8 @@ Welcome to the Project Repo for Team SWare.
 1. Install the WindowBuilder plugin on your IDE
 2. Install postgresql-42.1.4 jar file from https://jdbc.postgresql.org/
 3. Add the postgres jar file by configuring the run settings: Build Path -> Add External Jar files
-4. We are using assertj-swing for test automation, this requires 3 the following 3 jar files:
+4. We are using assertj-swing for test automation, this requires the following 3 jar files to be added to lib:
 
-    [assert-core](http://central.maven.org/maven2/org/assertj/assertj-core/3.8.0/assertj-core-3.8.0.jar)
-    [assertj-swing](http://central.maven.org/maven2/org/assertj/assertj-swing/3.8.0/assertj-swing-3.8.0.jar)
-    [assert-swing-junit](http://central.maven.org/maven2/org/assertj/assertj-swing-junit/3.8.0/assertj-swing-junit-3.8.0.jar)
+    1. [assert-core](http://central.maven.org/maven2/org/assertj/assertj-core/3.8.0/assertj-core-3.8.0.jar)
+    2. [assertj-swing](http://central.maven.org/maven2/org/assertj/assertj-swing/3.8.0/assertj-swing-3.8.0.jar)
+    3. [assert-swing-junit](http://central.maven.org/maven2/org/assertj/assertj-swing-junit/3.8.0/assertj-swing-junit-3.8.0.jar)
