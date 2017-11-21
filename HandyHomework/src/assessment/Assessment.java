@@ -28,6 +28,7 @@ public class Assessment {
 		this.isOpt = isOpt;
 		this.due = due;
 		this.weight = weight;
+		this.questions = new ArrayList<TextQuestion>();
 	}
 	
 	public int getAid() {
@@ -60,6 +61,10 @@ public class Assessment {
 	
 	public void addQuestions(TextQuestion ts) {
 		questions.add(ts);
+	}
+	
+	public ArrayList<TextQuestion> getQuestions() {
+		return this.questions;
 	}
 
 }

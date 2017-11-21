@@ -64,10 +64,12 @@ public class HHLogin extends JFrame {
 		usernameField.setBounds(80, 70, 250, 25);
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
+		usernameField.setName("username");
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(80, 145, 250, 25);
 		contentPane.add(passwordField);
+		passwordField.setName("pass");
 		
 		lblUsername = new JLabel("USERNAME");
 		lblUsername.setBounds(166, 39, 75, 20);
@@ -80,6 +82,7 @@ public class HHLogin extends JFrame {
 		contentPane.add(lblPassword);
 		
 		JButton btnNewButton = new JButton("Login");
+		btnNewButton.setName("Login");
 		btnNewButton.setBounds(90, 193, 102, 43);
 		contentPane.getRootPane().setDefaultButton(btnNewButton);
 		
@@ -87,17 +90,15 @@ public class HHLogin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String userName = String.valueOf(usernameField.getText());
 				String password = String.valueOf(passwordField.getPassword());
-				if (password.isEmpty() || userName.isEmpty()) {
-					JOptionPane.showMessageDialog(HHLogin.this, "Username and password cannot be empty.");
-				}
-				else {
+				if (passwordField.getPassword().length == 0 || userName.isEmpty()) {
+					JOptionPane.showMessageDialog(HHLogin.this, "Username or password cannot be empty.");
+				} else {
 					DbUser db = new DbUser();
 					UserLogin uf =  db.getUser(userName, password); //db.DbConnection.checkUser(userName, password);
 					
 					if (uf == null) {
-						System.out.println("'user':'pass'");
 						JOptionPane.showMessageDialog(HHLogin.this, 
-								"Username or password for username is incorrect .");
+								"Incorrect credentials entered.");
 					} else {					
 						SelectedUser.setUser(uf);
 						
@@ -121,6 +122,11 @@ public class HHLogin extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnRegister = new JButton("Register");
+		btnRegister.setName("Register");
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnRegister.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -132,7 +138,7 @@ public class HHLogin extends JFrame {
 				}
 			}
 			});
-		btnRegister.setBounds(212, 194, 102, 43);
+		btnRegister.setBounds(217, 183, 102, 43);
 		contentPane.add(btnRegister);
 	}
 }
