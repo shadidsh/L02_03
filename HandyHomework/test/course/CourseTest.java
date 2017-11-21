@@ -1,12 +1,12 @@
 package course;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import assessment.Assessment;
 import course.Course;
@@ -16,7 +16,7 @@ class CourseTest {
 	private ArrayList<Assessment> assessList;
 	private Assessment assess;
 	private Assessment assess2;
-	@BeforeEach
+	@Before
 	void setUp() throws Exception {
 		assessList = new ArrayList<Assessment>();
 		Calendar due = Calendar.getInstance();

@@ -1,12 +1,14 @@
 package assessment;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+
 
 import assessment.Assessment;
 import question.TextQuestion;
@@ -17,7 +19,7 @@ class AssessmentTest {
 	private TextQuestion TQ;
 	private TextQuestion TQ2;
 	private ArrayList<TextQuestion> TQList;
-	@BeforeEach
+	@Before
 	void setUp() throws Exception {
 		TQList = new ArrayList<TextQuestion>(); 
 		Calendar due = Calendar.getInstance();

@@ -1,14 +1,15 @@
 package login;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+
 
 class StudentTest {
 
 	private StudentLogin stud;
-	@BeforeEach
+	@Before
 	void setUp() throws Exception {
 		stud = new StudentLogin(1, "bestStud", "userIsFalse");
 	}

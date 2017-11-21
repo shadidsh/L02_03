@@ -1,9 +1,9 @@
 package answer;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import answer.TextAnswer;
 
@@ -11,7 +11,7 @@ class TextAnswerTest {
 	TextAnswer TAcorrect;
 	TextAnswer TAincorrect;
 
-	@BeforeEach
+	@Before
 	void setUp() throws Exception {
 		TAcorrect = new TextAnswer(0, "correct", true);
 		TAincorrect = new TextAnswer(1, "incorrect", false);
@@ -20,25 +20,25 @@ class TextAnswerTest {
 	@Test
 	void testIsCorrectStringCorrectUser() {
 		boolean iscorrect = TAcorrect.isCorrect("correct");
-		assertEquals(true, iscorrect);
+		assertTrue(iscorrect);
 	}
 	
 	@Test
 	void testIsCorrectStringIncorrectUser() {
 		boolean iscorrect = TAcorrect.isCorrect("incorrect");
-		assertEquals(false, iscorrect);
+		assertFalse(iscorrect);
 	}
 	
 	@Test
 	void testIsCorrectStringCorrectUserIncorrectAnswer() {
 		boolean iscorrect = TAincorrect.isCorrect("incorrect");
-		assertEquals(false, iscorrect);
+		assertFalse(iscorrect);
 	}
 	
 	@Test
 	void testIsCorrectStringIncorrectUserIncorrectAnswer() {
 		boolean iscorrect = TAincorrect.isCorrect("correct");
-		assertEquals(false, iscorrect);
+		assertFalse(iscorrect);
 	}
 	
 	@Test
@@ -56,37 +56,37 @@ class TextAnswerTest {
 	@Test
 	void testIsCorrect() {
 		boolean correct = TAcorrect.isCorrect();
-		assertEquals(true, correct);
+		assertTrue(correct);
 	}
 	
 	@Test
 	void testIsIncorrect() {
 		boolean incorrect = TAincorrect.isCorrect();
-		assertEquals(false, incorrect);
+		assertFalse(incorrect);
 	}
 
 	@Test
 	void testSetCorrect() {
 		TAcorrect.setCorrect(true);
-		assertEquals(true, TAcorrect.isCorrect());
+		assertTrue( TAcorrect.isCorrect());
 	}
 	
 	@Test
 	void testSetInCorrect() {
 		TAincorrect.setCorrect(false);
-		assertEquals(false, TAincorrect.isCorrect());
+		assertFalse(TAincorrect.isCorrect());
 	}
 	
 	@Test
 	void testSetToCorrect() {
 		TAincorrect.setCorrect(true);
-		assertEquals(true, TAincorrect.isCorrect());
+		assertTrue( TAincorrect.isCorrect());
 	}
 	
 	@Test
 	void testSetToIncorrect() {
 		TAcorrect.setCorrect(false);
-		assertEquals(false, TAcorrect.isCorrect());
+		assertFalse(TAcorrect.isCorrect());
 	}
 
 }

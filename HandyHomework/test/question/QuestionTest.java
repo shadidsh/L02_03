@@ -1,9 +1,9 @@
 package question;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import answer.TextAnswer;
 import question.TextQuestion;
@@ -12,7 +12,7 @@ class QuestionTest {
 	private TextQuestion TQ;
 	private TextAnswer TA1;
 	
-	@BeforeEach
+	@Before
 	void setUp() throws Exception {
 		TQ = new TextQuestion(0, "question0", "What profession did Bob Ross have?", 10);
 		TA1 = new TextAnswer(0, "correct", true);
