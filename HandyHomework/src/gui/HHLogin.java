@@ -80,6 +80,7 @@ public class HHLogin extends JFrame {
 		contentPane.add(lblPassword);
 		
 		JButton btnNewButton = new JButton("Login");
+		btnNewButton.setName("Login");
 		btnNewButton.setBounds(90, 193, 102, 43);
 		contentPane.getRootPane().setDefaultButton(btnNewButton);
 		

@@ -14,15 +14,10 @@ import org.junit.Test;
 
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
-import org.assertj.swing.edt.GuiQuery;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
-import org.assertj.swing.testing.AssertJSwingTestCaseTemplate;
 
-import static org.assertj.swing.launcher.ApplicationLauncher.application;
-import static org.assertj.swing.finder.WindowFinder.findFrame;
-
-public class HHLoginTest extends AssertJSwingJUnitTestCase  {
+public class LoginTest extends AssertJSwingJUnitTestCase  {
 	private FrameFixture window;
 	
 	
@@ -57,6 +52,18 @@ public class HHLoginTest extends AssertJSwingJUnitTestCase  {
 			window.button("Register").requireVisible().requireEnabled().click();
 	  }
 
+	  @Test
+	  public void validateLoginButton() {	  
+			window.button("Login").requireVisible().requireEnabled().click();
+	  }
+	  
+	  @Test
+	  public void EnterUserPassLogin() {	  
+			window.button("Login").requireVisible().requireEnabled().click();
+			
+			window.dialog("Username or password for username is incorrect .");
+	  }
+	  
 	/*
 	@Test
 	public void getUserById() {
