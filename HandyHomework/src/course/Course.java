@@ -17,6 +17,7 @@ public class Course {
 		this.name = name;
 		this.courseCode = courseCode;
 		this.term = term;
+		this.as = new ArrayList<Assessment>();
 	}
 	public String getCourseCode() {
 		return this.courseCode;
@@ -33,9 +34,12 @@ public class Course {
 	public int getcID() {
 		return this.cID;
 	}
-	
+		
 	public void addAssessment(Assessment assess) {
-		as.add(assess);
+		this.as.add(assess);
 	}
 	
+	public ArrayList<Assessment> getAssessment(){
+		return this.as;
+	}
 }

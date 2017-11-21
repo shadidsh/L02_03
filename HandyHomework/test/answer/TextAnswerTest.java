@@ -20,73 +20,73 @@ class TextAnswerTest {
 	@Test
 	void testIsCorrectStringCorrectUser() {
 		boolean iscorrect = TAcorrect.isCorrect("correct");
-		assertEquals(iscorrect, true);
+		assertEquals(true, iscorrect);
 	}
 	
 	@Test
 	void testIsCorrectStringIncorrectUser() {
 		boolean iscorrect = TAcorrect.isCorrect("incorrect");
-		assertEquals(iscorrect, false);
+		assertEquals(false, iscorrect);
 	}
 	
 	@Test
 	void testIsCorrectStringCorrectUserIncorrectAnswer() {
 		boolean iscorrect = TAincorrect.isCorrect("incorrect");
-		assertEquals(iscorrect, false);
+		assertEquals(false, iscorrect);
 	}
 	
 	@Test
 	void testIsCorrectStringIncorrectUserIncorrectAnswer() {
 		boolean iscorrect = TAincorrect.isCorrect("correct");
-		assertEquals(iscorrect, false);
+		assertEquals(false, iscorrect);
 	}
 	
 	@Test
 	void testGetAnswer() {
 		String answer = TAcorrect.getAnswer();
-		assertEquals(answer, "correct");
+		assertEquals("correct", answer);
 	}
 
 	@Test
 	void testGetQuestID() {
 		int ID = TAincorrect.getQuestID();
-		assertEquals(ID, 1);
+		assertEquals(1, ID);
 	}
 
 	@Test
 	void testIsCorrect() {
 		boolean correct = TAcorrect.isCorrect();
-		assertEquals(correct, true);
+		assertEquals(true, correct);
 	}
 	
 	@Test
 	void testIsIncorrect() {
 		boolean incorrect = TAincorrect.isCorrect();
-		assertEquals(incorrect, false);
+		assertEquals(false, incorrect);
 	}
 
 	@Test
 	void testSetCorrect() {
 		TAcorrect.setCorrect(true);
-		assertEquals(TAcorrect.isCorrect(), true);
+		assertEquals(true, TAcorrect.isCorrect());
 	}
 	
 	@Test
 	void testSetInCorrect() {
 		TAincorrect.setCorrect(false);
-		assertEquals(TAincorrect.isCorrect(), false);
+		assertEquals(false, TAincorrect.isCorrect());
 	}
 	
 	@Test
 	void testSetToCorrect() {
 		TAincorrect.setCorrect(true);
-		assertEquals(TAincorrect.isCorrect(), true);
+		assertEquals(true, TAincorrect.isCorrect());
 	}
 	
 	@Test
 	void testSetToIncorrect() {
 		TAcorrect.setCorrect(false);
-		assertEquals(TAcorrect.isCorrect(), false);
+		assertEquals(false, TAcorrect.isCorrect());
 	}
 
 }
