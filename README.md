@@ -11,7 +11,7 @@ Welcome to the Project Repo for Team SWare.
 [Sprint 04 Backlog](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_5/Sprint_04_Backlog.pdf)  
 [Sprint 05 Backlog](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_5/Sprint_05_Backlog.pdf)  
 [Code Review Debrief Video](https://drive.google.com/file/d/1gh6kGl7ygeRDOReZ5Xuvtna7WPnH_0U0/view?usp=sharing)  
-[Verification & Validation Report](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_5/Verification_and_Validation_Report.pdf)  
+[Verification & Validation Report](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_5/Report.pdf)  
 
 ## Project Code
 [Source Folder](https://github.com/CSCC01F17/L02_03/tree/master/U01_Code/src)  
