@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import course.SelectedCourse;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -15,12 +18,19 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import dao.DbCourse;
+import dao.DbUser;
+import login.SelectedUser;
+import login.StudentLogin;
+import login.UserLogin;
+
 public class AddOneStudentForm extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField studentNumField;
 	private JTextField firstName;
 	private JTextField lastName;
+	private JTextField usernameField;
 
 	/**
 	 * Launch the application.
@@ -43,7 +53,7 @@ public class AddOneStudentForm extends JFrame {
 	 */
 	public AddOneStudentForm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 370, 270);
+		setBounds(100, 100, 370, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -56,33 +66,43 @@ public class AddOneStudentForm extends JFrame {
 		
 		JLabel lblStudentNumber = new JLabel("Student Number:");
 		lblStudentNumber.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		lblStudentNumber.setBounds(37, 94, 116, 17);
+		lblStudentNumber.setBounds(37, 90, 116, 17);
 		contentPane.add(lblStudentNumber);
 		
 		JLabel lblFirstName = new JLabel("First Name:");
 		lblFirstName.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		lblFirstName.setBounds(37, 127, 77, 17);
+		lblFirstName.setBounds(37, 153, 77, 17);
 		contentPane.add(lblFirstName);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
 		lblLastName.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		lblLastName.setBounds(37, 160, 74, 17);
+		lblLastName.setBounds(37, 182, 74, 17);
 		contentPane.add(lblLastName);
 		
+		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		lblUsername.setBounds(37, 123, 73, 17);
+		contentPane.add(lblUsername);
+		
 		studentNumField = new JTextField();
-		studentNumField.setBounds(161, 90, 130, 26);
+		studentNumField.setBounds(154, 86, 130, 26);
 		contentPane.add(studentNumField);
 		studentNumField.setColumns(10);
 		
 		firstName = new JTextField();
-		firstName.setBounds(125, 123, 130, 26);
+		firstName.setBounds(126, 149, 130, 26);
 		contentPane.add(firstName);
 		firstName.setColumns(10);
 		
 		lastName = new JTextField();
-		lastName.setBounds(125, 156, 130, 26);
+		lastName.setBounds(125, 178, 130, 26);
 		contentPane.add(lastName);
 		lastName.setColumns(10);
+		
+		usernameField = new JTextField();
+		usernameField.setBounds(126, 119, 130, 26);
+		contentPane.add(usernameField);
+		usernameField.setColumns(10);
 		
 		JButton btnAddStudent = new JButton("Add Student");
 		btnAddStudent.addActionListener(new ActionListener() {
@@ -90,22 +110,33 @@ public class AddOneStudentForm extends JFrame {
 				String studID = studentNumField.getText();
 				String fName = firstName.getText();
 				String lName = lastName.getText();
-				if (studID.isEmpty() || fName.isEmpty() || lName.isEmpty()){
+				String username = usernameField.getText();
+				if (studID.isEmpty() || fName.isEmpty() || lName.isEmpty() || username.isEmpty()){
 					JOptionPane.showMessageDialog(AddOneStudentForm.this, "One or more fields are empty.");
 				} else {
+					// Lina's DB code - fingers crossed!
+					DbUser user = new DbUser();
+					if (! user.userExists(username)){
+						user.addUser(username, studID, false);
+					}
+					UserLogin student = user.getUser(username, studID);
+					DbCourse course = new DbCourse();
+					course.insertManagedCourses(student.getId(), SelectedCourse.getCourse().getcID(), false);
 					
-					//db.DbConnection.insertCourses(courseCode, name, courseTerm);
 					
 					ViewStudentsPage frame = new ViewStudentsPage();
 					frame.setVisible(true);
 					frame.setResizable(false);
 					if (frame.isShowing()){
 						dispose();
+					} else{
+						
 					}
 				}
 			}
 		});
-		btnAddStudent.setBounds(195, 194, 117, 29);
+		btnAddStudent.setBounds(195, 223, 117, 29);
 		contentPane.add(btnAddStudent);
+	
 	}
 }

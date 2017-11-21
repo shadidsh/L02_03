@@ -258,9 +258,20 @@ public class HHSavedAssessments extends JFrame {
 		contentPane.add(btnRemove);
 		
 		if (SelectedUser.getUser().isProf()) {
-			JButton btnAddStudents = new JButton("Add Students");
-			btnAddStudents.setBounds(420, 257, 120, 30);
-			contentPane.add(btnAddStudents);
+			JButton btnViewStudents = new JButton("View Students");
+			btnViewStudents.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ViewStudentsPage frame = new ViewStudentsPage();
+					frame.setVisible(true);	
+					frame.setResizable(false);
+					if (frame.isShowing()){
+						dispose();
+					} 
+				}
+				
+			});
+			btnViewStudents.setBounds(420, 257, 120, 30);
+			contentPane.add(btnViewStudents);
 		}
 		
 		

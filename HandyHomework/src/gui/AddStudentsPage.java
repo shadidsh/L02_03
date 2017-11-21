@@ -14,7 +14,7 @@ import javax.swing.JFileChooser;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class AddStudents extends JFrame {
+public class AddStudentsPage extends JFrame {
 
 	private JPanel contentPane;
 
@@ -25,7 +25,7 @@ public class AddStudents extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddStudents frame = new AddStudents();
+					AddStudentsPage frame = new AddStudentsPage();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +37,7 @@ public class AddStudents extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AddStudents() {
+	public AddStudentsPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 430, 270);
 		contentPane = new JPanel();

@@ -6,7 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
+import assessment.Assessment;
 import course.Course;
 import login.ProfessorLogin;
 import login.StudentLogin;
@@ -123,4 +126,40 @@ public class DbUser extends DbConnection implements UserDAO  {
     	}
     	return false;    
 	}
+
+	@Override
+	public List<StudentLogin> getStudentsForCourse(int cid) {
+		Connection conn = getConnection();
+		String query = "SELECT * FROM "	
+				+ constants.Constants.DataConstants.COURSECONTROL + " m," 
+				+ constants.Constants.DataConstants.USERS + " c where m.cid = ?;";
+		String query1 = "Select c.cid, c.courseCode, c.name, c.term from " 
+				+ constants.Constants.DataConstants.COURSECONTROL + " m," 
+				+ constants.Constants.DataConstants.COURSES + " c where m.user_id = ? "
+						+ " and m.cid = c.cid;";
+		PreparedStatement stat;
+		ArrayList<StudentLogin> students = new ArrayList<StudentLogin>();
+		
+		try {
+			stat = conn.prepareStatement(query);
+			stat.setInt(1, cid);
+			ResultSet Rs = stat.executeQuery();
+			
+			while (Rs.next()) {
+				int uid = Rs.getInt(1);
+				cid = Rs.getInt(2);
+				String username = Rs.getString(3);
+				String password = Rs.getString(4);	
+				
+				StudentLogin as = new StudentLogin(uid, username, password);	
+				students.add(as);
+			}
+			conn.close();
+			
+		} catch (Exception ex) {
+    		System.out.println(ex.getMessage());
+		}
+		return students;
+	}
+	
 }
