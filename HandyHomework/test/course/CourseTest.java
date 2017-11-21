@@ -11,13 +11,14 @@ import java.util.Calendar;
 import assessment.Assessment;
 import course.Course;
 
-class CourseTest {
+public class CourseTest {
 	private Course course;
 	private ArrayList<Assessment> assessList;
 	private Assessment assess;
 	private Assessment assess2;
+	
 	@Before
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		assessList = new ArrayList<Assessment>();
 		Calendar due = Calendar.getInstance();
 		due.set(2017, 9, 25, 10, 05, 30);
@@ -28,37 +29,37 @@ class CourseTest {
 	}
 
 	@Test
-	void testGetCourseCode() {
+	public void testGetCourseCode() {
 		String courseCode = course.getCourseCode();
 		assertEquals("CSCC01", courseCode);
 	}
 
 	@Test
-	void testGetName() {
+	public void testGetName() {
 		String name = course.getName();
 		assertEquals("Introduction to Software Engineering", name);
 	}
 
 	@Test
-	void testGetTerm() {
+	public void testGetTerm() {
 		String term = course.getTerm();
 		assertEquals("Fall", term);
 	}
 
 	@Test
-	void testGetcID() {
+	public void testGetcID() {
 		int cID = course.getcID();
 		assertEquals(0, cID);
 	}
 
 	@Test
-	void testAddAssessment() {
+	public void testAddAssessment() {
 		course.addAssessment(assess);
 		assertEquals(assessList, course.getAssessment());
 	}
 	
 	@Test
-	void testAddMultipleAssessments() {
+	public void testAddMultipleAssessments() {
 		course.addAssessment(assess);
 		course.addAssessment(assess2);
 		assessList.add(assess2);

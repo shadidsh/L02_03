@@ -7,84 +7,84 @@ import org.junit.Test;
 
 import answer.TextAnswer;
 
-class TextAnswerTest {
+public class TextAnswerTest {
 	TextAnswer TAcorrect;
 	TextAnswer TAincorrect;
 
 	@Before
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		TAcorrect = new TextAnswer(0, "correct", true);
 		TAincorrect = new TextAnswer(1, "incorrect", false);
 	}
 
 	@Test
-	void testIsCorrectStringCorrectUser() {
+	public void testIsCorrectStringCorrectUser() {
 		boolean iscorrect = TAcorrect.isCorrect("correct");
 		assertTrue(iscorrect);
 	}
 	
 	@Test
-	void testIsCorrectStringIncorrectUser() {
+	public void testIsCorrectStringIncorrectUser() {
 		boolean iscorrect = TAcorrect.isCorrect("incorrect");
 		assertFalse(iscorrect);
 	}
 	
 	@Test
-	void testIsCorrectStringCorrectUserIncorrectAnswer() {
+	public void testIsCorrectStringCorrectUserIncorrectAnswer() {
 		boolean iscorrect = TAincorrect.isCorrect("incorrect");
 		assertFalse(iscorrect);
 	}
 	
 	@Test
-	void testIsCorrectStringIncorrectUserIncorrectAnswer() {
+	public void testIsCorrectStringIncorrectUserIncorrectAnswer() {
 		boolean iscorrect = TAincorrect.isCorrect("correct");
 		assertFalse(iscorrect);
 	}
 	
 	@Test
-	void testGetAnswer() {
+	public void testGetAnswer() {
 		String answer = TAcorrect.getAnswer();
 		assertEquals("correct", answer);
 	}
 
 	@Test
-	void testGetQuestID() {
+	public void testGetQuestID() {
 		int ID = TAincorrect.getQuestID();
 		assertEquals(1, ID);
 	}
 
 	@Test
-	void testIsCorrect() {
+	public void testIsCorrect() {
 		boolean correct = TAcorrect.isCorrect();
 		assertTrue(correct);
 	}
 	
 	@Test
-	void testIsIncorrect() {
+	public void testIsIncorrect() {
 		boolean incorrect = TAincorrect.isCorrect();
 		assertFalse(incorrect);
 	}
 
 	@Test
-	void testSetCorrect() {
+	public void testSetCorrect() {
 		TAcorrect.setCorrect(true);
 		assertTrue( TAcorrect.isCorrect());
 	}
 	
 	@Test
-	void testSetInCorrect() {
+	public void testSetInCorrect() {
 		TAincorrect.setCorrect(false);
 		assertFalse(TAincorrect.isCorrect());
 	}
 	
 	@Test
-	void testSetToCorrect() {
+	public void testSetToCorrect() {
 		TAincorrect.setCorrect(true);
 		assertTrue( TAincorrect.isCorrect());
 	}
 	
 	@Test
-	void testSetToIncorrect() {
+	public void testSetToIncorrect() {
 		TAcorrect.setCorrect(false);
 		assertFalse(TAcorrect.isCorrect());
 	}

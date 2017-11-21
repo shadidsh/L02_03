@@ -13,14 +13,14 @@ import org.junit.Test;
 import assessment.Assessment;
 import question.TextQuestion;
 
-class AssessmentTest {
+public class AssessmentTest {
 	private Assessment assessment;
 	private Assessment assessment2;
 	private TextQuestion TQ;
 	private TextQuestion TQ2;
 	private ArrayList<TextQuestion> TQList;
 	@Before
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		TQList = new ArrayList<TextQuestion>(); 
 		Calendar due = Calendar.getInstance();
 		due.set(2017, 9, 25, 10, 05, 30);
@@ -32,49 +32,49 @@ class AssessmentTest {
 	}
 
 	@Test
-	void testGetAid() {
+	public void testGetAid() {
 		int aid = assessment.getAid();
 		assertEquals(0, aid);
 	}
 
 	@Test
-	void testGetTitle() {
+	public void testGetTitle() {
 		String title = assessment.getTitle();
 		assertEquals("assessment1", title);
 	}
 
 	@Test
-	void testGetName() {
+	public void testGetName() {
 		String name = assessment.getName();
 		assertEquals("database", name);
 	}
 
 	@Test
-	void testGetIsOptTrue() {
+	public void testGetIsOptTrue() {
 		boolean IsOpt = assessment2.getIsOpt();
 		assertEquals(true, IsOpt);
 	}
 	
 	@Test
-	void testGetIsOptFalse() {
+	public void testGetIsOptFalse() {
 		boolean IsOpt = assessment.getIsOpt();
 		assertEquals(false, IsOpt);
 	}
 
 	@Test
-	void testGetWeight() {
+	public void testGetWeight() {
 		float weight = assessment.getWeight();
-		assertEquals((float) 0.5, weight);
+		assertTrue(weight == (float) 0.5);
 	}
 
 	@Test
-	void testAddQuestion() {
+	public void testAddQuestion() {
 		assessment.addQuestions(TQ);
 		assertEquals(TQList, assessment.getQuestions());
 	}
 	
 	@Test
-	void testAddQuestions() {
+	public void testAddQuestions() {
 		TQList.add(TQ2);
 		assessment.addQuestions(TQ);
 		assessment.addQuestions(TQ2);

@@ -5,32 +5,32 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-class ProfessorTest {
+public class ProfessorTest {
 	private ProfessorLogin prof;
 	@Before
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		prof = new ProfessorLogin(0, "bestProf", "userIsTrue");
 	}
 
 	@Test
-	void testIsProf() {
+	public void testIsProf() {
 		assertEquals(true, prof.isProf());
 	}
 
 	@Test
-	void testGetUserName() {
+	public void testGetUserName() {
 		String user = prof.getUserName();
 		assertEquals("bestProf", user);
 	}
 
 	@Test
-	void testGetPassword() {
+	public void testGetPassword() {
 		String pass = prof.getPassword();
 		assertEquals("userIsTrue", pass);
 	}
 
 	@Test
-	void testGetId() {
+	public void testGetId() {
 		int id = prof.getId();
 		assertEquals(0, id);
 	}

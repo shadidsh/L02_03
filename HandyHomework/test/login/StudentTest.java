@@ -6,33 +6,33 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-class StudentTest {
+public class StudentTest {
 
 	private StudentLogin stud;
 	@Before
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		stud = new StudentLogin(1, "bestStud", "userIsFalse");
 	}
 
 	@Test
-	void testIsProf() {
+	public void testIsProf() {
 		assertEquals(false, stud.isProf());
 	}
 
 	@Test
-	void testGetUserName() {
+	public void testGetUserName() {
 		String user = stud.getUserName();
 		assertEquals("bestStud", user);
 	}
 
 	@Test
-	void testGetPassword() {
+	public void testGetPassword() {
 		String pass = stud.getPassword();
 		assertEquals("userIsFalse", pass);
 	}
 
 	@Test
-	void testGetId() {
+	public void testGetId() {
 		int id = stud.getId();
 		assertEquals(1, id);
 	}
