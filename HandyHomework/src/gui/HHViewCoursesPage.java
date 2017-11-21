@@ -190,7 +190,7 @@ public class HHViewCoursesPage extends JFrame {
 					}
 				}
 			});
-			btnAddCourse.setBounds(157, 209, 131, 35);
+			btnAddCourse.setBounds(163, 209, 131, 35);
 			contentPane.add(btnAddCourse);
 			
 			btnRemove.setBounds(15, 209, 141, 35);

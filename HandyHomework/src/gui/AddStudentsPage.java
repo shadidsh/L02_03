@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -50,12 +51,17 @@ public class AddStudentsPage extends JFrame {
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 25));
 		contentPane.add(lblNewLabel);
 		
-		final JFileChooser fc = new JFileChooser();
+		//final JFileChooser fc = new JFileChooser();
 		
 		JButton btnChoosecsvFile = new JButton("Upload a .csv file");
 		btnChoosecsvFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int returnVal = fc.showOpenDialog(contentPane);
+				//int returnVal = fc.showOpenDialog(contentPane);
+				JFileChooser chooser = new JFileChooser();
+			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			        "CSV", "csv");
+			    chooser.setFileFilter(filter);
+			    int returnVal = chooser.showOpenDialog(contentPane);
 			}
 		});
 		btnChoosecsvFile.setBounds(128, 109, 152, 48);
@@ -78,5 +84,20 @@ public class AddStudentsPage extends JFrame {
 		});
 		btnAddStudent.setBounds(126, 169, 154, 48);
 		contentPane.add(btnAddStudent);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(10, 11, 72, 30);
+		contentPane.add(btnBack);
+		
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewStudentsPage frame = new ViewStudentsPage();
+				frame.setVisible(true);		
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
+			}
+		});
 	}
 }

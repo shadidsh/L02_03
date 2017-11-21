@@ -61,7 +61,7 @@ public class AddOneStudentForm extends JFrame {
 		
 		JLabel lblStudentInformation = new JLabel("Student Information");
 		lblStudentInformation.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-		lblStudentInformation.setBounds(37, 28, 242, 31);
+		lblStudentInformation.setBounds(70, 44, 242, 31);
 		contentPane.add(lblStudentInformation);
 		
 		JLabel lblStudentNumber = new JLabel("Student Number:");
@@ -90,17 +90,17 @@ public class AddOneStudentForm extends JFrame {
 		studentNumField.setColumns(10);
 		
 		firstName = new JTextField();
-		firstName.setBounds(126, 149, 130, 26);
+		firstName.setBounds(154, 150, 130, 26);
 		contentPane.add(firstName);
 		firstName.setColumns(10);
 		
 		lastName = new JTextField();
-		lastName.setBounds(125, 178, 130, 26);
+		lastName.setBounds(154, 179, 130, 26);
 		contentPane.add(lastName);
 		lastName.setColumns(10);
 		
 		usernameField = new JTextField();
-		usernameField.setBounds(126, 119, 130, 26);
+		usernameField.setBounds(154, 118, 130, 26);
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
 		
@@ -138,5 +138,19 @@ public class AddOneStudentForm extends JFrame {
 		btnAddStudent.setBounds(195, 223, 117, 29);
 		contentPane.add(btnAddStudent);
 	
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(10, 11, 67, 30);
+		contentPane.add(btnBack);
+		
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddStudentsPage frame = new AddStudentsPage();
+				frame.setVisible(true);		
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
+			}
+		});
 	}
 }

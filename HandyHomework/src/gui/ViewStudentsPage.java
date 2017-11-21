@@ -84,7 +84,12 @@ public class ViewStudentsPage extends JFrame {
 //		Object data[][];
 		String[] colHeadings = {"Student Number","First Name", "Last Name"};
 		int numRows = 0;
-		DefaultTableModel model = new DefaultTableModel(numRows, colHeadings.length) ;
+		DefaultTableModel model = new DefaultTableModel(numRows, colHeadings.length) {
+			@Override
+		    public String getColumnName(int index) {
+		        return columnNames[index];
+		    }
+		};
 //		model.setColumnIdentifiers(colHeadings);
 		
 		if (SelectedCourse.isSelected()) {
@@ -92,7 +97,7 @@ public class ViewStudentsPage extends JFrame {
 			List<StudentLogin> students = user.getStudentsForCourse(cs.getcID());
 			
 			for (StudentLogin stud : students) {
-				Object[] data = {stud.getId(), "", ""};
+				Object[] data = {stud.getId(), stud.getName(), stud.getPassword()};
 				model.addRow(data);
 				System.out.println(stud.getId());
 			}
@@ -109,6 +114,21 @@ public class ViewStudentsPage extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(42, 75, 376, 121);
 		contentPane.add(scrollPane);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(10, 11, 79, 30);
+		contentPane.add(btnBack);
+		
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HHSavedAssessments frame = new HHSavedAssessments();
+				frame.setVisible(true);		
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
+			}
+		});
 		
 		//scrollPane.setViewportView(table_1);
 		
