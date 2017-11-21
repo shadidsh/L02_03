@@ -121,6 +121,11 @@ public class HHLogin extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnRegister = new JButton("Register");
+		btnRegister.setName("Register");
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnRegister.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -132,7 +137,7 @@ public class HHLogin extends JFrame {
 				}
 			}
 			});
-		btnRegister.setBounds(212, 194, 102, 43);
+		btnRegister.setBounds(217, 183, 102, 43);
 		contentPane.add(btnRegister);
 	}
 }
