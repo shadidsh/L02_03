@@ -53,7 +53,7 @@ public class AddOneStudentForm extends JFrame {
 	 */
 	public AddOneStudentForm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 370, 300);
+		setBounds(100, 100, 345, 302);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -65,16 +65,19 @@ public class AddOneStudentForm extends JFrame {
 		contentPane.add(lblStudentInformation);
 		
 		JLabel lblStudentNumber = new JLabel("Student Number:");
+		lblStudentNumber.setEnabled(false);
 		lblStudentNumber.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		lblStudentNumber.setBounds(37, 90, 116, 17);
 		contentPane.add(lblStudentNumber);
 		
 		JLabel lblFirstName = new JLabel("First Name:");
+		lblFirstName.setEnabled(false);
 		lblFirstName.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		lblFirstName.setBounds(37, 153, 77, 17);
 		contentPane.add(lblFirstName);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
+		lblLastName.setEnabled(false);
 		lblLastName.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		lblLastName.setBounds(37, 182, 74, 17);
 		contentPane.add(lblLastName);
@@ -85,18 +88,21 @@ public class AddOneStudentForm extends JFrame {
 		contentPane.add(lblUsername);
 		
 		studentNumField = new JTextField();
+		studentNumField.setEnabled(false);
 		studentNumField.setBounds(154, 86, 130, 26);
 		contentPane.add(studentNumField);
 		studentNumField.setColumns(10);
 		studentNumField.setName("studentNum");
 		
 		firstName = new JTextField();
+		firstName.setEnabled(false);
 		firstName.setBounds(154, 150, 130, 26);
 		contentPane.add(firstName);
 		firstName.setColumns(10);
 		firstName.setName("firstname");
 		
 		lastName = new JTextField();
+		lastName.setEnabled(false);
 		lastName.setBounds(154, 179, 130, 26);
 		contentPane.add(lastName);
 		lastName.setColumns(10);
@@ -116,31 +122,31 @@ public class AddOneStudentForm extends JFrame {
 				String fName = firstName.getText();
 				String lName = lastName.getText();
 				String username = usernameField.getText();
-				if (studID.isEmpty() || fName.isEmpty() || lName.isEmpty() || username.isEmpty()){
+				
+				if (username.isEmpty()){
 					JOptionPane.showMessageDialog(AddOneStudentForm.this, "One or more fields are empty.");
 				} else {
-					// Lina's DB code - fingers crossed!
 					DbUser user = new DbUser();
-					if (! user.userExists(username)){
-						user.addUser(username, studID, false);
-					}
-					UserLogin student = user.getUser(username, studID);
-					DbCourse course = new DbCourse();
-					course.insertManagedCourses(student.getId(), SelectedCourse.getCourse().getcID(), false);
-					
-					
-					ViewStudentsPage frame = new ViewStudentsPage();
-					frame.setVisible(true);
-					frame.setResizable(false);
-					if (frame.isShowing()){
-						dispose();
-					} else{
+					if (!user.userExists(username)){
+						JOptionPane.showMessageDialog(
+								AddOneStudentForm.this, "Student is not registered, could not enrol student to course");
+					} else {
+						UserLogin student = user.getUser(username);
+						DbCourse course = new DbCourse();
+						course.insertManagedCourses(student.getId(), SelectedCourse.getCourse().getcID(), false);
 						
+						ViewStudentsPage frame = new ViewStudentsPage();
+						frame.setVisible(true);
+						frame.setResizable(false);
+						if (frame.isShowing()){
+							dispose();
+						}
 					}
+
 				}
 			}
 		});
-		btnAddStudent.setBounds(195, 223, 117, 29);
+		btnAddStudent.setBounds(167, 218, 117, 29);
 		contentPane.add(btnAddStudent);
 	
 		JButton btnBack = new JButton("Back");
