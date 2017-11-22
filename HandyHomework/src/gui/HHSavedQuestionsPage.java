@@ -76,7 +76,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedQuestionsPage() {
-		setTitle("HandyHomework");
+		setName("SavedQuestions");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 569, 395);
 		contentPane = new JPanel();
@@ -121,14 +121,6 @@ public class HHSavedQuestionsPage extends JFrame {
 		gbc_labelTitle.gridy = 0;
 		panel.add(labelTitle, gbc_labelTitle);
 		questionTitle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		
-//		JLabel labelQuestion = new JLabel("");
-//		GridBagConstraints gbc_labelQuestion = new GridBagConstraints();
-//		gbc_labelQuestion.fill = GridBagConstraints.BOTH;
-//		gbc_labelQuestion.gridx = 0;
-//		gbc_labelQuestion.gridy = 1;
-//		panel.add(labelQuestion, gbc_labelQuestion);
-//		labelQuestion.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		
 		JTextArea questionText = new JTextArea("Select a Question");
 		questionText.setWrapStyleWord(true);
@@ -188,7 +180,6 @@ public class HHSavedQuestionsPage extends JFrame {
 						+ constants.Constants.DataConstants.QUESTIONS + ";");
 				aid = 3;
 			}
-			System.out.println(stat);
 			ResultSet Rs = stat.executeQuery();				
 			
 			while (Rs.next()) {
@@ -223,7 +214,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		JButton btnback = new JButton("\u2190 Back");
 		btnback.setBounds(15, 35, 115, 30);
 		contentPane.add(btnback);
-		
+		btnback.setName("back");
 		btnback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();
@@ -240,6 +231,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		contentPane.add(scrollPane);
 		JList<String> listQuestion = new JList<>(lstQuestion);
 		scrollPane.setViewportView(listQuestion);
+		listQuestion.setName("lstQuestion");
 		
 		listQuestion.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {

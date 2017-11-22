@@ -110,15 +110,18 @@ public class DbCourse extends DbConnection implements CourseAccessDAO {
 			    PreparedStatement stat = conn.prepareStatement(delete);
 	    		stat.setInt(1, uid);
 	    		stat.setInt(2, cid);
+	    		System.out.println(stat);
+	    		   		
 	    		stat.executeQuery(); 
 	    		
 	    		
 				String query = "select exists(select 1 from " + constants.Constants.DataConstants.COURSECONTROL 
 		    				+  " where user_id = ? and cid = ?)";
+				stat.clearParameters();
 				stat = conn.prepareStatement(query);
 		    	stat.setInt(1, uid);
 		    	stat.setInt(2, cid);
-		    	
+		    	System.out.println(stat);
 	    		ResultSet Rs = stat.executeQuery(); 
 	    		Rs.next();
 	    		if (!Rs.getBoolean(1)) {

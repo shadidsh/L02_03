@@ -52,7 +52,7 @@ public class HHFormFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public HHFormFrame() {
-		setTitle("HandyHomework");
+		setTitle("questionCreate");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 475, 325);
 		contentPane = new JPanel();
@@ -76,6 +76,7 @@ public class HHFormFrame extends JFrame {
 		questionNameField.setBounds(122, 73, 118, 20);
 		contentPane.add(questionNameField);
 		questionNameField.setColumns(10);
+		questionNameField.setName("questionName");
 		
 		JLabel lblEnterYourQuestion = new JLabel("Enter your question here: ");
 		lblEnterYourQuestion.setBounds(20, 102, 162, 16);
@@ -86,6 +87,7 @@ public class HHFormFrame extends JFrame {
 		questionContentField.setWrapStyleWord(true);
 		questionContentField.setLineWrap(true);
 		contentPane.add(questionContentField);
+		questionContentField.setName("content");
 		
 		JLabel lblFinalAnswer = new JLabel("Final Answer: ");
 		lblFinalAnswer.setBounds(20, 225, 90, 14);
@@ -95,6 +97,7 @@ public class HHFormFrame extends JFrame {
 		questionAnswerField.setBounds(109, 222, 150, 20);
 		questionAnswerField.setColumns(10);
 		contentPane.add(questionAnswerField);
+		questionAnswerField.setName("questionAnswer");
 		
 		JLabel lblNumberOfMarks = new JLabel("Number of Marks Awarded: ");
 		lblNumberOfMarks.setBounds(20, 257, 180, 14);
@@ -111,6 +114,7 @@ public class HHFormFrame extends JFrame {
 		
 		JButton btnSubmit = new JButton("Submit");
 		contentPane.getRootPane().setDefaultButton(btnSubmit);
+		btnSubmit.setName("submit");
 		btnSubmit.setBounds(315, 225, 100, 50);
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -132,12 +136,14 @@ public class HHFormFrame extends JFrame {
 						int qid = dbQuest.insertQuestions(as.getAid(), name, questionContent, value);
 						dbQuest.insertAnswers(qid,  true,  answer);
 						
-						String message = name + "\nQuestion is: " + questionContent + "\nSuccessfully added.";
-						JOptionPane.showMessageDialog(HHFormFrame.this, message);
+						//String message = name + "\nQuestion is: " + questionContent + "\nSuccessfully added.";
+						//JOptionPane.showMessageDialog(HHFormFrame.this, message);
 						questionContentField.setText("");
+						
 						questionNameField.setText("");
 						questionAnswerField.setText("");
 						spinner.setValue(0);
+						
 						
 					} catch (NullPointerException e1){
 						System.out.println("Could not insert question into database."); 
@@ -150,6 +156,7 @@ public class HHFormFrame extends JFrame {
 		contentPane.add(btnSubmit);
 		
 		JButton btnCancel = new JButton("\u2190 Back");
+		btnCancel.setName("back");
 		btnCancel.setBounds(20, 26, 100, 25);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
