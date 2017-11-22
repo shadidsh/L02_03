@@ -25,7 +25,7 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 		Course cs = new Course(2, "CSC130H3", "Intro to its late.", "Winter 2017");
 		SelectedCourse.setCourse(cs);
 		Assessment tq = new Assessment(
-				15, "assessment 5", "Greedy Algo.", true, null, (float) 0.99);
+				3, "assessment 5", "Greedy Algo.", true, null, (float) 0.99);
 		SelectedAssessment.setAssess(tq);
 		
 		HHFormFrame frame = GuiActionRunner.execute(() -> new HHFormFrame());
