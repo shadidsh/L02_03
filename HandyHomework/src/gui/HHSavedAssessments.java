@@ -70,7 +70,7 @@ public class HHSavedAssessments extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedAssessments() {
-		setTitle("HandyHomework");
+		this.setName("SavedAssess");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 395);
 		contentPane = new JPanel();
@@ -156,6 +156,7 @@ public class HHSavedAssessments extends JFrame {
 		scrollPane_2.setBounds(30, 97, 215, 239);
 		contentPane.add(scrollPane_2);
 		JList<String> listAssessment = new JList<>(lstAssess);
+		listAssessment.setName("assess");
 		scrollPane_2.setViewportView(listAssessment);
 		JLabel lblPts = new JLabel("");
 		lblPts.setBounds(283, 215, 203, 30);
@@ -230,26 +231,15 @@ public class HHSavedAssessments extends JFrame {
 		contentPane.add(btnBack);
 		
 		JButton btnRemove = new JButton("Remove Assessment");
+		btnRemove.setName("removeAssess");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (selectedAs == null || selInd < 0 ) {
 					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment to remove.");
 				} else {
 					dbAssess.removeAssessment(selectedAs.getAid());
-					
-					System.out.println(selInd);
 					lstAssess.remove(selInd);
-					//assess.remove(selInd);	
-					
-					// re-query this assessment - workaround to just load the page again
-					/*
-					HHSavedAssessments frame = new HHSavedAssessments();
-					frame.setVisible(true);	
-					frame.setResizable(false);
-					if (frame.isShowing()){
-						dispose();
-					} 
-					*/
+					assess.remove(selInd);	
 				}
 			} 
 		}); 	

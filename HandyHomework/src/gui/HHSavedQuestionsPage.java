@@ -53,6 +53,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	private TextAnswer questAnswer;
 	
 	private TextQuestion selQuestion;
+	private int selInd;
 	
 
 	/**
@@ -76,7 +77,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedQuestionsPage() {
-		setTitle("HandyHomework");
+		setName("SavedQuestions");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 569, 395);
 		contentPane = new JPanel();
@@ -122,14 +123,6 @@ public class HHSavedQuestionsPage extends JFrame {
 		panel.add(labelTitle, gbc_labelTitle);
 		questionTitle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		
-//		JLabel labelQuestion = new JLabel("");
-//		GridBagConstraints gbc_labelQuestion = new GridBagConstraints();
-//		gbc_labelQuestion.fill = GridBagConstraints.BOTH;
-//		gbc_labelQuestion.gridx = 0;
-//		gbc_labelQuestion.gridy = 1;
-//		panel.add(labelQuestion, gbc_labelQuestion);
-//		labelQuestion.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		
 		JTextArea questionText = new JTextArea("Select a Question");
 		questionText.setWrapStyleWord(true);
 		questionText.setEditable(false);
@@ -174,21 +167,22 @@ public class HHSavedQuestionsPage extends JFrame {
 			PreparedStatement stat;
 			int aid;
 			
-			if (SelectedAssessment.isSelected()) {				
-				//JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Assessment is selected");
-				stat = conn.prepareStatement("SELECT * FROM "	
-						+ constants.Constants.DataConstants.QUESTIONS + " where aid = ?;");
-				Assessment as = SelectedAssessment.getAssess();
-				stat.setInt(1, as.getAid());
-				aid = as.getAid();
-				lblAssessmentName.setText("Assessment Name: "+ as.getName());
-			} else {
-				//JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No Assessments have been selected, displaying question for assessment 3");
-				stat = conn.prepareStatement("SELECT * FROM "	
-						+ constants.Constants.DataConstants.QUESTIONS + ";");
-				aid = 3;
+			if (!SelectedAssessment.isSelected()) {	
+				JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No Assessments have been selected, displaying question for assessment 3");
+				HHLogin frame = new HHLogin();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
-			System.out.println(stat);
+			stat = conn.prepareStatement("SELECT * FROM "	
+						+ constants.Constants.DataConstants.QUESTIONS + " where aid = ?;");
+			Assessment as = SelectedAssessment.getAssess();
+			stat.setInt(1, as.getAid());
+			aid = as.getAid();
+			lblAssessmentName.setText("Assessment Name: "+ as.getName());
+
 			ResultSet Rs = stat.executeQuery();				
 			
 			while (Rs.next()) {
@@ -198,7 +192,7 @@ public class HHSavedQuestionsPage extends JFrame {
 				String questionContent = Rs.getString(5);
 				Integer points = new Integer(Rs.getInt(6));
 				
-				TextQuestion question = new TextQuestion(aid, name, questionContent, points);
+				TextQuestion question = new TextQuestion(qid, name, questionContent, points);
 				DbQuestions dbQuest = new DbQuestions();
 				
 				TextAnswer ans = dbQuest.singleAnswerQuestion(qid); // db.DbConnection.answers_for_question(qid);
@@ -223,7 +217,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		JButton btnback = new JButton("\u2190 Back");
 		btnback.setBounds(15, 35, 115, 30);
 		contentPane.add(btnback);
-		
+		btnback.setName("back");
 		btnback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();
@@ -240,23 +234,29 @@ public class HHSavedQuestionsPage extends JFrame {
 		contentPane.add(scrollPane);
 		JList<String> listQuestion = new JList<>(lstQuestion);
 		scrollPane.setViewportView(listQuestion);
+		listQuestion.setName("lstQuestion");
 		
 		listQuestion.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				String res = "<html>This question is worth</html>";
 				//System.out.println(res);
 					
-				JList list = (JList) e.getSource();
-				TextQuestion question = questions.get(list.getSelectedIndex());
+				JList<?> list = (JList<?>) e.getSource();
+				int index = list.getSelectedIndex();
+				if (index != -1) {
+					TextQuestion question = questions.get(list.getSelectedIndex());
+					questionText.setText("Q: " + question.getQuestion());
+					questionText.setSize(questionText.getPreferredSize());
+					res = "<html>This question is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;
+					lblPts.setText(res);
+					questionTitle.setText("Title: " + question.getName());
+					questionTitle.setSize(questionTitle.getPreferredSize());
+					selQuestion = question;
+					questAnswer = selQuestion.getCorrectAnswer();
 					
-				questionText.setText("Q: " + question.getQuestion());	
-				questionText.setSize(questionText.getPreferredSize());
-				res = "<html>This question is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;
-				lblPts.setText(res);
-				questionTitle.setText("Title: " + question.getName());
-				questionTitle.setSize(questionTitle.getPreferredSize());
-				
-				selQuestion = question;
+					
+				}				
+				/*
 				// Professor side - ans must change every time a new q is selected
 				if (selQuestion != null && SelectedUser.getUser().isProf()) {
 					questAnswer = selQuestion.getCorrectAnswer();
@@ -265,18 +265,32 @@ public class HHSavedQuestionsPage extends JFrame {
 					} else {
 						String answer = "Answer: " + questAnswer.getAnswer();
 						lblAnswer.setText(answer);
-//						contentPane.add(ans);
-//						ans.setBackground(Color.WHITE);
-//						ans.setAlignmentY(Component.CENTER_ALIGNMENT);
-//						ans.setBounds(229, 84, 307, 72);
-//						ans.setFont(new Font("Dialog", Font.PLAIN, 14));
 					}
-				} 
+				} */
 			}
+			
 		});
 		
 		
 		listQuestion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JButton btnRemove = new JButton("Remove Question");
+		btnRemove.setName("removeQuestion");
+		btnRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selQuestion == null || selInd < 0 ) {
+					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Please select an assessment to remove.");
+				} else {
+					DbQuestions dq = new DbQuestions();
+					dq.removeQuestion(selQuestion.getQid());
+					lstQuestion.remove(selInd);
+					questions.remove(selInd);	
+				}
+			}
+		});
+		
+		btnRemove.setBounds(397, 302, 139, 35);
+		contentPane.add(btnRemove);
 		
 		//String answer = null;
 		
