@@ -74,6 +74,30 @@ public class DbCourse extends DbConnection implements CourseAccessDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+	public boolean checkManagedCourse(int uid, int cid) {
+    	Connection conn = getConnection();
+    	boolean result = false;    	
+    	try{
+    		String exist = "select exists(select 1 from " + constants.Constants.DataConstants.COURSECONTROL 
+    				+  " where user_id = ? and cid = ?)"; 
+    		
+    		PreparedStatement stat = conn.prepareStatement(exist);
+    		stat.setInt(1, uid);
+    		stat.setInt(2, cid);
+    		
+    		ResultSet Rs = stat.executeQuery();
+    		Rs.next();
+    		result =  Rs.getBoolean(1);    		
+    		conn.close();
+    		
+    	}catch(Exception ex) {
+    		System.out.println(ex.getMessage());    		
+    	}    	
+    	return result;  
+	}
+	
 
 	@Override
 	public int insertManagedCourses(int uid, int cid, boolean modAccess) {

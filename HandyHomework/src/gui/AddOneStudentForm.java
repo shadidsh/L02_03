@@ -133,16 +133,19 @@ public class AddOneStudentForm extends JFrame {
 					} else {
 						UserLogin student = user.getUser(username);
 						DbCourse course = new DbCourse();
-						course.insertManagedCourses(student.getId(), SelectedCourse.getCourse().getcID(), false);
-						
-						ViewStudentsPage frame = new ViewStudentsPage();
-						frame.setVisible(true);
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
+						int id = student.getId();
+						int cid = SelectedCourse.getCourse().getcID();
+						if (!course.checkManagedCourse(id, cid)) {
+							course.insertManagedCourses(id, cid, false);
+							
+							ViewStudentsPage frame = new ViewStudentsPage();
+							frame.setVisible(true);
+							frame.setResizable(false);
+							if (frame.isShowing()){
+								dispose();
+							}
 						}
 					}
-
 				}
 			}
 		});

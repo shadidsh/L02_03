@@ -83,7 +83,7 @@ public class HHLogin extends JFrame {
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.setName("Login");
-		btnNewButton.setBounds(90, 193, 102, 43);
+		btnNewButton.setBounds(90, 183, 102, 43);
 		contentPane.getRootPane().setDefaultButton(btnNewButton);
 		
 		btnNewButton.addActionListener(new ActionListener() {
@@ -122,6 +122,7 @@ public class HHLogin extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnRegister = new JButton("Register");
+		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnRegister.setName("Register");
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

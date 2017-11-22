@@ -39,6 +39,7 @@ public class AddStudentsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public AddStudentsPage() {
+		this.setName("addStudents");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 430, 270);
 		contentPane = new JPanel();
@@ -72,6 +73,7 @@ public class AddStudentsPage extends JFrame {
 		contentPane.add(lblChooseOneOf);
 		
 		JButton btnAddStudent = new JButton("Add Student");
+		btnAddStudent.setName("addStudent");
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddOneStudentForm frame = new AddOneStudentForm();
