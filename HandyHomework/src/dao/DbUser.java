@@ -130,13 +130,11 @@ public class DbUser extends DbConnection implements UserDAO  {
 	@Override
 	public List<StudentLogin> getStudentsForCourse(int cid) {
 		Connection conn = getConnection();
-		String query = "SELECT * FROM "	
+		String query = "SELECT user_id, cid, weight_earned, username, password FROM "	
 				+ constants.Constants.DataConstants.COURSECONTROL + " m," 
-				+ constants.Constants.DataConstants.USERS + " c where m.cid = ?;";
-		String query1 = "Select c.cid, c.courseCode, c.name, c.term from " 
-				+ constants.Constants.DataConstants.COURSECONTROL + " m," 
-				+ constants.Constants.DataConstants.COURSES + " c where m.user_id = ? "
-						+ " and m.cid = c.cid;";
+				+ constants.Constants.DataConstants.USERS + " c where m.user_id = c.user_id"
+						+ "and m.cid = ? and is_prof = false;";
+		
 		PreparedStatement stat;
 		ArrayList<StudentLogin> students = new ArrayList<StudentLogin>();
 		
@@ -148,8 +146,9 @@ public class DbUser extends DbConnection implements UserDAO  {
 			while (Rs.next()) {
 				int uid = Rs.getInt(1);
 				cid = Rs.getInt(2);
-				String username = Rs.getString(3);
-				String password = Rs.getString(4);	
+				
+				String username = Rs.getString(4);
+				String password = Rs.getString(5);	
 				
 				StudentLogin as = new StudentLogin(uid, username, password);	
 				students.add(as);

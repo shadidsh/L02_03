@@ -88,23 +88,28 @@ public class AddOneStudentForm extends JFrame {
 		studentNumField.setBounds(154, 86, 130, 26);
 		contentPane.add(studentNumField);
 		studentNumField.setColumns(10);
+		studentNumField.setName("studentNum");
 		
 		firstName = new JTextField();
 		firstName.setBounds(154, 150, 130, 26);
 		contentPane.add(firstName);
 		firstName.setColumns(10);
+		firstName.setName("firstname");
 		
 		lastName = new JTextField();
 		lastName.setBounds(154, 179, 130, 26);
 		contentPane.add(lastName);
 		lastName.setColumns(10);
+		lastName.setName("lastname");
 		
 		usernameField = new JTextField();
 		usernameField.setBounds(154, 118, 130, 26);
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
+		usernameField.setName("username");
 		
 		JButton btnAddStudent = new JButton("Add Student");
+		btnAddStudent.setName("addStudent");
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String studID = studentNumField.getText();
@@ -141,6 +146,7 @@ public class AddOneStudentForm extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.setBounds(10, 11, 67, 30);
 		contentPane.add(btnBack);
+		btnBack.setName("back");
 		
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
