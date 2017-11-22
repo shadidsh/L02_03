@@ -90,7 +90,6 @@ public class ViewStudentsPage extends JFrame {
 		        return columnNames[index];
 		    }
 		};
-//		model.setColumnIdentifiers(colHeadings);
 		
 		if (SelectedCourse.isSelected()) {
 			Course cs = SelectedCourse.getCourse();
@@ -106,14 +105,10 @@ public class ViewStudentsPage extends JFrame {
 		table = new JTable(model);
 		model.setColumnIdentifiers(colHeadings);
 	
-
-//		JPanel tablePanel = new JPanel(new BorderLayout());
-//		tablePanel.add(table, BorderLayout.CENTER);
-//		tablePanel.add(table.getTableHeader(), BorderLayout.NORTH);
-		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(42, 75, 376, 121);
 		contentPane.add(scrollPane);
+		scrollPane.setName("studentTable");
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setBounds(10, 11, 79, 30);
