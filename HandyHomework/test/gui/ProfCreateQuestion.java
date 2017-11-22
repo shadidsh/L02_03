@@ -1,12 +1,8 @@
 package gui;
 
-import static org.junit.Assert.*;
-
 import org.assertj.swing.edt.GuiActionRunner;
-import org.assertj.swing.finder.JOptionPaneFinder;
 import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.FrameFixture;
-import org.assertj.swing.fixture.JOptionPaneFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 import org.junit.Test;
 
@@ -37,7 +33,7 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 		window = new FrameFixture(robot(), frame);
 		
 	}
-	/*
+	
 	@Test
 	public void createQuestionError1() {
 		window.textBox("questionName").setText("assess");
@@ -49,30 +45,34 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 	public void createQuestionError2() {
 		window.textBox("content").setText("THIS IS YOOOOOOOOUR QUUUUESTIONS");
 		window.button("submit").click();
-		window.optionPane().requireVisible().requireMessage("One or more fields are empty.");
+		window.optionPane().requireVisible().requireMessage("One or more fields are empty.").click();
 	}
 	
 	@Test
 	public void createQuestionError3() {
 		window.textBox("questionAnswer").setText("THIS IS YOOOOOOOOUR ANSWWWWWWER");
 		window.button("submit").click();
-		window.optionPane().requireVisible().requireMessage("One or more fields are empty.");
+		window.optionPane().requireVisible().requireMessage("One or more fields are empty.").click();
 	}
-	*/
 	
 	@Test
-	public void createAndViewQuestion() {
+	public void createSpinInputError() {
+		window.spinner("spin").increment(22);
+		window.button("submit").click();
+		window.optionPane().requireVisible().requireMessage("One or more fields are empty.").click();
+	}
+	
+	
+	@Test
+	public void createViewAndRemoveQuestion() {
 		window.textBox("questionName").setText("THIS IS YOOOOOOOOUR Title");
 		window.textBox("content").setText("THIS IS YOOOOOOOOUR QUUUUESTIONS");
 		window.textBox("questionAnswer").setText("THIS IS YOOOOOOOOUR ANSWWWWWWER");
 		window.button("submit").click();
-		//JOptionPaneFixture optionPane = JOptionPaneFinder.findOptionPane().withTimeout(10000).using(robot());
-		
-		//optionPane.requireVisible().click();
 		window.button("back").click();
 		window = WindowFinder.findFrame("SavedQuestions").using(robot());
 		window.list("lstQuestion").requireVisible().clickItem("THIS IS YOOOOOOOOUR Title");
-		
+		window.button("removeQuestion").requireEnabled().requireVisible().click();
 	}
 	
 }

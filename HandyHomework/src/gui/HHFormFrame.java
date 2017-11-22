@@ -103,11 +103,12 @@ public class HHFormFrame extends JFrame {
 		lblNumberOfMarks.setBounds(20, 257, 180, 14);
 		contentPane.add(lblNumberOfMarks);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(192, 254, 90, 20);
-		contentPane.add(spinner);
+		JSpinner spinMarks = new JSpinner();
+		spinMarks.setBounds(192, 254, 90, 20);
+		contentPane.add(spinMarks);
+		spinMarks.setName("spin");
 		
-		JComponent field = ((JSpinner.DefaultEditor) spinner.getEditor());
+		JComponent field = ((JSpinner.DefaultEditor) spinMarks.getEditor());
 	    Dimension prefSize = field.getPreferredSize();
 	    prefSize = new Dimension(40, prefSize.height);
 	    field.setPreferredSize(prefSize);
@@ -121,7 +122,7 @@ public class HHFormFrame extends JFrame {
 				String name = String.valueOf(questionNameField.getText());
 				String questionContent = String.valueOf(questionContentField.getText());
 				String answer = String.valueOf(questionAnswerField.getText());
-				int value = (int) (spinner.getValue());
+				int value = (int) (spinMarks.getValue());
 				System.out.println("question is :" + questionContent);
 				if (name.isEmpty() || questionContent.isEmpty() || answer.isEmpty()) {
 					JOptionPane.showMessageDialog(HHFormFrame.this, "One or more fields are empty.");
@@ -142,8 +143,7 @@ public class HHFormFrame extends JFrame {
 						
 						questionNameField.setText("");
 						questionAnswerField.setText("");
-						spinner.setValue(0);
-						
+						spinMarks.setValue(0);						
 						
 					} catch (NullPointerException e1){
 						System.out.println("Could not insert question into database."); 

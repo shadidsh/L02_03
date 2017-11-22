@@ -59,14 +59,14 @@ public class QuestionTest {
 
 	@Test
 	public void testGetAssessID() {
-		int aID = TQ.getAssessID();
+		int aID = TQ.getQid();
 		assertEquals(0, aID);
 	}
 	
 	@Test
 	public void testSetAssessID() {
-		TQ.setAssessID(1);
-		int aID = TQ.getAssessID();
+		TQ.setQid(1);
+		int aID = TQ.getQid();
 		assertEquals(1, aID);
 	}
 

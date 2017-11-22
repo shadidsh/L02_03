@@ -112,7 +112,7 @@ public class DbCourse extends DbConnection implements CourseAccessDAO {
 	    		stat.setInt(2, cid);
 	    		System.out.println(stat);
 	    		   		
-	    		stat.executeQuery(); 
+	    		stat.executeUpdate(); 
 	    		
 	    		
 				String query = "select exists(select 1 from " + constants.Constants.DataConstants.COURSECONTROL 
@@ -144,7 +144,7 @@ public class DbCourse extends DbConnection implements CourseAccessDAO {
     		PreparedStatement stat = conn.prepareStatement(delete);
     		stat.setInt(1, cid);
     		
-    		ResultSet Rs = stat.executeQuery(); 
+    		stat.executeUpdate(); 
     		conn.close();
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
