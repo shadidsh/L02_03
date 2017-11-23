@@ -11,6 +11,7 @@ public interface UserDAO {
 
 	/**Should raise Unable to insert user error.*/
     public int addUser(String user, String pass, boolean isProf);
+    public int removeUser(String user);
 	public UserLogin getUser(int id); 
 	public UserLogin getUser(String user, String pass);
 	public boolean userExists(String user);	
