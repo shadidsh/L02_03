@@ -16,6 +16,8 @@ import dao.DbUser;
 import login.StudentLogin;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -72,7 +74,7 @@ public class ViewStudentsPage extends JFrame {
 				} 
 			}
 		});
-		btnAddStudentsPage.setBounds(147, 208, 142, 45);
+		btnAddStudentsPage.setBounds(231, 208, 142, 45);
 		contentPane.add(btnAddStudentsPage);
 		
 		
@@ -104,15 +106,38 @@ public class ViewStudentsPage extends JFrame {
 		
 		table = new JTable(model);
 		model.setColumnIdentifiers(colHeadings);
-	
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(42, 75, 376, 121);
 		contentPane.add(scrollPane);
 		scrollPane.setName("studentTable");
 		
 		JButton btnBack = new JButton("\u2190 Back");
-		btnBack.setBounds(10, 11, 79, 30);
+		btnBack.setBounds(17, 26, 90, 36);
 		contentPane.add(btnBack);
+		
+		JButton btnRemoveStudent = new JButton("Remove Student");
+		btnRemoveStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (table.getSelectedRow() == -1){
+					JOptionPane.showMessageDialog(ViewStudentsPage.this, "No student has been selected.");
+				} else {
+					int row = table.getSelectedRow();
+					DbUser stud = new DbUser();
+					DbCourse course = new DbCourse();
+					String user = (String) table.getValueAt(row, 1);
+					Course cs = SelectedCourse.getCourse();
+					
+					int ret = JOptionPane.showConfirmDialog(ViewStudentsPage.this, "Are you sure you want to remove " + user + "?", "Remove Student?", JOptionPane.YES_NO_OPTION);
+					if (ret == JOptionPane.YES_OPTION){
+						course.removeManagedCourses(stud.getUser(user).getId(), cs.getcID());
+						new ViewStudentsPage().setVisible(true);						
+						dispose();
+					}
+				}
+			}
+		});
+		btnRemoveStudent.setBounds(84, 208, 142, 45);
+		contentPane.add(btnRemoveStudent);
 		
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
