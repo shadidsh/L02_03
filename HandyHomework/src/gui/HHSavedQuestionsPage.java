@@ -77,7 +77,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedQuestionsPage() {
-		setName("View Questions");
+		setName("SavedQuestions");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 569, 420);
 		contentPane = new JPanel();
