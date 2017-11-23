@@ -94,7 +94,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 		JCheckBox chckbxContainsMCQ = new JCheckBox("Contains multiple choice");
 		chckbxContainsMCQ.setBounds(30, 195, 190, 23);
 		
-		JButton btnCreate = new JButton("Create Question");
+		JButton btnCreate = new JButton("Create Assessment");
 		btnCreate.setBounds(230, 273, 125, 40);
 		btnCreate.setName("create");
 		contentPane.getRootPane().setDefaultButton(btnCreate);

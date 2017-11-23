@@ -199,11 +199,6 @@ public class HHSavedAssessments extends JFrame {
 		listAssessment.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		JButton btnNewAssessment = new JButton("New Assessment");
-		if (SelectedUser.getUser().isProf()) {
-			btnNewAssessment.setBounds(257, 257, 160, 30);
-		} else {
-			btnNewAssessment.setBounds(254, 269, 275, 30);
-		}
 		btnNewAssessment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
@@ -214,7 +209,6 @@ public class HHSavedAssessments extends JFrame {
 				}
 			}
 		});
-		contentPane.add(btnNewAssessment);
 		
 		JButton btnBack = new JButton("\u2190 Back");
 		btnBack.addActionListener(new ActionListener() {
@@ -263,6 +257,8 @@ public class HHSavedAssessments extends JFrame {
 			contentPane.add(btnViewStudents);
 			btnRemove.setBounds(309, 326, 160, 30);
 			contentPane.add(btnRemove);
+			contentPane.add(btnNewAssessment);
+			btnNewAssessment.setBounds(257, 257, 160, 30);
 		}
 		
 		

@@ -77,9 +77,9 @@ public class HHSavedQuestionsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedQuestionsPage() {
-		setName("SavedQuestions");
+		setName("View Questions");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 569, 395);
+		setBounds(100, 100, 569, 420);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -181,7 +181,7 @@ public class HHSavedQuestionsPage extends JFrame {
 			Assessment as = SelectedAssessment.getAssess();
 			stat.setInt(1, as.getAid());
 			aid = as.getAid();
-			lblAssessmentName.setText("Assessment Name: "+ as.getName());
+			lblAssessmentName.setText(as.getName());
 
 			ResultSet Rs = stat.executeQuery();				
 			
@@ -256,7 +256,7 @@ public class HHSavedQuestionsPage extends JFrame {
 					
 					
 				}				
-				/*
+				
 				// Professor side - ans must change every time a new q is selected
 				if (selQuestion != null && SelectedUser.getUser().isProf()) {
 					questAnswer = selQuestion.getCorrectAnswer();
@@ -266,7 +266,7 @@ public class HHSavedQuestionsPage extends JFrame {
 						String answer = "Answer: " + questAnswer.getAnswer();
 						lblAnswer.setText(answer);
 					}
-				} */
+				} 
 			}
 			
 		});
@@ -274,7 +274,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		
 		listQuestion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		JButton btnRemove = new JButton("Remove Question");
+		JButton btnRemove = new JButton("Remove Selected");
 		btnRemove.setName("removeQuestion");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -288,31 +288,29 @@ public class HHSavedQuestionsPage extends JFrame {
 				}
 			}
 		});
+	
 		
-		btnRemove.setBounds(397, 302, 139, 35);
-		contentPane.add(btnRemove);
-		
-		//String answer = null;
-		
-		if (SelectedUser.getUser().isProf()){
-			// Add question button
-			JButton btnAdd = new JButton("Add Question");
-			btnAdd.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					//SharedQuestion.setQuestion(selQuestion);
-					HHFormFrame frame = new HHFormFrame();
-					frame.setVisible(true);	
-					frame.setResizable(false);
-					if (frame.isShowing()){
-						dispose();
-					}
+		JButton btnAdd = new JButton("Add Question");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//SharedQuestion.setQuestion(selQuestion);
+				HHFormFrame frame = new HHFormFrame();
+				frame.setVisible(true);	
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
 				}
-			});
-			btnAdd.setMaximumSize(new Dimension(139, 23));
-			btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			btnAdd.setBounds(29, 300, 136, 30);
+			}
+		});
+		btnAdd.setMaximumSize(new Dimension(139, 23));
+		btnAdd.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+				
+		if (SelectedUser.getUser().isProf()){
+			btnAdd.setBounds(58, 301, 130, 36);
 			contentPane.add(btnAdd);
 			
+			btnRemove.setBounds(58, 342, 130, 35);
+			contentPane.add(btnRemove);
 		} else {
 			// create answer field
 			questionAnswerField = new JTextField();
@@ -348,10 +346,9 @@ public class HHSavedQuestionsPage extends JFrame {
 					}				
 				}
 			});
-			btnView.setBounds(282, 293, 120, 31);
-			contentPane.add(btnView);	
+			btnView.setBounds(288, 325, 120, 31);
+			contentPane.add(btnView);
 		}
-		
 		
 	}
 }
