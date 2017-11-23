@@ -119,7 +119,7 @@ public class HHRegister extends JFrame {
 		lblRegister.setBounds(200, 5, 125, 30);
 		contentPane.add(lblRegister);
 		
-		JButton btnBack = new JButton("Back");
+		JButton btnBack = new JButton("\u2190 Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHLogin frame = new HHLogin();

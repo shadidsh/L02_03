@@ -152,7 +152,7 @@ public class AddOneStudentForm extends JFrame {
 		btnAddStudent.setBounds(167, 218, 117, 29);
 		contentPane.add(btnAddStudent);
 	
-		JButton btnBack = new JButton("Back");
+		JButton btnBack = new JButton("\u2190 Back");
 		btnBack.setBounds(10, 11, 67, 30);
 		contentPane.add(btnBack);
 		btnBack.setName("back");

@@ -138,7 +138,7 @@ public class AddStudentsPage extends JFrame {
 		btnAddStudent.setBounds(126, 169, 154, 48);
 		contentPane.add(btnAddStudent);
 		
-		JButton btnBack = new JButton("Back");
+		JButton btnBack = new JButton("\u2190 Back");
 		btnBack.setBounds(10, 11, 72, 30);
 		contentPane.add(btnBack);
 		

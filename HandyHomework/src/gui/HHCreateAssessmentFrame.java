@@ -151,7 +151,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 			}
 		});		
 		
-		JButton btnCancel = new JButton("\u2190Back");
+		JButton btnCancel = new JButton("\u2190 Back");
 		btnCancel.setName("back");
 		btnCancel.setBounds(6, 26, 86, 28);
 		btnCancel.addActionListener(new ActionListener() {

@@ -110,7 +110,7 @@ public class ViewStudentsPage extends JFrame {
 		contentPane.add(scrollPane);
 		scrollPane.setName("studentTable");
 		
-		JButton btnBack = new JButton("Back");
+		JButton btnBack = new JButton("\u2190 Back");
 		btnBack.setBounds(10, 11, 79, 30);
 		contentPane.add(btnBack);
 		

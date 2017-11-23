@@ -216,7 +216,7 @@ public class HHSavedAssessments extends JFrame {
 		});
 		contentPane.add(btnNewAssessment);
 		
-		JButton btnBack = new JButton("Back to Courses");
+		JButton btnBack = new JButton("\u2190 Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				HHViewCoursesPage frame = new HHViewCoursesPage();
@@ -244,8 +244,7 @@ public class HHSavedAssessments extends JFrame {
 			} 
 		}); 	
 		
-		btnRemove.setBounds(309, 326, 160, 30);
-		contentPane.add(btnRemove);
+		
 		
 		if (SelectedUser.getUser().isProf()) {
 			JButton btnViewStudents = new JButton("View Students");
@@ -262,6 +261,8 @@ public class HHSavedAssessments extends JFrame {
 			});
 			btnViewStudents.setBounds(420, 257, 120, 30);
 			contentPane.add(btnViewStudents);
+			btnRemove.setBounds(309, 326, 160, 30);
+			contentPane.add(btnRemove);
 		}
 		
 		
