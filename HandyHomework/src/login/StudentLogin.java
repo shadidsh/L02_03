@@ -10,4 +10,14 @@ public class StudentLogin extends UserLogin {
 		return false;
 	}
 	
+	
+	public String getName() {
+		return this.getUserName();
+	}
+	
+	@Override
+	public String getPassword() {
+		return this.getUserName();
+	}
+	
 }

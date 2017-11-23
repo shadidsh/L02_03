@@ -54,6 +54,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	private TextAnswer questAnswer;
 	
 	private TextQuestion selQuestion;
+	private int selInd;
 	
 
 	/**
@@ -77,9 +78,9 @@ public class HHSavedQuestionsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedQuestionsPage() {
-		setTitle("HandyHomework");
+		setName("SavedQuestions");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 569, 395);
+		setBounds(100, 100, 569, 420);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -122,14 +123,6 @@ public class HHSavedQuestionsPage extends JFrame {
 		gbc_labelTitle.gridy = 0;
 		panel.add(labelTitle, gbc_labelTitle);
 		questionTitle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		
-//		JLabel labelQuestion = new JLabel("");
-//		GridBagConstraints gbc_labelQuestion = new GridBagConstraints();
-//		gbc_labelQuestion.fill = GridBagConstraints.BOTH;
-//		gbc_labelQuestion.gridx = 0;
-//		gbc_labelQuestion.gridy = 1;
-//		panel.add(labelQuestion, gbc_labelQuestion);
-//		labelQuestion.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		
 		JTextArea questionText = new JTextArea("Select a Question");
 		questionText.setWrapStyleWord(true);
@@ -174,22 +167,22 @@ public class HHSavedQuestionsPage extends JFrame {
 		try {
 			PreparedStatement stat;
 			int aid;
-			
-			if (SelectedAssessment.isSelected()) {				
-				//JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Assessment is selected");
-				stat = conn.prepareStatement("SELECT * FROM "	
-						+ constants.Constants.DataConstants.QUESTIONS + " where aid = ?;");
-				Assessment as = SelectedAssessment.getAssess();
-				stat.setInt(1, as.getAid());
-				aid = as.getAid();
-				lblAssessmentName.setText(as.getName());
-			} else {
-				//JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No Assessments have been selected, displaying question for assessment 3");
-				stat = conn.prepareStatement("SELECT * FROM "	
-						+ constants.Constants.DataConstants.QUESTIONS + ";");
-				aid = 3;
+			if (!SelectedAssessment.isSelected()) {	
+				JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No Assessments have been selected, displaying question for assessment 3");
+				HHLogin frame = new HHLogin();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
-			System.out.println(stat);
+			stat = conn.prepareStatement("SELECT * FROM "	
+						+ constants.Constants.DataConstants.QUESTIONS + " where aid = ?;");
+			Assessment as = SelectedAssessment.getAssess();
+			stat.setInt(1, as.getAid());
+			aid = as.getAid();
+			lblAssessmentName.setText(as.getName());
+
 			ResultSet Rs = stat.executeQuery();				
 			
 			while (Rs.next()) {
@@ -199,7 +192,7 @@ public class HHSavedQuestionsPage extends JFrame {
 				String questionContent = Rs.getString(5);
 				Integer points = new Integer(Rs.getInt(6));
 				
-				TextQuestion question = new TextQuestion(aid, name, questionContent, points);
+				TextQuestion question = new TextQuestion(qid, name, questionContent, points);
 				DbQuestions dbQuest = new DbQuestions();
 				
 				TextAnswer ans = dbQuest.singleAnswerQuestion(qid); // db.DbConnection.answers_for_question(qid);
@@ -224,7 +217,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		JButton btnback = new JButton("\u2190 Back");
 		btnback.setBounds(15, 35, 115, 30);
 		contentPane.add(btnback);
-		
+		btnback.setName("back");
 		btnback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();
@@ -241,23 +234,29 @@ public class HHSavedQuestionsPage extends JFrame {
 		contentPane.add(scrollPane);
 		JList<String> listQuestion = new JList<>(lstQuestion);
 		scrollPane.setViewportView(listQuestion);
+		listQuestion.setName("lstQuestion");
 		
 		listQuestion.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				String res = "<html>This question is worth</html>";
 				//System.out.println(res);
 					
-				JList list = (JList) e.getSource();
-				TextQuestion question = questions.get(list.getSelectedIndex());
+				JList<?> list = (JList<?>) e.getSource();
+				int index = list.getSelectedIndex();
+				if (index != -1) {
+					TextQuestion question = questions.get(list.getSelectedIndex());
+					questionText.setText("Q: " + question.getQuestion());
+					questionText.setSize(questionText.getPreferredSize());
+					res = "<html>This question is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;
+					lblPts.setText(res);
+					questionTitle.setText("Title: " + question.getName());
+					questionTitle.setSize(questionTitle.getPreferredSize());
+					selQuestion = question;
+					questAnswer = selQuestion.getCorrectAnswer();
 					
-				questionText.setText("Q: " + question.getQuestion());	
-				questionText.setSize(questionText.getPreferredSize());
-				res = "<html>This question is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;
-				lblPts.setText(res);
-				questionTitle.setText("Title: " + question.getName());
-				questionTitle.setSize(questionTitle.getPreferredSize());
+					
+				}				
 				
-				selQuestion = question;
 				// Professor side - ans must change every time a new q is selected
 				if (selQuestion != null && SelectedUser.getUser().isProf()) {
 					questAnswer = selQuestion.getCorrectAnswer();
@@ -266,39 +265,52 @@ public class HHSavedQuestionsPage extends JFrame {
 					} else {
 						String answer = "Answer: " + questAnswer.getAnswer();
 						lblAnswer.setText(answer);
-//						contentPane.add(ans);
-//						ans.setBackground(Color.WHITE);
-//						ans.setAlignmentY(Component.CENTER_ALIGNMENT);
-//						ans.setBounds(229, 84, 307, 72);
-//						ans.setFont(new Font("Dialog", Font.PLAIN, 14));
 					}
 				} 
 			}
+			
 		});
 		
 		
 		listQuestion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		
-		if (SelectedUser.getUser().isProf()){
-			// Add question button
-			JButton btnAdd = new JButton("Add Question");
-			btnAdd.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					//SharedQuestion.setQuestion(selQuestion);
-					HHFormFrame frame = new HHFormFrame();
-					frame.setVisible(true);	
-					frame.setResizable(false);
-					if (frame.isShowing()){
-						dispose();
-					}
+		JButton btnRemove = new JButton("Remove Selected");
+		btnRemove.setName("removeQuestion");
+		btnRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selQuestion == null || selInd < 0 ) {
+					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Please select an assessment to remove.");
+				} else {
+					DbQuestions dq = new DbQuestions();
+					dq.removeQuestion(selQuestion.getQid());
+					lstQuestion.remove(selInd);
+					questions.remove(selInd);	
 				}
-			});
-			btnAdd.setMaximumSize(new Dimension(139, 23));
-			btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			btnAdd.setBounds(29, 300, 136, 30);
+			}
+		});
+
+		
+		JButton btnAdd = new JButton("Add Question");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//SharedQuestion.setQuestion(selQuestion);
+				HHFormFrame frame = new HHFormFrame();
+				frame.setVisible(true);	
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
+			}
+		});
+		btnAdd.setMaximumSize(new Dimension(139, 23));
+		btnAdd.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+				
+		if (SelectedUser.getUser().isProf()){
+			btnAdd.setBounds(58, 301, 130, 36);
 			contentPane.add(btnAdd);
 			
+			btnRemove.setBounds(58, 342, 130, 35);
+			contentPane.add(btnRemove);
 		} else {
 			// create answer field
 			questionAnswerField = new JTextField();
@@ -334,8 +346,8 @@ public class HHSavedQuestionsPage extends JFrame {
 					}				
 				}
 			});
-			btnView.setBounds(282, 293, 120, 31);
-			contentPane.add(btnView);	
+			btnView.setBounds(288, 325, 120, 31);
+			contentPane.add(btnView);
 		}
 		
 	}

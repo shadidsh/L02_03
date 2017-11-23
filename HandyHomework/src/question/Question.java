@@ -1,13 +1,13 @@
 package question;
 
 public abstract class Question {
-	public int assessID;
+	public int qid;
 	public String name;
 	public String question;
 	public int points;
 	
 	Question(int assessID, String name, String question, int points) {
-		this.assessID = assessID;
+		this.qid = assessID;
 		this.name = name;
 		this.question = question;
 		this.points = points;
@@ -26,12 +26,12 @@ public abstract class Question {
 		return this.points;
 	}
 	
-	public int getAssessID() {
-		return this.assessID;
+	public int getQid() {
+		return this.qid;
 	}
 
-	public void setAssessID(int assessID) {
-		this.assessID = assessID;
+	public void setQid(int assessID) {
+		this.qid = assessID;
 	}
 
 	public void setName(String name) {

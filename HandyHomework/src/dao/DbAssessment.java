@@ -86,8 +86,8 @@ public class DbAssessment extends DbConnection  implements AssessmentDAO {
 	public void removeAssessment(int aid) {
 		 Connection conn = getConnection();
 		 try{
-	    		String insert = "DELETE FROM " + constants.Constants.DataConstants.ASSESSMENTS + " WHERE aid = ?";
-	    		PreparedStatement stat = conn.prepareStatement(insert);
+	    		String delete = "DELETE FROM " + constants.Constants.DataConstants.ASSESSMENTS + " WHERE aid = ?";
+	    		PreparedStatement stat = conn.prepareStatement(delete);
 	    		
 	    		stat.setInt(1, aid);
 	    		ResultSet Rs = stat.executeQuery();

@@ -6,7 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
+import assessment.Assessment;
 import course.Course;
 import login.ProfessorLogin;
 import login.StudentLogin;
@@ -105,6 +108,37 @@ public class DbUser extends DbConnection implements UserDAO  {
     	return null;    	
     }
 
+	
+	public UserLogin getUser(String user) {
+    	Connection conn = getConnection();
+    	try { 
+    		
+    		String query = "select * from " + constants.Constants.DataConstants.USERS 
+    				+  " where username = ?";
+    		PreparedStatement stat = conn.prepareStatement(query);
+    		stat.setString(1, user);
+    		ResultSet Rs = stat.executeQuery(); 
+    		UserLogin userLog;
+    		if (Rs.next()) { 
+    			Integer userId = Rs.getInt(1);
+    			String username = Rs.getString(2);
+    			String password = Rs.getString(3);
+    			boolean isProf = Rs.getBoolean(4);
+    			//String email = Rs.getString(5);
+    			
+    			if (isProf) {
+    				userLog = new ProfessorLogin(userId, username, password);
+    			} else {
+    				userLog = new StudentLogin(userId, username, password);
+    			}
+    			return userLog;
+    		} 
+    	} catch(Exception ex) {
+    		System.out.print(ex.getMessage());    		
+    	}
+    	return null;    	
+    }
+
 	@Override
 	public boolean userExists(String user) {
     	Connection conn = getConnection();
@@ -123,4 +157,40 @@ public class DbUser extends DbConnection implements UserDAO  {
     	}
     	return false;    
 	}
+
+	@Override
+	public List<StudentLogin> getStudentsForCourse(int cid) {
+		Connection conn = getConnection();
+		String query = "SELECT c.user_id, cid, weight_earned, username, password FROM "	
+				+ constants.Constants.DataConstants.COURSECONTROL + " m," 
+				+ constants.Constants.DataConstants.USERS + " c where m.user_id = c.user_id"
+						+ " and m.cid = ? and is_prof = false;";
+		
+		PreparedStatement stat;
+		ArrayList<StudentLogin> students = new ArrayList<StudentLogin>();
+		
+		try {
+			stat = conn.prepareStatement(query);
+			stat.setInt(1, cid);
+			System.out.println(stat);
+			ResultSet Rs = stat.executeQuery();
+			
+			while (Rs.next()) {
+				int uid = Rs.getInt(1);
+				cid = Rs.getInt(2);
+				
+				String username = Rs.getString(4);
+				String password = Rs.getString(5);	
+				
+				StudentLogin as = new StudentLogin(uid, username, password);	
+				students.add(as);
+			}
+			conn.close();
+			
+		} catch (Exception ex) {
+    		System.out.println(ex.getMessage());
+		}
+		return students;
+	}
+	
 }

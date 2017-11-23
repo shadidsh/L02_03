@@ -55,6 +55,7 @@ public class HHViewCoursesPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHViewCoursesPage() {
+		this.setName("viewCourse");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -97,6 +98,7 @@ public class HHViewCoursesPage extends JFrame {
 		
 		JList listCourses = new JList<>(lstCourses);
 		listCourses.setBounds(66, 68, 304, 119);
+		listCourses.setName("courses");
 		
 		listCourses.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -106,13 +108,14 @@ public class HHViewCoursesPage extends JFrame {
 					Course as = courses.get(list.getSelectedIndex());
 					selectedCourse = as;
 					selInd = index;
-					
-				}				
+				}			
+				
 			}
 		});
 		
 		
 		JButton btnSelectCourse = new JButton("Select Course");
+		btnSelectCourse.setName("Select Course");
 		btnSelectCourse.setBounds(300, 209, 129, 35);
 		btnSelectCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -156,17 +159,19 @@ public class HHViewCoursesPage extends JFrame {
 		
 
 		JButton btnRemove = new JButton("Remove Course");
+		btnRemove.setName("removeCourse");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(SelectedCourse.isSelected());
-				System.out.println(selInd);
 				if (selectedCourse == null || selInd < 0 ) {
 					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "Please select a course to remove.");
 				} else {
 					DbCourse dbcourse = new DbCourse();
 					dbcourse.removeManagedCourses(SelectedUser.getUser().getId(), selectedCourse.getcID());
 					lstCourses.remove(selInd);
+					courses.remove(selInd);
+					//	((DefaultListModel) listCourses.getModel()).remove(selInd);
 					
+					//selInd = -1;
 					/*
 					HHViewCoursesPage frame = new HHViewCoursesPage();
 					frame.setVisible(true);	
@@ -192,7 +197,7 @@ public class HHViewCoursesPage extends JFrame {
 					}
 				}
 			});
-			btnAddCourse.setBounds(157, 209, 131, 35);
+			btnAddCourse.setBounds(163, 209, 131, 35);
 			contentPane.add(btnAddCourse);
 			
 			btnRemove.setBounds(15, 209, 141, 35);

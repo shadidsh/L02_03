@@ -52,6 +52,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public HHCreateAssessmentFrame() {
+		this.setName("SavedAssess");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 415, 370);
 		contentPane = new JPanel();
@@ -68,6 +69,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 		assessmentNameField = new JTextField();
 		assessmentNameField.setBounds(160, 80, 150, 20);
 		assessmentNameField.setColumns(10);
+		assessmentNameField.setName("assess");
 		
 		JLabel lblAssessmentTitle = new JLabel("* Assessment Title:");
 		lblAssessmentTitle.setBounds(30, 120, 150, 14);
@@ -75,12 +77,14 @@ public class HHCreateAssessmentFrame extends JFrame {
 		titleField = new JTextField();
 		titleField.setBounds(160, 115, 150, 20);
 		titleField.setColumns(10);
+		titleField.setName("title");
 		
 		JLabel lblTotalPointsAwarded = new JLabel("Total Points Awarded:");
 		lblTotalPointsAwarded.setBounds(30, 154, 150, 14);
 		
 		JSpinner spinner = new JSpinner();
 		spinner.setBounds(170, 151, 150, 20);
+		spinner.setName("spin");
 		
 		JComponent field = ((JSpinner.DefaultEditor) spinner.getEditor());
 	    Dimension prefSize = field.getPreferredSize();
@@ -90,11 +94,9 @@ public class HHCreateAssessmentFrame extends JFrame {
 		JCheckBox chckbxContainsMCQ = new JCheckBox("Contains multiple choice");
 		chckbxContainsMCQ.setBounds(30, 195, 190, 23);
 		
-		JCheckBox chckbxOptionalAssessment = new JCheckBox("Optional Assessment");
-		chckbxOptionalAssessment.setBounds(30, 230, 166, 23);
-		
-		JButton btnCreate = new JButton("Create Question");
+		JButton btnCreate = new JButton("Create Assessment");
 		btnCreate.setBounds(230, 273, 125, 40);
+		btnCreate.setName("create");
 		contentPane.getRootPane().setDefaultButton(btnCreate);
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -112,18 +114,15 @@ public class HHCreateAssessmentFrame extends JFrame {
 				// booleans
 				
 				boolean mult = chckbxContainsMCQ.isSelected();
-				boolean opt = chckbxOptionalAssessment.isSelected();
 				
 				System.out.println("Assessment name is :" + name);
 				if (name.isEmpty() || title.isEmpty()) {
-					// msg box to say mand fields are empty
 					JOptionPane.showMessageDialog(HHCreateAssessmentFrame.this, "One or more mandatory fields are empty.");
 				} else {
 					Calendar due = Calendar.getInstance();
 					 due.set(2017, 9, 25, 10, 05, 30);	
 						if (totalPoints > 100){
 							JOptionPane.showMessageDialog(HHCreateAssessmentFrame.this, "Maximum assessment weight is 100.");
-							//Assessment a1 = new Assessment(name, title, mult, opt);
 						} else if (!SelectedCourse.isSelected()) {
 							JOptionPane.showMessageDialog(HHCreateAssessmentFrame.this, 
 									"Attempting to insert Assessment without a course being selected");
@@ -152,7 +151,8 @@ public class HHCreateAssessmentFrame extends JFrame {
 			}
 		});		
 		
-		JButton btnCancel = new JButton("\u2190Back");
+		JButton btnCancel = new JButton("\u2190 Back");
+		btnCancel.setName("back");
 		btnCancel.setBounds(6, 26, 86, 28);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -172,7 +172,6 @@ public class HHCreateAssessmentFrame extends JFrame {
 		contentPane.add(titleField);
 		contentPane.add(lblAssessmentName);
 		contentPane.add(assessmentNameField);
-		contentPane.add(chckbxOptionalAssessment);
 		contentPane.add(chckbxContainsMCQ);
 		contentPane.add(btnCreate);
 		contentPane.add(btnCancel);		

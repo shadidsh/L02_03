@@ -70,7 +70,7 @@ public class HHSavedAssessments extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedAssessments() {
-		setTitle("HandyHomework");
+		this.setName("SavedAssess");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 395);
 		contentPane = new JPanel();
@@ -156,6 +156,7 @@ public class HHSavedAssessments extends JFrame {
 		scrollPane_2.setBounds(30, 97, 215, 239);
 		contentPane.add(scrollPane_2);
 		JList<String> listAssessment = new JList<>(lstAssess);
+		listAssessment.setName("assess");
 		scrollPane_2.setViewportView(listAssessment);
 		JLabel lblPts = new JLabel("");
 		lblPts.setBounds(283, 215, 203, 30);
@@ -198,11 +199,6 @@ public class HHSavedAssessments extends JFrame {
 		listAssessment.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		JButton btnNewAssessment = new JButton("New Assessment");
-		if (SelectedUser.getUser().isProf()) {
-			btnNewAssessment.setBounds(257, 257, 160, 30);
-		} else {
-			btnNewAssessment.setBounds(254, 269, 275, 30);
-		}
 		btnNewAssessment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
@@ -213,10 +209,9 @@ public class HHSavedAssessments extends JFrame {
 				}
 			}
 		});
-
 		contentPane.add(btnNewAssessment);
 		
-		JButton btnBack = new JButton("Back to Courses");
+		JButton btnBack = new JButton("\u2190 Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				HHViewCoursesPage frame = new HHViewCoursesPage();
@@ -231,37 +226,40 @@ public class HHSavedAssessments extends JFrame {
 		contentPane.add(btnBack);
 		
 		JButton btnRemove = new JButton("Remove Assessment");
+		btnRemove.setName("removeAssess");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (selectedAs == null || selInd < 0 ) {
 					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment to remove.");
 				} else {
 					dbAssess.removeAssessment(selectedAs.getAid());
-					
-					System.out.println(selInd);
 					lstAssess.remove(selInd);
-					//assess.remove(selInd);	
-					
-					// re-query this assessment - workaround to just load the page again
-					/*
-					HHSavedAssessments frame = new HHSavedAssessments();
+					assess.remove(selInd);	
+				}
+			} 
+		}); 	
+		
+		
+		
+		if (SelectedUser.getUser().isProf()) {
+			JButton btnViewStudents = new JButton("View Students");
+			btnViewStudents.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ViewStudentsPage frame = new ViewStudentsPage();
 					frame.setVisible(true);	
 					frame.setResizable(false);
 					if (frame.isShowing()){
 						dispose();
 					} 
-					*/
 				}
-			} 
-		}); 	
-		
-		btnRemove.setBounds(309, 326, 160, 30);
-		contentPane.add(btnRemove);
-		
-		if (SelectedUser.getUser().isProf()) {
-			JButton btnAddStudents = new JButton("Add Students");
-			btnAddStudents.setBounds(420, 257, 120, 30);
-			contentPane.add(btnAddStudents);
+				
+			});
+			btnViewStudents.setBounds(420, 257, 120, 30);
+			contentPane.add(btnViewStudents);
+			btnRemove.setBounds(309, 326, 160, 30);
+			contentPane.add(btnRemove);
+			contentPane.add(btnNewAssessment);
+			btnNewAssessment.setBounds(257, 257, 160, 30);
 		}
 		
 		

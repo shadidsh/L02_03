@@ -5,7 +5,7 @@ public class SelectedUser {
 	 public static UserLogin selectedUser = null;
 	 
 	 public static void setUser(UserLogin selected) {
-		 selectedUser = selected;	 
+		 selectedUser = selected;	
 	 }
 	 
 	 public static boolean isSelected() {

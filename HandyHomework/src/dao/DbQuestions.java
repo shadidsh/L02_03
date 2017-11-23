@@ -121,4 +121,23 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 		return res;
 	}
 
+	@Override
+	public void removeQuestion(int qid) {
+		Connection conn = getConnection();
+		//int res = -1;
+		try {
+    		String deleteAns = "DELETE FROM " + constants.Constants.DataConstants.ANSWERS + " WHERE qid = ?";
+    		PreparedStatement stat = conn.prepareStatement(deleteAns);
+    		stat.setInt(1, qid);
+    		stat.executeUpdate();
+    		
+    		String deleteQuest = "DELETE FROM " + constants.Constants.DataConstants.QUESTIONS + " WHERE qid = ?";
+    		PreparedStatement stat2 = conn.prepareStatement(deleteQuest);
+    		stat2.setInt(1, qid);
+    		stat2.executeUpdate();
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());  
+		}
+	}
+
 }
