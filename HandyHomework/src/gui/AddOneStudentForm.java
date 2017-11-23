@@ -129,7 +129,7 @@ public class AddOneStudentForm extends JFrame {
 					DbUser user = new DbUser();
 					if (!user.userExists(username)){
 						JOptionPane.showMessageDialog(
-								AddOneStudentForm.this, "Student is not registered, could not enrol student to course");
+								AddOneStudentForm.this, "Student " + username + " is not registered, could not enrol student to course");
 					} else {
 						UserLogin student = user.getUser(username);
 						DbCourse course = new DbCourse();
