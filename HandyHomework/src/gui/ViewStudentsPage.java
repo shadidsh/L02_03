@@ -51,6 +51,7 @@ public class ViewStudentsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewStudentsPage() {
+		this.setName("ViewStudentsPage");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -109,6 +110,7 @@ public class ViewStudentsPage extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(42, 75, 376, 121);
 		contentPane.add(scrollPane);
+		table.setName("studentTable");
 		scrollPane.setName("studentTable");
 		
 		JButton btnBack = new JButton("\u2190 Back");
@@ -116,6 +118,7 @@ public class ViewStudentsPage extends JFrame {
 		contentPane.add(btnBack);
 		
 		JButton btnRemoveStudent = new JButton("Remove Student");
+		btnRemoveStudent.setName("btnRemoveStudent");
 		btnRemoveStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow() == -1){

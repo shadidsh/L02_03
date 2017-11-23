@@ -3,7 +3,9 @@ package gui;
 import static org.junit.Assert.*;
 
 import org.assertj.swing.edt.GuiActionRunner;
+import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.FrameFixture;
+import org.assertj.swing.fixture.JTableFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 import org.junit.Test;
 
@@ -12,7 +14,7 @@ import course.SelectedCourse;
 import login.ProfessorLogin;
 import login.SelectedUser;
 
-public class ProfAddStudent  extends AssertJSwingJUnitTestCase  {
+public class ProfModifyStudent  extends AssertJSwingJUnitTestCase  {
 	private FrameFixture window;
 
 	@Override
@@ -33,13 +35,23 @@ public class ProfAddStudent  extends AssertJSwingJUnitTestCase  {
 		window.textBox("username").setText("Doesnt Exist");
 		window.button("addStudent").click();
 		window.optionPane().requireVisible().requireMessage(
-				"Student is not registered, could not enrol student to course");
+				"Student Doesnt Exist is not registered, could not enrol student to course");
 	}
 	
 	@Test
-	public void addExistingStudent() {
+	public void addAndRemoveStudent() {
 		window.textBox("username").setText("student");
 		window.button("addStudent").click();
+		window.button("back").click();
+		
+		window = WindowFinder.findFrame("addStudents").using(robot());
+		window.button("back").requireVisible().click();
+		
+		window = WindowFinder.findFrame("ViewStudentsPage").using(robot());
+		
+		window.table("studentTable").cell("student").click();
+		window.button("btnRemoveStudent").click();
+		window.optionPane().yesButton().click();
 	}
 
 }
