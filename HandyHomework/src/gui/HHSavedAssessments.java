@@ -141,8 +141,8 @@ public class HHSavedAssessments extends JFrame {
 				} else {
 					SelectedAssessment.setAssess(selectedAs);
 					
-					//HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-					AnswerStudentQuestions frame = new AnswerStudentQuestions();
+					HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
+					//AnswerStudentQuestions frame = new AnswerStudentQuestions();
 					frame.setVisible(true);	
 					frame.setResizable(false);
 					if (frame.isShowing()){
