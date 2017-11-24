@@ -140,7 +140,9 @@ public class HHSavedAssessments extends JFrame {
 					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment.");
 				} else {
 					SelectedAssessment.setAssess(selectedAs);
-					HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
+					
+					//HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
+					AnswerStudentQuestions frame = new AnswerStudentQuestions();
 					frame.setVisible(true);	
 					frame.setResizable(false);
 					if (frame.isShowing()){
