@@ -176,8 +176,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		DbQuestions dbQuest = new DbQuestions();
 		aid = as.getAid();
 		List<TextQuestion> questions = dbQuest.questions_for_assessments(aid);
-		
-		
+				
 		lblAssessmentName.setText(as.getName());
 		for (TextQuestion tq: questions ) {
 			lstQuestion.addElement(tq.getName());
@@ -208,7 +207,6 @@ public class HHSavedQuestionsPage extends JFrame {
 		listQuestion.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				String res = "<html>This question is worth</html>";
-				//System.out.println(res);
 					
 				JList<?> list = (JList<?>) e.getSource();
 				int index = list.getSelectedIndex();
