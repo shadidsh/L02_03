@@ -72,19 +72,18 @@ public class AnswerStudentQuestions extends JFrame {
 		setContentPane(contentPane);
 		getContentPane().setLayout(null);
 		
-		JLabel lblQuestions = new JLabel("Display your questions here?");
-		lblQuestions.setName("dispQuestion");
+		JLabel lblQuestions = new JLabel("");
+		lblQuestions.setName("");
 		lblQuestions.setHorizontalAlignment(SwingConstants.CENTER);
-		lblQuestions.setBounds(0, 75, 835, 144);
+		lblQuestions.setBounds(12, 74, 835, 144);
 		lblQuestions.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		getContentPane().add(lblQuestions);
-		lblQuestions.setText(null);
+		//lblQuestions.setText(null);
 		
 		JTextArea txtAns = new JTextArea();
 		txtAns.setName("Ans");
 		txtAns.setLineWrap(true);
 		txtAns.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtAns.setText("testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesSDDDDDDDDDDDDDttesttesttesttest");
 		txtAns.setBounds(12, 271, 811, 170);
 		getContentPane().add(txtAns);
 		
@@ -97,19 +96,19 @@ public class AnswerStudentQuestions extends JFrame {
 		
 
 		
-		JLabel lblPointsWorth = new JLabel("Points worth: ");
+		JLabel lblPointsWorth = new JLabel("");
 		lblPointsWorth.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPointsWorth.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblPointsWorth.setBounds(547, 0, 238, 72);
 		getContentPane().add(lblPointsWorth);
-		lblPointsWorth.setName(null);
+	//	lblPointsWorth.setName(null);
 		
-		JLabel lblQuestName = new JLabel("Question Name:");
+		JLabel lblQuestName = new JLabel("");
 		lblQuestName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblQuestName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblQuestName.setBounds(0, 0, 238, 72);
 		getContentPane().add(lblQuestName);
-		lblQuestName.setText(null);
+		//lblQuestName.setText(null);
 		
 		if (!SelectedAssessment.isSelected()) {
 			JOptionPane.showMessageDialog(AnswerStudentQuestions.this, "Asssessment not selected");
@@ -134,14 +133,14 @@ public class AnswerStudentQuestions extends JFrame {
 			HHLogin frame = new HHLogin();
 			frame.setVisible(true);
 			frame.setResizable(false);
-
 		}
 		System.out.println("gets here");
 		tq = textQ.next();
-		if (lblQuestions.getText().isEmpty() ) {
-			lblQuestions.setText(tq.getQuestion());
-			lblQuestName.setText(tq.getName());
-			lblPointsWorth.setText(new Integer(tq.getPoints()).toString() );
+		String q = String.valueOf(lblQuestions.getText());
+		if (q.isEmpty() ) {
+			lblQuestions.setText("Questions: " + tq.getQuestion());
+			lblQuestName.setText("Name: " + tq.getName());
+			lblPointsWorth.setText("Points: " + new Integer(tq.getPoints()).toString() );
 			
 		}
 		
@@ -160,10 +159,9 @@ public class AnswerStudentQuestions extends JFrame {
 						totalPts += tq.getPoints();
 					}
 					
-					test(AnswerStudentQuestions.this);
 					if (!textQ.hasNext()) {
 						JOptionPane.showMessageDialog(AnswerStudentQuestions.this, "Finished assessment");
-						HHLogin frame = new HHLogin();
+						HHSavedAssessments frame = new HHSavedAssessments();
 						frame.setVisible(true);
 						frame.setResizable(false);
 						if (frame.isShowing()){
@@ -183,11 +181,8 @@ public class AnswerStudentQuestions extends JFrame {
 		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnSubmit.setName("Submit");
 		btnSubmit.setBounds(652, 454, 171, 52);
-		frame.getContentPane().add(btnSubmit);
+		contentPane.add(btnSubmit);
 		
 	}
 	
-	private void test(AnswerStudentQuestions as) {
-		
-	}
 }
