@@ -3,7 +3,6 @@ package course;
 import java.util.ArrayList;
 
 import assessment.Assessment;
-import db.DbConnection;
 
 public class Course {
 	int cID;

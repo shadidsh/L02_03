@@ -34,7 +34,6 @@ import assessment.SelectedAssessment;
 import course.Course;
 import course.SelectedCourse;
 import dao.DbAssessment;
-import db.DbConnection;
 import login.SelectedUser;
 
 import java.awt.SystemColor;

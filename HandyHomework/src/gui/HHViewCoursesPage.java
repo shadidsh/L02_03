@@ -169,16 +169,6 @@ public class HHViewCoursesPage extends JFrame {
 					dbcourse.removeManagedCourses(SelectedUser.getUser().getId(), selectedCourse.getcID());
 					lstCourses.remove(selInd);
 					courses.remove(selInd);
-					//	((DefaultListModel) listCourses.getModel()).remove(selInd);
-					
-					//selInd = -1;
-					/*
-					HHViewCoursesPage frame = new HHViewCoursesPage();
-					frame.setVisible(true);	
-					frame.setResizable(false);
-					if (frame.isShowing()){
-						dispose();
-					} */
 				}
 			}
 		});

@@ -13,7 +13,42 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 
 	@Override
 	public List<TextQuestion> questions_for_assessments(int aid) {
-		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		try {
+    		String query = "Select qid, is_mult, name, question, points from "
+    				+ constants.Constants.DataConstants.QUESTIONS + " where "
+    						+ " aid = ?";
+    		PreparedStatement stat = conn.prepareStatement(query);
+    		stat.setInt(1, aid);
+    		ResultSet Rs = stat.executeQuery();
+    		
+    		ArrayList<TextQuestion> questions = new ArrayList<TextQuestion>() ;
+    		TextAnswer ta;
+    		TextQuestion tq;
+    		while (Rs.next()) {
+    			int qid = Rs.getInt(1);
+    			boolean isMult = Rs.getBoolean(2);
+    			String name = Rs.getString(3);
+    			String question = Rs.getString(4);
+    			int points = Rs.getInt(5);
+    			
+    			if (isMult) {
+
+    			} else {
+    				tq = new TextQuestion(qid, name, question, points);
+    				ta = this.singleAnswerQuestion(qid);
+    				tq.setAnswer(ta);
+    				questions.add(tq);
+    			}
+    		}
+    		
+    		conn.close();
+    		return questions;
+    		
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());  
+		}
+		
 		return null;
 	}
 
