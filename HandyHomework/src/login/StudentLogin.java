@@ -18,7 +18,7 @@ public class StudentLogin extends UserLogin {
 	
 	@Override
 	public String getPassword() {
-		return this.getUserName();
+		return this.getPassword();
 	}
 	
 }
