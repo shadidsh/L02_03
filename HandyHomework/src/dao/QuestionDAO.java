@@ -16,5 +16,10 @@ public interface QuestionDAO {
 	public TextAnswer singleAnswerQuestion(int questID);
 	public int insertAnswers(int forQuest, boolean isCorrect, String answer);
 
+	void removeQuestionsForAssessments(int aid);
+	
+	
+	
+	void removeUserAnswers(int aid);
 	
 }

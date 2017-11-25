@@ -3,7 +3,6 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -87,7 +86,10 @@ public class DbAssessment extends DbConnection  implements AssessmentDAO {
 		 Connection conn = getConnection();
 		 try{
 	    		String delete = "DELETE FROM " + constants.Constants.DataConstants.ASSESSMENTS + " WHERE aid = ?";
-	    		PreparedStatement stat = conn.prepareStatement(delete);
+	    		PreparedStatement stat = conn.prepareStatement(delete);	    		
+	    		
+	    		DbQuestions dbq = new DbQuestions();	    		
+	    		dbq.removeQuestionsForAssessments(aid);
 	    		
 	    		stat.setInt(1, aid);
 	    		ResultSet Rs = stat.executeQuery();
@@ -95,5 +97,13 @@ public class DbAssessment extends DbConnection  implements AssessmentDAO {
 		 }catch(Exception ex) {
 	    		System.out.println(ex.getMessage());    		
 	     }
+	}
+
+	@Override
+	public void removeAssessmentForCourse(int cid) {
+		List<Assessment> ac = getAssessmentForCourse(cid);
+		for (Assessment assess : ac) {
+			this.removeAssessment(assess.getAid());
+		}		
 	}
 }

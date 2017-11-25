@@ -10,7 +10,6 @@ public class TextAnswer {
 		this.questID = questID;
 		this.setCorrect(isCorrect);
 	}
-	
 	public boolean isCorrect(String userAnswer) {
 		return this.answer.equals(userAnswer) && this.isCorrect();
 	}

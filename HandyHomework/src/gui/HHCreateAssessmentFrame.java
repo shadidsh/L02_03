@@ -90,9 +90,6 @@ public class HHCreateAssessmentFrame extends JFrame {
 	    Dimension prefSize = field.getPreferredSize();
 	    prefSize = new Dimension(40, prefSize.height);
 	    field.setPreferredSize(prefSize);
-	    
-		JCheckBox chckbxContainsMCQ = new JCheckBox("Contains multiple choice");
-		chckbxContainsMCQ.setBounds(30, 195, 190, 23);
 		
 		JButton btnCreate = new JButton("Create Assessment");
 		btnCreate.setBounds(230, 273, 125, 40);
@@ -104,16 +101,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 				String name = String.valueOf(assessmentNameField.getText()); 
 				String title = String.valueOf(titleField.getText());
 				
-				// get date thing? TODO
-				// Date due = dateChooser.getDate();
-				//Calendar c = new GregorianCalendar();
-				//c.setTime(due);
-				// points
-				
 				int totalPoints = (int) (spinner.getValue());
-				// booleans
-				
-				boolean mult = chckbxContainsMCQ.isSelected();
 				
 				System.out.println("Assessment name is :" + name);
 				if (name.isEmpty() || title.isEmpty()) {
@@ -172,7 +160,6 @@ public class HHCreateAssessmentFrame extends JFrame {
 		contentPane.add(titleField);
 		contentPane.add(lblAssessmentName);
 		contentPane.add(assessmentNameField);
-		contentPane.add(chckbxContainsMCQ);
 		contentPane.add(btnCreate);
 		contentPane.add(btnCancel);		
 		

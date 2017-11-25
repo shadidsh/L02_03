@@ -39,6 +39,16 @@ public class MultQuestion extends Question {
 		}
 		at.add(answer);
 	}
+	
+	@Override
+	public boolean hasAnswer() {
+		for (TextAnswer ans: at) {
+			if (ans.isCorrect()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public void addAnswer(TextAnswer answer) {
 		at.add(answer);
@@ -47,4 +57,6 @@ public class MultQuestion extends Question {
 	public void addAnswers(List<TextAnswer> answer) {
 		at.addAll(answer);
 	}
+
+
 }

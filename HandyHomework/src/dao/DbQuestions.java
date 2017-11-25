@@ -33,6 +33,7 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
     			int points = Rs.getInt(5);
     			
     			if (isMult) {
+    				/* TODO: When multiple choice questions are added*/
 
     			} else {
     				tq = new TextQuestion(qid, name, question, points);
@@ -77,34 +78,6 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 		}
 		return res;
 	}
-	/*
-	@Override
-	public List<TextAnswer> ansForQuestion(int questID) {
-    	Connection conn = getConnection();
-    	ArrayList<TextAnswer>  at =  new ArrayList<TextAnswer>();
-    	try{
-    		String query = "SELECT * FROM "	+ constants.Constants.DataConstants.ANSWERS + " where qid = ?;";
-    		PreparedStatement stat = conn.prepareStatement(query);
-    		stat.setInt(1, questID);
-    		ResultSet Rs = stat.executeQuery();    		
-    		
-    		while (Rs.next()) {
-    			// Create and return a list of answer objects
-    			
-    			Boolean isCorrect = Rs.getBoolean(3);
-    			String answer = Rs.getString(4);    			
-    			TextAnswer ans = new TextAnswer(questID, answer, isCorrect);
-    			at.add(ans);
-    			System.out.println(answer);    
-    		}
-    		
-    		conn.close();
-    	}catch(Exception ex) {
-    		System.out.print(ex.getMessage());    		
-    	}
-		return at;
-	}
-	*/
 	
 	@Override
 	public TextAnswer singleAnswerQuestion(int questID) {
@@ -114,7 +87,7 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
     		PreparedStatement stat = conn.prepareStatement(query);
     		stat.setInt(1, questID);
     		ResultSet Rs = stat.executeQuery();    		
-    		
+    		System.out.println(stat);
     		if (Rs.next()) {
     			// Create and return a list of answer objects
     			
@@ -159,7 +132,6 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 	@Override
 	public void removeQuestion(int qid) {
 		Connection conn = getConnection();
-		//int res = -1;
 		try {
     		String deleteAns = "DELETE FROM " + constants.Constants.DataConstants.ANSWERS + " WHERE qid = ?";
     		PreparedStatement stat = conn.prepareStatement(deleteAns);
@@ -174,5 +146,20 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 			System.out.println(ex.getMessage());  
 		}
 	}
+
+	@Override
+	public void removeQuestionsForAssessments(int aid) {
+		List<TextQuestion> questions = this.questions_for_assessments(aid);
+		for (TextQuestion tq: questions) {
+			this.removeQuestion(tq.getQid());
+		}
+	}
+
+	@Override
+	public void removeUserAnswers(int aid) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

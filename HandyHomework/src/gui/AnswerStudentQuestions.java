@@ -34,6 +34,8 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AnswerStudentQuestions extends JFrame {
 
@@ -41,6 +43,7 @@ public class AnswerStudentQuestions extends JFrame {
 	private JFrame frame;
 	private TextQuestion tq;
 	private int totalPts = 0;
+	private boolean nextQ = true;
 
 	/**
 	 * Launch the application.
@@ -124,43 +127,42 @@ public class AnswerStudentQuestions extends JFrame {
 		List<TextQuestion> textQuests = dbQuest.questions_for_assessments(aid);
 		ListIterator<TextQuestion>  textQ = textQuests.listIterator();
 		
-		
 		if (!textQ.hasNext()) {
-			JOptionPane.showMessageDialog(AnswerStudentQuestions.this, "Finished assessment");
-			if (frame.isShowing()){
-				dispose();
-			}
-			HHLogin frame = new HHLogin();
+			JOptionPane.showMessageDialog(AnswerStudentQuestions.this, 
+					"There are no questions for this assessment");
+			HHSavedAssessments frame = new HHSavedAssessments();
 			frame.setVisible(true);
 			frame.setResizable(false);
+			if (frame.isShowing()){
+				dispose();
+			}			
+
 		}
-		System.out.println("gets here");
-		tq = textQ.next();
-		String q = String.valueOf(lblQuestions.getText());
-		if (q.isEmpty() ) {
+		
+	//	if (nextQ) {
+			tq = textQ.next();
+			String q = String.valueOf(lblQuestions.getText());
 			lblQuestions.setText("Questions: " + tq.getQuestion());
 			lblQuestName.setText("Name: " + tq.getName());
-			lblPointsWorth.setText("Points: " + new Integer(tq.getPoints()).toString() );
+			lblPointsWorth.setText("Points: " + new Integer(tq.getPoints()).toString() );	
 			
-		}
-		
+	//	}		
 		
 		JButton btnSubmit = new JButton("Submit Answer");
-		btnSubmit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnSubmit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				String answer = String.valueOf(txtAns.getText());
 				
 				// AnswerStudentQuestions
 				if (answer.isEmpty()) {
 					JOptionPane.showMessageDialog(AnswerStudentQuestions.this, "Answer field is empty.");
+				} else if (tq == null) {
+					JOptionPane.showMessageDialog(AnswerStudentQuestions.this, ".");
 				} else {
-					TextAnswer ta = tq.getCorrectAnswer();
-					if (ta.isCorrect(answer.toString())) {
-						totalPts += tq.getPoints();
-					}
-					
-					if (!textQ.hasNext()) {
-						JOptionPane.showMessageDialog(AnswerStudentQuestions.this, "Finished assessment");
+					if (!tq.hasAnswer()) {
+						JOptionPane.showMessageDialog(AnswerStudentQuestions.this, 
+								"ERROR in the Database - There are no answers for this question");
 						HHSavedAssessments frame = new HHSavedAssessments();
 						frame.setVisible(true);
 						frame.setResizable(false);
@@ -168,14 +170,40 @@ public class AnswerStudentQuestions extends JFrame {
 							dispose();
 						}
 					}
-					tq = textQ.next();
-					if (lblQuestions.getText().isEmpty() ) {
-						lblQuestions.setText(tq.getQuestion());
-						lblQuestName.setText(tq.getName());
-						lblPointsWorth.setText(new Integer(tq.getPoints()).toString() );
-						
+					
+					TextAnswer ta = tq.getCorrectAnswer();
+					System.out.print(answer.toString() + ": vs. :" + ta.getAnswer());
+					
+					if (ta.isCorrect(answer.toString())) {
+						totalPts += tq.getPoints();
 					}
-				}
+					//nextQ = true;
+					
+					if (!textQ.hasNext()) {
+						JOptionPane.showMessageDialog(
+								AnswerStudentQuestions.this, "Finished assessment, points earned : " + totalPts);
+						HHSavedAssessments frame = new HHSavedAssessments();
+						frame.setVisible(true);
+						frame.setResizable(false);
+						if (frame.isShowing()){
+							dispose();
+						}
+					} else {
+						tq = textQ.next();
+						String q = String.valueOf(lblQuestions.getText());
+						lblQuestions.setText("Questions: " + tq.getQuestion());
+						lblQuestName.setText("Name: " + tq.getName());
+						lblPointsWorth.setText("Points: " + new Integer(tq.getPoints()).toString() );	
+					}
+					}
+
+			}
+		});
+		
+		
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
 			}
 		});
 		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 15));

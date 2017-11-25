@@ -46,5 +46,5 @@ public abstract class Question {
 		this.points = points;
 	}
 	
-	
+	public abstract boolean hasAnswer();
 }

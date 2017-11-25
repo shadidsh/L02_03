@@ -17,4 +17,9 @@ public class TextQuestion extends Question{
 	public void setAnswer(TextAnswer ans) {
 		this.textAns = ans;
 	}
+
+	@Override
+	public boolean hasAnswer() {
+		return textAns != null;
+	}
 }

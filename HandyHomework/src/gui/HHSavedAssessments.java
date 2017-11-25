@@ -34,6 +34,8 @@ import assessment.SelectedAssessment;
 import course.Course;
 import course.SelectedCourse;
 import dao.DbAssessment;
+import dao.DbCourse;
+import dao.DbQuestions;
 import login.SelectedUser;
 
 import java.awt.SystemColor;
@@ -141,13 +143,21 @@ public class HHSavedAssessments extends JFrame {
 				} else {
 					SelectedAssessment.setAssess(selectedAs);
 					
-					//HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-					AnswerStudentQuestions frame = new AnswerStudentQuestions();
-					frame.setVisible(true);	
-					frame.setResizable(false);
-					if (frame.isShowing()){
-						dispose();
-					}
+					if (SelectedUser.getUser().isProf()) {
+						HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
+						frame.setVisible(true);	
+						frame.setResizable(false);
+						if (frame.isShowing()){
+							dispose();
+						}
+					} else {
+						AnswerStudentQuestions frame = new AnswerStudentQuestions();
+						frame.setVisible(true);	
+						frame.setResizable(false);
+						if (frame.isShowing()){
+							dispose();
+						}
+					}				
 				}
 				}
 		});
@@ -233,6 +243,7 @@ public class HHSavedAssessments extends JFrame {
 				if (selectedAs == null || selInd < 0 ) {
 					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment to remove.");
 				} else {
+					
 					dbAssess.removeAssessment(selectedAs.getAid());
 					lstAssess.remove(selInd);
 					assess.remove(selInd);	
