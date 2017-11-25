@@ -21,6 +21,7 @@ public class Constants {
 		 public static final String USERS   = "users";
 		 
 		 public static final String COURSECONTROL   = "courseControl";
+		 public static final String USERANSWERS   = "user_answers";
 		 
 	 }
 	

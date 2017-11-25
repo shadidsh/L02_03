@@ -157,8 +157,17 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 
 	@Override
 	public void removeUserAnswers(int aid) {
-		// TODO Auto-generated method stub
-		
+		Connection conn = getConnection();
+		try {
+    		String deleteAns = "DELETE FROM " 
+		+ constants.Constants.DataConstants.USERANSWERS + " WHERE aid = ?";
+    		PreparedStatement stat = conn.prepareStatement(deleteAns);
+    		stat.setInt(1, aid);
+    		stat.executeUpdate();
+    		
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());  
+		}	
 	}
 
 

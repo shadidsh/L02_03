@@ -191,8 +191,17 @@ public class DbUser extends DbConnection implements UserDAO  {
 
 	@Override
 	public void removeAnswersForUser(int uid) {
-		// TODO Auto-generated method stub
-		
+		Connection conn = getConnection();
+		try {
+    		String deleteAns = "DELETE FROM " 
+		+ constants.Constants.DataConstants.USERANSWERS + " WHERE user_id = ?";
+    		PreparedStatement stat = conn.prepareStatement(deleteAns);
+    		stat.setInt(1, uid);
+    		stat.executeUpdate();
+    		
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());  
+		}		
 	}
 	
 }
