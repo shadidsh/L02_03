@@ -20,6 +20,7 @@ import java.awt.Dimension;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -54,7 +55,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	
 	private TextQuestion selQuestion;
 	private int selInd;
-	
+	private String selected = "";
 
 	/**
 	 * Launch the application.
@@ -237,7 +238,17 @@ public class HHSavedQuestionsPage extends JFrame {
 			}
 			
 		});
-		
+		String[] cBoxStrings = {"Text Question", "Multiple Choice Question"};
+		JComboBox<Object> cBox = new JComboBox<Object>(cBoxStrings);
+		cBox.setSelectedIndex(0);
+		selected = (String) cBox.getSelectedItem();
+		cBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selected = (String) cBox.getSelectedItem();
+			}
+		});
+		cBox.setBounds(250, 300, 200, 30);
+		contentPane.add(cBox);
 		
 		listQuestion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
@@ -260,11 +271,21 @@ public class HHSavedQuestionsPage extends JFrame {
 		JButton btnAdd = new JButton("Add Question");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HHFormFrame frame = new HHFormFrame();
-				frame.setVisible(true);	
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
+				if (selected.equals("Text Question")) {
+					HHFormFrame frame = new HHFormFrame();
+					frame.setVisible(true);	
+					frame.setResizable(false);
+					if (frame.isShowing()){
+						dispose();
+					}
+				}
+				else if (selected.equals("Multiple Choice Question")) {
+					AddMultipleChoice frame = new AddMultipleChoice();
+					frame.setVisible(true);	
+					frame.setResizable(false);
+					if (frame.isShowing()){
+						dispose();
+					}
 				}
 			}
 		});
