@@ -139,14 +139,11 @@ public class AnswerStudentQuestions extends JFrame {
 
 		}
 		
-	//	if (nextQ) {
-			tq = textQ.next();
-			String q = String.valueOf(lblQuestions.getText());
-			lblQuestions.setText("Questions: " + tq.getQuestion());
-			lblQuestName.setText("Name: " + tq.getName());
-			lblPointsWorth.setText("Points: " + new Integer(tq.getPoints()).toString() );	
-			
-	//	}		
+		tq = textQ.next();
+		lblQuestions.setText("Questions: " + tq.getQuestion());
+		lblQuestName.setText("Name: " + tq.getName());
+		lblPointsWorth.setText("Points: " + new Integer(tq.getPoints()).toString() );	
+					
 		
 		JButton btnSubmit = new JButton("Submit Answer");
 		btnSubmit.addMouseListener(new MouseAdapter() {
@@ -172,13 +169,14 @@ public class AnswerStudentQuestions extends JFrame {
 					}
 					
 					TextAnswer ta = tq.getCorrectAnswer();
-					System.out.print(answer.toString() + ": vs. :" + ta.getAnswer());
-					
+					System.out.println(answer.toString() + ": vs. :" + ta.getAnswer());
 					if (ta.isCorrect(answer.toString())) {
 						totalPts += tq.getPoints();
 					}
-					//nextQ = true;
-					
+					System.out.print(textQ.hasNext());
+					System.out.println("gets here");
+					System.out.println(textQ.nextIndex());
+					System.out.println(textQ.toString());
 					if (!textQ.hasNext()) {
 						JOptionPane.showMessageDialog(
 								AnswerStudentQuestions.this, "Finished assessment, points earned : " + totalPts);
@@ -190,13 +188,11 @@ public class AnswerStudentQuestions extends JFrame {
 						}
 					} else {
 						tq = textQ.next();
-						String q = String.valueOf(lblQuestions.getText());
 						lblQuestions.setText("Questions: " + tq.getQuestion());
 						lblQuestName.setText("Name: " + tq.getName());
 						lblPointsWorth.setText("Points: " + new Integer(tq.getPoints()).toString() );	
 					}
-					}
-
+				}
 			}
 		});
 		
