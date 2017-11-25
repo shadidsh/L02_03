@@ -1,5 +1,4 @@
 package gui;
-import db.DbConnection;
 import login.SelectedUser;
 import question.TextQuestion;
 
@@ -34,6 +33,7 @@ import dao.DbQuestions;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextField;
+import javax.swing.JScrollBar;
 import java.awt.Component;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -156,64 +156,32 @@ public class HHSavedQuestionsPage extends JFrame {
 		gbc_lblAnswer.gridy = 5;
 		gbc_lblAnswer.fill = GridBagConstraints.BOTH;
 		panel.add(lblAnswer, gbc_lblAnswer);
-				
-		Connection conn = DbConnection.getConnection();
-		//String res = "";
 		
-		DefaultListModel<String> lstQuestion = new DefaultListModel<>();		
-		ArrayList<TextQuestion> questions = new ArrayList<TextQuestion>();
-		
-		try {
-			PreparedStatement stat;
-			int aid;
 			
-			if (!SelectedAssessment.isSelected()) {	
-				JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "No Assessments have been selected, displaying question for assessment 3");
-				HHLogin frame = new HHLogin();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
-				}
+		
+		int aid;
+		if (!SelectedAssessment.isSelected()) {	
+			JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, 
+					"No Assessments have been selected, returning to login");
+			HHLogin frame = new HHLogin();
+			frame.setVisible(true);
+			frame.setResizable(false);
+			if (frame.isShowing()){
+				dispose();
 			}
-			stat = conn.prepareStatement("SELECT * FROM "	
-						+ constants.Constants.DataConstants.QUESTIONS + " where aid = ?;");
-			Assessment as = SelectedAssessment.getAssess();
-			stat.setInt(1, as.getAid());
-			aid = as.getAid();
-			lblAssessmentName.setText(as.getName());
-
-			ResultSet Rs = stat.executeQuery();				
-			
-			while (Rs.next()) {
-				
-				int qid = Rs.getInt(1);
-				String name = Rs.getString(4);
-				String questionContent = Rs.getString(5);
-				Integer points = new Integer(Rs.getInt(6));
-				
-				TextQuestion question = new TextQuestion(qid, name, questionContent, points);
-				DbQuestions dbQuest = new DbQuestions();
-				
-				TextAnswer ans = dbQuest.singleAnswerQuestion(qid); // db.DbConnection.answers_for_question(qid);
-				question.setAnswer(ans);				
-				
-				lstQuestion.addElement(question.getName());
-				questions.add(question);
-					
-			}	
-			Rs.close();
-			conn.close();
-				
-		} catch (SQLException e1) {
-				e1.printStackTrace();
-				System.out.println("Could not access database."); 
-				JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Could not access database - " + "\nplease check your connection and try again.");
-		} catch (NullPointerException e2) {
-			e2.printStackTrace();
-			System.out.println("Could not access database."); 
-			JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Could not access database - " + "\nplease check your connection and try again.");
 		}
+		
+		DefaultListModel<String> lstQuestion = new DefaultListModel<>();	
+		Assessment as = SelectedAssessment.getAssess();
+		DbQuestions dbQuest = new DbQuestions();
+		aid = as.getAid();
+		List<TextQuestion> questions = dbQuest.questions_for_assessments(aid);
+				
+		lblAssessmentName.setText(as.getName());
+		for (TextQuestion tq: questions ) {
+			lstQuestion.addElement(tq.getName());
+		}
+			
 		JButton btnback = new JButton("\u2190 Back");
 		btnback.setBounds(15, 35, 115, 30);
 		contentPane.add(btnback);
@@ -228,7 +196,7 @@ public class HHSavedQuestionsPage extends JFrame {
 				}
 			}
 		});
-			
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(29, 84, 188, 205);
 		contentPane.add(scrollPane);
@@ -239,7 +207,6 @@ public class HHSavedQuestionsPage extends JFrame {
 		listQuestion.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				String res = "<html>This question is worth</html>";
-				//System.out.println(res);
 					
 				JList<?> list = (JList<?>) e.getSource();
 				int index = list.getSelectedIndex();
@@ -288,12 +255,11 @@ public class HHSavedQuestionsPage extends JFrame {
 				}
 			}
 		});
-	
+
 		
 		JButton btnAdd = new JButton("Add Question");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//SharedQuestion.setQuestion(selQuestion);
 				HHFormFrame frame = new HHFormFrame();
 				frame.setVisible(true);	
 				frame.setResizable(false);
@@ -312,7 +278,6 @@ public class HHSavedQuestionsPage extends JFrame {
 			btnRemove.setBounds(58, 342, 130, 35);
 			contentPane.add(btnRemove);
 		} else {
-			// create answer field
 			questionAnswerField = new JTextField();
 			contentPane.add(questionAnswerField);
 			questionAnswerField.setBackground(Color.WHITE);
@@ -321,7 +286,6 @@ public class HHSavedQuestionsPage extends JFrame {
 			questionAnswerField.setBounds(29, 310, 247, 57);
 			questionAnswerField.setFont(new Font("Dialog", Font.PLAIN, 14));
 			questionAnswerField.setSelectedTextColor(Color.black);
-			// Submit button
 			JButton btnView = new JButton("Submit Answer");
 			btnView.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {

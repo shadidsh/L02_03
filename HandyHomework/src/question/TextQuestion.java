@@ -16,6 +16,5 @@ public class TextQuestion extends Question{
 	
 	public void setAnswer(TextAnswer ans) {
 		this.textAns = ans;
-		
 	}
 }

@@ -34,7 +34,6 @@ import assessment.SelectedAssessment;
 import course.Course;
 import course.SelectedCourse;
 import dao.DbAssessment;
-import db.DbConnection;
 import login.SelectedUser;
 
 import java.awt.SystemColor;
@@ -209,6 +208,7 @@ public class HHSavedAssessments extends JFrame {
 				}
 			}
 		});
+		contentPane.add(btnNewAssessment);
 		
 		JButton btnBack = new JButton("\u2190 Back");
 		btnBack.addActionListener(new ActionListener() {

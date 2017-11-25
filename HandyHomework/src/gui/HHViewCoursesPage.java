@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import course.Course;
 import course.SelectedCourse;
+
 import dao.DbCourse;
 import dao.DbUser;
 import login.SelectedUser;
@@ -156,6 +157,7 @@ public class HHViewCoursesPage extends JFrame {
 		contentPane.add(listCourses);
 		contentPane.add(lblCourses);
 		
+
 		JButton btnRemove = new JButton("Remove Course");
 		btnRemove.setName("removeCourse");
 		btnRemove.addActionListener(new ActionListener() {
@@ -167,16 +169,6 @@ public class HHViewCoursesPage extends JFrame {
 					dbcourse.removeManagedCourses(SelectedUser.getUser().getId(), selectedCourse.getcID());
 					lstCourses.remove(selInd);
 					courses.remove(selInd);
-					//	((DefaultListModel) listCourses.getModel()).remove(selInd);
-					
-					//selInd = -1;
-					/*
-					HHViewCoursesPage frame = new HHViewCoursesPage();
-					frame.setVisible(true);	
-					frame.setResizable(false);
-					if (frame.isShowing()){
-						dispose();
-					} */
 				}
 			}
 		});
@@ -203,3 +195,4 @@ public class HHViewCoursesPage extends JFrame {
 		}
 	}
 }
+

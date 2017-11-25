@@ -105,7 +105,8 @@ public class AddStudentsPage extends JFrame {
 									}
 								}
 							}
-		            
+							
+							brd.close();
 		                } 
 		            } catch (Exception e1) {
 		                String errmsg = e1.getMessage();
