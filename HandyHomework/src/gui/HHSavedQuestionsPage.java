@@ -228,15 +228,18 @@ public class HHSavedQuestionsPage extends JFrame {
 				}				
 				
 				// Professor side - ans must change every time a new q is selected
+				/*
 				if (selQuestion != null && SelectedUser.getUser().isProf()) {
 					questAnswer = selQuestion.getCorrectAnswer();
 					if (questAnswer == null) {
-						JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Question doesn't have a corresponding answer.");
+						JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, 
+								"Question doesn't have a corresponding answer.");
 					} else {
 						String answer = "Answer: " + questAnswer.getAnswer();
 						lblAnswer.setText(answer);
 					}
-				} 
+				}
+				*/
 			}
 			
 		});
@@ -284,6 +287,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		btnRemove.setName("removeQuestion");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selInd = listQuestion.getSelectedIndex();
 				if (selQuestion == null || selInd < 0 ) {
 					JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, "Please select an assessment to remove.");
 				} else {

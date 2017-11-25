@@ -5,9 +5,9 @@ public class TextAnswer {
 	private int questID;
 	private boolean isCorrect;
 
-	public TextAnswer(int questID, String answer, boolean isCorrect) {
+	public TextAnswer(int ansId, String answer, boolean isCorrect) {
 		this.answer = answer;
-		this.questID = questID;
+		this.questID = ansId;
 		this.setCorrect(isCorrect);
 	}
 	public boolean isCorrect(String userAnswer) {

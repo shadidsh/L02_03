@@ -8,7 +8,7 @@ import answer.TextAnswer;
 public class MultQuestion extends Question {
 	ArrayList<TextAnswer> at;
 
-	MultQuestion(int assessID, String name, String question, int points) {
+	public MultQuestion(int assessID, String name, String question, int points) {
 		super(assessID, name, question, points);
 		at = new ArrayList<TextAnswer>();
 	}

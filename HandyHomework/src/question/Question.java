@@ -6,8 +6,8 @@ public abstract class Question {
 	public String question;
 	public int points;
 	
-	Question(int assessID, String name, String question, int points) {
-		this.qid = assessID;
+	Question(int qid, String name, String question, int points) {
+		this.qid = qid;
 		this.name = name;
 		this.question = question;
 		this.points = points;
