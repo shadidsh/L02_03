@@ -22,13 +22,13 @@ public class StudentTest {
 	@Test
 	public void testGetUserName() {
 		String user = stud.getUserName();
-		assertEquals("bestStud", user);
+		assertTrue("bestStud", user.equals(anObject));
 	}
 
 	@Test
 	public void testGetPassword() {
 		String pass = stud.getPassword();
-		assertEquals("userIsFalse", pass);
+		assertTrue("userIsFalse", pass);
 	}
 
 	@Test
