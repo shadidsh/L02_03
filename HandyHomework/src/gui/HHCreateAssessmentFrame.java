@@ -92,7 +92,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 	    field.setPreferredSize(prefSize);
 		
 		JButton btnCreate = new JButton("Create Assessment");
-		btnCreate.setBounds(230, 273, 125, 40);
+		btnCreate.setBounds(205, 273, 150, 40);
 		btnCreate.setName("create");
 		contentPane.getRootPane().setDefaultButton(btnCreate);
 		btnCreate.addActionListener(new ActionListener() {

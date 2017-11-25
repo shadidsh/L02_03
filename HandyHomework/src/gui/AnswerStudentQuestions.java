@@ -24,7 +24,6 @@ import java.awt.GridLayout;
 import java.util.List;
 import java.util.ListIterator;
 
-import net.miginfocom.swing.MigLayout;
 import question.TextQuestion;
 
 import com.jgoodies.forms.layout.FormSpecs;
@@ -97,7 +96,16 @@ public class AnswerStudentQuestions extends JFrame {
 		btnback.setBounds(12, 454, 141, 49);
 		getContentPane().add(btnback);
 		
-
+		btnback.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {				
+				HHSavedAssessments frame = new HHSavedAssessments();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
+			}
+		});
 		
 		JLabel lblPointsWorth = new JLabel("");
 		lblPointsWorth.setHorizontalAlignment(SwingConstants.CENTER);

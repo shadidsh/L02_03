@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -238,6 +240,32 @@ public class HHSavedQuestionsPage extends JFrame {
 			}
 			
 		});
+		
+//		*** not yet functional so its commented out
+//		listQuestion.addMouseListener(new MouseAdapter() {
+//			public void mouseClicked(MouseEvent e) {
+//				JList listQuestion = (JList)e.getSource();
+//				if (e.getClickCount() == 2) {
+//					sfdfsdfsSelectedAssessment.setAssess(selectedAs);
+//					if (SelectedUser.getUser().isProf()) {
+//						HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
+//						frame.setVisible(true);	
+//						frame.setResizable(false);
+//						if (frame.isShowing()){
+//							dispose();
+//						}
+//					} else {
+//						AnswerStudentQuestions frame = new AnswerStudentQuestions();
+//						frame.setVisible(true);	
+//						frame.setResizable(false);
+//						if (frame.isShowing()){
+//							dispose();
+//						}
+//					}
+//				}
+//			}
+//		});
+//		
 		String[] cBoxStrings = {"Text Question", "Multiple Choice Question"};
 		JComboBox<Object> cBox = new JComboBox<Object>(cBoxStrings);
 		cBox.setSelectedIndex(0);
