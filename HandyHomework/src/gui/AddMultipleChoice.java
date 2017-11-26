@@ -162,10 +162,6 @@ public class AddMultipleChoice extends JFrame {
 		});
 		contentPane.add(btnCancel);
 		
-		JCheckBox chckbxCorrectAnswer = new JCheckBox("Correct Answer");
-		chckbxCorrectAnswer.setBounds(161, 211, 180, 23);
-		contentPane.add(chckbxCorrectAnswer);
-		
 		JButton btnAddAnswer = new JButton("Add Answer");
 		btnAddAnswer.setVisible(false);
 		
@@ -189,7 +185,6 @@ public class AddMultipleChoice extends JFrame {
 					model.addRow(data);
 					ansCount++;
 					questionAnswerField.setText("");
-	
 				}
 			}
 		});

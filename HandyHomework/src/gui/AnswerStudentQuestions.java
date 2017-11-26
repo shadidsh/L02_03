@@ -51,9 +51,9 @@ public class AnswerStudentQuestions extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AnswerStudentQuestions classFrame = new AnswerStudentQuestions();
-					classFrame.setVisible(true);
-					classFrame.setResizable(false);
+					AnswerStudentQuestions window = new AnswerStudentQuestions();
+					window.setVisible(true);
+					window.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

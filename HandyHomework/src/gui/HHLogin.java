@@ -16,8 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Window;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -33,6 +31,7 @@ public class HHLogin extends JFrame {
 	private JPasswordField passwordField;
 	private JLabel lblUsername;
 	private JLabel lblPassword;
+
 	/**
 	 * Launch the application.
 	 */
@@ -53,7 +52,6 @@ public class HHLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public HHLogin() {
-		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 420, 300);
@@ -105,8 +103,11 @@ public class HHLogin extends JFrame {
 						SelectedUser.setUser(uf);
 						
 						HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
-						sf.switchForm(frame);
-						dispose();
+						frame.setVisible(true);
+						frame.setResizable(false);
+						if (frame.isShowing()){
+							dispose();
+						}
 					}
 				}
 			}
@@ -131,10 +132,13 @@ public class HHLogin extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				HHRegister frame = new HHRegister();
-				sf.switchForm(frame);
-				dispose();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
-		});
+			});
 		btnRegister.setBounds(217, 183, 102, 43);
 		contentPane.add(btnRegister);
 	}

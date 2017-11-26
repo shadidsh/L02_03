@@ -10,8 +10,6 @@ import login.SelectedUser;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Window;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLayeredPane;
@@ -22,6 +20,7 @@ import java.awt.Dimension;
 public class HandyHomeworkMainPage extends JFrame {
 
 	private JLayeredPane contentPane;
+
 	/**
 	 * Launch the application.
 	 */
@@ -43,7 +42,6 @@ public class HandyHomeworkMainPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HandyHomeworkMainPage() {
-		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 300);
@@ -91,8 +89,11 @@ public class HandyHomeworkMainPage extends JFrame {
 		btnViewCourses.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHViewCoursesPage frame = new HHViewCoursesPage();
-				sf.switchForm(frame);
-				dispose();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
 		});
 		btnViewCourses.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
@@ -108,8 +109,11 @@ public class HandyHomeworkMainPage extends JFrame {
 				SelectedUser.setUser(null);
 				
 				HHLogin frame = new HHLogin();
-				sf.switchForm(frame);
-				dispose();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
 		});
 	}
