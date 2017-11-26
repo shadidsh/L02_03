@@ -18,7 +18,7 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 	public List<Question> allQuestions(int aid) {
 		Connection conn = getConnection();
 		try {
-    		String query = "Select qid, name, question, is_mult, points from "
+    		String query = "Select qid, name, question, is_mult, points, is_latex from "
     				+ constants.Constants.DataConstants.QUESTIONS + " where "
     						+ " aid = ?";
     		PreparedStatement stat = conn.prepareStatement(query);
@@ -35,6 +35,7 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
     			String question = Rs.getString(3);
     			boolean isMult = Rs.getBoolean(4);
     			int points = Rs.getInt(5);
+    			boolean isLat = Rs.getBoolean(6);
     			
     			if (isMult) {
     				MultQuestion mq = new MultQuestion(qid, name, question, points);
@@ -42,8 +43,8 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
     				mq.addAnswers(multAns);
     				questions.add(mq);
     				
-    			} else {
-        			TextQuestion tq = new TextQuestion(qid, name, question, points);
+    			} else {        			
+    				TextQuestion tq = new TextQuestion(qid, name, question, points, isLat);
         			ta = this.singleAnswerQuestion(qid);
         			tq.setAnswer(ta);
         			questions.add(tq);
