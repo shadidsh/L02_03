@@ -132,7 +132,7 @@ public class AnswerStudentQuestions extends JFrame {
 		}
 		int aid = SelectedAssessment.getAssess().getAid();
 		DbQuestions dbQuest = new DbQuestions();
-		List<TextQuestion> textQuests = dbQuest.questions_for_assessments(aid);
+		List<TextQuestion> textQuests = dbQuest.TextQuestions(aid);
 		ListIterator<TextQuestion>  textQ = textQuests.listIterator();
 		
 		if (!textQ.hasNext()) {

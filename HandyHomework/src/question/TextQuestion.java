@@ -22,4 +22,9 @@ public class TextQuestion extends Question{
 	public boolean hasAnswer() {
 		return textAns != null;
 	}
+
+	@Override
+	public boolean hasMultAnswer() {
+		return false;
+	}
 }

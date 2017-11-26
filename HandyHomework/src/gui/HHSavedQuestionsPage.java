@@ -178,7 +178,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		Assessment as = SelectedAssessment.getAssess();
 		DbQuestions dbQuest = new DbQuestions();
 		aid = as.getAid();
-		List<TextQuestion> questions = dbQuest.questions_for_assessments(aid);
+		List<TextQuestion> questions = dbQuest.TextQuestions(aid);
 				
 		lblAssessmentName.setText(as.getName());
 		for (TextQuestion tq: questions ) {

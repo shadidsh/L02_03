@@ -47,4 +47,6 @@ public abstract class Question {
 	}
 	
 	public abstract boolean hasAnswer();
+	
+	public abstract boolean hasMultAnswer();
 }

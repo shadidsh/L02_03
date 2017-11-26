@@ -198,6 +198,7 @@ public class AddMultipleChoice extends JFrame {
 
 		scrollPane.setBounds(77, 134, 657, 155);
 		contentPane.add(scrollPane);
+		table.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		JLabel lblCorAns = new JLabel("Please select one correct answer from the list");
 		lblCorAns.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -230,14 +231,16 @@ public class AddMultipleChoice extends JFrame {
 		lblQuestion.setVerticalAlignment(SwingConstants.TOP);
 		lblQuestion.setBounds(147, 77, 419, 24);
 		contentPane.add(lblQuestion);
-		lblQuestion.setVisible(true);
+		lblQuestion.setVisible(false);
 		
 		JLabel lblSelectedQn = new JLabel("");
 		lblSelectedQn.setBounds(77, 188, 213, 109);
 		contentPane.add(lblSelectedQn);
 		
-		JButton button = new JButton("Add Question");
-		button.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		JButton btnAddQuestion = new JButton("Add Question");
+		btnAddQuestion.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		JButton btnAbortQuestion = new JButton("Discard Question");
 		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.setBounds(86, 406, 125, 50);
@@ -261,19 +264,19 @@ public class AddMultipleChoice extends JFrame {
 						dbQ.insertAnswers(textQ.getQid(), ansInd == row, ans);
 						dm.removeRow(ansInd);
 					}
-					ansCount = 0;
-					textQ = null;
-					
 					JOptionPane.showMessageDialog(AddMultipleChoice.this, 
 							"Successfully added.");
 					
+					//RESET
+					ansCount = 0;
+					textQ = null;
 					lblQuestionName.setVisible(true);
 					questionNameField.setVisible(true);
 					lblEnterYourQuestion.setVisible(true);
 					questionContentField.setVisible(true);					
 					lblNumberOfMarks.setVisible(true);
 					spinMarks.setVisible(true);
-					button.setVisible(true);
+					btnAddQuestion.setVisible(true);
 					
 					lblQuestion.setVisible(false);
 					scrollPane.setVisible(false);
@@ -282,6 +285,7 @@ public class AddMultipleChoice extends JFrame {
 					btnAddAnswer.setVisible(false);
 					btnRemoveAnswer.setVisible(false);
 					btnSubmit.setVisible(false);
+					btnAddQuestion.setVisible(false);
 					
 					questionContentField.setText("");
 					questionNameField.setText("");
@@ -294,7 +298,7 @@ public class AddMultipleChoice extends JFrame {
 		contentPane.add(btnSubmit);
 		
 		
-		button.addActionListener(new ActionListener() {
+		btnAddQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (textQ == null) {
 					String name = String.valueOf(questionNameField.getText());
@@ -325,8 +329,7 @@ public class AddMultipleChoice extends JFrame {
 						questionContentField.setVisible(false);
 						lblNumberOfMarks.setVisible(false);
 						spinMarks.setVisible(false);
-						button.setVisible(false);
-						
+						btnAddQuestion.setVisible(false);						
 						
 						scrollPane.setVisible(true);
 						lblFinalAnswer.setVisible(true);
@@ -334,19 +337,53 @@ public class AddMultipleChoice extends JFrame {
 						btnAddAnswer.setVisible(true);
 						btnRemoveAnswer.setVisible(true);
 						btnSubmit.setVisible(true);
+						btnAbortQuestion.setVisible(true);
 						
 						ansCount = 0;
 					}
 				}
 			}
 		});
-		button.setName("AddQuestion");
-		button.setBounds(459, 406, 125, 50);
-		contentPane.add(button);
+		btnAddQuestion.setName("AddQuestion");
+		btnAddQuestion.setBounds(459, 406, 125, 50);
+		contentPane.add(btnAddQuestion);
 		
-		JButton btnAbortQuestion = new JButton("Discard Question");
+		btnAbortQuestion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				DbQuestions dbQuest = new DbQuestions();
+				dbQuest.removeQuestion(textQ.qid);
+				
+				//RESET
+				ansCount = 0;
+				textQ = null;
+				lblQuestionName.setVisible(true);
+				questionNameField.setVisible(true);
+				lblEnterYourQuestion.setVisible(true);
+				questionContentField.setVisible(true);					
+				lblNumberOfMarks.setVisible(true);
+				spinMarks.setVisible(true);
+				btnAddQuestion.setVisible(true);
+				
+				lblQuestion.setVisible(false);
+				scrollPane.setVisible(false);
+				lblFinalAnswer.setVisible(false);
+				questionAnswerField.setVisible(false);					
+				btnAddAnswer.setVisible(false);
+				btnRemoveAnswer.setVisible(false);
+				btnSubmit.setVisible(false);
+				btnAbortQuestion.setVisible(false);
+				
+				questionContentField.setText("");
+				questionNameField.setText("");
+				lblSelectedQn.setText("");
+				spinMarks.setValue(0);
+				
+			}
+		});
 		btnAbortQuestion.setBounds(533, 15, 201, 39);
 		contentPane.add(btnAbortQuestion);
+		btnAbortQuestion.setVisible(false);
 	}
 	
 	public boolean alreadyExists(JTable table, String answer) {
