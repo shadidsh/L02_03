@@ -28,7 +28,7 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 				3, "assessment 5", "Greedy Algo.", true, null, (float) 0.99);
 		SelectedAssessment.setAssess(tq);
 		
-		HHFormFrame frame = GuiActionRunner.execute(() -> new HHFormFrame());
+		HHCreateTextQuestion frame = GuiActionRunner.execute(() -> new HHCreateTextQuestion());
 		frame.setVisible(true);
 		window = new FrameFixture(robot(), frame);
 		

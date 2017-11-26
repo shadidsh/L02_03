@@ -283,7 +283,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (selected.equals("Text Question")) {
-					HHFormFrame frame = new HHFormFrame();
+					HHCreateTextQuestion frame = new HHCreateTextQuestion();
 					frame.setVisible(true);	
 					frame.setResizable(false);
 					frame.setLocationRelativeTo(null);

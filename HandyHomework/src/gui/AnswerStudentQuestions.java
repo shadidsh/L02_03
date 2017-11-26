@@ -170,6 +170,7 @@ public class AnswerStudentQuestions extends JFrame {
 				} else if (tq == null) {
 					JOptionPane.showMessageDialog(AnswerStudentQuestions.this, ".");
 				} else {
+					DbQuestions dbQ = new DbQuestions();
 					if (!tq.hasAnswer()) {
 						JOptionPane.showMessageDialog(AnswerStudentQuestions.this, 
 								"ERROR in the Database - There are no answers for this question");
@@ -188,7 +189,7 @@ public class AnswerStudentQuestions extends JFrame {
 						totalPts += tq.getPoints();
 					}
 					
-					DbQuestions dbQ = new DbQuestions();
+					
 					int aid = SelectedAssessment.getAssess().getAid();
 					
 					if (!textQ.hasNext()) {
