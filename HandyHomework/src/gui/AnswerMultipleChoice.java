@@ -60,6 +60,7 @@ public class AnswerMultipleChoice extends JFrame {
 	 * Create the frame.
 	 */
 	public AnswerMultipleChoice() {
+		setTitle("HandyHomework - Multiple Choice Question");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 450);
 		contentPane = new JPanel();
@@ -122,6 +123,7 @@ public class AnswerMultipleChoice extends JFrame {
 			HHLogin frame = new HHLogin();
 			frame.setVisible(true);
 			frame.setResizable(false);
+			frame.setLocationRelativeTo(null);
 			if (frame.isShowing()){
 				dispose();
 			}
@@ -138,6 +140,7 @@ public class AnswerMultipleChoice extends JFrame {
 			HHSavedAssessments frame = new HHSavedAssessments();
 			frame.setVisible(true);
 			frame.setResizable(false);
+			frame.setLocationRelativeTo(null);
 			if (frame.isShowing()){
 				dispose();
 			}			
@@ -162,6 +165,7 @@ public class AnswerMultipleChoice extends JFrame {
 						HHSavedAssessments frame = new HHSavedAssessments();
 						frame.setVisible(true);
 						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -182,6 +186,7 @@ public class AnswerMultipleChoice extends JFrame {
 						HHSavedAssessments frame = new HHSavedAssessments();
 						frame.setVisible(true);
 						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
 						if (frame.isShowing()){
 							dispose();
 						}			
@@ -206,6 +211,7 @@ public class AnswerMultipleChoice extends JFrame {
 				HHSavedAssessments frame = new HHSavedAssessments();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}

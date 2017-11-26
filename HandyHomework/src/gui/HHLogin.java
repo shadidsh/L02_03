@@ -41,6 +41,7 @@ public class HHLogin extends JFrame {
 				try {
 					HHLogin frame = new HHLogin();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,7 +53,7 @@ public class HHLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public HHLogin() {
-		setTitle("HandyHomework");
+		setTitle("HandyHomework - Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 420, 300);
 		contentPane = new JPanel();
@@ -105,6 +106,7 @@ public class HHLogin extends JFrame {
 						HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
 						frame.setVisible(true);
 						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -134,6 +136,7 @@ public class HHLogin extends JFrame {
 				HHRegister frame = new HHRegister();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}

@@ -52,6 +52,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public HHCreateAssessmentFrame() {
+		setTitle("HandyHomework - Create Assessment");
 		this.setName("SavedAssess");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 415, 370);
@@ -124,7 +125,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 								HHSavedAssessments frame = new HHSavedAssessments();
 								frame.setVisible(true);
 								frame.setResizable(false);
-								frame.setResizable(false);
+								frame.setLocationRelativeTo(null);
 								if (frame.isShowing()){
 									dispose();
 								}
@@ -147,6 +148,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 				HHSavedAssessments frame = new HHSavedAssessments();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}

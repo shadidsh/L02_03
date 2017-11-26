@@ -73,6 +73,7 @@ public class HHSavedAssessments extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedAssessments() {
+		setTitle("HandyHomework - Assessments");
 		this.setName("SavedAssess");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 395);
@@ -115,6 +116,7 @@ public class HHSavedAssessments extends JFrame {
 			HHLogin frame = new HHLogin();
 			frame.setVisible(true);
 			frame.setResizable(false);
+			frame.setLocationRelativeTo(null);
 			if (frame.isShowing()){
 				dispose();
 			}
@@ -128,6 +130,7 @@ public class HHSavedAssessments extends JFrame {
 				HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
 				frame.setVisible(true);	
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -143,29 +146,33 @@ public class HHSavedAssessments extends JFrame {
 					SelectedAssessment.setAssess(selectedAs);
 					if (SelectedUser.getUser().isProf()) {
 						HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-						frame.setVisible(true);
+						frame.setVisible(true);	
 						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
 						if (frame.isShowing()){
 							dispose();
 						}
-					} 
-					// DUPLICATE CODE
-					DbQuestions dbQ = new DbQuestions();
-					int aid = SelectedAssessment.getAssess().getAid();
-					if (dbQ.hasTextQuestions(aid)) {
-						AnswerStudentQuestions frame = new AnswerStudentQuestions();
-						frame.setVisible(true);	
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
-						}							
-					} 
-					if (dbQ.hasMultChoice(aid)){
-						AnswerMultipleChoice frame = new AnswerMultipleChoice();
-						frame.setVisible(true);	
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
+					} else {
+						
+						//DUPLICATE COOODE from actionPerformed
+						DbQuestions dbQ = new DbQuestions();
+						int aid = SelectedAssessment.getAssess().getAid();
+						if (dbQ.hasTextQuestions(aid)) {
+							AnswerStudentQuestions frame = new AnswerStudentQuestions();
+							frame.setVisible(true);	
+							frame.setResizable(false);
+							frame.setLocationRelativeTo(null);
+							if (frame.isShowing()){
+								dispose();
+							}							
+						} else if (dbQ.hasMultChoice(aid)){
+							AnswerMultipleChoice frame = new AnswerMultipleChoice();
+							frame.setVisible(true);	
+							frame.setResizable(false);
+							frame.setLocationRelativeTo(null);
+							if (frame.isShowing()){
+								dispose();
+							}
 						}
 					}
 				}
@@ -226,6 +233,7 @@ public class HHSavedAssessments extends JFrame {
 						HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
 						frame.setVisible(true);	
 						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -238,14 +246,15 @@ public class HHSavedAssessments extends JFrame {
 							AnswerStudentQuestions frame = new AnswerStudentQuestions();
 							frame.setVisible(true);	
 							frame.setResizable(false);
+							frame.setLocationRelativeTo(null);
 							if (frame.isShowing()){
 								dispose();
 							}							
-						} 
-						if (dbQ.hasMultChoice(aid)){
+						} else if (dbQ.hasMultChoice(aid)){
 							AnswerMultipleChoice frame = new AnswerMultipleChoice();
 							frame.setVisible(true);	
 							frame.setResizable(false);
+							frame.setLocationRelativeTo(null);
 							if (frame.isShowing()){
 								dispose();
 							}
@@ -263,6 +272,7 @@ public class HHSavedAssessments extends JFrame {
 				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
 				frame.setVisible(true);	
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -276,6 +286,7 @@ public class HHSavedAssessments extends JFrame {
 				HHViewCoursesPage frame = new HHViewCoursesPage();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -307,6 +318,7 @@ public class HHSavedAssessments extends JFrame {
 					ViewStudentsPage frame = new ViewStudentsPage();
 					frame.setVisible(true);	
 					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
 					if (frame.isShowing()){
 						dispose();
 					} 
@@ -319,6 +331,22 @@ public class HHSavedAssessments extends JFrame {
 			contentPane.add(btnRemove);
 			contentPane.add(btnNewAssessment);
 			btnNewAssessment.setBounds(257, 257, 160, 30);
-		}		
+		} else if (!SelectedUser.getUser().isProf()) {
+			JButton btnViewMarks = new JButton("View Grades");
+			btnViewMarks.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					// pop-up looking at the grades for the assessment, if one is selected 
+					if (selectedAs == null ) {
+						JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment.");
+					} else {
+						// use selectedAs to get the score from the db? selectedAs;
+						JOptionPane.showMessageDialog(HHSavedAssessments.this, "This\nis\nwhere\nthe\nresults\ngo");
+					}	
+				}
+				
+			});
+			btnViewMarks.setBounds(309, 326, 160, 30);
+			contentPane.add(btnViewMarks);
+		}
 	}
 }

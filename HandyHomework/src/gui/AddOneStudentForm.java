@@ -52,6 +52,7 @@ public class AddOneStudentForm extends JFrame {
 	 * Create the frame.
 	 */
 	public AddOneStudentForm() {
+		setTitle("HandyHomework - Add A Student");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 345, 302);
 		contentPane = new JPanel();
@@ -141,6 +142,7 @@ public class AddOneStudentForm extends JFrame {
 							ViewStudentsPage frame = new ViewStudentsPage();
 							frame.setVisible(true);
 							frame.setResizable(false);
+							frame.setLocationRelativeTo(null);
 							if (frame.isShowing()){
 								dispose();
 							}
@@ -162,6 +164,7 @@ public class AddOneStudentForm extends JFrame {
 				AddStudentsPage frame = new AddStudentsPage();
 				frame.setVisible(true);		
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}

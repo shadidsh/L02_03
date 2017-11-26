@@ -51,6 +51,7 @@ public class ViewStudentsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewStudentsPage() {
+		setTitle("HandyHomework - Enrolled Students");
 		this.setName("ViewStudentsPage");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -70,6 +71,7 @@ public class ViewStudentsPage extends JFrame {
 				AddStudentsPage frame = new AddStudentsPage();
 				frame.setVisible(true);	
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				} 
@@ -147,6 +149,7 @@ public class ViewStudentsPage extends JFrame {
 				HHSavedAssessments frame = new HHSavedAssessments();
 				frame.setVisible(true);		
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}

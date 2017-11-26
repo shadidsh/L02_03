@@ -54,6 +54,7 @@ public class AnswerStudentQuestions extends JFrame {
 					AnswerStudentQuestions window = new AnswerStudentQuestions();
 					window.setVisible(true);
 					window.setResizable(false);
+					window.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,6 +67,7 @@ public class AnswerStudentQuestions extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	public AnswerStudentQuestions() {
+		setTitle("HandyHomework - Text Question");
 		//frame = new JFrame();
 	    setBounds(300, 300, 853, 564);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,6 +103,7 @@ public class AnswerStudentQuestions extends JFrame {
 				HHSavedAssessments frame = new HHSavedAssessments();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -126,6 +129,7 @@ public class AnswerStudentQuestions extends JFrame {
 			HHLogin frame = new HHLogin();
 			frame.setVisible(true);
 			frame.setResizable(false);
+			frame.setLocationRelativeTo(null);
 			if (frame.isShowing()){
 				dispose();
 			}
@@ -141,6 +145,7 @@ public class AnswerStudentQuestions extends JFrame {
 			HHSavedAssessments frame = new HHSavedAssessments();
 			frame.setVisible(true);
 			frame.setResizable(false);
+			frame.setLocationRelativeTo(null);
 			if (frame.isShowing()){
 				dispose();
 			}			
@@ -171,6 +176,7 @@ public class AnswerStudentQuestions extends JFrame {
 						HHSavedAssessments frame = new HHSavedAssessments();
 						frame.setVisible(true);
 						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -191,6 +197,7 @@ public class AnswerStudentQuestions extends JFrame {
 							AnswerMultipleChoice frame = new AnswerMultipleChoice();
 							frame.setVisible(true);	
 							frame.setResizable(false);
+							frame.setLocationRelativeTo(null);
 							if (frame.isShowing()){
 								dispose();
 							}
@@ -201,6 +208,7 @@ public class AnswerStudentQuestions extends JFrame {
 							HHSavedAssessments frame = new HHSavedAssessments();
 							frame.setVisible(true);
 							frame.setResizable(false);
+							frame.setLocationRelativeTo(null);
 							if (frame.isShowing()){
 								dispose();
 							}
@@ -219,7 +227,7 @@ public class AnswerStudentQuestions extends JFrame {
 		
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				// Nothing is being done here at the moment???
 			}
 		});
 		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 15));
