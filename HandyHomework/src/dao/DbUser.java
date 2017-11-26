@@ -203,5 +203,9 @@ public class DbUser extends DbConnection implements UserDAO  {
 			System.out.println(ex.getMessage());  
 		}		
 	}
-	
+	@Override
+	public int removeUser(String user) {
+		return -1;
+	}
+
 }

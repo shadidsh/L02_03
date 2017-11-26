@@ -57,6 +57,7 @@ public class HHViewCoursesPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHViewCoursesPage() {
+		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Courses");
 		this.setName("viewCourse");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,9 +124,7 @@ public class HHViewCoursesPage extends JFrame {
 					SelectedCourse.setCourse(selectedCourse);
 					
 					HHSavedAssessments frame = new HHSavedAssessments();
-					frame.setVisible(true);
-					frame.setResizable(false);
-					frame.setLocationRelativeTo(null);
+					sf.switchForm(frame);
 					if (frame.isShowing()){
 						dispose();
 					}
@@ -149,9 +148,7 @@ public class HHViewCoursesPage extends JFrame {
 						SelectedCourse.setCourse(selectedCourse);
 						
 						HHSavedAssessments frame = new HHSavedAssessments();
-						frame.setVisible(true);
-						frame.setResizable(false);
-						frame.setLocationRelativeTo(null);
+						sf.switchForm(frame);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -165,9 +162,7 @@ public class HHViewCoursesPage extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				frame.setLocationRelativeTo(null);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -202,9 +197,7 @@ public class HHViewCoursesPage extends JFrame {
 			btnAddCourse.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					HHCreateCoursePage frame = new HHCreateCoursePage();
-					frame.setVisible(true);
-					frame.setResizable(false);
-					frame.setLocationRelativeTo(null);
+					sf.switchForm(frame);
 					if (frame.isShowing()){
 						dispose();
 					}

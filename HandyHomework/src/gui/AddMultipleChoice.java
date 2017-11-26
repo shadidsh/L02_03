@@ -67,6 +67,7 @@ public class AddMultipleChoice extends JFrame {
 	 * Create the frame.
 	 */
 	public AddMultipleChoice() {
+		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Create Multiple Choice Question");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 778, 531);
@@ -153,9 +154,7 @@ public class AddMultipleChoice extends JFrame {
 				textQ = null;
 				
 				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				frame.setLocationRelativeTo(null);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
