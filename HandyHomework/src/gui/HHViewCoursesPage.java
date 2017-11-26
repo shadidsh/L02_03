@@ -34,7 +34,6 @@ public class HHViewCoursesPage extends JFrame {
 	private JList<?> list;
 	private List<Course> courses;
 	private int selInd;
-
 	/**
 	 * Launch the application.
 	 */
@@ -42,8 +41,8 @@ public class HHViewCoursesPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HHViewCoursesPage frame = new HHViewCoursesPage();
-					frame.setVisible(true);
+					HHViewCoursesPage classFrame = new HHViewCoursesPage();
+					classFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,6 +54,7 @@ public class HHViewCoursesPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHViewCoursesPage() {
+		SwitchForm sf = new SwitchForm();
 		this.setName("viewCourse");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -129,11 +129,8 @@ public class HHViewCoursesPage extends JFrame {
 						SelectedCourse.setCourse(selectedCourse);
 						
 						HHSavedAssessments frame = new HHSavedAssessments();
-						frame.setVisible(true);
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
-						}
+						sf.switchForm(frame);
+						dispose();
 					}
 				}
 			}
@@ -144,11 +141,8 @@ public class HHViewCoursesPage extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
-				}
+				sf.switchForm(frame);
+				dispose();
 			}
 		});
 		contentPane.setLayout(null);
@@ -180,11 +174,8 @@ public class HHViewCoursesPage extends JFrame {
 			btnAddCourse.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					HHCreateCoursePage frame = new HHCreateCoursePage();
-					frame.setVisible(true);
-					frame.setResizable(false);
-					if (frame.isShowing()){
-						dispose();
-					}
+					sf.switchForm(frame);
+					dispose();
 				}
 			});
 			btnAddCourse.setBounds(163, 209, 131, 35);

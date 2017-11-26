@@ -23,6 +23,7 @@ import javax.swing.JComponent;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JCheckBox;
 
 public class AddMultipleChoice extends JFrame {
 
@@ -167,14 +168,20 @@ public class AddMultipleChoice extends JFrame {
 		});
 		contentPane.add(btnCancel);
 		
+		JCheckBox chckbxCorrectAnswer = new JCheckBox("Correct Answer");
+		chckbxCorrectAnswer.setBounds(161, 211, 180, 23);
+		contentPane.add(chckbxCorrectAnswer);
+		
 		JButton btnAddAnswer = new JButton("Add Answer");
 		contentPane.getRootPane().setDefaultButton(btnAddAnswer);
 		btnAddAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				chckbxCorrectAnswer.isSelected();
 				questionAnswerField.setText("");
 			}
 		});
 		btnAddAnswer.setBounds(161, 235, 125, 50);
 		contentPane.add(btnAddAnswer);
+		
 	}
 }
