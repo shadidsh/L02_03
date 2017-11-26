@@ -267,9 +267,8 @@ public class AddMultipleChoice extends JFrame {
 					for (int ansInd = 0; ansInd < dm.getRowCount();ansInd++) {
 						String ans = (String) dm.getValueAt(ansInd, 0);
 						dbQ.insertAnswers(textQ.getQid(), ansInd == row, ans);
+						dm.removeRow(ansInd);
 					}
-					dm.setRowCount(0);
-					
 					JOptionPane.showMessageDialog(AddMultipleChoice.this, 
 							"Successfully added.");
 					
