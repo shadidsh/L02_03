@@ -45,7 +45,7 @@ public class LatexExample extends JFrame implements ActionListener {
 		content.add(this.drawingArea = new JPanel());		
 		this.btnRender.addActionListener(this);
 		
-		this.latexSource.setText("x=\\frac{-b \\pm \\sqrt {b^2-4ac}}{2a}$ for $\\x \\in E$");
+		this.latexSource.setText("\\int_{-\\infty}^{+\\infty}\\!e^{-x^2}\\, \\mathrm{d}x = \\sqrt \\pi x=\\frac{-b \\pm \\sqrt {b^2-4ac}}{2a}$ for $\\x \\in E$");
 	}
 
 	public void render() {
@@ -76,6 +76,7 @@ public class LatexExample extends JFrame implements ActionListener {
 			
 			// now draw it to the screen			
 			Graphics g = this.drawingArea.getGraphics();
+			g.clearRect(icon.getIconWidth(), icon.getIconHeight(), 100, 100);
 			g.drawImage(image,0,0,null);
 		} catch (Exception ex) {
 			ex.printStackTrace();

@@ -12,6 +12,7 @@ public interface QuestionDAO {
 	
 	public List<Question> allQuestions(int aid);
 	
+	public boolean hasLatex(int aid);
 	public boolean hasMultChoice(int aid);
 	public boolean hasTextQuestions(int aid);
 	
@@ -21,7 +22,7 @@ public interface QuestionDAO {
 	/* Load text questions only */
 	public List<TextQuestion> TextQuestions(int aid);
 	
-	public int insertQuestions(int aid, String name, String question, int points, boolean isMult);
+	public int insertQuestions(int aid, String name, String question, int points, boolean isMult, boolean isLat);
 	
 	public void removeQuestion(int qid);
 	
@@ -33,6 +34,8 @@ public interface QuestionDAO {
 	void removeUserAnswers(int aid);
 
 	public List<TextAnswer> multAnswerQuestion(int qid);
+
+	List<TextQuestion> LatexQuestions(int aid);
 
 	
 }

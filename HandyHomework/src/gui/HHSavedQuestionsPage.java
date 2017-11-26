@@ -81,6 +81,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedQuestionsPage() {
+		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Questions");
 		setName("SavedQuestions");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -169,9 +170,7 @@ public class HHSavedQuestionsPage extends JFrame {
 			JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, 
 					"No Assessments have been selected, returning to login");
 			HHLogin frame = new HHLogin();
-			frame.setVisible(true);
-			frame.setResizable(false);
-			frame.setLocationRelativeTo(null);
+			sf.switchForm(frame);
 			if (frame.isShowing()){
 				dispose();
 			}
@@ -195,9 +194,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		btnback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();
-				frame.setVisible(true);		
-				frame.setResizable(false);
-				frame.setLocationRelativeTo(null);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -283,19 +280,15 @@ public class HHSavedQuestionsPage extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (selected.equals("Text Question")) {
-					HHFormFrame frame = new HHFormFrame();
-					frame.setVisible(true);	
-					frame.setResizable(false);
-					frame.setLocationRelativeTo(null);
+					HHCreateTextQuestion frame = new HHCreateTextQuestion();
+					sf.switchForm(frame);
 					if (frame.isShowing()){
 						dispose();
 					}
 				}
 				else if (selected.equals("Multiple Choice Question")) {
 					AddMultipleChoice frame = new AddMultipleChoice();
-					frame.setVisible(true);	
-					frame.setResizable(false);
-					frame.setLocationRelativeTo(null);
+					sf.switchForm(frame);
 					if (frame.isShowing()){
 						dispose();
 					}

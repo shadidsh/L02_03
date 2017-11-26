@@ -23,8 +23,11 @@ import javax.swing.JComponent;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JCheckBox;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-public class HHFormFrame extends JFrame {
+public class HHCreateTextQuestion extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField questionNameField;
@@ -38,7 +41,7 @@ public class HHFormFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HHFormFrame frame = new HHFormFrame();
+					HHCreateTextQuestion frame = new HHCreateTextQuestion();
 					frame.setVisible(true);
 					frame.setResizable(false);
 				} catch (Exception e) {
@@ -51,60 +54,65 @@ public class HHFormFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HHFormFrame() {
+	public HHCreateTextQuestion() {
+		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Create Text Question");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 475, 325);
+		setBounds(100, 100, 734, 501);
 		contentPane = new JPanel();
 		contentPane.setAutoscrolls(true);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblQuestionForm = new JLabel("Question Form  ");
-		lblQuestionForm.setBounds(223, 22, 219, 24);
-		lblQuestionForm.setFont(new Font("Menlo", Font.ITALIC, 23));
-		lblQuestionForm.setHorizontalAlignment(SwingConstants.RIGHT);
-		contentPane.add(lblQuestionForm);
-		
 		JLabel lblQuestionName = new JLabel("Question Name:");
-		lblQuestionName.setBounds(20, 75, 101, 16);
+		lblQuestionName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblQuestionName.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblQuestionName.setBounds(224, 25, 262, 28);
 		lblQuestionName.setVerticalAlignment(SwingConstants.TOP);
 		contentPane.add(lblQuestionName);
 		
 		questionNameField = new JTextField();
-		questionNameField.setBounds(122, 73, 118, 20);
+		questionNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		questionNameField.setBounds(207, 66, 304, 28);
 		contentPane.add(questionNameField);
 		questionNameField.setColumns(10);
 		questionNameField.setName("questionName");
 		
 		JLabel lblEnterYourQuestion = new JLabel("Enter your question here: ");
-		lblEnterYourQuestion.setBounds(20, 102, 162, 16);
+		lblEnterYourQuestion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEnterYourQuestion.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblEnterYourQuestion.setBounds(20, 129, 466, 27);
 		contentPane.add(lblEnterYourQuestion);
 		
 		JTextArea questionContentField = new JTextArea();
-		questionContentField.setBounds(20, 123, 426, 81);
+		questionContentField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		questionContentField.setBounds(20, 169, 466, 107);
 		questionContentField.setWrapStyleWord(true);
 		questionContentField.setLineWrap(true);
 		contentPane.add(questionContentField);
 		questionContentField.setName("content");
 		
 		JLabel lblFinalAnswer = new JLabel("Final Answer: ");
-		lblFinalAnswer.setBounds(20, 225, 90, 14);
+		lblFinalAnswer.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblFinalAnswer.setBounds(228, 307, 170, 14);
 		contentPane.add(lblFinalAnswer);
 		
 		questionAnswerField = new JTextField();
-		questionAnswerField.setBounds(109, 222, 150, 20);
+		questionAnswerField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		questionAnswerField.setBounds(20, 334, 668, 57);
 		questionAnswerField.setColumns(10);
 		contentPane.add(questionAnswerField);
 		questionAnswerField.setName("questionAnswer");
 		
 		JLabel lblNumberOfMarks = new JLabel("Number of Marks Awarded: ");
-		lblNumberOfMarks.setBounds(20, 257, 180, 14);
+		lblNumberOfMarks.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNumberOfMarks.setBounds(12, 428, 228, 14);
 		contentPane.add(lblNumberOfMarks);
 		
 		JSpinner spinMarks = new JSpinner();
-		spinMarks.setBounds(192, 254, 90, 20);
+		spinMarks.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		spinMarks.setBounds(241, 428, 101, 20);
 		contentPane.add(spinMarks);
 		spinMarks.setName("spin");
 		
@@ -114,9 +122,10 @@ public class HHFormFrame extends JFrame {
 	    field.setPreferredSize(prefSize);
 		
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		contentPane.getRootPane().setDefaultButton(btnSubmit);
 		btnSubmit.setName("submit");
-		btnSubmit.setBounds(315, 225, 100, 50);
+		btnSubmit.setBounds(548, 408, 156, 38);
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String name = String.valueOf(questionNameField.getText());
@@ -125,16 +134,16 @@ public class HHFormFrame extends JFrame {
 				int value = (int) (spinMarks.getValue());
 				System.out.println("question is :" + questionContent);
 				if (name.isEmpty() || questionContent.isEmpty() || answer.isEmpty()) {
-					JOptionPane.showMessageDialog(HHFormFrame.this, "One or more fields are empty.");
+					JOptionPane.showMessageDialog(HHCreateTextQuestion.this, "One or more fields are empty.");
 				} else if (!SelectedAssessment.isSelected()) {
-					JOptionPane.showMessageDialog(HHFormFrame.this, "No assessment selected.");
+					JOptionPane.showMessageDialog(HHCreateTextQuestion.this, "No assessment selected.");
 				}				
 				else {	
 					try {
 						Assessment as = SelectedAssessment.getAssess();
 						DbQuestions dbQuest = new DbQuestions();
 						
-						int qid = dbQuest.insertQuestions(as.getAid(), name, questionContent, value, false);
+						int qid = dbQuest.insertQuestions(as.getAid(), name, questionContent, value, false, false);
 						dbQuest.insertAnswers(qid,  true,  answer);
 						
 						//String message = name + "\nQuestion is: " + questionContent + "\nSuccessfully added.";
@@ -148,27 +157,52 @@ public class HHFormFrame extends JFrame {
 					} catch (NullPointerException e1){
 						System.out.println("Could not insert question into database."); 
 						e1.printStackTrace();
-						JOptionPane.showMessageDialog(HHFormFrame.this, "Could not save question - please check your connection and try again.");
+						JOptionPane.showMessageDialog(HHCreateTextQuestion.this, "Could not save question - please check your connection and try again.");
 					}
 				}
 			}
 		});
 		contentPane.add(btnSubmit);
 		
-		JButton btnCancel = new JButton("\u2190 Back");
+		JButton btnCancel = new JButton("Back");
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnCancel.setName("back");
-		btnCancel.setBounds(20, 26, 100, 25);
+		btnCancel.setBounds(20, 26, 123, 38);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				frame.setLocationRelativeTo(null);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
 			}
 		});
 		contentPane.add(btnCancel);
+		
+		JButton btnPrev = new JButton("Preview");
+		btnPrev.setVisible(false);
+		btnPrev.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnPrev.setName("submit");
+		btnPrev.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnPrev.setBounds(517, 238, 156, 38);
+		contentPane.add(btnPrev);
+		
+		JCheckBox chckbxLatex = new JCheckBox("Is latex");
+		chckbxLatex.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (chckbxLatex.isSelected()) {
+					btnPrev.setVisible(true);
+				} else {
+					btnPrev.setVisible(false);
+				}
+			}
+		});
+		chckbxLatex.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		chckbxLatex.setBounds(548, 170, 113, 25);
+		contentPane.add(chckbxLatex);
 	}
 }

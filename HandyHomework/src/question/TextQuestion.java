@@ -4,12 +4,19 @@ import answer.TextAnswer;
 
 public class TextQuestion extends Question{
 
-	TextAnswer textAns;
+	private TextAnswer textAns;
+	private boolean isLat;
 	
 	public TextQuestion(int qid, String name, String question, int points) {
 		super(qid, name, question,  points);
+		this.isLat = false;
 	}
 	
+	public TextQuestion(int qid, String name, String question, int points, boolean isLat) {
+		super(qid, name, question,  points);
+		this.isLat = isLat;
+	}
+
 	@Override
 	public TextAnswer getCorrectAnswer() {
 		return textAns;
@@ -27,5 +34,9 @@ public class TextQuestion extends Question{
 	@Override
 	public boolean hasMultAnswer() {
 		return false;
+	}
+	
+	public boolean isLat() {
+		return isLat;
 	}
 }

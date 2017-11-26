@@ -15,6 +15,6 @@ public interface UserDAO {
 	public UserLogin getUser(String user, String pass);
 	public boolean userExists(String user);	
 	public List<StudentLogin> getStudentsForCourse(int cid);
-	
+	public int removeUser(String user);
 	void removeAnswersForUser(int uid);
 }

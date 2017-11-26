@@ -60,6 +60,7 @@ public class AnswerMultipleChoice extends JFrame {
 	 * Create the frame.
 	 */
 	public AnswerMultipleChoice() {
+		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Multiple Choice Question");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 450);
@@ -121,9 +122,7 @@ public class AnswerMultipleChoice extends JFrame {
 			JOptionPane.showMessageDialog(AnswerMultipleChoice.this, 
 					"Asssessment not selected");
 			HHLogin frame = new HHLogin();
-			frame.setVisible(true);
-			frame.setResizable(false);
-			frame.setLocationRelativeTo(null);
+			sf.switchForm(frame);
 			if (frame.isShowing()){
 				dispose();
 			}
@@ -138,9 +137,7 @@ public class AnswerMultipleChoice extends JFrame {
 			JOptionPane.showMessageDialog(AnswerMultipleChoice.this, 
 					"There are no questions for this assessment");
 			HHSavedAssessments frame = new HHSavedAssessments();
-			frame.setVisible(true);
-			frame.setResizable(false);
-			frame.setLocationRelativeTo(null);
+			sf.switchForm(frame);
 			if (frame.isShowing()){
 				dispose();
 			}			
@@ -163,9 +160,7 @@ public class AnswerMultipleChoice extends JFrame {
 						JOptionPane.showMessageDialog(AnswerMultipleChoice.this, 
 								"ERROR in the Database - There are no answers for this question");
 						HHSavedAssessments frame = new HHSavedAssessments();
-						frame.setVisible(true);
-						frame.setResizable(false);
-						frame.setLocationRelativeTo(null);
+						sf.switchForm(frame);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -184,9 +179,7 @@ public class AnswerMultipleChoice extends JFrame {
 						JOptionPane.showMessageDialog(AnswerMultipleChoice.this, 
 								"Completed Assessment");
 						HHSavedAssessments frame = new HHSavedAssessments();
-						frame.setVisible(true);
-						frame.setResizable(false);
-						frame.setLocationRelativeTo(null);
+						sf.switchForm(frame);
 						if (frame.isShowing()){
 							dispose();
 						}			
@@ -209,9 +202,7 @@ public class AnswerMultipleChoice extends JFrame {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				frame.setLocationRelativeTo(null);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
