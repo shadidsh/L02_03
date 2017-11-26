@@ -134,7 +134,7 @@ public class HHFormFrame extends JFrame {
 						Assessment as = SelectedAssessment.getAssess();
 						DbQuestions dbQuest = new DbQuestions();
 						
-						int qid = dbQuest.insertQuestions(as.getAid(), name, questionContent, value);
+						int qid = dbQuest.insertQuestions(as.getAid(), name, questionContent, value, false);
 						dbQuest.insertAnswers(qid,  true,  answer);
 						
 						//String message = name + "\nQuestion is: " + questionContent + "\nSuccessfully added.";

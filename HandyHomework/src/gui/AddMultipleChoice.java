@@ -315,7 +315,7 @@ public class AddMultipleChoice extends JFrame {
 						Assessment as = SelectedAssessment.getAssess();
 						DbQuestions dbQuest = new DbQuestions();
 						
-						int qid = dbQuest.insertQuestions(as.getAid(), name, questionContent, value);
+						int qid = dbQuest.insertQuestions(as.getAid(), name, questionContent, value, true);
 						MultQuestion mc = new MultQuestion(qid, questionContent, questionContent, qid);
 						
 						lblSelectedQn.setText(mc.getQuestion());

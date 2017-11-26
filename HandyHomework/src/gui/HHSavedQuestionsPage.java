@@ -1,5 +1,6 @@
 package gui;
 import login.SelectedUser;
+import question.Question;
 import question.TextQuestion;
 
 import java.awt.EventQueue;
@@ -55,7 +56,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	private JLabel ans;
 	private TextAnswer questAnswer;
 	
-	private TextQuestion selQuestion;
+	private Question selQuestion;
 	private int selInd;
 	private String selected = "";
 
@@ -178,10 +179,10 @@ public class HHSavedQuestionsPage extends JFrame {
 		Assessment as = SelectedAssessment.getAssess();
 		DbQuestions dbQuest = new DbQuestions();
 		aid = as.getAid();
-		List<TextQuestion> questions = dbQuest.TextQuestions(aid);
+		List<Question> questions = dbQuest.allQuestions(aid);
 				
 		lblAssessmentName.setText(as.getName());
-		for (TextQuestion tq: questions ) {
+		for (Question tq: questions ) {
 			lstQuestion.addElement(tq.getName());
 		}
 			
@@ -214,7 +215,7 @@ public class HHSavedQuestionsPage extends JFrame {
 				JList<?> list = (JList<?>) e.getSource();
 				int index = list.getSelectedIndex();
 				if (index != -1) {
-					TextQuestion question = questions.get(list.getSelectedIndex());
+					Question question = questions.get(list.getSelectedIndex());
 					questionText.setText("Q: " + question.getQuestion());
 					questionText.setSize(questionText.getPreferredSize());
 					res = "<html>This question is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;

@@ -181,19 +181,31 @@ public class AnswerStudentQuestions extends JFrame {
 					if (ta.isCorrect(answer.toString())) {
 						totalPts += tq.getPoints();
 					}
-					System.out.print(textQ.hasNext());
-					System.out.println("gets here");
-					System.out.println(textQ.nextIndex());
-					System.out.println(textQ.toString());
+					
+					DbQuestions dbQ = new DbQuestions();
+					int aid = SelectedAssessment.getAssess().getAid();
+					
 					if (!textQ.hasNext()) {
-						JOptionPane.showMessageDialog(
-								AnswerStudentQuestions.this, "Finished assessment, points earned : " + totalPts);
-						HHSavedAssessments frame = new HHSavedAssessments();
-						frame.setVisible(true);
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
+						System.out.println(totalPts);
+						if (dbQ.hasMultChoice(aid)) {
+							AnswerMultipleChoice frame = new AnswerMultipleChoice();
+							frame.setVisible(true);	
+							frame.setResizable(false);
+							if (frame.isShowing()){
+								dispose();
+							}
+						} else {
+							//DUPLICATE COOOOODE!!!!!!!!
+							JOptionPane.showMessageDialog(
+									AnswerStudentQuestions.this, "Finished assessment, points earned : " + totalPts);
+							HHSavedAssessments frame = new HHSavedAssessments();
+							frame.setVisible(true);
+							frame.setResizable(false);
+							if (frame.isShowing()){
+								dispose();
+							}
 						}
+						
 					} else {
 						tq = textQ.next();
 						lblQuestions.setText("Questions: " + tq.getQuestion());

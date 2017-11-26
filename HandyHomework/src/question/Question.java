@@ -1,5 +1,7 @@
 package question;
 
+import answer.TextAnswer;
+
 public abstract class Question {
 	public int qid;
 	public String name;
@@ -49,4 +51,6 @@ public abstract class Question {
 	public abstract boolean hasAnswer();
 	
 	public abstract boolean hasMultAnswer();
+
+	public abstract TextAnswer getCorrectAnswer();
 }

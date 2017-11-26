@@ -96,8 +96,6 @@ public class HHSavedAssessments extends JFrame {
 		assessmentTitle.setWrapStyleWord(true);
 		contentPane.add(assessmentTitle);
 		
-		String res = "";
-		
 		DefaultListModel<String> lstAssess = new DefaultListModel<>();
 		ArrayList<Assessment> assess = new ArrayList<Assessment>();
 		DbAssessment dbAssess = new DbAssessment();
@@ -133,7 +131,6 @@ public class HHSavedAssessments extends JFrame {
 				if (frame.isShowing()){
 					dispose();
 				}
-
 			}
 		});
 		JButton btnView = new JButton("Select Assessment");
@@ -151,16 +148,28 @@ public class HHSavedAssessments extends JFrame {
 						if (frame.isShowing()){
 							dispose();
 						}
-					} else {
+					} 
+					// DUPLICATE CODE
+					DbQuestions dbQ = new DbQuestions();
+					int aid = SelectedAssessment.getAssess().getAid();
+					if (dbQ.hasTextQuestions(aid)) {
 						AnswerStudentQuestions frame = new AnswerStudentQuestions();
-						frame.setVisible(true);
+						frame.setVisible(true);	
+						frame.setResizable(false);
+						if (frame.isShowing()){
+							dispose();
+						}							
+					} 
+					if (dbQ.hasMultChoice(aid)){
+						AnswerMultipleChoice frame = new AnswerMultipleChoice();
+						frame.setVisible(true);	
 						frame.setResizable(false);
 						if (frame.isShowing()){
 							dispose();
 						}
 					}
 				}
-				}
+			}
 		});
 		contentPane.add(btnView);
 		
@@ -221,11 +230,25 @@ public class HHSavedAssessments extends JFrame {
 							dispose();
 						}
 					} else {
-						AnswerStudentQuestions frame = new AnswerStudentQuestions();
-						frame.setVisible(true);	
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
+						
+						//DUPLICATE COOODE from actionPerformed
+						DbQuestions dbQ = new DbQuestions();
+						int aid = SelectedAssessment.getAssess().getAid();
+						if (dbQ.hasTextQuestions(aid)) {
+							AnswerStudentQuestions frame = new AnswerStudentQuestions();
+							frame.setVisible(true);	
+							frame.setResizable(false);
+							if (frame.isShowing()){
+								dispose();
+							}							
+						} 
+						if (dbQ.hasMultChoice(aid)){
+							AnswerMultipleChoice frame = new AnswerMultipleChoice();
+							frame.setVisible(true);	
+							frame.setResizable(false);
+							if (frame.isShowing()){
+								dispose();
+							}
 						}
 					}
 				}
@@ -277,7 +300,6 @@ public class HHSavedAssessments extends JFrame {
 		}); 	
 		
 		
-		
 		if (SelectedUser.getUser().isProf()) {
 			JButton btnViewStudents = new JButton("View Students");
 			btnViewStudents.addActionListener(new ActionListener() {
@@ -297,8 +319,6 @@ public class HHSavedAssessments extends JFrame {
 			contentPane.add(btnRemove);
 			contentPane.add(btnNewAssessment);
 			btnNewAssessment.setBounds(257, 257, 160, 30);
-		}
-		
-		
+		}		
 	}
 }

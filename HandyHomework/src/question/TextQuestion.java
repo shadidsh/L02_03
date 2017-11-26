@@ -10,6 +10,7 @@ public class TextQuestion extends Question{
 		super(qid, name, question,  points);
 	}
 	
+	@Override
 	public TextAnswer getCorrectAnswer() {
 		return textAns;
 	}
