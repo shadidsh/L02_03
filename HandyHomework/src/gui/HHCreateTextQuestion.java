@@ -24,7 +24,7 @@ import javax.swing.JComponent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class HHFormFrame extends JFrame {
+public class HHCreateTextQuestion extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField questionNameField;
@@ -38,7 +38,7 @@ public class HHFormFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HHFormFrame frame = new HHFormFrame();
+					HHCreateTextQuestion frame = new HHCreateTextQuestion();
 					frame.setVisible(true);
 					frame.setResizable(false);
 				} catch (Exception e) {
@@ -51,7 +51,7 @@ public class HHFormFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HHFormFrame() {
+	public HHCreateTextQuestion() {
 		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Create Text Question");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -126,9 +126,9 @@ public class HHFormFrame extends JFrame {
 				int value = (int) (spinMarks.getValue());
 				System.out.println("question is :" + questionContent);
 				if (name.isEmpty() || questionContent.isEmpty() || answer.isEmpty()) {
-					JOptionPane.showMessageDialog(HHFormFrame.this, "One or more fields are empty.");
+					JOptionPane.showMessageDialog(HHCreateTextQuestion.this, "One or more fields are empty.");
 				} else if (!SelectedAssessment.isSelected()) {
-					JOptionPane.showMessageDialog(HHFormFrame.this, "No assessment selected.");
+					JOptionPane.showMessageDialog(HHCreateTextQuestion.this, "No assessment selected.");
 				}				
 				else {	
 					try {
@@ -149,7 +149,7 @@ public class HHFormFrame extends JFrame {
 					} catch (NullPointerException e1){
 						System.out.println("Could not insert question into database."); 
 						e1.printStackTrace();
-						JOptionPane.showMessageDialog(HHFormFrame.this, "Could not save question - please check your connection and try again.");
+						JOptionPane.showMessageDialog(HHCreateTextQuestion.this, "Could not save question - please check your connection and try again.");
 					}
 				}
 			}
