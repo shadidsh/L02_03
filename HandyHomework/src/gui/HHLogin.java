@@ -102,8 +102,7 @@ public class HHLogin extends JFrame {
 						JOptionPane.showMessageDialog(HHLogin.this, 
 								"Incorrect credentials entered.");
 					} else {					
-						SelectedUser.setUser(uf);
-						
+						SelectedUser.setUser(uf);		
 						HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
 						sf.switchForm(frame);
 						if (frame.isShowing()){
