@@ -30,12 +30,9 @@ import javax.swing.JComponent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
-<<<<<<< HEAD
 import javax.swing.JCheckBox;
-=======
 import javax.swing.JScrollPane;
 import java.awt.Component;
->>>>>>> fcdf7732fe07f54206041f381671359ee876d439
 
 public class AddMultipleChoice extends JFrame {
 
@@ -174,10 +171,8 @@ public class AddMultipleChoice extends JFrame {
 		contentPane.getRootPane().setDefaultButton(btnAddAnswer);
 		btnAddAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-<<<<<<< HEAD
 				chckbxCorrectAnswer.isSelected();
 				questionAnswerField.setText("");
-=======
 				String answer = String.valueOf(questionAnswerField.getText());				
 				
 				if (answer.isEmpty() ) {
@@ -197,14 +192,10 @@ public class AddMultipleChoice extends JFrame {
 					questionAnswerField.setText("");
 	
 				}
->>>>>>> fcdf7732fe07f54206041f381671359ee876d439
 			}
 		});
 		btnAddAnswer.setBounds(334, 406, 125, 50);
 		contentPane.add(btnAddAnswer);
-<<<<<<< HEAD
-		
-=======
 
 		
 		table = new JTable(model);
@@ -411,6 +402,5 @@ public class AddMultipleChoice extends JFrame {
 			}
 		}
 		return false;
->>>>>>> fcdf7732fe07f54206041f381671359ee876d439
 	}
 }
