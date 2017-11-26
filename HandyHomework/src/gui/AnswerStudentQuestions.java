@@ -42,11 +42,8 @@ public class AnswerStudentQuestions extends JFrame {
 	private JFrame frame;
 	private TextQuestion tq;
 	private int totalPts = 0;
-<<<<<<< HEAD
-=======
 	private boolean nextQ = true;
 
->>>>>>> fcdf7732fe07f54206041f381671359ee876d439
 	/**
 	 * Launch the application.
 	 */

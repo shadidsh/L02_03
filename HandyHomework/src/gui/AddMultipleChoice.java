@@ -32,6 +32,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
+import javax.swing.JScrollPane;
+import java.awt.Component;
 
 public class AddMultipleChoice extends JFrame {
 
@@ -193,8 +195,6 @@ public class AddMultipleChoice extends JFrame {
 		});
 		btnAddAnswer.setBounds(334, 406, 125, 50);
 		contentPane.add(btnAddAnswer);
-
-
 		
 		table = new JTable(model);
 		model.setColumnIdentifiers(colHeadings);
