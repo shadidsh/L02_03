@@ -222,6 +222,18 @@ public class DbUser extends DbConnection implements UserDAO  {
 	}
 	@Override
 	public int removeUser(String user) {
+		Connection conn = getConnection();
+		try {
+    		String deleteAns = "DELETE FROM " 
+		+ constants.Constants.DataConstants.USERS + " WHERE username = ?";
+    		PreparedStatement stat = conn.prepareStatement(deleteAns);
+    		stat.setString(1, user);
+    		stat.executeUpdate();
+    		conn.close();
+    		return 0;
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
 		return -1;
 	}
 
