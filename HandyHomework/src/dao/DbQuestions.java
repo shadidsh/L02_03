@@ -130,19 +130,54 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 	}
 	
 	@Override
-	public int insertQuestions(int aid, String name, String question, int points, boolean isMult) {
+	public List<TextQuestion> LatexQuestions(int aid) {
+		Connection conn = getConnection();
+		try {
+    		String query = "Select qid, name, question, points from "
+    				+ constants.Constants.DataConstants.QUESTIONS + " where "
+    						+ " aid = ? and is_mult = false and is_latex = true";
+    		PreparedStatement stat = conn.prepareStatement(query);
+    		stat.setInt(1, aid);
+    		ResultSet Rs = stat.executeQuery();
+    		
+    		ArrayList<TextQuestion> questions = new ArrayList<TextQuestion>() ;
+    		TextAnswer ta;
+    		
+    		while (Rs.next()) {
+    			int qid = Rs.getInt(1);
+    			String name = Rs.getString(2);
+    			String question = Rs.getString(3);
+    			int points = Rs.getInt(4);
+
+    			TextQuestion tq = new TextQuestion(qid, name, question, points);
+    			ta = this.singleAnswerQuestion(qid);
+    			tq.setAnswer(ta);
+    			questions.add(tq);
+    		}    		
+    		conn.close();
+    		return questions;
+    		
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());  
+		}		
+		return null;
+	}
+	
+	@Override
+	public int insertQuestions(int aid, String name, String question, int points, boolean isMult, boolean isLat) {
 		Connection conn = getConnection();
 		int res = -1;
 		try{
     		String insert = "INSERT INTO " + constants.Constants.DataConstants.QUESTIONS 
-    				+ "(name, aid, question, points, is_mult) " +
-    				" VALUES(?,?,?,?,?) RETURNING qid";
+    				+ "(name, aid, question, points, is_mult, is_latex) " +
+    				" VALUES(?,?,?,?,?,?) RETURNING qid";
 			PreparedStatement stat = conn.prepareStatement(insert);
 			stat.setString(1, name);
 			stat.setInt(2, aid);
 			stat.setString(3, question);
 			stat.setInt(4, points);
 			stat.setBoolean(5, isMult);
+			stat.setBoolean(6, isLat);
 
 			ResultSet Rs = stat.executeQuery();
 			Rs.next();
@@ -266,6 +301,7 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
     		stat.setInt(1, aid);
     		stat.executeUpdate();
     		
+    		conn.close();
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());  
 		}	
@@ -274,6 +310,7 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 	@Override
 	public boolean hasMultChoice(int aid) {
     	Connection conn = getConnection();
+    	
     	try { 
     		
     		String query = "select exists(select 1 from " + constants.Constants.DataConstants.QUESTIONS 
@@ -283,7 +320,10 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
     		
     		ResultSet Rs = stat.executeQuery(); 
     		Rs.next();
-    		return Rs.getBoolean(1);
+    		boolean res = Rs.getBoolean(1);
+    		conn.close();
+    		return res;
+    		
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
     	}
@@ -296,17 +336,39 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
     	try { 
     		
     		String query = "select exists(select 1 from " + constants.Constants.DataConstants.QUESTIONS 
-    				+  " where aid = ? and is_mult = false)";
+    				+  " where aid = ? and is_mult = false and is_latex = false)";
     		PreparedStatement stat = conn.prepareStatement(query);
     		stat.setInt(1, aid);
     		
     		ResultSet Rs = stat.executeQuery(); 
     		Rs.next();
-    		return Rs.getBoolean(1);
+    		boolean res = Rs.getBoolean(1);
+    		return res;
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
     	}
     	return false;   
+	}
+
+	@Override
+	public boolean hasLatex(int aid) {
+    	Connection conn = getConnection();
+    	try { 
+    		
+    		String query = "select exists(select 1 from " + constants.Constants.DataConstants.QUESTIONS 
+    				+  " where aid = ? and is_mult = false and is_latex = true)";
+    		PreparedStatement stat = conn.prepareStatement(query);
+    		stat.setInt(1, aid);
+    		
+    		ResultSet Rs = stat.executeQuery(); 
+    		Rs.next();
+    		boolean res = Rs.getBoolean(1);
+    		conn.close();
+    		return res;
+    	} catch(Exception ex) {
+    		System.out.print(ex.getMessage());    		
+    	}
+    	return false; 
 	}
 
 }

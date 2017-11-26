@@ -332,6 +332,7 @@ public class HHSavedAssessments extends JFrame {
 			contentPane.add(btnNewAssessment);
 			btnNewAssessment.setBounds(257, 257, 160, 30);
 		} else if (!SelectedUser.getUser().isProf()) {
+			/*
 			JButton btnViewMarks = new JButton("View Grades");
 			btnViewMarks.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -344,9 +345,11 @@ public class HHSavedAssessments extends JFrame {
 					}	
 				}
 				
-			});
+			}
+			);
+			
 			btnViewMarks.setBounds(309, 326, 160, 30);
-			contentPane.add(btnViewMarks);
+			contentPane.add(btnViewMarks);*/
 		}
 	}
 }
