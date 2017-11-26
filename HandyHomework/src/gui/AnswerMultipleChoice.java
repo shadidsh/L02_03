@@ -208,7 +208,7 @@ public class AnswerMultipleChoice extends JFrame {
 				frame.setResizable(false);
 				if (frame.isShowing()){
 					dispose();
-				}
+				}st
 			}
 		});
 		btnCancel.setBounds(156, 370, 117, 29);
