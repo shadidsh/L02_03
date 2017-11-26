@@ -171,7 +171,7 @@ public class AddMultipleChoice extends JFrame {
 				if (answer.isEmpty() ) {
 					JOptionPane.showMessageDialog(AddMultipleChoice.this, 
 							"Answer field is empty.");
-				} else if (ansCount >= 5) {
+				} else if (ansCount > 5) {
 					JOptionPane.showMessageDialog(AddMultipleChoice.this, 
 							"Maximum number of answers for a question is 6.");
 				} else if (alreadyExists(table, answer)) {
@@ -285,7 +285,6 @@ public class AddMultipleChoice extends JFrame {
 					btnAddAnswer.setVisible(false);
 					btnRemoveAnswer.setVisible(false);
 					btnSubmit.setVisible(false);
-					btnAddQuestion.setVisible(false);
 					
 					questionContentField.setText("");
 					questionNameField.setText("");

@@ -10,6 +10,7 @@ import question.TextQuestion;
 public interface QuestionDAO {
 	
 	public List<MultQuestion> multChoiceQuestions(int qid);
+	
 	public List<TextQuestion> TextQuestions(int aid);
 	
 	public int insertQuestions(int aid, String name, String question, int points);
