@@ -96,7 +96,9 @@ public class DbUser extends DbConnection implements UserDAO  {
     				userLog = new StudentLogin(userId, username, password);
     			}
     			System.out.println(userId);
+    			conn.close();
     			return userLog;
+    			
     		} 
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
