@@ -41,6 +41,7 @@ public class HHLogin extends JFrame {
 				try {
 					HHLogin frame = new HHLogin();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -105,6 +106,7 @@ public class HHLogin extends JFrame {
 						HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
 						frame.setVisible(true);
 						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -134,6 +136,7 @@ public class HHLogin extends JFrame {
 				HHRegister frame = new HHRegister();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}

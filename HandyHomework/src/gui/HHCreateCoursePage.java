@@ -100,6 +100,7 @@ public class HHCreateCoursePage extends JFrame {
 					HHViewCoursesPage frame = new HHViewCoursesPage();
 					frame.setVisible(true);
 					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
 					if (frame.isShowing()){
 						dispose();
 					}
@@ -121,6 +122,7 @@ public class HHCreateCoursePage extends JFrame {
 				HHViewCoursesPage frame = new HHViewCoursesPage();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}

@@ -116,6 +116,7 @@ public class HHSavedAssessments extends JFrame {
 			HHLogin frame = new HHLogin();
 			frame.setVisible(true);
 			frame.setResizable(false);
+			frame.setLocationRelativeTo(null);
 			if (frame.isShowing()){
 				dispose();
 			}
@@ -129,6 +130,7 @@ public class HHSavedAssessments extends JFrame {
 				HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
 				frame.setVisible(true);	
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -146,6 +148,7 @@ public class HHSavedAssessments extends JFrame {
 						HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
 						frame.setVisible(true);	
 						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -158,6 +161,7 @@ public class HHSavedAssessments extends JFrame {
 							AnswerStudentQuestions frame = new AnswerStudentQuestions();
 							frame.setVisible(true);	
 							frame.setResizable(false);
+							frame.setLocationRelativeTo(null);
 							if (frame.isShowing()){
 								dispose();
 							}							
@@ -165,6 +169,7 @@ public class HHSavedAssessments extends JFrame {
 							AnswerMultipleChoice frame = new AnswerMultipleChoice();
 							frame.setVisible(true);	
 							frame.setResizable(false);
+							frame.setLocationRelativeTo(null);
 							if (frame.isShowing()){
 								dispose();
 							}
@@ -228,6 +233,7 @@ public class HHSavedAssessments extends JFrame {
 						HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
 						frame.setVisible(true);	
 						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -240,6 +246,7 @@ public class HHSavedAssessments extends JFrame {
 							AnswerStudentQuestions frame = new AnswerStudentQuestions();
 							frame.setVisible(true);	
 							frame.setResizable(false);
+							frame.setLocationRelativeTo(null);
 							if (frame.isShowing()){
 								dispose();
 							}							
@@ -247,6 +254,7 @@ public class HHSavedAssessments extends JFrame {
 							AnswerMultipleChoice frame = new AnswerMultipleChoice();
 							frame.setVisible(true);	
 							frame.setResizable(false);
+							frame.setLocationRelativeTo(null);
 							if (frame.isShowing()){
 								dispose();
 							}
@@ -264,6 +272,7 @@ public class HHSavedAssessments extends JFrame {
 				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
 				frame.setVisible(true);	
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -277,6 +286,7 @@ public class HHSavedAssessments extends JFrame {
 				HHViewCoursesPage frame = new HHViewCoursesPage();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -308,6 +318,7 @@ public class HHSavedAssessments extends JFrame {
 					ViewStudentsPage frame = new ViewStudentsPage();
 					frame.setVisible(true);	
 					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
 					if (frame.isShowing()){
 						dispose();
 					} 
@@ -320,6 +331,22 @@ public class HHSavedAssessments extends JFrame {
 			contentPane.add(btnRemove);
 			contentPane.add(btnNewAssessment);
 			btnNewAssessment.setBounds(257, 257, 160, 30);
-		}		
+		} else if (!SelectedUser.getUser().isProf()) {
+			JButton btnViewMarks = new JButton("View Grades");
+			btnViewMarks.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					// pop-up looking at the grades for the assessment, if one is selected 
+					if (selectedAs == null ) {
+						JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment.");
+					} else {
+						// use selectedAs to get the score from the db? selectedAs;
+						JOptionPane.showMessageDialog(HHSavedAssessments.this, "This\nis\nwhere\nthe\nresults\ngo");
+					}	
+				}
+				
+			});
+			btnViewMarks.setBounds(309, 326, 160, 30);
+			contentPane.add(btnViewMarks);
+		}
 	}
 }

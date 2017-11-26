@@ -91,6 +91,7 @@ public class HandyHomeworkMainPage extends JFrame {
 				HHViewCoursesPage frame = new HHViewCoursesPage();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -111,6 +112,7 @@ public class HandyHomeworkMainPage extends JFrame {
 				HHLogin frame = new HHLogin();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}

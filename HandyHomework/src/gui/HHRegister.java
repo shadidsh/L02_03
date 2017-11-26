@@ -100,6 +100,7 @@ public class HHRegister extends JFrame {
 						HHLogin frame = new HHLogin();
 						frame.setVisible(true);
 						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -125,6 +126,7 @@ public class HHRegister extends JFrame {
 				HHLogin frame = new HHLogin();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}

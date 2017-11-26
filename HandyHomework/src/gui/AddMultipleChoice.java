@@ -155,6 +155,7 @@ public class AddMultipleChoice extends JFrame {
 				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}

@@ -101,6 +101,7 @@ public class AddStudentsPage extends JFrame {
 									ViewStudentsPage frame = new ViewStudentsPage();
 									frame.setVisible(true);
 									frame.setResizable(false);
+									frame.setLocationRelativeTo(null);
 									if (frame.isShowing()){
 										dispose();
 									}
@@ -132,6 +133,7 @@ public class AddStudentsPage extends JFrame {
 				AddOneStudentForm frame = new AddOneStudentForm();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -149,6 +151,7 @@ public class AddStudentsPage extends JFrame {
 				ViewStudentsPage frame = new ViewStudentsPage();
 				frame.setVisible(true);		
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}

@@ -125,6 +125,7 @@ public class HHViewCoursesPage extends JFrame {
 					HHSavedAssessments frame = new HHSavedAssessments();
 					frame.setVisible(true);
 					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
 					if (frame.isShowing()){
 						dispose();
 					}
@@ -150,6 +151,7 @@ public class HHViewCoursesPage extends JFrame {
 						HHSavedAssessments frame = new HHSavedAssessments();
 						frame.setVisible(true);
 						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -165,6 +167,7 @@ public class HHViewCoursesPage extends JFrame {
 				HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -201,6 +204,7 @@ public class HHViewCoursesPage extends JFrame {
 					HHCreateCoursePage frame = new HHCreateCoursePage();
 					frame.setVisible(true);
 					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
 					if (frame.isShowing()){
 						dispose();
 					}
