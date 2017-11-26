@@ -52,6 +52,7 @@ public class AddStudentsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public AddStudentsPage() {
+		setTitle("HandyHomework - Add Students to Course");
 		this.setName("addStudents");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 430, 270);

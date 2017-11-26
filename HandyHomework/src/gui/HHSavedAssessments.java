@@ -73,6 +73,7 @@ public class HHSavedAssessments extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedAssessments() {
+		setTitle("HandyHomework - Assessments");
 		this.setName("SavedAssess");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 395);
@@ -143,29 +144,30 @@ public class HHSavedAssessments extends JFrame {
 					SelectedAssessment.setAssess(selectedAs);
 					if (SelectedUser.getUser().isProf()) {
 						HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-						frame.setVisible(true);
+						frame.setVisible(true);	
 						frame.setResizable(false);
 						if (frame.isShowing()){
 							dispose();
 						}
-					} 
-					// DUPLICATE CODE
-					DbQuestions dbQ = new DbQuestions();
-					int aid = SelectedAssessment.getAssess().getAid();
-					if (dbQ.hasTextQuestions(aid)) {
-						AnswerStudentQuestions frame = new AnswerStudentQuestions();
-						frame.setVisible(true);	
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
-						}							
-					} 
-					if (dbQ.hasMultChoice(aid)){
-						AnswerMultipleChoice frame = new AnswerMultipleChoice();
-						frame.setVisible(true);	
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
+					} else {
+						
+						//DUPLICATE COOODE from actionPerformed
+						DbQuestions dbQ = new DbQuestions();
+						int aid = SelectedAssessment.getAssess().getAid();
+						if (dbQ.hasTextQuestions(aid)) {
+							AnswerStudentQuestions frame = new AnswerStudentQuestions();
+							frame.setVisible(true);	
+							frame.setResizable(false);
+							if (frame.isShowing()){
+								dispose();
+							}							
+						} else if (dbQ.hasMultChoice(aid)){
+							AnswerMultipleChoice frame = new AnswerMultipleChoice();
+							frame.setVisible(true);	
+							frame.setResizable(false);
+							if (frame.isShowing()){
+								dispose();
+							}
 						}
 					}
 				}
@@ -241,8 +243,7 @@ public class HHSavedAssessments extends JFrame {
 							if (frame.isShowing()){
 								dispose();
 							}							
-						} 
-						if (dbQ.hasMultChoice(aid)){
+						} else if (dbQ.hasMultChoice(aid)){
 							AnswerMultipleChoice frame = new AnswerMultipleChoice();
 							frame.setVisible(true);	
 							frame.setResizable(false);

@@ -60,6 +60,7 @@ public class AnswerMultipleChoice extends JFrame {
 	 * Create the frame.
 	 */
 	public AnswerMultipleChoice() {
+		setTitle("HandyHomework - Multiple Choice Question");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 450);
 		contentPane = new JPanel();
@@ -208,7 +209,7 @@ public class AnswerMultipleChoice extends JFrame {
 				frame.setResizable(false);
 				if (frame.isShowing()){
 					dispose();
-				}st
+				}
 			}
 		});
 		btnCancel.setBounds(156, 370, 117, 29);

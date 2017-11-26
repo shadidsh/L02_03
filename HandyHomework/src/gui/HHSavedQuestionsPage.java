@@ -81,6 +81,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedQuestionsPage() {
+		setTitle("HandyHomework - Questions");
 		setName("SavedQuestions");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 569, 420);
@@ -323,13 +324,13 @@ public class HHSavedQuestionsPage extends JFrame {
 			}
 		});
 		btnAdd.setMaximumSize(new Dimension(139, 23));
-		btnAdd.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		btnAdd.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 				
 		if (SelectedUser.getUser().isProf()){
-			btnAdd.setBounds(58, 301, 130, 36);
+			btnAdd.setBounds(58, 301, 133, 36);
 			contentPane.add(btnAdd);
 			
-			btnRemove.setBounds(58, 342, 130, 35);
+			btnRemove.setBounds(58, 342, 133, 35);
 			contentPane.add(btnRemove);
 		} else {
 			questionAnswerField = new JTextField();

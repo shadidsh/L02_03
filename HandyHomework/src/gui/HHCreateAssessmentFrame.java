@@ -52,6 +52,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public HHCreateAssessmentFrame() {
+		setTitle("HandyHomework - Create Assessment");
 		this.setName("SavedAssess");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 415, 370);

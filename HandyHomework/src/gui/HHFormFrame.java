@@ -52,7 +52,7 @@ public class HHFormFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public HHFormFrame() {
-		setTitle("questionCreate");
+		setTitle("HandyHomework - Create Text Question");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 475, 325);
 		contentPane = new JPanel();

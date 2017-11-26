@@ -66,6 +66,7 @@ public class AnswerStudentQuestions extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	public AnswerStudentQuestions() {
+		setTitle("HandyHomework - Text Question");
 		//frame = new JFrame();
 	    setBounds(300, 300, 853, 564);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

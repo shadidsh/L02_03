@@ -52,7 +52,7 @@ public class HHLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public HHLogin() {
-		setTitle("HandyHomework");
+		setTitle("HandyHomework - Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 420, 300);
 		contentPane = new JPanel();

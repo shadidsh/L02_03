@@ -42,7 +42,7 @@ public class HandyHomeworkMainPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HandyHomeworkMainPage() {
-		setTitle("HandyHomework");
+		setTitle("HandyHomework - Main Page");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 300);
 		contentPane = new JLayeredPane();
