@@ -12,12 +12,11 @@ public class StudentLogin extends UserLogin {
 	
 	
 	public String getName() {
-		return this.getUserName();
+		return super.getUserName();
 	}
 	
-	@Override
 	public String getPassword() {
-		return this.getUserName();
+		return super.getPassword();
 	}
 	
 }
