@@ -67,59 +67,62 @@ public class AddMultipleChoice extends JFrame {
 	public AddMultipleChoice() {
 		setTitle("questionCreate");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 835, 533);
+		setBounds(100, 100, 778, 531);
 		contentPane = new JPanel();
 		contentPane.setAutoscrolls(true);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblQuestionForm = new JLabel("Question Form  ");
-		lblQuestionForm.setBounds(166, 22, 219, 24);
-		lblQuestionForm.setFont(new Font("Menlo", Font.ITALIC, 23));
-		lblQuestionForm.setHorizontalAlignment(SwingConstants.RIGHT);
-		contentPane.add(lblQuestionForm);
-		
 		JLabel lblQuestionName = new JLabel("Question Name:");
-		lblQuestionName.setBounds(138, 94, 101, 16);
+		lblQuestionName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblQuestionName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblQuestionName.setBounds(219, 133, 315, 24);
 		lblQuestionName.setVerticalAlignment(SwingConstants.TOP);
 		contentPane.add(lblQuestionName);
 		
 		questionNameField = new JTextField();
-		questionNameField.setBounds(20, 123, 359, 20);
+		questionNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		questionNameField.setBounds(36, 170, 698, 41);
 		contentPane.add(questionNameField);
 		questionNameField.setColumns(10);
 		questionNameField.setName("questionName");
 		
 		JLabel lblEnterYourQuestion = new JLabel("Enter your question here: ");
-		lblEnterYourQuestion.setBounds(106, 156, 162, 16);
+		lblEnterYourQuestion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEnterYourQuestion.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblEnterYourQuestion.setBounds(302, 210, 213, 49);
 		contentPane.add(lblEnterYourQuestion);
 		
 		JTextArea questionContentField = new JTextArea();
-		questionContentField.setBounds(20, 185, 359, 37);
+		questionContentField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		questionContentField.setBounds(36, 273, 698, 88);
 		questionContentField.setWrapStyleWord(true);
 		questionContentField.setLineWrap(true);
 		contentPane.add(questionContentField);
 		questionContentField.setName("content");
 		
-		JLabel lblFinalAnswer = new JLabel("Answer: ");
-		lblFinalAnswer.setBounds(138, 257, 90, 37);
+		JLabel lblFinalAnswer = new JLabel("Enter your answer here");
+		lblFinalAnswer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFinalAnswer.setBounds(86, 302, 648, 37);
 		contentPane.add(lblFinalAnswer);
 		lblFinalAnswer.setVisible(false);
 		
 		questionAnswerField = new JTextField();
-		questionAnswerField.setBounds(20, 307, 299, 37);
+		questionAnswerField.setBounds(86, 341, 648, 37);
 		questionAnswerField.setColumns(10);
 		contentPane.add(questionAnswerField);
 		questionAnswerField.setName("questionAnswer");
 		questionAnswerField.setVisible(false);
 		
 		JLabel lblNumberOfMarks = new JLabel("Number of Marks Awarded: ");
-		lblNumberOfMarks.setBounds(20, 424, 180, 14);
+		lblNumberOfMarks.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNumberOfMarks.setBounds(20, 403, 222, 35);
 		contentPane.add(lblNumberOfMarks);
 		
 		JSpinner spinMarks = new JSpinner();
-		spinMarks.setBounds(192, 421, 90, 20);
+		spinMarks.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		spinMarks.setBounds(242, 405, 116, 35);
 		contentPane.add(spinMarks);
 		spinMarks.setName("spin");
 		
@@ -138,16 +141,15 @@ public class AddMultipleChoice extends JFrame {
 		    public String getColumnName(int index) {
 		        return columnNames[index];
 		    }
-		};
-	    
-		
-
-		
+		};		
 		JButton btnCancel = new JButton("\u2190 Back");
-		btnCancel.setBounds(20, 26, 100, 25);
+		btnCancel.setBounds(20, 13, 132, 41);
 		btnCancel.setName("back");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				textQ = null;
+				
 				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
 				frame.setVisible(true);
 				frame.setResizable(false);
@@ -169,7 +171,7 @@ public class AddMultipleChoice extends JFrame {
 				if (answer.isEmpty() ) {
 					JOptionPane.showMessageDialog(AddMultipleChoice.this, 
 							"Answer field is empty.");
-				} else if (ansCount > 6) {
+				} else if (ansCount >= 5) {
 					JOptionPane.showMessageDialog(AddMultipleChoice.this, 
 							"Maximum number of answers for a question is 6.");
 				} else if (alreadyExists(table, answer)) {
@@ -179,25 +181,31 @@ public class AddMultipleChoice extends JFrame {
 					
 					Object[] data = {answer};
 					model.addRow(data);
+					ansCount++;
 					questionAnswerField.setText("");
 	
 				}
 			}
 		});
-		btnAddAnswer.setBounds(532, 406, 125, 50);
+		btnAddAnswer.setBounds(334, 406, 125, 50);
 		contentPane.add(btnAddAnswer);
 
 		
-
+		table = new JTable(model);
+		model.setColumnIdentifiers(colHeadings);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setVisible(false);
-		scrollPane.setName("studentTable");
-		scrollPane.setBounds(401, 136, 404, 240);
+
+		scrollPane.setBounds(77, 134, 657, 155);
 		contentPane.add(scrollPane);
 		
-		JLabel lblPleaseSelectThe = new JLabel("Please select the correct answer");
-		lblPleaseSelectThe.setBounds(518, 84, 236, 37);
-		contentPane.add(lblPleaseSelectThe);
+		JLabel lblCorAns = new JLabel("Please select one correct answer from the list");
+		lblCorAns.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblCorAns.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCorAns.setToolTipText("");
+		lblCorAns.setBounds(213, 100, 336, 57);
+		contentPane.add(lblCorAns);
+		lblCorAns.setVisible(false);
 		
 		JButton btnRemoveAnswer = new JButton("Remove Answer");
 		btnRemoveAnswer.setVisible(false);
@@ -210,46 +218,50 @@ public class AddMultipleChoice extends JFrame {
 				} else {
 					DefaultTableModel dm=(DefaultTableModel)table.getModel();
 					dm.removeRow(row);
+					ansCount--;
 				}
 			}
 		});
-		btnRemoveAnswer.setBounds(669, 406, 125, 50);
+		btnRemoveAnswer.setBounds(596, 406, 140, 50);
 		contentPane.add(btnRemoveAnswer);
 		
 		JLabel lblQuestion = new JLabel("Question Name:");
+		lblQuestion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblQuestion.setVerticalAlignment(SwingConstants.TOP);
-		lblQuestion.setBounds(434, 55, 101, 16);
+		lblQuestion.setBounds(147, 77, 419, 24);
 		contentPane.add(lblQuestion);
+		lblQuestion.setVisible(true);
 		
-		JLabel lblSelectedQn = new JLabel("Selected Qn");
-		lblSelectedQn.setVerticalAlignment(SwingConstants.TOP);
-		lblSelectedQn.setBounds(572, 55, 101, 16);
+		JLabel lblSelectedQn = new JLabel("");
+		lblSelectedQn.setBounds(77, 188, 213, 109);
 		contentPane.add(lblSelectedQn);
 		
 		JButton button = new JButton("Add Question");
+		button.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		JButton btnSubmit = new JButton("Submit");
-		btnSubmit.setBounds(410, 406, 125, 50);
+		btnSubmit.setBounds(86, 406, 125, 50);
 		btnSubmit.setName("Submit");
 		btnSubmit.setVisible(false);
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
+				
 				if (ansCount < 2) {
 					JOptionPane.showMessageDialog(AddMultipleChoice.this, 
 							"Atleast 2 answers are required for multiple choice.");
-				} else if (row < 0) {
+				} else if (row < 0 || table.getSelectedRowCount() > 1) {
 					JOptionPane.showMessageDialog(AddMultipleChoice.this, 
-							"Please select the correct answer for this question.");
+							"Please select one correct answer for this question.");
 				} else {
 					DefaultTableModel dm=(DefaultTableModel)table.getModel();
 					DbQuestions dbQ = new DbQuestions();
 					for (int ansInd = 0; ansInd < dm.getRowCount();ansInd++) {
 						String ans = (String) dm.getValueAt(ansInd, 0);
 						dbQ.insertAnswers(textQ.getQid(), ansInd == row, ans);
-						
 						dm.removeRow(ansInd);
 					}
+					ansCount = 0;
 					textQ = null;
 					
 					JOptionPane.showMessageDialog(AddMultipleChoice.this, 
@@ -263,7 +275,7 @@ public class AddMultipleChoice extends JFrame {
 					spinMarks.setVisible(true);
 					button.setVisible(true);
 					
-					
+					lblQuestion.setVisible(false);
 					scrollPane.setVisible(false);
 					lblFinalAnswer.setVisible(false);
 					questionAnswerField.setVisible(false);					
@@ -271,6 +283,10 @@ public class AddMultipleChoice extends JFrame {
 					btnRemoveAnswer.setVisible(false);
 					btnSubmit.setVisible(false);
 					
+					questionContentField.setText("");
+					questionNameField.setText("");
+					lblSelectedQn.setText("");
+					spinMarks.setValue(0);
 				}
 	
 			}
@@ -301,6 +317,8 @@ public class AddMultipleChoice extends JFrame {
 						lblSelectedQn.setText(mc.getQuestion());
 						textQ = mc;
 						
+						scrollPane.setName("Answers for " +  mc.name);
+						
 						lblQuestionName.setVisible(false);
 						questionNameField.setVisible(false);
 						lblEnterYourQuestion.setVisible(false);
@@ -318,19 +336,17 @@ public class AddMultipleChoice extends JFrame {
 						btnSubmit.setVisible(true);
 						
 						ansCount = 0;
-						
-						
 					}
 				}
 			}
 		});
 		button.setName("AddQuestion");
-		button.setBounds(315, 406, 125, 50);
+		button.setBounds(459, 406, 125, 50);
 		contentPane.add(button);
 		
-		table = new JTable(model);
-		model.setColumnIdentifiers(colHeadings);
-		
+		JButton btnAbortQuestion = new JButton("Discard Question");
+		btnAbortQuestion.setBounds(533, 15, 201, 39);
+		contentPane.add(btnAbortQuestion);
 	}
 	
 	public boolean alreadyExists(JTable table, String answer) {
@@ -343,22 +359,4 @@ public class AddMultipleChoice extends JFrame {
 		}
 		return false;
 	}
-	
-	public void reset(javax.swing.JComponent c) {
-		c.setVisible(!c.isVisible());
-		
-		
-	}
-/*	public void hideQuestionInput() {
-		lblQuestionName.setVisible(false);
-		questionNameField.setVisible(false);
-		lblEnterYourQuestion.setVisible(false);
-		questionContentField.setVisible(false);
-		lblFinalAnswer.setVisible(false);
-		questionAnswerField.setVisible(false);
-		lblNumberOfMarks.setVisible(false);
-		spinMarks.setVisible(false);
-		button.setVisible(false);
-	}
-	*/
 }
