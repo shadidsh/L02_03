@@ -43,7 +43,6 @@ public class AnswerStudentQuestions extends JFrame {
 	private TextQuestion tq;
 	private int totalPts = 0;
 	private boolean nextQ = true;
-
 	/**
 	 * Launch the application.
 	 */

@@ -191,7 +191,6 @@ public class AddMultipleChoice extends JFrame {
 		});
 		btnAddAnswer.setBounds(334, 406, 125, 50);
 		contentPane.add(btnAddAnswer);
-		
 		table = new JTable(model);
 		model.setColumnIdentifiers(colHeadings);
 		JScrollPane scrollPane = new JScrollPane(table);
