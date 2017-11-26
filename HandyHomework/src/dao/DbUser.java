@@ -50,7 +50,7 @@ public class DbUser extends DbConnection implements UserDAO  {
     		stat.setInt(1, id);
     		
     		ResultSet Rs = stat.executeQuery(); 
-    		UserLogin userLog;
+    		UserLogin userLog = null;
     		if (Rs.next()) { 
     			Integer userId = Rs.getInt(1);
     			String username = Rs.getString(2);
@@ -63,8 +63,10 @@ public class DbUser extends DbConnection implements UserDAO  {
     			} else {
     				userLog = new StudentLogin(userId, username, password);
     			}
-    			return userLog;
-    		} 
+    		}
+    		conn.close();
+    		return userLog;
+    		
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
     	}
@@ -82,7 +84,7 @@ public class DbUser extends DbConnection implements UserDAO  {
     		stat.setString(1, user);
     		stat.setString(2, pass);
     		ResultSet Rs = stat.executeQuery(); 
-    		UserLogin userLog;
+    		UserLogin userLog = null;
     		if (Rs.next()) { 
     			Integer userId = Rs.getInt(1);
     			String username = Rs.getString(2);
@@ -96,8 +98,9 @@ public class DbUser extends DbConnection implements UserDAO  {
     				userLog = new StudentLogin(userId, username, password);
     			}
     			System.out.println(userId);
-    			return userLog;
     		} 
+    		conn.close();
+			return userLog;
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
     	}
@@ -114,7 +117,7 @@ public class DbUser extends DbConnection implements UserDAO  {
     		PreparedStatement stat = conn.prepareStatement(query);
     		stat.setString(1, user);
     		ResultSet Rs = stat.executeQuery(); 
-    		UserLogin userLog;
+    		UserLogin userLog = null;
     		if (Rs.next()) { 
     			Integer userId = Rs.getInt(1);
     			String username = Rs.getString(2);
@@ -127,8 +130,9 @@ public class DbUser extends DbConnection implements UserDAO  {
     			} else {
     				userLog = new StudentLogin(userId, username, password);
     			}
-    			return userLog;
-    		} 
+    		}
+    		conn.close();
+			return userLog;
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
     	}
@@ -147,7 +151,10 @@ public class DbUser extends DbConnection implements UserDAO  {
     		
     		ResultSet Rs = stat.executeQuery(); 
     		Rs.next();
-    		return Rs.getBoolean(1);
+    		boolean res = Rs.getBoolean(1);
+    		conn.close();
+    		return res;
+    		
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
     	}
@@ -198,7 +205,7 @@ public class DbUser extends DbConnection implements UserDAO  {
     		PreparedStatement stat = conn.prepareStatement(deleteAns);
     		stat.setInt(1, uid);
     		stat.executeUpdate();
-    		
+    		conn.close();
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());  
 		}		
