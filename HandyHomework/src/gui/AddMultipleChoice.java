@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -66,7 +67,7 @@ public class AddMultipleChoice extends JFrame {
 	 * Create the frame.
 	 */
 	public AddMultipleChoice() {
-		setTitle("questionCreate");
+		setTitle("HandyHomework - Create Multiple Choice Question");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 778, 531);
 		contentPane = new JPanel();
@@ -154,6 +155,7 @@ public class AddMultipleChoice extends JFrame {
 				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -161,18 +163,12 @@ public class AddMultipleChoice extends JFrame {
 		});
 		contentPane.add(btnCancel);
 		
-		JCheckBox chckbxCorrectAnswer = new JCheckBox("Correct Answer");
-		chckbxCorrectAnswer.setBounds(161, 211, 180, 23);
-		contentPane.add(chckbxCorrectAnswer);
-		
 		JButton btnAddAnswer = new JButton("Add Answer");
 		btnAddAnswer.setVisible(false);
 		
 		contentPane.getRootPane().setDefaultButton(btnAddAnswer);
 		btnAddAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				chckbxCorrectAnswer.isSelected();
-				questionAnswerField.setText("");
 				String answer = String.valueOf(questionAnswerField.getText());				
 				
 				if (answer.isEmpty() ) {
@@ -190,14 +186,11 @@ public class AddMultipleChoice extends JFrame {
 					model.addRow(data);
 					ansCount++;
 					questionAnswerField.setText("");
-	
 				}
 			}
 		});
 		btnAddAnswer.setBounds(334, 406, 125, 50);
 		contentPane.add(btnAddAnswer);
-
-		
 		table = new JTable(model);
 		model.setColumnIdentifiers(colHeadings);
 		JScrollPane scrollPane = new JScrollPane(table);
@@ -322,7 +315,7 @@ public class AddMultipleChoice extends JFrame {
 						Assessment as = SelectedAssessment.getAssess();
 						DbQuestions dbQuest = new DbQuestions();
 						
-						int qid = dbQuest.insertQuestions(as.getAid(), name, questionContent, value);
+						int qid = dbQuest.insertQuestions(as.getAid(), name, questionContent, value, true);
 						MultQuestion mc = new MultQuestion(qid, questionContent, questionContent, qid);
 						
 						lblSelectedQn.setText(mc.getQuestion());

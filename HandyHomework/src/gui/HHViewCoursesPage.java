@@ -36,6 +36,7 @@ public class HHViewCoursesPage extends JFrame {
 	private JList<?> list;
 	private List<Course> courses;
 	private int selInd;
+
 	/**
 	 * Launch the application.
 	 */
@@ -43,8 +44,8 @@ public class HHViewCoursesPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HHViewCoursesPage classFrame = new HHViewCoursesPage();
-					classFrame.setVisible(true);
+					HHViewCoursesPage frame = new HHViewCoursesPage();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -56,7 +57,7 @@ public class HHViewCoursesPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHViewCoursesPage() {
-		SwitchForm sf = new SwitchForm();
+		setTitle("HandyHomework - Courses");
 		this.setName("viewCourse");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -124,6 +125,7 @@ public class HHViewCoursesPage extends JFrame {
 					HHSavedAssessments frame = new HHSavedAssessments();
 					frame.setVisible(true);
 					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
 					if (frame.isShowing()){
 						dispose();
 					}
@@ -147,8 +149,12 @@ public class HHViewCoursesPage extends JFrame {
 						SelectedCourse.setCourse(selectedCourse);
 						
 						HHSavedAssessments frame = new HHSavedAssessments();
-						sf.switchForm(frame);
-						dispose();
+						frame.setVisible(true);
+						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
+						if (frame.isShowing()){
+							dispose();
+						}
 					}
 				}
 			}
@@ -159,8 +165,12 @@ public class HHViewCoursesPage extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
-				sf.switchForm(frame);
-				dispose();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
 		});
 		contentPane.setLayout(null);
@@ -192,8 +202,12 @@ public class HHViewCoursesPage extends JFrame {
 			btnAddCourse.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					HHCreateCoursePage frame = new HHCreateCoursePage();
-					sf.switchForm(frame);
-					dispose();
+					frame.setVisible(true);
+					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
+					if (frame.isShowing()){
+						dispose();
+					}
 				}
 			});
 			btnAddCourse.setBounds(163, 209, 131, 35);

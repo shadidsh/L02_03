@@ -17,9 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Window;
-
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
@@ -34,6 +31,7 @@ import java.awt.event.ActionEvent;
 public class AddStudentsPage extends JFrame {
 
 	private JPanel contentPane;
+
 	/**
 	 * Launch the application.
 	 */
@@ -41,8 +39,8 @@ public class AddStudentsPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddStudentsPage classFrame = new AddStudentsPage();
-					classFrame.setVisible(true);
+					AddStudentsPage frame = new AddStudentsPage();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,7 +52,7 @@ public class AddStudentsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public AddStudentsPage() {
-		SwitchForm sf = new SwitchForm();
+		setTitle("HandyHomework - Add Students to Course");
 		this.setName("addStudents");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 430, 270);
@@ -101,8 +99,12 @@ public class AddStudentsPage extends JFrame {
 									course.insertManagedCourses(id, cid, false);
 									
 									ViewStudentsPage frame = new ViewStudentsPage();
-									sf.switchForm(frame);
-									dispose();
+									frame.setVisible(true);
+									frame.setResizable(false);
+									frame.setLocationRelativeTo(null);
+									if (frame.isShowing()){
+										dispose();
+									}
 								}
 							}
 							
@@ -129,8 +131,12 @@ public class AddStudentsPage extends JFrame {
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddOneStudentForm frame = new AddOneStudentForm();
-				sf.switchForm(frame);
-				dispose();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
 		});
 		btnAddStudent.setBounds(126, 169, 154, 48);
@@ -143,8 +149,12 @@ public class AddStudentsPage extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ViewStudentsPage frame = new ViewStudentsPage();
-				sf.switchForm(frame);
-				dispose();
+				frame.setVisible(true);		
+				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
 		});
 	}

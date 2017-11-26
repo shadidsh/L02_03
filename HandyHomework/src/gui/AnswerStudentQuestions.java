@@ -50,9 +50,10 @@ public class AnswerStudentQuestions extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AnswerStudentQuestions classFrame = new AnswerStudentQuestions();
-					classFrame.setVisible(true);
-					classFrame.setResizable(false);
+					AnswerStudentQuestions window = new AnswerStudentQuestions();
+					window.setVisible(true);
+					window.setResizable(false);
+					window.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -65,6 +66,7 @@ public class AnswerStudentQuestions extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	public AnswerStudentQuestions() {
+		setTitle("HandyHomework - Text Question");
 		//frame = new JFrame();
 	    setBounds(300, 300, 853, 564);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,6 +102,7 @@ public class AnswerStudentQuestions extends JFrame {
 				HHSavedAssessments frame = new HHSavedAssessments();
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -125,6 +128,7 @@ public class AnswerStudentQuestions extends JFrame {
 			HHLogin frame = new HHLogin();
 			frame.setVisible(true);
 			frame.setResizable(false);
+			frame.setLocationRelativeTo(null);
 			if (frame.isShowing()){
 				dispose();
 			}
@@ -140,6 +144,7 @@ public class AnswerStudentQuestions extends JFrame {
 			HHSavedAssessments frame = new HHSavedAssessments();
 			frame.setVisible(true);
 			frame.setResizable(false);
+			frame.setLocationRelativeTo(null);
 			if (frame.isShowing()){
 				dispose();
 			}			
@@ -170,6 +175,7 @@ public class AnswerStudentQuestions extends JFrame {
 						HHSavedAssessments frame = new HHSavedAssessments();
 						frame.setVisible(true);
 						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -180,19 +186,33 @@ public class AnswerStudentQuestions extends JFrame {
 					if (ta.isCorrect(answer.toString())) {
 						totalPts += tq.getPoints();
 					}
-					System.out.print(textQ.hasNext());
-					System.out.println("gets here");
-					System.out.println(textQ.nextIndex());
-					System.out.println(textQ.toString());
+					
+					DbQuestions dbQ = new DbQuestions();
+					int aid = SelectedAssessment.getAssess().getAid();
+					
 					if (!textQ.hasNext()) {
-						JOptionPane.showMessageDialog(
-								AnswerStudentQuestions.this, "Finished assessment, points earned : " + totalPts);
-						HHSavedAssessments frame = new HHSavedAssessments();
-						frame.setVisible(true);
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
+						System.out.println(totalPts);
+						if (dbQ.hasMultChoice(aid)) {
+							AnswerMultipleChoice frame = new AnswerMultipleChoice();
+							frame.setVisible(true);	
+							frame.setResizable(false);
+							frame.setLocationRelativeTo(null);
+							if (frame.isShowing()){
+								dispose();
+							}
+						} else {
+							//DUPLICATE COOOOODE!!!!!!!!
+							JOptionPane.showMessageDialog(
+									AnswerStudentQuestions.this, "Finished assessment, points earned : " + totalPts);
+							HHSavedAssessments frame = new HHSavedAssessments();
+							frame.setVisible(true);
+							frame.setResizable(false);
+							frame.setLocationRelativeTo(null);
+							if (frame.isShowing()){
+								dispose();
+							}
 						}
+						
 					} else {
 						tq = textQ.next();
 						lblQuestions.setText("Questions: " + tq.getQuestion());
@@ -206,7 +226,7 @@ public class AnswerStudentQuestions extends JFrame {
 		
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				// Nothing is being done here at the moment???
 			}
 		});
 		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 15));

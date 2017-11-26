@@ -8,10 +8,57 @@ import java.util.List;
 
 import answer.TextAnswer;
 import question.MultQuestion;
+import question.Question;
 import question.TextQuestion;
 
 public class DbQuestions extends DbConnection implements QuestionDAO {
 
+
+	@Override
+	public List<Question> allQuestions(int aid) {
+		Connection conn = getConnection();
+		try {
+    		String query = "Select qid, name, question, is_mult, points from "
+    				+ constants.Constants.DataConstants.QUESTIONS + " where "
+    						+ " aid = ?";
+    		PreparedStatement stat = conn.prepareStatement(query);
+    		stat.setInt(1, aid);
+    		ResultSet Rs = stat.executeQuery();
+    		
+    		ArrayList<Question> questions = new ArrayList<Question>() ;
+    		TextAnswer ta;
+    		List<TextAnswer> multAns;
+    		
+    		while (Rs.next()) {
+    			int qid = Rs.getInt(1);
+    			String name = Rs.getString(2);
+    			String question = Rs.getString(3);
+    			boolean isMult = Rs.getBoolean(4);
+    			int points = Rs.getInt(5);
+    			
+    			if (isMult) {
+    				MultQuestion mq = new MultQuestion(qid, name, question, points);
+    				multAns = this.multAnswerQuestion(qid);
+    				mq.addAnswers(multAns);
+    				questions.add(mq);
+    				
+    			} else {
+        			TextQuestion tq = new TextQuestion(qid, name, question, points);
+        			ta = this.singleAnswerQuestion(qid);
+        			tq.setAnswer(ta);
+        			questions.add(tq);
+    			}
+
+    		}    		
+    		conn.close();
+    		return questions;
+    		
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());  
+		}		
+		return null;
+	}
+	
 	@Override
 	public List<TextQuestion> TextQuestions(int aid) {
 		Connection conn = getConnection();
@@ -59,7 +106,6 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
     		
     		ArrayList<MultQuestion> questions = new ArrayList<MultQuestion>() ;
     		TextAnswer ta;
-    		
     		while (Rs.next()) {
     			int qid = Rs.getInt(1);
     			boolean isMult = Rs.getBoolean(2);
@@ -84,7 +130,7 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 	}
 	
 	@Override
-	public int insertQuestions(int aid, String name, String question, int points) {
+	public int insertQuestions(int aid, String name, String question, int points, boolean isMult) {
 		Connection conn = getConnection();
 		int res = -1;
 		try{
@@ -96,7 +142,7 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 			stat.setInt(2, aid);
 			stat.setString(3, question);
 			stat.setInt(4, points);
-			stat.setBoolean(5, false);
+			stat.setBoolean(5, isMult);
 
 			ResultSet Rs = stat.executeQuery();
 			Rs.next();
@@ -119,13 +165,12 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
     		PreparedStatement stat = conn.prepareStatement(query);
     		stat.setInt(1, questID);
     		ResultSet Rs = stat.executeQuery();
-    		
+    		System.out.println(stat);
     		while (Rs.next()) {    			
     			Boolean isCorrect = Rs.getBoolean(1);
     			String answer = Rs.getString(2);    			
     			TextAnswer ans = new TextAnswer(questID, answer, isCorrect);
     			at.add(ans);
-    			
     		}
     		conn.close();
     		return at;
@@ -225,4 +270,43 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 			System.out.println(ex.getMessage());  
 		}	
 	}
+
+	@Override
+	public boolean hasMultChoice(int aid) {
+    	Connection conn = getConnection();
+    	try { 
+    		
+    		String query = "select exists(select 1 from " + constants.Constants.DataConstants.QUESTIONS 
+    				+  " where aid = ? and is_mult = true)";
+    		PreparedStatement stat = conn.prepareStatement(query);
+    		stat.setInt(1, aid);
+    		
+    		ResultSet Rs = stat.executeQuery(); 
+    		Rs.next();
+    		return Rs.getBoolean(1);
+    	} catch(Exception ex) {
+    		System.out.print(ex.getMessage());    		
+    	}
+    	return false;   
+	}
+
+	@Override
+	public boolean hasTextQuestions(int aid) {
+    	Connection conn = getConnection();
+    	try { 
+    		
+    		String query = "select exists(select 1 from " + constants.Constants.DataConstants.QUESTIONS 
+    				+  " where aid = ? and is_mult = false)";
+    		PreparedStatement stat = conn.prepareStatement(query);
+    		stat.setInt(1, aid);
+    		
+    		ResultSet Rs = stat.executeQuery(); 
+    		Rs.next();
+    		return Rs.getBoolean(1);
+    	} catch(Exception ex) {
+    		System.out.print(ex.getMessage());    		
+    	}
+    	return false;   
+	}
+
 }

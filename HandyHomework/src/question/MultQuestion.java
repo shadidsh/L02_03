@@ -13,6 +13,7 @@ public class MultQuestion extends Question {
 		at = new ArrayList<TextAnswer>();
 	}
 	
+	@Override
 	public TextAnswer getCorrectAnswer() {
 		for (TextAnswer ans: at) {
 			if (ans.isCorrect()) {
@@ -38,6 +39,14 @@ public class MultQuestion extends Question {
 			}
 		}
 		at.add(answer);
+	}
+	
+	public List<TextAnswer> getAnswers() {
+		ArrayList<TextAnswer> res = new ArrayList<TextAnswer>();
+		for (TextAnswer ans: at) {
+			res.add(ans);
+		}
+		return res;
 	}
 	
 	@Override
