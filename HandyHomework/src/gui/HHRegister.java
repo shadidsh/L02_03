@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Window;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -29,7 +31,6 @@ public class HHRegister extends JFrame {
 	private JLabel lblUsername;
 	private JLabel lblPassword;
 	private JLabel lblRegister;
-
 	/**
 	 * Launch the application.
 	 */
@@ -37,8 +38,8 @@ public class HHRegister extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HHRegister frame = new HHRegister();
-					frame.setVisible(true);
+					HHRegister classFrame = new HHRegister();
+					classFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,6 +51,7 @@ public class HHRegister extends JFrame {
 	 * Create the frame.
 	 */
 	public HHRegister() {
+		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 300);
@@ -98,11 +100,8 @@ public class HHRegister extends JFrame {
 					} else {
 						db.addUser(userName, password, isProf);
 						HHLogin frame = new HHLogin();
-						frame.setVisible(true);
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
-						}
+						sf.switchForm(frame);
+						dispose();
 					}
 					
 
@@ -123,11 +122,8 @@ public class HHRegister extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHLogin frame = new HHLogin();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
-				}
+				sf.switchForm(frame);
+				dispose();
 			}
 		});
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 15));

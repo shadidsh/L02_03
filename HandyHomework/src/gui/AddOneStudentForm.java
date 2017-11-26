@@ -13,6 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Window;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -31,7 +34,6 @@ public class AddOneStudentForm extends JFrame {
 	private JTextField firstName;
 	private JTextField lastName;
 	private JTextField usernameField;
-
 	/**
 	 * Launch the application.
 	 */
@@ -39,8 +41,8 @@ public class AddOneStudentForm extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddOneStudentForm frame = new AddOneStudentForm();
-					frame.setVisible(true);
+					AddOneStudentForm classFrame = new AddOneStudentForm();
+					classFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,6 +54,7 @@ public class AddOneStudentForm extends JFrame {
 	 * Create the frame.
 	 */
 	public AddOneStudentForm() {
+		SwitchForm sf = new SwitchForm();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 345, 302);
 		contentPane = new JPanel();
@@ -139,11 +142,8 @@ public class AddOneStudentForm extends JFrame {
 							course.insertManagedCourses(id, cid, false);
 							
 							ViewStudentsPage frame = new ViewStudentsPage();
-							frame.setVisible(true);
-							frame.setResizable(false);
-							if (frame.isShowing()){
-								dispose();
-							}
+							sf.switchForm(frame);
+							dispose();
 						}
 					}
 				}
@@ -160,11 +160,8 @@ public class AddOneStudentForm extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddStudentsPage frame = new AddStudentsPage();
-				frame.setVisible(true);		
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
-				}
+				sf.switchForm(frame);
+				dispose();
 			}
 		});
 	}

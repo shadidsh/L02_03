@@ -30,7 +30,6 @@ public class ViewStudentsPage extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-
 	/**
 	 * Launch the application.
 	 */
@@ -38,8 +37,8 @@ public class ViewStudentsPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewStudentsPage frame = new ViewStudentsPage();
-					frame.setVisible(true);
+					ViewStudentsPage classFrame = new ViewStudentsPage();
+					classFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,6 +50,7 @@ public class ViewStudentsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewStudentsPage() {
+		SwitchForm sf = new SwitchForm();
 		this.setName("ViewStudentsPage");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -68,11 +68,8 @@ public class ViewStudentsPage extends JFrame {
 		btnAddStudentsPage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddStudentsPage frame = new AddStudentsPage();
-				frame.setVisible(true);	
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
-				} 
+				sf.switchForm(frame);
+				dispose();
 			}
 		});
 		btnAddStudentsPage.setBounds(231, 208, 142, 45);
@@ -145,11 +142,8 @@ public class ViewStudentsPage extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();
-				frame.setVisible(true);		
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
-				}
+				sf.switchForm(frame);
+				dispose();
 			}
 		});
 		

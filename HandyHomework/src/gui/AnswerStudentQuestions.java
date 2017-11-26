@@ -42,8 +42,11 @@ public class AnswerStudentQuestions extends JFrame {
 	private JFrame frame;
 	private TextQuestion tq;
 	private int totalPts = 0;
+<<<<<<< HEAD
+=======
 	private boolean nextQ = true;
 
+>>>>>>> fcdf7732fe07f54206041f381671359ee876d439
 	/**
 	 * Launch the application.
 	 */
@@ -51,9 +54,9 @@ public class AnswerStudentQuestions extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AnswerStudentQuestions window = new AnswerStudentQuestions();
-					window.setVisible(true);
-					window.setResizable(false);
+					AnswerStudentQuestions classFrame = new AnswerStudentQuestions();
+					classFrame.setVisible(true);
+					classFrame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

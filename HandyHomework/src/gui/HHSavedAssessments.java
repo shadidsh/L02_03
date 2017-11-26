@@ -51,7 +51,6 @@ public class HHSavedAssessments extends JFrame {
 	private String questAnswer;
 	private Assessment selectedAs;
 	private int selInd;
-
 	/**
 	 * Launch the application.
 	 */
@@ -59,9 +58,9 @@ public class HHSavedAssessments extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HHSavedAssessments frame = new HHSavedAssessments();
-					frame.setVisible(true);
-					frame.setResizable(false);
+					HHSavedAssessments classFrame = new HHSavedAssessments();
+					classFrame.setVisible(true);
+					classFrame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -73,6 +72,7 @@ public class HHSavedAssessments extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedAssessments() {
+		SwitchForm sf = new SwitchForm();
 		this.setName("SavedAssess");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 395);
@@ -115,11 +115,8 @@ public class HHSavedAssessments extends JFrame {
 			JOptionPane.showMessageDialog(HHSavedAssessments.this, 
 					"No Courses have been selected, Logging out ");
 			HHLogin frame = new HHLogin();
-			frame.setVisible(true);
-			frame.setResizable(false);
-			if (frame.isShowing()){
-				dispose();
-			}
+			sf.switchForm(frame);
+			dispose();
 		}
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.setBounds(12, 54, 100, 30);
@@ -128,12 +125,8 @@ public class HHSavedAssessments extends JFrame {
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
-				frame.setVisible(true);	
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
-				}
-
+				sf.switchForm(frame);
+				dispose();
 			}
 		});
 		JButton btnView = new JButton("Select Assessment");
@@ -147,20 +140,17 @@ public class HHSavedAssessments extends JFrame {
 					if (SelectedUser.getUser().isProf()) {
 						HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
 						frame.setVisible(true);	
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
-						}
+						sf.switchForm(frame);
+						dispose();
 					} else {
 						AnswerStudentQuestions frame = new AnswerStudentQuestions();
 						frame.setVisible(true);	
 						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
-						}
+						sf.switchForm(frame);
+						dispose();
 					}
 				}
-				}
+			}
 		});
 		contentPane.add(btnView);
 		
@@ -238,11 +228,8 @@ public class HHSavedAssessments extends JFrame {
 		btnNewAssessment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
-				frame.setVisible(true);	
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
-				}
+				sf.switchForm(frame);
+				dispose();
 			}
 		});
 		contentPane.add(btnNewAssessment);
@@ -251,11 +238,8 @@ public class HHSavedAssessments extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				HHViewCoursesPage frame = new HHViewCoursesPage();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
-				}
+				sf.switchForm(frame);
+				dispose();
 			}
 		});
 		btnBack.setBounds(12, 13, 100, 30);
@@ -283,11 +267,8 @@ public class HHSavedAssessments extends JFrame {
 			btnViewStudents.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					ViewStudentsPage frame = new ViewStudentsPage();
-					frame.setVisible(true);	
-					frame.setResizable(false);
-					if (frame.isShowing()){
-						dispose();
-					} 
+					sf.switchForm(frame);
+					dispose();
 				}
 				
 			});

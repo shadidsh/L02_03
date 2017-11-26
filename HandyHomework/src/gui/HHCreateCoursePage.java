@@ -31,7 +31,6 @@ public class HHCreateCoursePage extends JFrame {
 	private JButton btnCreate;
 	private JButton btnCancel;
 	private JTextField txtCourseTerm;
-
 	/**
 	 * Launch the application.
 	 */
@@ -39,8 +38,8 @@ public class HHCreateCoursePage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HHCreateCoursePage frame = new HHCreateCoursePage();
-					frame.setVisible(true);
+					HHCreateCoursePage classFrame = new HHCreateCoursePage();
+					classFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,6 +51,7 @@ public class HHCreateCoursePage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHCreateCoursePage() {
+		SwitchForm sf = new SwitchForm();
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 350, 250);
@@ -97,11 +97,8 @@ public class HHCreateCoursePage extends JFrame {
 					DbCourse dbCourse = new DbCourse();
 					dbCourse.insertCourses(pid, courseCode, name, courseTerm);
 					HHViewCoursesPage frame = new HHViewCoursesPage();
-					frame.setVisible(true);
-					frame.setResizable(false);
-					if (frame.isShowing()){
-						dispose();
-					}
+					sf.switchForm(frame);
+					dispose();
 				}
 			}
 		});
@@ -118,11 +115,8 @@ public class HHCreateCoursePage extends JFrame {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHViewCoursesPage frame = new HHViewCoursesPage();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
-				}
+				sf.switchForm(frame);
+				dispose();
 			}
 		});
 		btnCancel.setBounds(30, 15, 90, 29);

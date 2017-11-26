@@ -12,6 +12,9 @@ import dao.DbAssessment;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Window;
+
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.JOptionPane;
@@ -30,7 +33,6 @@ public class HHCreateAssessmentFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField assessmentNameField;
 	private JTextField titleField;
-
 	/**
 	 * Launch the application.
 	 */
@@ -38,9 +40,9 @@ public class HHCreateAssessmentFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
-					frame.setVisible(true);
-					frame.setResizable(false);
+					HHCreateAssessmentFrame classFrame = new HHCreateAssessmentFrame();
+					classFrame.setVisible(true);
+					classFrame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,6 +54,7 @@ public class HHCreateAssessmentFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public HHCreateAssessmentFrame() {
+		SwitchForm sf = new SwitchForm();
 		this.setName("SavedAssess");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 415, 370);
@@ -122,12 +125,8 @@ public class HHCreateAssessmentFrame extends JFrame {
 								
 								// Upon confirmation, open the saved assessments!!
 								HHSavedAssessments frame = new HHSavedAssessments();
-								frame.setVisible(true);
-								frame.setResizable(false);
-								frame.setResizable(false);
-								if (frame.isShowing()){
-									dispose();
-								}
+								sf.switchForm(frame);
+								dispose();
 							} catch (NullPointerException e1){
 								System.out.println("Could not access database."); 
 								e1.printStackTrace();
@@ -145,11 +144,8 @@ public class HHCreateAssessmentFrame extends JFrame {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				if (frame.isShowing()){
-					dispose();
-				}
+				sf.switchForm(frame);
+				dispose();
 			}
 		});
 		contentPane.setLayout(null);
