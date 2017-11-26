@@ -52,6 +52,7 @@ public class HHFormFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public HHFormFrame() {
+		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Create Text Question");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 475, 325);
@@ -161,9 +162,7 @@ public class HHFormFrame extends JFrame {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				frame.setLocationRelativeTo(null);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}

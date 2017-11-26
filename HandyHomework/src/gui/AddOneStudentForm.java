@@ -52,6 +52,7 @@ public class AddOneStudentForm extends JFrame {
 	 * Create the frame.
 	 */
 	public AddOneStudentForm() {
+		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Add A Student");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 345, 302);
@@ -140,9 +141,7 @@ public class AddOneStudentForm extends JFrame {
 							course.insertManagedCourses(id, cid, false);
 							
 							ViewStudentsPage frame = new ViewStudentsPage();
-							frame.setVisible(true);
-							frame.setResizable(false);
-							frame.setLocationRelativeTo(null);
+							sf.switchForm(frame);
 							if (frame.isShowing()){
 								dispose();
 							}
@@ -162,9 +161,7 @@ public class AddOneStudentForm extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddStudentsPage frame = new AddStudentsPage();
-				frame.setVisible(true);		
-				frame.setResizable(false);
-				frame.setLocationRelativeTo(null);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}

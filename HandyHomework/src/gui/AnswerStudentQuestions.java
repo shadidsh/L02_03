@@ -66,6 +66,7 @@ public class AnswerStudentQuestions extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	public AnswerStudentQuestions() {
+		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Text Question");
 		//frame = new JFrame();
 	    setBounds(300, 300, 853, 564);
@@ -100,9 +101,7 @@ public class AnswerStudentQuestions extends JFrame {
 		btnback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				HHSavedAssessments frame = new HHSavedAssessments();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				frame.setLocationRelativeTo(null);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -126,9 +125,7 @@ public class AnswerStudentQuestions extends JFrame {
 		if (!SelectedAssessment.isSelected()) {
 			JOptionPane.showMessageDialog(AnswerStudentQuestions.this, "Asssessment not selected");
 			HHLogin frame = new HHLogin();
-			frame.setVisible(true);
-			frame.setResizable(false);
-			frame.setLocationRelativeTo(null);
+			sf.switchForm(frame);
 			if (frame.isShowing()){
 				dispose();
 			}
@@ -142,9 +139,7 @@ public class AnswerStudentQuestions extends JFrame {
 			JOptionPane.showMessageDialog(AnswerStudentQuestions.this, 
 					"There are no questions for this assessment");
 			HHSavedAssessments frame = new HHSavedAssessments();
-			frame.setVisible(true);
-			frame.setResizable(false);
-			frame.setLocationRelativeTo(null);
+			sf.switchForm(frame);
 			if (frame.isShowing()){
 				dispose();
 			}			
@@ -173,9 +168,7 @@ public class AnswerStudentQuestions extends JFrame {
 						JOptionPane.showMessageDialog(AnswerStudentQuestions.this, 
 								"ERROR in the Database - There are no answers for this question");
 						HHSavedAssessments frame = new HHSavedAssessments();
-						frame.setVisible(true);
-						frame.setResizable(false);
-						frame.setLocationRelativeTo(null);
+						sf.switchForm(frame);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -194,9 +187,7 @@ public class AnswerStudentQuestions extends JFrame {
 						System.out.println(totalPts);
 						if (dbQ.hasMultChoice(aid)) {
 							AnswerMultipleChoice frame = new AnswerMultipleChoice();
-							frame.setVisible(true);	
-							frame.setResizable(false);
-							frame.setLocationRelativeTo(null);
+							sf.switchForm(frame);
 							if (frame.isShowing()){
 								dispose();
 							}
@@ -205,9 +196,7 @@ public class AnswerStudentQuestions extends JFrame {
 							JOptionPane.showMessageDialog(
 									AnswerStudentQuestions.this, "Finished assessment, points earned : " + totalPts);
 							HHSavedAssessments frame = new HHSavedAssessments();
-							frame.setVisible(true);
-							frame.setResizable(false);
-							frame.setLocationRelativeTo(null);
+							sf.switchForm(frame);
 							if (frame.isShowing()){
 								dispose();
 							}

@@ -42,6 +42,7 @@ public class HandyHomeworkMainPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HandyHomeworkMainPage() {
+		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Main Page");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 300);
@@ -89,9 +90,7 @@ public class HandyHomeworkMainPage extends JFrame {
 		btnViewCourses.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHViewCoursesPage frame = new HHViewCoursesPage();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				frame.setLocationRelativeTo(null);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -110,9 +109,7 @@ public class HandyHomeworkMainPage extends JFrame {
 				SelectedUser.setUser(null);
 				
 				HHLogin frame = new HHLogin();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				frame.setLocationRelativeTo(null);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}

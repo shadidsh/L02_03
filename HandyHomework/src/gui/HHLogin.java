@@ -53,6 +53,7 @@ public class HHLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public HHLogin() {
+		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 420, 300);
@@ -104,9 +105,7 @@ public class HHLogin extends JFrame {
 						SelectedUser.setUser(uf);
 						
 						HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
-						frame.setVisible(true);
-						frame.setResizable(false);
-						frame.setLocationRelativeTo(null);
+						sf.switchForm(frame);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -134,9 +133,7 @@ public class HHLogin extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				HHRegister frame = new HHRegister();
-				frame.setVisible(true);
-				frame.setResizable(false);
-				frame.setLocationRelativeTo(null);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
