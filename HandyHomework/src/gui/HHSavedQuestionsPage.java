@@ -58,6 +58,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	private TextQuestion selQuestion;
 	private int selInd;
 	private String selected = "";
+
 	/**
 	 * Launch the application.
 	 */
@@ -65,9 +66,9 @@ public class HHSavedQuestionsPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HHSavedQuestionsPage classFrame = new HHSavedQuestionsPage();
-					classFrame.setVisible(true);
-					classFrame.setResizable(false);
+					HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
+					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -79,7 +80,6 @@ public class HHSavedQuestionsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedQuestionsPage() {
-		SwitchForm sf = new SwitchForm();
 		setName("SavedQuestions");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 569, 420);
@@ -167,8 +167,11 @@ public class HHSavedQuestionsPage extends JFrame {
 			JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, 
 					"No Assessments have been selected, returning to login");
 			HHLogin frame = new HHLogin();
-			sf.switchForm(frame);
-			dispose();
+			frame.setVisible(true);
+			frame.setResizable(false);
+			if (frame.isShowing()){
+				dispose();
+			}
 		}
 		
 		DefaultListModel<String> lstQuestion = new DefaultListModel<>();	
@@ -178,7 +181,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		List<TextQuestion> questions = dbQuest.TextQuestions(aid);
 				
 		lblAssessmentName.setText(as.getName());
-		for (TextQuestion tq: questions) {
+		for (TextQuestion tq: questions ) {
 			lstQuestion.addElement(tq.getName());
 		}
 			
@@ -189,8 +192,11 @@ public class HHSavedQuestionsPage extends JFrame {
 		btnback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();
-				sf.switchForm(frame);
-				dispose();
+				frame.setVisible(true);		
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
 		});
 
@@ -299,13 +305,19 @@ public class HHSavedQuestionsPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (selected.equals("Text Question")) {
 					HHFormFrame frame = new HHFormFrame();
-					sf.switchForm(frame);
-					dispose();
+					frame.setVisible(true);	
+					frame.setResizable(false);
+					if (frame.isShowing()){
+						dispose();
+					}
 				}
 				else if (selected.equals("Multiple Choice Question")) {
 					AddMultipleChoice frame = new AddMultipleChoice();
-					sf.switchForm(frame);
-					dispose();
+					frame.setVisible(true);	
+					frame.setResizable(false);
+					if (frame.isShowing()){
+						dispose();
+					}
 				}
 			}
 		});

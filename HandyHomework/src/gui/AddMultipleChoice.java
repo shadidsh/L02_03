@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -161,17 +162,12 @@ public class AddMultipleChoice extends JFrame {
 		});
 		contentPane.add(btnCancel);
 		
-		JCheckBox chckbxCorrectAnswer = new JCheckBox("Correct Answer");
-		chckbxCorrectAnswer.setBounds(161, 211, 180, 23);
-		contentPane.add(chckbxCorrectAnswer);
-		
 		JButton btnAddAnswer = new JButton("Add Answer");
 		btnAddAnswer.setVisible(false);
 		
 		contentPane.getRootPane().setDefaultButton(btnAddAnswer);
 		btnAddAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				chckbxCorrectAnswer.isSelected();
 				String answer = String.valueOf(questionAnswerField.getText());				
 				
 				if (answer.isEmpty() ) {
@@ -189,7 +185,6 @@ public class AddMultipleChoice extends JFrame {
 					model.addRow(data);
 					ansCount++;
 					questionAnswerField.setText("");
-	
 				}
 			}
 		});

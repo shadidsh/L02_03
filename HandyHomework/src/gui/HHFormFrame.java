@@ -14,8 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Window;
 
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
@@ -31,6 +29,8 @@ public class HHFormFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField questionNameField;
 	private JTextField questionAnswerField;
+	
+
 	/**
 	 * Launch the application.
 	 */
@@ -38,9 +38,9 @@ public class HHFormFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HHFormFrame classFrame = new HHFormFrame();
-					classFrame.setVisible(true);
-					classFrame.setResizable(false);
+					HHFormFrame frame = new HHFormFrame();
+					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,7 +52,6 @@ public class HHFormFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public HHFormFrame() {
-		SwitchForm sf = new SwitchForm();
 		setTitle("questionCreate");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 475, 325);
@@ -162,8 +161,11 @@ public class HHFormFrame extends JFrame {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-				sf.switchForm(frame);
-				dispose();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
 			}
 		});
 		contentPane.add(btnCancel);
