@@ -2,19 +2,15 @@ package dao;
 
 import java.sql.Connection;
 
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import assessment.Assessment;
-import course.Course;
+
 import login.ProfessorLogin;
 import login.StudentLogin;
 import login.UserLogin;
-import constants.Constants.ConnectionConstants;
 
 public class DbUser extends DbConnection implements UserDAO  {
 	
@@ -191,6 +187,21 @@ public class DbUser extends DbConnection implements UserDAO  {
     		System.out.println(ex.getMessage());
 		}
 		return students;
+	}
+
+	@Override
+	public void removeAnswersForUser(int uid) {
+		Connection conn = getConnection();
+		try {
+    		String deleteAns = "DELETE FROM " 
+		+ constants.Constants.DataConstants.USERANSWERS + " WHERE user_id = ?";
+    		PreparedStatement stat = conn.prepareStatement(deleteAns);
+    		stat.setInt(1, uid);
+    		stat.executeUpdate();
+    		
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());  
+		}		
 	}
 	
 }

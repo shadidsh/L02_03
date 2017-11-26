@@ -24,7 +24,6 @@ import java.awt.GridLayout;
 import java.util.List;
 import java.util.ListIterator;
 
-import net.miginfocom.swing.MigLayout;
 import question.TextQuestion;
 
 import com.jgoodies.forms.layout.FormSpecs;
@@ -34,6 +33,8 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AnswerStudentQuestions extends JFrame {
 
@@ -41,6 +42,11 @@ public class AnswerStudentQuestions extends JFrame {
 	private JFrame frame;
 	private TextQuestion tq;
 	private int totalPts = 0;
+<<<<<<< HEAD
+=======
+	private boolean nextQ = true;
+
+>>>>>>> fcdf7732fe07f54206041f381671359ee876d439
 	/**
 	 * Launch the application.
 	 */
@@ -93,7 +99,16 @@ public class AnswerStudentQuestions extends JFrame {
 		btnback.setBounds(12, 454, 141, 49);
 		getContentPane().add(btnback);
 		
-
+		btnback.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {				
+				HHSavedAssessments frame = new HHSavedAssessments();
+				frame.setVisible(true);
+				frame.setResizable(false);
+				if (frame.isShowing()){
+					dispose();
+				}
+			}
+		});
 		
 		JLabel lblPointsWorth = new JLabel("");
 		lblPointsWorth.setHorizontalAlignment(SwingConstants.CENTER);
@@ -120,46 +135,42 @@ public class AnswerStudentQuestions extends JFrame {
 		}
 		int aid = SelectedAssessment.getAssess().getAid();
 		DbQuestions dbQuest = new DbQuestions();
-		List<TextQuestion> textQuests = dbQuest.questions_for_assessments(aid);
+		List<TextQuestion> textQuests = dbQuest.TextQuestions(aid);
 		ListIterator<TextQuestion>  textQ = textQuests.listIterator();
 		
-		
 		if (!textQ.hasNext()) {
-			JOptionPane.showMessageDialog(AnswerStudentQuestions.this, "Finished assessment");
-			if (frame.isShowing()){
-				dispose();
-			}
-			HHLogin frame = new HHLogin();
+			JOptionPane.showMessageDialog(AnswerStudentQuestions.this, 
+					"There are no questions for this assessment");
+			HHSavedAssessments frame = new HHSavedAssessments();
 			frame.setVisible(true);
 			frame.setResizable(false);
-		}
-		System.out.println("gets here");
-		tq = textQ.next();
-		String q = String.valueOf(lblQuestions.getText());
-		if (q.isEmpty() ) {
-			lblQuestions.setText("Questions: " + tq.getQuestion());
-			lblQuestName.setText("Name: " + tq.getName());
-			lblPointsWorth.setText("Points: " + new Integer(tq.getPoints()).toString() );
-			
+			if (frame.isShowing()){
+				dispose();
+			}			
+
 		}
 		
+		tq = textQ.next();
+		lblQuestions.setText("Questions: " + tq.getQuestion());
+		lblQuestName.setText("Name: " + tq.getName());
+		lblPointsWorth.setText("Points: " + new Integer(tq.getPoints()).toString() );	
+					
 		
 		JButton btnSubmit = new JButton("Submit Answer");
-		btnSubmit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnSubmit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				String answer = String.valueOf(txtAns.getText());
 				
 				// AnswerStudentQuestions
 				if (answer.isEmpty()) {
 					JOptionPane.showMessageDialog(AnswerStudentQuestions.this, "Answer field is empty.");
+				} else if (tq == null) {
+					JOptionPane.showMessageDialog(AnswerStudentQuestions.this, ".");
 				} else {
-					TextAnswer ta = tq.getCorrectAnswer();
-					if (ta.isCorrect(answer.toString())) {
-						totalPts += tq.getPoints();
-					}
-					
-					if (!textQ.hasNext()) {
-						JOptionPane.showMessageDialog(AnswerStudentQuestions.this, "Finished assessment");
+					if (!tq.hasAnswer()) {
+						JOptionPane.showMessageDialog(AnswerStudentQuestions.this, 
+								"ERROR in the Database - There are no answers for this question");
 						HHSavedAssessments frame = new HHSavedAssessments();
 						frame.setVisible(true);
 						frame.setResizable(false);
@@ -167,14 +178,39 @@ public class AnswerStudentQuestions extends JFrame {
 							dispose();
 						}
 					}
-					tq = textQ.next();
-					if (lblQuestions.getText().isEmpty() ) {
-						lblQuestions.setText(tq.getQuestion());
-						lblQuestName.setText(tq.getName());
-						lblPointsWorth.setText(new Integer(tq.getPoints()).toString() );
-						
+					
+					TextAnswer ta = tq.getCorrectAnswer();
+					System.out.println(answer.toString() + ": vs. :" + ta.getAnswer());
+					if (ta.isCorrect(answer.toString())) {
+						totalPts += tq.getPoints();
+					}
+					System.out.print(textQ.hasNext());
+					System.out.println("gets here");
+					System.out.println(textQ.nextIndex());
+					System.out.println(textQ.toString());
+					if (!textQ.hasNext()) {
+						JOptionPane.showMessageDialog(
+								AnswerStudentQuestions.this, "Finished assessment, points earned : " + totalPts);
+						HHSavedAssessments frame = new HHSavedAssessments();
+						frame.setVisible(true);
+						frame.setResizable(false);
+						if (frame.isShowing()){
+							dispose();
+						}
+					} else {
+						tq = textQ.next();
+						lblQuestions.setText("Questions: " + tq.getQuestion());
+						lblQuestName.setText("Name: " + tq.getName());
+						lblPointsWorth.setText("Points: " + new Integer(tq.getPoints()).toString() );	
 					}
 				}
+			}
+		});
+		
+		
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
 			}
 		});
 		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 15));

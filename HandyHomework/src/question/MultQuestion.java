@@ -8,8 +8,8 @@ import answer.TextAnswer;
 public class MultQuestion extends Question {
 	ArrayList<TextAnswer> at;
 
-	MultQuestion(int assessID, String name, String question, int points) {
-		super(assessID, name, question, points);
+	public MultQuestion(int qid, String name, String question, int points) {
+		super(qid, name, question, points);
 		at = new ArrayList<TextAnswer>();
 	}
 	
@@ -39,6 +39,16 @@ public class MultQuestion extends Question {
 		}
 		at.add(answer);
 	}
+	
+	@Override
+	public boolean hasAnswer() {
+		for (TextAnswer ans: at) {
+			if (ans.isCorrect()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public void addAnswer(TextAnswer answer) {
 		at.add(answer);
@@ -47,4 +57,11 @@ public class MultQuestion extends Question {
 	public void addAnswers(List<TextAnswer> answer) {
 		at.addAll(answer);
 	}
+
+	@Override
+	public boolean hasMultAnswer() {
+		return true;
+	}
+
+
 }

@@ -147,7 +147,5 @@ public class ViewStudentsPage extends JFrame {
 			}
 		});
 		
-		//scrollPane.setViewportView(table_1);
-		
 	}
 }

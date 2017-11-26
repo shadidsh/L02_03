@@ -5,12 +5,11 @@ public class TextAnswer {
 	private int questID;
 	private boolean isCorrect;
 
-	public TextAnswer(int questID, String answer, boolean isCorrect) {
+	public TextAnswer(int questId, String answer, boolean isCorrect) {
 		this.answer = answer;
-		this.questID = questID;
+		this.questID = questId;
 		this.setCorrect(isCorrect);
 	}
-	
 	public boolean isCorrect(String userAnswer) {
 		return this.answer.equals(userAnswer) && this.isCorrect();
 	}

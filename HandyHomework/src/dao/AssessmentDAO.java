@@ -12,4 +12,5 @@ public interface AssessmentDAO {
 	public List<Assessment> getAssessmentForCourse(int cid); 	
 	public void removeAssessment(int aid);
 
+	public void removeAssessmentForCourse(int cid); 	
 }

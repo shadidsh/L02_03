@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,6 +36,8 @@ import assessment.SelectedAssessment;
 import course.Course;
 import course.SelectedCourse;
 import dao.DbAssessment;
+import dao.DbCourse;
+import dao.DbQuestions;
 import login.SelectedUser;
 
 import java.awt.SystemColor;
@@ -115,7 +119,7 @@ public class HHSavedAssessments extends JFrame {
 			dispose();
 		}
 		JButton btnMainMenu = new JButton("Main Menu");
-		btnMainMenu.setBounds(12, 54, 120, 30);
+		btnMainMenu.setBounds(12, 54, 100, 30);
 		contentPane.add(btnMainMenu);
 		
 		btnMainMenu.addActionListener(new ActionListener() {
@@ -133,11 +137,18 @@ public class HHSavedAssessments extends JFrame {
 					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment.");
 				} else {
 					SelectedAssessment.setAssess(selectedAs);
-					
-					HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-					//AnswerStudentQuestions frame = new AnswerStudentQuestions();
-					sf.switchForm(frame);
-					dispose();
+					if (SelectedUser.getUser().isProf()) {
+						HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
+						frame.setVisible(true);	
+						sf.switchForm(frame);
+						dispose();
+					} else {
+						AnswerStudentQuestions frame = new AnswerStudentQuestions();
+						frame.setVisible(true);	
+						frame.setResizable(false);
+						sf.switchForm(frame);
+						dispose();
+					}
 				}
 			}
 		});
@@ -185,7 +196,31 @@ public class HHSavedAssessments extends JFrame {
 					selInd = index;
 				}
 			}
-		});			
+		});
+		
+		listAssessment.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				JList listAssessment = (JList)e.getSource();
+				if (e.getClickCount() == 2) {
+					SelectedAssessment.setAssess(selectedAs);
+					if (SelectedUser.getUser().isProf()) {
+						HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
+						frame.setVisible(true);	
+						frame.setResizable(false);
+						if (frame.isShowing()){
+							dispose();
+						}
+					} else {
+						AnswerStudentQuestions frame = new AnswerStudentQuestions();
+						frame.setVisible(true);	
+						frame.setResizable(false);
+						if (frame.isShowing()){
+							dispose();
+						}
+					}
+				}
+			}
+		});
 		
 		listAssessment.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
@@ -207,7 +242,7 @@ public class HHSavedAssessments extends JFrame {
 				dispose();
 			}
 		});
-		btnBack.setBounds(12, 13, 140, 30);
+		btnBack.setBounds(12, 13, 100, 30);
 		contentPane.add(btnBack);
 		
 		JButton btnRemove = new JButton("Remove Assessment");
@@ -217,6 +252,7 @@ public class HHSavedAssessments extends JFrame {
 				if (selectedAs == null || selInd < 0 ) {
 					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment to remove.");
 				} else {
+					
 					dbAssess.removeAssessment(selectedAs.getAid());
 					lstAssess.remove(selInd);
 					assess.remove(selInd);	

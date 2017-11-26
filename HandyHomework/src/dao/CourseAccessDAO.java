@@ -13,4 +13,5 @@ public interface CourseAccessDAO {
 	
 	public int insertManagedCourses(int uid, int cid, boolean modAccess);
 	public List<Course> managedCourses(int id);
+	public void unEnrollFromCourse(int cid);
 }
