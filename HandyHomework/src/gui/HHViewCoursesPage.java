@@ -10,7 +10,6 @@ import course.Course;
 import course.SelectedCourse;
 
 import dao.DbCourse;
-import dao.DbUser;
 import login.SelectedUser;
 import login.UserLogin;
 
@@ -23,7 +22,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -71,7 +69,6 @@ public class HHViewCoursesPage extends JFrame {
 		lblCourses.setFont(new Font("Lucida Grande", Font.BOLD, 24));		
 
 		DefaultListModel<String> lstCourses = new DefaultListModel<>();
-		 // = new ArrayList<Course>();
 		
 		if (!SelectedUser.isSelected()) {
 			JOptionPane.showMessageDialog(HHViewCoursesPage.this, "No user logged in");
@@ -84,20 +81,7 @@ public class HHViewCoursesPage extends JFrame {
 			for (Course cse : courses) {
 				lstCourses.addElement(cse.getCourseCode() + ":" + cse.getTerm());
 			}
-			
-			/*if (user.isProf()) {
-				Integer pfId = SelectedUser.getUser().getId();
-				courses = db.DbConnection.managedCourses(pfId);				
-				if (courses == null) {
-					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "prof has no courses");
-				}
-			} else {
-				Integer sId = SelectedUser.getUser().getId();
-				courses = db.DbConnection.managedCourses(sId);
-				if (courses == null) {
-					JOptionPane.showMessageDialog(HHViewCoursesPage.this, "This student has no courses");
-				}
-			}			*/
+		
 		}
 		
 		JList listCourses = new JList<>(lstCourses);

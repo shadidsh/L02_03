@@ -1,8 +1,6 @@
 package gui;
 import login.SelectedUser;
 import question.Question;
-import question.TextQuestion;
-
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,13 +9,6 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.awt.Dimension;
 
@@ -37,13 +28,9 @@ import dao.DbQuestions;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextField;
-import javax.swing.JScrollBar;
 import java.awt.Component;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.SystemColor;
 
 import java.awt.Color;
@@ -196,19 +183,6 @@ public class HHSavedQuestionsPage extends JFrame {
 					
 				}				
 				
-				// Professor side - ans must change every time a new q is selected
-				/*
-				if (selQuestion != null && SelectedUser.getUser().isProf()) {
-					questAnswer = selQuestion.getCorrectAnswer();
-					if (questAnswer == null) {
-						JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, 
-								"Question doesn't have a corresponding answer.");
-					} else {
-						String answer = "Answer: " + questAnswer.getAnswer();
-						lblAnswer.setText(answer);
-					}
-				}
-				*/
 			}
 			
 		});

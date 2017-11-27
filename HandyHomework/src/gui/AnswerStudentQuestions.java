@@ -4,41 +4,24 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Dimension;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-
 import answer.TextAnswer;
-import assessment.Assessment;
 import assessment.SelectedAssessment;
 import dao.DbQuestions;
-import login.SelectedUser;
-
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import java.awt.GridLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-import question.MultQuestion;
-import question.Question;
 import question.TextQuestion;
 
-import com.jgoodies.forms.layout.FormSpecs;
-
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -52,8 +35,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-
-import javax.swing.JScrollPane;
 
 public class AnswerStudentQuestions extends JFrame {
 
@@ -91,14 +72,12 @@ public class AnswerStudentQuestions extends JFrame {
 		SwitchForm sf = new SwitchForm();
 		setName("AnswerTextQ");
 		setTitle("HandyHomework - Text Question");
-		//frame = new JFrame();
 	    setBounds(300, 300, 853, 564);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		getContentPane().setLayout(null);
-		//lblQuestions.setText(null);
 		
 		JTextArea txtAns = new JTextArea();
 		txtAns.setName("Ans");
@@ -214,7 +193,6 @@ public class AnswerStudentQuestions extends JFrame {
 								dispose();
 							}
 						} else {
-							//DUPLICATE COOOOODE!!!!!!!!
 							JOptionPane.showMessageDialog(
 									AnswerStudentQuestions.this, "Finished assessment, points earned: " + totalPts);
 							HHSavedAssessments frame = new HHSavedAssessments();
@@ -232,7 +210,6 @@ public class AnswerStudentQuestions extends JFrame {
 							btnParse.setVisible(false);
 						} else {
 							btnParse.setVisible(true);
-							//render(tq.getQuestion(), frame);
 						}
 					}
 				}
@@ -246,7 +223,6 @@ public class AnswerStudentQuestions extends JFrame {
 		btnParse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			//	if (tq.isLat())  {
 					try {					
 						// create a formula
 						TeXFormula formula = new TeXFormula(tq.getQuestion());
@@ -271,8 +247,6 @@ public class AnswerStudentQuestions extends JFrame {
 						
 						// now draw it to the screen						
 						Graphics g = drawingArea.getGraphics();
-						//g.clearRect(0, 0, 20, 20);
-						//g.drawImage(image,0,0,null);
 						g.drawImage(image,0,0,null);
 						
 				}  catch (Exception ex) {
@@ -280,7 +254,6 @@ public class AnswerStudentQuestions extends JFrame {
 					JOptionPane.showMessageDialog(frame, 
 							"Latex Parsing error, please entor a valid latex input.");		
 				}
-	//		}
 			}
 		});
 		btnParse.setName("ParseAsLatex");

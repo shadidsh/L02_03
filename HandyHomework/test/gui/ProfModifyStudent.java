@@ -1,14 +1,11 @@
 package gui;
 
-import static org.junit.Assert.*;
-
 import java.awt.Dimension;
 
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.edt.GuiQuery;
 import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.FrameFixture;
-import org.assertj.swing.fixture.JTableFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 import org.junit.Test;
 
@@ -40,9 +37,6 @@ public class ProfModifyStudent  extends AssertJSwingJUnitTestCase  {
             }
         });
 		
-		
-//		AddOneStudentForm frame = GuiActionRunner.execute(() -> new AddOneStudentForm());
-//		frame.setVisible(true);
 		window = new FrameFixture(robot(), frame);
 		
 	}
@@ -61,11 +55,10 @@ public class ProfModifyStudent  extends AssertJSwingJUnitTestCase  {
 		window.button("addStudent").click();
 		window.button("back").click();
 		
-		window = WindowFinder.findFrame("addStudents").using(robot());
+		window = WindowFinder.findFrame("addStudentsPage").using(robot());
 		window.button("back").requireVisible().click();
 		
 		window = WindowFinder.findFrame("ViewStudentsPage").using(robot());
-		
 		window.table("studentTable").cell("student").click();
 		window.button("btnRemoveStudent").click();
 		window.optionPane().yesButton().click();

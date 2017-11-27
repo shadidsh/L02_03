@@ -132,7 +132,6 @@ public class DbUser extends DbConnection implements UserDAO  {
     			String username = Rs.getString(2);
     			String password = Rs.getString(3);
     			boolean isProf = Rs.getBoolean(4);
-    			//String email = Rs.getString(5);
     			conn.close();
     			if (isProf) {
     				userLog = new ProfessorLogin(userId, username, password);

@@ -40,7 +40,7 @@ public class DbUserTest {
 		int res = dbUser.addUser(profNE.getUserName(), profNE.getPassword(), profNE.isProf());
 		System.out.print(res);
 		assertTrue(res >= 0);
-		dbUser.removeUser("nonexistentProf");
+		tearDown();
 	}
 	
 	@After

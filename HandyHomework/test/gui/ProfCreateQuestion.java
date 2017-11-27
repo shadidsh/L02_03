@@ -2,13 +2,10 @@ package gui;
 
 import java.awt.Dimension;
 
-import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.edt.GuiQuery;
-import org.assertj.swing.finder.JOptionPaneFinder;
 import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.FrameFixture;
-import org.assertj.swing.fixture.JOptionPaneFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 import org.junit.Test;
 
@@ -18,7 +15,6 @@ import course.Course;
 import course.SelectedCourse;
 import login.ProfessorLogin;
 import login.SelectedUser;
-import question.TextQuestion;
 
 public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 	private FrameFixture window;

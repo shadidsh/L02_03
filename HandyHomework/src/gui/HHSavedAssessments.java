@@ -8,12 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -36,13 +31,10 @@ import assessment.SelectedAssessment;
 import course.Course;
 import course.SelectedCourse;
 import dao.DbAssessment;
-import dao.DbCourse;
 import dao.DbQuestions;
 import login.SelectedUser;
 
 import java.awt.SystemColor;
-import javax.swing.UIManager;
-import java.awt.Color;
 
 public class HHSavedAssessments extends JFrame {
 
@@ -149,12 +141,9 @@ public class HHSavedAssessments extends JFrame {
 							dispose();
 						}
 					} else {
-						
-						//DUPLICATE COOODE from actionPerformed
 						DbQuestions dbQ = new DbQuestions();
 						int aid = SelectedAssessment.getAssess().getAid();
-						// logic error- the if statement checks that a text question exists, 
-						// not that the first question is a text question
+
 						if (dbQ.hasTextQuestions(aid)) {
 							AnswerStudentQuestions frame = new AnswerStudentQuestions();
 							sf.switchForm(frame);

@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -24,8 +23,6 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.awt.event.ActionEvent;
 
 public class AddStudentsPage extends JFrame {
@@ -54,7 +51,7 @@ public class AddStudentsPage extends JFrame {
 	public AddStudentsPage() {
 		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Add Students to Course");
-		this.setName("addStudents");
+		this.setName("addStudentsPage");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 430, 270);
 		contentPane = new JPanel();
@@ -66,13 +63,10 @@ public class AddStudentsPage extends JFrame {
 		lblNewLabel.setBounds(123, 18, 184, 38);
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 25));
 		contentPane.add(lblNewLabel);
-		
-		//final JFileChooser fc = new JFileChooser();
-		
+				
 		JButton btnChoosecsvFile = new JButton("Upload a .csv file");
 		btnChoosecsvFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//int returnVal = fc.showOpenDialog(contentPane);
 				JFileChooser chooser = new JFileChooser();
 			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
 			        "CSV", "csv");
@@ -112,7 +106,7 @@ public class AddStudentsPage extends JFrame {
 		            } catch (Exception e1) {
 		                String errmsg = e1.getMessage();
 		                System.out.println("File not found:" + errmsg);
-		            } // end of Catch
+		            } 
 			    } else {
 			    	chooser.cancelSelection();
 			    }

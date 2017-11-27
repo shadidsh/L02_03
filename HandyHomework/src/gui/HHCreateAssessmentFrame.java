@@ -17,7 +17,6 @@ import javax.swing.JSpinner;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerDateModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 
 import java.awt.event.ActionListener;

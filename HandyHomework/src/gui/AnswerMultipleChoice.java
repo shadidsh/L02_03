@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,28 +10,20 @@ import answer.TextAnswer;
 import assessment.SelectedAssessment;
 import dao.DbQuestions;
 import question.MultQuestion;
-import question.Question;
-import question.TextQuestion;
-
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -179,12 +170,8 @@ public class AnswerMultipleChoice extends JFrame {
 					
 					if  (mq.isCorrectAnswer(sel)) {
 						totalPts += mq.getPoints();
-						//JOptionPane.showMessageDialog(AnswerMultipleChoice.this, "Correct!");
-					} else {
-						//JOptionPane.showMessageDialog(AnswerMultipleChoice.this, "Incorrect!");
 					}
 					
-					//DUPLICATE COOOOODE!!!!!!!!
 					if (!multQ.hasNext()) {
 						System.out.println(totalPts);
 						JOptionPane.showMessageDialog(AnswerMultipleChoice.this, 

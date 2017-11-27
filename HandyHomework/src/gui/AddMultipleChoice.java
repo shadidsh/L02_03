@@ -8,20 +8,14 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import answer.TextAnswer;
 import assessment.Assessment;
 import assessment.SelectedAssessment;
 import dao.DbQuestions;
-import login.StudentLogin;
 import question.MultQuestion;
-import question.TextQuestion;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import java.awt.Frame;
-
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JSpinner;
@@ -32,9 +26,6 @@ import javax.swing.JComponent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import javax.swing.JCheckBox;
-import javax.swing.JScrollPane;
-import java.awt.Component;
 
 public class AddMultipleChoice extends JFrame {
 
@@ -240,16 +231,18 @@ public class AddMultipleChoice extends JFrame {
 				
 				if (ansCount < 2) {
 					JOptionPane.showMessageDialog(AddMultipleChoice.this, 
-							"Atleast 2 answers are required for multiple choice.");
+							"At least 2 answers are required for multiple choice.");
 				} else if (row < 0 || table.getSelectedRowCount() > 1) {
 					JOptionPane.showMessageDialog(AddMultipleChoice.this, 
 							"Please select one correct answer for this question.");
 				} else {
 					DefaultTableModel dm=(DefaultTableModel)table.getModel();
 					DbQuestions dbQ = new DbQuestions();
-					for (int ansInd = 0; ansInd < dm.getRowCount();ansInd++) {
+					for (int ansInd = 0; ansInd < dm.getRowCount(); ansInd++) {
 						String ans = (String) dm.getValueAt(ansInd, 0);
 						dbQ.insertAnswers(textQ.getQid(), ansInd == row, ans);
+					}
+					for (int ansInd = 0; ansInd < dm.getRowCount(); ansInd++) {
 						dm.removeRow(ansInd);
 					}
 					JOptionPane.showMessageDialog(AddMultipleChoice.this, 

@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import org.scilab.forge.jlatexmath.TeXConstants;
@@ -23,7 +22,6 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.Insets;
 
 import javax.swing.JTextField;
@@ -34,18 +32,12 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import java.awt.event.ActionListener;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 
 public class HHCreateTextQuestion extends JFrame {
 
@@ -151,14 +143,12 @@ public class HHCreateTextQuestion extends JFrame {
 					shiftPanel.setBounds(shiftPanel.getX(), shiftPanel.getY() + 100, shiftPanel.getWidth(), shiftPanel.getHeight());
 					drawingArea.setVisible(true);
 					setBounds(100, 100, 680, 720);
-				//	contentPane.setBounds(contentPane.getX(), contentPane.getY() + 185, contentPane.getWidth(), contentPane.getHeight());
 				} else {
 					btnPrev.setVisible(false);
 					shiftPanel.setBounds(shiftPanel.getX(), shiftPanel.getY() - 100, shiftPanel.getWidth(), shiftPanel.getHeight());
 					drawingArea.setVisible(false);
 					setBounds(100, 100, 680, 700);
-				//	contentPane.setBounds(contentPane.getX(), contentPane.getY() - 185, contentPane.getWidth(), contentPane.getHeight());
-				//	this.frame .setSize(frame.getWidth(),frame.getHeight() - 185);
+
 				}
 			}
 		});
@@ -178,8 +168,6 @@ public class HHCreateTextQuestion extends JFrame {
 			public void mouseReleased(MouseEvent e) {
 				String questionContent = String.valueOf(questionContentField.getText());
 				try {					
-				//	drawingArea.setVisible(false);
-					//drawingArea.setVisible();
 					// create a formula
 					TeXFormula formula = new TeXFormula(questionContent);
 					
@@ -302,9 +290,6 @@ public class HHCreateTextQuestion extends JFrame {
 	    Dimension prefSize = field.getPreferredSize();
 	    prefSize = new Dimension(40, prefSize.height);
 	    field.setPreferredSize(prefSize);
-		
-
-		
 		
 	}
 }

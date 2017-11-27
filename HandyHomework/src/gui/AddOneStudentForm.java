@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -20,8 +19,6 @@ import java.awt.event.ActionEvent;
 
 import dao.DbCourse;
 import dao.DbUser;
-import login.SelectedUser;
-import login.StudentLogin;
 import login.UserLogin;
 
 public class AddOneStudentForm extends JFrame {
@@ -78,9 +75,6 @@ public class AddOneStudentForm extends JFrame {
 		btnAddStudent.setName("addStudent");
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			//	String studID = studentNumField.getText();
-			///	String fName = firstName.getText();
-			///	String lName = lastName.getText();
 				String username = usernameField.getText();
 				
 				if (username.isEmpty()){

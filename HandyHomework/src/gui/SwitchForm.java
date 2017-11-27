@@ -1,8 +1,5 @@
 package gui;
 
-import java.awt.Frame;
-import java.awt.Window;
-
 import javax.swing.JFrame;
 
 public class SwitchForm extends JFrame{

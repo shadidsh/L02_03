@@ -1,7 +1,5 @@
 package gui;
 
-import static org.junit.Assert.*;
-
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.FrameFixture;

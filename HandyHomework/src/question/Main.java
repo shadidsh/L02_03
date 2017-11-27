@@ -8,7 +8,6 @@ public class Main {
 	public static void main(String[] args) {
 		String question = "", answer = "", questionName = "";
 		int points = 0;
-		//Assessment assessment = new Assessment();
 		InputStreamReader inRead = new InputStreamReader(System.in);
 	    BufferedReader bRead = new BufferedReader(inRead);
 	    System.out.println("Type exit to terminate program");

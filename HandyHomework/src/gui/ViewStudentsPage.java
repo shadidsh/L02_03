@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import assessment.Assessment;
 import course.Course;
 import course.SelectedCourse;
 import dao.DbCourse;
@@ -83,9 +81,7 @@ public class ViewStudentsPage extends JFrame {
 		String[] columnNames = {"Student ID", "First Name", "Last Name"};
 		
 		
-//		DbCourse course = new DbCourse();
 		DbUser user = new DbUser();
-//		Object data[][];
 		String[] colHeadings = {"Student Number","First Name", "Last Name"};
 		int numRows = 0;
 		DefaultTableModel model = new DefaultTableModel(numRows, colHeadings.length) {
