@@ -56,16 +56,16 @@ public class StudentAnswerMultQuestionTest extends AssertJSwingJUnitTestCase {
 		Course cs = new Course(2, "CSC130H3", "Intro to its late.", "Winter 2017");
 		SelectedCourse.setCourse(cs);
 		Assessment assessment = new Assessment(
-				220, "Title", "Name", true, null, (float) 100);
+				221, "MCQTest", "MCQ", true, null, (float) 100);
 		SelectedAssessment.setAssess(assessment);
 		
-		ArrayList<TextAnswer> mcAnswers = new ArrayList<TextAnswer>();
-		TextAnswer one = new TextAnswer(5, "option 1", true);
-		TextAnswer two = new TextAnswer(5, "option 2", false);
-		mcAnswers.add(one);
-		mcAnswers.add(two);
-		MultQuestion mult = new MultQuestion(220, "pick one", "what is one?", 5);
-		mult.addAnswers(mcAnswers);
+//		ArrayList<TextAnswer> mcAnswers = new ArrayList<TextAnswer>();
+//		TextAnswer one = new TextAnswer(5, "option 1", true);
+//		TextAnswer two = new TextAnswer(5, "option 2", false);
+//		mcAnswers.add(one);
+//		mcAnswers.add(two);
+//		MultQuestion mult = new MultQuestion(220, "pick one", "what is one?", 5);
+//		mult.addAnswers(mcAnswers);
 		
 		AnswerMultipleChoice frame = GuiActionRunner.execute(() -> new AnswerMultipleChoice() {
 			protected AnswerMultipleChoice executeInEDT() throws Exception {
@@ -83,7 +83,7 @@ public class StudentAnswerMultQuestionTest extends AssertJSwingJUnitTestCase {
 	public void studentAnswerCorrect() {
 		window.radioButton("rdbtnA1").click();
 		window.button("Submit").click();
-		window.optionPane().requireVisible().requireMessage("Finished assessment, points earned: 5");
+		window.optionPane().requireVisible().requireMessage("Finished assessment, points earned: 4");
 		tearDown();
 	}
 	

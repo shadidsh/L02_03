@@ -84,31 +84,37 @@ public class AnswerMultipleChoice extends JFrame {
 		contentPane.add(lblquestion);
 		
 		JRadioButton rdbtnA1 = new JRadioButton();
+		rdbtnA1.setName("rdbtnA1");
 		rdbtnA1.setBounds(166, 153, 312, 23);
 		contentPane.add(rdbtnA1);
 		rdbtnA1.setVisible(false);
 		
 		JRadioButton rdbtnA2 = new JRadioButton();
+		rdbtnA2.setName("rdbtnA2");
 		rdbtnA2.setBounds(166, 189, 312, 23);
 		contentPane.add(rdbtnA2);
 		rdbtnA2.setVisible(false);
 		
 		JRadioButton rdbtnA3 = new JRadioButton();
+		rdbtnA3.setName("rdbtnA3");
 		rdbtnA3.setBounds(166, 229, 312, 23);
 		contentPane.add(rdbtnA3);
 		rdbtnA3.setVisible(false);
 		
 		JRadioButton rdbtnA4 = new JRadioButton();
+		rdbtnA4.setName("rdbtnA4");
 		rdbtnA4.setBounds(166, 265, 312, 23);
 		contentPane.add(rdbtnA4);
 		rdbtnA4.setVisible(false);
 		
 		JRadioButton rdbtnA5 = new JRadioButton();
+		rdbtnA5.setName("rdbtnA5");
 		rdbtnA5.setBounds(166, 297, 312, 23);
 		contentPane.add(rdbtnA5);
 		rdbtnA5.setVisible(false);
 		
 		JRadioButton rdbtnA6 = new JRadioButton();
+		rdbtnA6.setName("rdbtnA6");
 		rdbtnA6.setBounds(166, 323, 312, 23);
 		contentPane.add(rdbtnA6);
 		rdbtnA6.setVisible(false);
@@ -153,6 +159,7 @@ public class AnswerMultipleChoice extends JFrame {
 		}		
 		
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.setName("Submit");
 		btnSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -181,7 +188,7 @@ public class AnswerMultipleChoice extends JFrame {
 					if (!multQ.hasNext()) {
 						System.out.println(totalPts);
 						JOptionPane.showMessageDialog(AnswerMultipleChoice.this, 
-								"Completed Assessment");
+								"Finished assessment, points earned: " + totalPts);
 						HHSavedAssessments frame = new HHSavedAssessments();
 						sf.switchForm(frame);
 						if (frame.isShowing()){
