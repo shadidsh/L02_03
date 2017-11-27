@@ -354,6 +354,7 @@ public class AddMultipleChoice extends JFrame {
 				lblNumberOfMarks.setVisible(true);
 				spinMarks.setVisible(true);
 				btnAddQuestion.setVisible(true);
+				btnCancel.setVisible(true);
 				
 				lblQuestion.setVisible(false);
 				scrollPane.setVisible(false);
@@ -363,6 +364,7 @@ public class AddMultipleChoice extends JFrame {
 				btnRemoveAnswer.setVisible(false);
 				btnSubmit.setVisible(false);
 				btnAbortQuestion.setVisible(false);
+				
 				
 				questionContentField.setText("");
 				questionNameField.setText("");
