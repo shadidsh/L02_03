@@ -22,6 +22,7 @@ public class DbQuestionsTest {
 	private int aid;
 	private int qid;
 	private Calendar due;
+	
 	@Before
 	public void setup() {
 		dbUser = new DbUser();
@@ -30,11 +31,11 @@ public class DbQuestionsTest {
 		dbQuestions = new DbQuestions();
 		due = Calendar.getInstance();
 		due.set(2017, 9, 25, 10, 05, 30);
-		if (! dbUser.userExists("myProf")) {
-			pid = dbUser.addUser("myProf", "123", true);
-			cid = dbCourse.insertCourses(pid, "CSCC73", "Algorithm design and analysis", "Fall");
-			aid = dbAssessment.insertAssessment("Assessment3", cid, "Dynamic Programming", due, true, (float) 0.5);
-			qid = dbQuestions.insertQuestions(aid, "Quick", "2+2", 100, false, false);
+		if (! dbUser.userExists("myProf3")) {
+			pid = dbUser.addUser("myProf3", "123", true);
+			cid = dbCourse.insertCourses(pid, "CSCC7399", "Algorithm design and analysis9", "Fall2019");
+			aid = dbAssessment.insertAssessment("Assessme1nt3", cid, "Dynam1ic Programming", due, true, (float) 0.5);
+			qid = dbQuestions.insertQuestions(aid, "Quic1k", "2+2", 100, false, false);
 		}
 
 		System.out.println(pid);
@@ -44,8 +45,7 @@ public class DbQuestionsTest {
 	}
 	@Test
 	public void testTextQuestions() {
-		ArrayList<TextQuestion> TQ = new ArrayList<TextQuestion>();
-		TQ = (ArrayList<TextQuestion>) dbQuestions.TextQuestions(aid);
+		java.util.List<TextQuestion> TQ = dbQuestions.TextQuestions(aid);
 		assertFalse(TQ.isEmpty());
 	}
 
@@ -66,9 +66,9 @@ public class DbQuestionsTest {
 	}
 	@After
 	public void tearDown() {
-		dbCourse.removeCourse(cid);
-		dbUser.removeUser("myProf");
-		dbAssessment.removeAssessment(aid);
+		dbUser.removeUser("myProf3");
 		dbQuestions.removeQuestion(qid);
+		dbAssessment.removeAssessment(aid);
+		dbCourse.removeCourse(cid);		
 	}
 }

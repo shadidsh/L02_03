@@ -26,11 +26,12 @@ public class DbUser extends DbConnection implements UserDAO  {
     		stat.setString(1, user);
     		stat.setString(2, pass);
     		stat.setBoolean(3, isProf);
-    		
+    		System.out.println(stat);
     		ResultSet Rs =	stat.executeQuery();
     		Rs.next();
     		result =  Rs.getInt(1);
     		conn.close();
+    		return result;
     	} catch(Exception ex) {
     		result = -1;
     		System.out.print(ex.getMessage());    		
@@ -223,6 +224,9 @@ public class DbUser extends DbConnection implements UserDAO  {
 	@Override
 	public int removeUser(String user) {
 		Connection conn = getConnection();
+		UserLogin ul =  getUser(user);
+		DbCourse dbc = new DbCourse();
+		dbc.unEnrollFromCourse(ul.getId());
 		try {
     		String deleteAns = "DELETE FROM " 
 		+ constants.Constants.DataConstants.USERS + " WHERE username = ?";

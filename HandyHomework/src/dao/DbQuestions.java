@@ -180,11 +180,12 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 			stat.setInt(4, points);
 			stat.setBoolean(5, isMult);
 			stat.setBoolean(6, isLat);
-
+			System.out.println(stat);
 			ResultSet Rs = stat.executeQuery();
 			Rs.next();
 			res =  Rs.getInt(1); 
-			conn.close();		
+			conn.close();
+			return res;
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());  
 		}
