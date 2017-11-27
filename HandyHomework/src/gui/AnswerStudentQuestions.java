@@ -89,6 +89,7 @@ public class AnswerStudentQuestions extends JFrame {
 	 */
 	public AnswerStudentQuestions() {
 		SwitchForm sf = new SwitchForm();
+		setName("AnswerTextQ");
 		setTitle("HandyHomework - Text Question");
 		//frame = new JFrame();
 	    setBounds(300, 300, 853, 564);
@@ -129,6 +130,7 @@ public class AnswerStudentQuestions extends JFrame {
 		getContentPane().add(lblPointsWorth);
 		
 		JLabel lblQuestName = new JLabel("");
+		lblQuestName.setName("QuestName");
 		lblQuestName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblQuestName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblQuestName.setBounds(0, 0, 238, 72);
