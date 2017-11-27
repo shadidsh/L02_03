@@ -13,7 +13,8 @@ Welcome to the Project Repo for Team SWare.
     1. [assert-core](http://central.maven.org/maven2/org/assertj/assertj-core/3.8.0/assertj-core-3.8.0.jar)
     2. [assertj-swing](http://central.maven.org/maven2/org/assertj/assertj-swing/3.8.0/assertj-swing-3.8.0.jar)
     3. [assert-swing-junit](http://central.maven.org/maven2/org/assertj/assertj-swing-junit/3.8.0/assertj-swing-junit-3.8.0.jar)
-
+5. We are also using the jlatexmath library 
+    1. [jlatex](https://jar-download.com/?search_box=jlatexmath)
 
 ## Backlog
 [Project Backlog v4](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_5/Project_Backlog_v4.pdf)  
