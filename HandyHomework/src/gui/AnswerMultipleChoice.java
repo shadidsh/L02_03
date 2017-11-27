@@ -197,76 +197,8 @@ public class AnswerMultipleChoice extends JFrame {
 				
 				
 			}
-		});
-		
-    // below is the navigation tool
-	JScrollPane scrollPane = new JScrollPane();
-	scrollPane.setBounds(10, 153, 141, 212);
-	contentPane.add(scrollPane);
-	
-	JPanel navigationPanel = new JPanel();
-	scrollPane.setViewportView(navigationPanel);
-	
-	JLabel lblNavigateAssessment = new JLabel("Navigate Assessment");
-	scrollPane.setColumnHeaderView(lblNavigateAssessment);
-	
-	// make container for list of questions
-	DefaultListModel<String> lstQuestion = new DefaultListModel<>();	
-	// get list of questions from db
-	List<Question> questions = MCQ.allQuestions(aid);
-	// fill lstQuestion with list of questions
-	for (Question tq: questions ) {
-		lstQuestion.addElement(tq.getName());
-	}
-	// create list
-	JList<String> listQuestions = new JList<>(lstQuestion);
-	listQuestions.setFixedCellWidth(100);
-	// add to navigationPanel
-	navigationPanel.add(listQuestions);
-	// double click element to go to that question
-	listQuestions.addMouseListener(new MouseAdapter() {
-		public void mouseClicked(MouseEvent e) {
-			String qName = listQuestions.getSelectedValue();
-			if ((e.getClickCount() == 2) && (!qName.equals(mq.getName()))) {
-				// make db connection
-				DbQuestions dbQ = new DbQuestions();
-				// get assessment id
-				int aid = SelectedAssessment.getAssess().getAid();
-				// get list of questions in assessment
-				List<Question> questions = dbQ.allQuestions(aid);
-				ListIterator<Question> questionIterator = questions.listIterator();
-				int newQid = 0;
-				int i;
-				for (i = 0; i < questions.size(); i++) {
-					if (questions.get(i).getName().equals(qName)) {
-						newQid = questions.get(i).getQid();
-						break;
-					}
-				}
-				if (questions.get(i).hasMultAnswer()) {
-					mq = (MultQuestion) questions.get(i);
-					lblquestion.setText("Questions: " + mq.getQuestion());
-					List<TextAnswer> mqAnswers = mq.getAnswers();
-					setButtonText(buttons, mqAnswers);
-					/*
-					AnswerMultipleChoice frame = new AnswerMultipleChoice();
-					frame.mq = (MultQuestion) questions.get(i);
-					sf.switchForm(frame);
-					if (frame.isShowing()){
-						dispose();
-					}*/
-				} else {
-					// then it is a text question
-					AnswerStudentQuestions frame = new AnswerStudentQuestions();
-					sf.switchForm(frame);
-					if (frame.isShowing()){
-						dispose();
-					}
-				}
-			}
-		}
-	});
-		
+		});	
+    	
 		btnSubmit.setBounds(285, 370, 117, 29);
 		contentPane.add(btnSubmit);
 		

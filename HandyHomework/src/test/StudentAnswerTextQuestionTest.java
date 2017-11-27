@@ -1,4 +1,4 @@
-package gui;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -19,11 +19,15 @@ import assessment.Assessment;
 import assessment.SelectedAssessment;
 import course.Course;
 import course.SelectedCourse;
+import gui.AnswerStudentQuestions;
 import login.ProfessorLogin;
 import login.SelectedUser;
+import login.StudentLogin;
+import question.TextQuestion;
 
 public class StudentAnswerTextQuestionTest extends AssertJSwingJUnitTestCase {
-/*
+	private FrameFixture window;
+
 	@Override
 	protected void onSetUp() {
 		// set up student user
@@ -39,26 +43,23 @@ public class StudentAnswerTextQuestionTest extends AssertJSwingJUnitTestCase {
 		// set up text question with answer
 		TextQuestion text = new TextQuestion(4, "write answer", "just write answer", 5);
 		TextAnswer forText = new TextAnswer(4, "answer", true); 
+		SelectedAssessment.getAssess().addQuestions(text);
 		//
-		HHSavedAssessment frame = GuiActionRunner.execute(() -> new HHSavedAssessment());
+		AnswerStudentQuestions frame = GuiActionRunner.execute(() -> new AnswerStudentQuestions());
 		frame.setVisible(true);
 		window = new FrameFixture(robot(), frame);
 	}
 	
 	@Test
 	public void studentAnswerCorrect() {
-		fail("Not yet implemented");
+		window.textBox("txtAns").setText("answer");
+		window.button("btnSubmit").click();
+		window.optionPane().requireVisible().requireMessage("Finished assessment, points earned: 5");
 	}
 	
-*/	@Test
+	@Test
 	public void studentAnswerWrong() {
 		fail("Not yet implemented");
 	}
-
-@Override
-protected void onSetUp() {
-	// TODO Auto-generated method stub
-	
-}
 
 }
