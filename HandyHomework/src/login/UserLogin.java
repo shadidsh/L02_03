@@ -10,11 +10,11 @@ public abstract class UserLogin {
 		this.password = password;
 	}
 	
-	String getUserName() {
+	public String getUserName() {
 		return userName;
 	}
 
-	String getPassword() {
+	public String getPassword() {
 		return password;
 	}
 	
