@@ -22,14 +22,9 @@ public class StudentTest {
 	@Test
 	public void testGetUserName() {
 		String user = stud.getUserName();
-		assertEquals("bestStud", user);
+		assertTrue(user.equals("bestStud"));
 	}
 
-	@Test
-	public void testGetPassword() {
-		String pass = stud.getPassword();
-		assertEquals("userIsFalse", pass);
-	}
 
 	@Test
 	public void testGetId() {
