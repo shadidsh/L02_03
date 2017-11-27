@@ -26,7 +26,7 @@ import login.StudentLogin;
 import question.MultQuestion;
 
 public class StudentAnswerMultQuestionTest {
-
+/*
 	protected void onSetUp() {
 		// set up student user
 		StudentLogin student = new StudentLogin(1, "student", "password");
@@ -58,7 +58,7 @@ public class StudentAnswerMultQuestionTest {
 		fail("Not yet implemented");
 	}
 	
-	@Test
+*/	@Test
 	public void studentAnswerWrong() {
 		fail("Not yet implemented");
 	}

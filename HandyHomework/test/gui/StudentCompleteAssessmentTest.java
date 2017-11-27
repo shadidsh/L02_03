@@ -23,7 +23,7 @@ import login.ProfessorLogin;
 import login.SelectedUser;
 
 public class StudentCompleteAssessmentTest {
-
+/*
 	@Override
 	protected void onSetUp() {
 		// set up student user
@@ -60,7 +60,7 @@ public class StudentCompleteAssessmentTest {
 	public void studentAnswerBothCorrect() {
 		fail("Not yet implemented");
 	}
-	
+*/	
 	@Test
 	public void studentAnswerBothWrong() {
 		fail("Not yet implemented");

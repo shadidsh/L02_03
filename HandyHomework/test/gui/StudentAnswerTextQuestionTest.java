@@ -23,7 +23,7 @@ import login.ProfessorLogin;
 import login.SelectedUser;
 
 public class StudentAnswerTextQuestionTest {
-
+/*
 	@Override
 	protected void onSetUp() {
 		// set up student user
@@ -50,7 +50,7 @@ public class StudentAnswerTextQuestionTest {
 		fail("Not yet implemented");
 	}
 	
-	@Test
+*/	@Test
 	public void studentAnswerWrong() {
 		fail("Not yet implemented");
 	}
