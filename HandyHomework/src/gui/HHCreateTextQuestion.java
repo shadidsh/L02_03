@@ -87,7 +87,7 @@ public class HHCreateTextQuestion extends JFrame {
 		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Create Text Question");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 680, 650);
+		setBounds(0, 0, 680, 650);
 		
 		contentPane = new JPanel();
 		contentPane.setAutoscrolls(true);

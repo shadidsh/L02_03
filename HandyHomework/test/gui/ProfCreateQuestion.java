@@ -1,6 +1,10 @@
 package gui;
 
+import java.awt.Dimension;
+
+import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
+import org.assertj.swing.edt.GuiQuery;
 import org.assertj.swing.finder.JOptionPaneFinder;
 import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.FrameFixture;
@@ -20,6 +24,7 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 	private FrameFixture window;
 	private ProfessorLogin user;
 	
+	
 	@Override
 	protected void onSetUp() {
 		ProfessorLogin user = new ProfessorLogin(1, "user", "pass");
@@ -30,12 +35,25 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 				163, "Normal", "Creating Questions", true, null, (float) 100);
 		SelectedAssessment.setAssess(tq);
 		
-		HHCreateTextQuestion frame = GuiActionRunner.execute(() -> new HHCreateTextQuestion());
-		frame.setVisible(true);
-		window = new FrameFixture(robot(), frame);
+		HHCreateTextQuestion frame = GuiActionRunner.execute(new GuiQuery<HHCreateTextQuestion>() {
+
+            @Override
+            protected HHCreateTextQuestion executeInEDT() throws Exception {
+            	HHCreateTextQuestion frame = new HHCreateTextQuestion();
+            	frame.setVisible(true);
+            	frame.setPreferredSize(new Dimension(680, 650));
+            	frame.setBounds(0, 0, 680, 650);
+            	frame.pack();
+            	return frame;
+            }
+        });
 		
+		//HHCreateTextQuestion frame = GuiActionRunner.execute(() -> new HHCreateTextQuestion());
+	//	frame.setVisible(true);
+	//	frame.showWindow();
+		window = new FrameFixture(robot(), frame);
 	}
-	/*
+	
 	@Test
 	public void createQuestionError1() {
 		window.textBox("questionName").setText("assess");
@@ -64,9 +82,10 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 		window.optionPane().requireVisible().requireMessage("One or more fields are empty.").click();
 	}
 	
+	
 	// FAILS BECAUSE WINDOW ORDER FROM MAIN IS WRONG
 	// UPON SUBMITTING A Q IT GOES IDK WHERE
-	*/
+	
 	@Test
 	public void createViewAndRemoveQuestion() {
 		window.textBox("questionName").setText("THIS IS YOOOOOOOOUR Title");
@@ -78,5 +97,6 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 		window.list("lstQuestion").requireVisible().clickItem("THIS IS YOOOOOOOOUR Title");
 		window.button("removeQuestion").requireEnabled().requireVisible().click();
 	}
+	
 	
 }
