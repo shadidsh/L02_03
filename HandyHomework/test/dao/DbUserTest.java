@@ -36,15 +36,13 @@ public class DbUserTest {
 	
 	@Test
 	public void testAddNonExistingProf() {	
-		ProfessorLogin profNE = new ProfessorLogin(0, "nonexistentProf", "userIsNonExistent");
+		ProfessorLogin profNE = new ProfessorLogin(0, "nonExistentProf", "userIsNonExistent");
 		int res = dbUser.addUser(profNE.getUserName(), profNE.getPassword(), profNE.isProf());
 		System.out.print(res);
 		assertTrue(res >= 0);
-		tearDown();
+		dbUser.removeUser("nonExistentProf");
+
 	}
 	
-	@After
-	public void tearDown() {
-		dbUser.removeUser("nonexistentProf");
-	}
+
 }

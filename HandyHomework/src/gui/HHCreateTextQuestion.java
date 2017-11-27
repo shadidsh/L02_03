@@ -160,7 +160,7 @@ public class HHCreateTextQuestion extends JFrame {
 		});
 		chckbxLatex.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		btnPrev = new JButton("Preview Render");
+		btnPrev = new JButton("Preview Latex");
 		btnPrev.setBounds(260, 385, 155, 37);
 		shiftPanel.add(btnPrev);
 		btnPrev.addMouseListener(new MouseAdapter() {
