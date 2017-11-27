@@ -234,7 +234,7 @@ public class AnswerMultipleChoice extends JFrame {
 				int aid = SelectedAssessment.getAssess().getAid();
 				// get list of questions in assessment
 				List<Question> questions = dbQ.allQuestions(aid);
-				ListIterator<Question> questionIterator = questions.listIterator();
+				//ListIterator<Question> questionIterator = questions.listIterator();
 				int newQid = 0;
 				int i;
 				for (i = 0; i < questions.size(); i++) {

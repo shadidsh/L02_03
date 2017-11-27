@@ -32,8 +32,8 @@ public class DbCourseTest {
 	}
 
 	@Test
-	public void testUnEnrollFromCourse() {
-		dbCourse.unEnrollFromCourse(cid);
+	public void removeCourseListings() {
+		dbCourse.removeCourseListings(cid);
 		assertFalse(dbCourse.checkManagedCourse(pid, cid));
 	}
 
