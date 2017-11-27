@@ -109,7 +109,8 @@ public class HHSavedAssessments extends JFrame {
 			
 			for (Assessment ase : as) {
 				lstAssess.addElement(ase.getName());
-				assess.add(ase);			
+				assess.add(ase);
+				System.out.println(ase.getAid());
 			}
 		} else {
 			JOptionPane.showMessageDialog(HHSavedAssessments.this, 

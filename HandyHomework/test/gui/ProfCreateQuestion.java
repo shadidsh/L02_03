@@ -1,8 +1,10 @@
 package gui;
 
 import org.assertj.swing.edt.GuiActionRunner;
+import org.assertj.swing.finder.JOptionPaneFinder;
 import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.FrameFixture;
+import org.assertj.swing.fixture.JOptionPaneFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 import org.junit.Test;
 
@@ -22,10 +24,10 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 	protected void onSetUp() {
 		ProfessorLogin user = new ProfessorLogin(1, "user", "pass");
 		SelectedUser.setUser(user);
-		Course cs = new Course(2, "CSC130H3", "Intro to its late.", "Winter 2017");
+		Course cs = new Course(131, "T123", "GUI Testing", "Fall 2017");
 		SelectedCourse.setCourse(cs);
 		Assessment tq = new Assessment(
-				3, "assessment 5", "Greedy Algo.", true, null, (float) 0.99);
+				163, "Normal", "Creating Questions", true, null, (float) 100);
 		SelectedAssessment.setAssess(tq);
 		
 		HHCreateTextQuestion frame = GuiActionRunner.execute(() -> new HHCreateTextQuestion());
@@ -62,7 +64,8 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 		window.optionPane().requireVisible().requireMessage("One or more fields are empty.").click();
 	}
 	
-	
+	// FAILS BECAUSE WINDOW ORDER FROM MAIN IS WRONG
+	// UPON SUBMITTING A Q IT GOES IDK WHERE
 	@Test
 	public void createViewAndRemoveQuestion() {
 		window.textBox("questionName").setText("THIS IS YOOOOOOOOUR Title");

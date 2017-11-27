@@ -253,13 +253,11 @@ public class HHCreateTextQuestion extends JFrame {
 						DbQuestions dbQuest = new DbQuestions();
 						int qid = dbQuest.insertQuestions(as.getAid(), name, questionContent, value, false, isLat);
 						dbQuest.insertAnswers(qid,  true,  answer);
-						
 
 						questionContentField.setText("");
 						questionNameField.setText("");
 						questionAnswerField.setText("");
 						spinMarks.setValue(0);
-						
 						
 						for(ActionListener a: chckbxLatex.getActionListeners()) {
 						    a.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null) {
