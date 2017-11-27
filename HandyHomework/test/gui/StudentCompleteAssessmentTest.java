@@ -22,7 +22,7 @@ import course.SelectedCourse;
 import login.ProfessorLogin;
 import login.SelectedUser;
 
-public class StudentCompleteAssessmentTest {
+public class StudentCompleteAssessmentTest extends AssertJSwingJUnitTest {
 /*
 	@Override
 	protected void onSetUp() {
