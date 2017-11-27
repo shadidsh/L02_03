@@ -2,8 +2,6 @@ package dao;
 
 import static org.junit.Assert.*;
 
-import java.awt.List;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.junit.After;
@@ -37,33 +35,36 @@ public class DbQuestionsTest {
 			aid = dbAssessment.insertAssessment("Assessme1nt3", cid, "Dynam1ic Programming", due, true, (float) 0.5);
 			qid = dbQuestions.insertQuestions(aid, "Quic1k", "2+2", 100, false, false);
 		}
-
-		System.out.println(pid);
-		System.out.println(cid);
-		System.out.println(aid);
-		System.out.println(qid);
 	}
+	
 	@Test
 	public void testTextQuestions() {
 		java.util.List<TextQuestion> TQ = dbQuestions.TextQuestions(aid);
 		assertFalse(TQ.isEmpty());
 	}
-
-	public void testInsertQuestions() {
-		fail("Not yet implemented");
+	@Test
+	public void testRemoveQuestionsForAssessments() {
+		dbQuestions.removeQuestionsForAssessments(aid);
+		assertFalse(dbQuestions.hasTextQuestions(aid));
 	}
-
-	public void testSingleAnswerQuestion() {
-		fail("Not yet implemented");
+	
+	@Test
+	public void testRemoveQuestion() {
+		dbQuestions.removeQuestion(qid);
+		assertFalse(dbQuestions.hasTextQuestions(aid));
 	}
-
+	
+	@Test
 	public void testInsertAnswers() {
-		fail("Not yet implemented");
+		dbQuestions.insertAnswers(qid, true, "4");
+		assertEquals("4", dbQuestions.singleAnswerQuestion(qid).getAnswer());
 	}
+	
 	@Test 
 	public void testHasTextQuestion() {
 		assertTrue(dbQuestions.hasTextQuestions(aid));
 	}
+	
 	@After
 	public void tearDown() {
 		dbUser.removeUser("myProf3");

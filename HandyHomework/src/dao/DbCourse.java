@@ -157,10 +157,10 @@ public class DbCourse extends DbConnection implements CourseAccessDAO {
 	}
 
 	@Override
-	public void removeCourse(int cid) {
+	public void removeCourseListings(int cid) {
     	Connection conn = getConnection();
 		String delete = "DELETE FROM " +
-				constants.Constants.DataConstants.COURSES 
+				constants.Constants.DataConstants.COURSECONTROL 
 				+ " WHERE cid = ?";
 		this.unEnrollFromCourse(cid);
 		DbAssessment dbAssess = new DbAssessment();
@@ -191,6 +191,26 @@ public class DbCourse extends DbConnection implements CourseAccessDAO {
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
     	}
+	}
+
+	@Override
+	public void removeCourse(int cid) {
+    	Connection conn = getConnection();
+		String delete = "DELETE FROM " +
+				constants.Constants.DataConstants.COURSES 
+				+ " WHERE cid = ?";
+		this.removeCourseListings(cid);
+    	try { 
+    		    		
+    		PreparedStatement stat = conn.prepareStatement(delete);
+    		stat.setInt(1, cid);
+    		
+    		stat.executeUpdate(); 
+    		conn.close();
+    	} catch(Exception ex) {
+    		System.out.print(ex.getMessage());    		
+    	}
+		
 	}
 
 }

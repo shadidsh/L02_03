@@ -276,7 +276,7 @@ public class HHCreateTextQuestion extends JFrame {
 		btnCancel.setName("back");
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(42, 136, 579, 114);
+		scrollPane.setBounds(95, 140, 431, 114);
 		contentPane.add(scrollPane);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		
