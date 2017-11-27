@@ -107,14 +107,9 @@ public class HHSavedQuestionsPage extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel questionTitle = new JLabel("");
-		questionTitle.setBounds(50, 10, 237, 10);
+		questionTitle.setBounds(0, 6, 237, 10);
 		panel.add(questionTitle);
-		questionTitle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		
-		JLabel labelTitle = new JLabel("");
-		labelTitle.setBounds(0, 0, 307, 25);
-		panel.add(labelTitle);
-		questionTitle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		questionTitle.setFont(new Font("Lucida Grande", Font.BOLD, 15));
 		
 		JTextArea questionText = new JTextArea("Select a Question");
 		questionText.setBounds(0, 48, 307, 31);
@@ -188,6 +183,7 @@ public class HHSavedQuestionsPage extends JFrame {
 				int index = list.getSelectedIndex();
 				if (index != -1) {
 					Question question = questions.get(list.getSelectedIndex());
+					questionText.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 					questionText.setText("Q: " + question.getQuestion());
 					questionText.setSize(questionText.getPreferredSize());
 					res = "<html>This question is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;

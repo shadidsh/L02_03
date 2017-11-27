@@ -22,7 +22,7 @@ import course.SelectedCourse;
 import login.ProfessorLogin;
 import login.SelectedUser;
 
-public class StudentAnswerTextQuestionTest extends AssertJSwingJUnitTest {
+public class StudentAnswerTextQuestionTest extends AssertJSwingJUnitTestCase {
 /*
 	@Override
 	protected void onSetUp() {
@@ -54,5 +54,11 @@ public class StudentAnswerTextQuestionTest extends AssertJSwingJUnitTest {
 	public void studentAnswerWrong() {
 		fail("Not yet implemented");
 	}
+
+@Override
+protected void onSetUp() {
+	// TODO Auto-generated method stub
+	
+}
 
 }

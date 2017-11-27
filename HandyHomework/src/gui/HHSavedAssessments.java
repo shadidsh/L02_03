@@ -114,7 +114,7 @@ public class HHSavedAssessments extends JFrame {
 			}
 		} else {
 			JOptionPane.showMessageDialog(HHSavedAssessments.this, 
-					"No Courses have been selected, Logging out ");
+					"No courses have been selected. \nLogging out ");
 			HHLogin frame = new HHLogin();
 			sf.switchForm(frame);
 			if (frame.isShowing()){

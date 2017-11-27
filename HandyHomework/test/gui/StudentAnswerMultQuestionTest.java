@@ -25,7 +25,7 @@ import login.SelectedUser;
 import login.StudentLogin;
 import question.MultQuestion;
 
-public class StudentAnswerMultQuestionTest extends AssertJSwingJUnitTest {
+public class StudentAnswerMultQuestionTest extends AssertJSwingJUnitTestCase {
 /*
 	protected void onSetUp() {
 		// set up student user
@@ -62,5 +62,11 @@ public class StudentAnswerMultQuestionTest extends AssertJSwingJUnitTest {
 	public void studentAnswerWrong() {
 		fail("Not yet implemented");
 	}
+
+@Override
+protected void onSetUp() {
+	// TODO Auto-generated method stub
+	
+}
 
 }

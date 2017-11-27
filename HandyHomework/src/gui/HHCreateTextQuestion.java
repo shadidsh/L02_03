@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import org.scilab.forge.jlatexmath.TeXConstants;
@@ -28,10 +29,13 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JSpinner;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import java.awt.event.KeyAdapter;
@@ -39,6 +43,9 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class HHCreateTextQuestion extends JFrame {
 
@@ -53,6 +60,7 @@ public class HHCreateTextQuestion extends JFrame {
 	private JPanel shiftPanel;
 	private JButton btnPrev;
 	private JFrame frame;
+	private JScrollPane scrollPane;
 	//private JFrame frame;
 
 	/**
@@ -79,7 +87,7 @@ public class HHCreateTextQuestion extends JFrame {
 		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Create Text Question");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 752, 711);
+		setBounds(100, 100, 680, 650);
 		
 		contentPane = new JPanel();
 		contentPane.setAutoscrolls(true);
@@ -87,81 +95,68 @@ public class HHCreateTextQuestion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel shiftPanel = new JPanel();
-		shiftPanel.setBounds(12, 140, 713, 328);
-		contentPane.add(shiftPanel);
 		
-		JLabel lblQuestionName = new JLabel("Question Name:");
-		lblQuestionName.setHorizontalAlignment(SwingConstants.CENTER);
-		lblQuestionName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblQuestionName.setBounds(172, 58, 262, 28);
-		lblQuestionName.setVerticalAlignment(SwingConstants.TOP);
-		lblQuestionName.setLayout(null);
-		contentPane.add(lblQuestionName);
+		shiftPanel = new JPanel();
+		shiftPanel.setBounds(42, 140, 579, 455);
+		contentPane.add(shiftPanel);
 		shiftPanel.setLayout(null);
 		
 		JLabel lblEnterYourQuestion = new JLabel("Enter your question here: ");
 		lblEnterYourQuestion.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEnterYourQuestion.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblEnterYourQuestion.setBounds(36, 13, 498, 22);
+		lblEnterYourQuestion.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblEnterYourQuestion.setBounds(25, 6, 171, 19);
 		shiftPanel.add(lblEnterYourQuestion);
 		
 		JLabel lblFinalAnswer = new JLabel("Final Answer: ");
 		lblFinalAnswer.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFinalAnswer.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblFinalAnswer.setBounds(24, 177, 498, 22);
+		lblFinalAnswer.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblFinalAnswer.setBounds(25, 184, 93, 19);
 		shiftPanel.add(lblFinalAnswer);
 		
 		questionAnswerField = new JTextField();
-		questionAnswerField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		questionAnswerField.setBounds(24, 212, 510, 45);
+		questionAnswerField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		questionAnswerField.setBounds(30, 203, 510, 45);
 		questionAnswerField.setColumns(10);
 		shiftPanel.add(questionAnswerField);
 		questionAnswerField.setName("questionAnswer");
 		
 		JLabel lblNumberOfMarks = new JLabel("Number of Marks Awarded: ");
-		lblNumberOfMarks.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNumberOfMarks.setBounds(46, 293, 282, 22);
+		lblNumberOfMarks.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNumberOfMarks.setBounds(25, 293, 282, 22);
 		shiftPanel.add(lblNumberOfMarks);
 		
 		JSpinner spinMarks = new JSpinner();
-		spinMarks.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		spinMarks.setBounds(379, 290, 155, 28);
+		spinMarks.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		spinMarks.setBounds(230, 290, 155, 28);
 		shiftPanel.add(spinMarks);
 		spinMarks.setName("spin");
 		
 		JComponent field = ((JSpinner.DefaultEditor) spinMarks.getEditor());
-	    Dimension prefSize = field.getPreferredSize();
-	    prefSize = new Dimension(40, prefSize.height);
-	    field.setPreferredSize(prefSize);
 		
-		JButton btnCancel = new JButton("Back");
-		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCancel.setName("back");
-		btnCancel.setBounds(12, 13, 124, 28);
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-				sf.switchForm(frame);
-				if (frame.isShowing()){
-					dispose();
-				}
-			}
-		});
-		contentPane.add(btnCancel);
+		questionContentField = new JTextArea();
+		questionContentField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		questionContentField.setBounds(30, 25, 515, 135);
+		questionContentField.setWrapStyleWord(true);
+		questionContentField.setLineWrap(true);
+		shiftPanel.add(questionContentField);
+		questionContentField.setName("content");
 		
-		chckbxLatex = new JCheckBox("Is latex");
+		chckbxLatex = new JCheckBox("Latex");
+		chckbxLatex.setBounds(30, 350, 90, 27);
+		shiftPanel.add(chckbxLatex);
 		chckbxLatex.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (chckbxLatex.isSelected()) {
 					btnPrev.setVisible(true);
-					shiftPanel.setBounds(shiftPanel.getX(), shiftPanel.getY() + 185, shiftPanel.getWidth(), shiftPanel.getHeight());
+					shiftPanel.setBounds(shiftPanel.getX(), shiftPanel.getY() + 100, shiftPanel.getWidth(), shiftPanel.getHeight());
 					drawingArea.setVisible(true);
+					setBounds(100, 100, 680, 720);
 				//	contentPane.setBounds(contentPane.getX(), contentPane.getY() + 185, contentPane.getWidth(), contentPane.getHeight());
 				} else {
 					btnPrev.setVisible(false);
-					shiftPanel.setBounds(shiftPanel.getX(), shiftPanel.getY() - 185, shiftPanel.getWidth(), shiftPanel.getHeight());
+					shiftPanel.setBounds(shiftPanel.getX(), shiftPanel.getY() - 100, shiftPanel.getWidth(), shiftPanel.getHeight());
 					drawingArea.setVisible(false);
+					setBounds(100, 100, 680, 700);
 				//	contentPane.setBounds(contentPane.getX(), contentPane.getY() - 185, contentPane.getWidth(), contentPane.getHeight());
 				//	this.frame .setSize(frame.getWidth(),frame.getHeight() - 185);
 				}
@@ -173,15 +168,11 @@ public class HHCreateTextQuestion extends JFrame {
 
 			}
 		});
-		chckbxLatex.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		chckbxLatex.setBounds(579, 68, 87, 31);
-		shiftPanel.add(chckbxLatex);
-		
-		drawingArea = new JPanel();
-		drawingArea.setBounds(12, 178, 713, 114);
-		contentPane.add(drawingArea);
+		chckbxLatex.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		btnPrev = new JButton("Preview Render");
+		btnPrev.setBounds(260, 385, 155, 37);
+		shiftPanel.add(btnPrev);
 		btnPrev.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -224,15 +215,16 @@ public class HHCreateTextQuestion extends JFrame {
 		});
 		btnPrev.setVisible(false);
 		btnPrev.setName("submit");
-		btnPrev.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnPrev.setBounds(546, 108, 155, 37);
-		shiftPanel.add(btnPrev);
+		btnPrev.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		JButton btnSubmit = new JButton("Submit");
-		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnSubmit.setBounds(427, 386, 146, 34);
+		shiftPanel.add(btnSubmit);
+		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.getRootPane().setDefaultButton(btnSubmit);
 		btnSubmit.setName("submit");
-		btnSubmit.setBounds(550, 234, 142, 31);
+		
+		
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String name = String.valueOf(questionNameField.getText());
@@ -269,21 +261,47 @@ public class HHCreateTextQuestion extends JFrame {
 			}
 		});
 		
-		questionContentField = new JTextArea();
-		questionContentField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		questionContentField.setBounds(24, 48, 510, 116);
-		questionContentField.setWrapStyleWord(true);
-		questionContentField.setLineWrap(true);
-		shiftPanel.add(questionContentField);
-		questionContentField.setName("content");
-		shiftPanel.add(btnSubmit);
+		JLabel lblQuestionName = new JLabel("Question Name:");
+		lblQuestionName.setBounds(64, 74, 107, 19);
+		contentPane.add(lblQuestionName);
+		lblQuestionName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblQuestionName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblQuestionName.setVerticalAlignment(SwingConstants.TOP);
+		lblQuestionName.setLayout(null);
+		
+		JButton btnCancel = new JButton("\u2190 Back");
+		btnCancel.setBounds(32, 16, 124, 28);
+		contentPane.add(btnCancel);
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCancel.setName("back");
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(42, 136, 579, 114);
+		contentPane.add(scrollPane);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+		
+		drawingArea = new JPanel();
+		drawingArea.setBorder(null);
+		scrollPane.setViewportView(drawingArea);
 		
 		questionNameField = new JTextField();
-		questionNameField.setBounds(44, 99, 473, 28);
+		questionNameField.setBounds(64, 94, 473, 34);
 		contentPane.add(questionNameField);
-		questionNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		questionNameField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		questionNameField.setColumns(10);
 		questionNameField.setName("questionName");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
+				sf.switchForm(frame);
+				if (frame.isShowing()){
+					dispose();
+				}
+			}
+		});
+	    Dimension prefSize = field.getPreferredSize();
+	    prefSize = new Dimension(40, prefSize.height);
+	    field.setPreferredSize(prefSize);
 		
 
 		
