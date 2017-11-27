@@ -104,64 +104,36 @@ public class HHSavedQuestionsPage extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBounds(229, 84, 307, 205);
 		contentPane.add(panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{307, 0};
-		gbl_panel.rowHeights = new int[]{30, 0, 49, 57, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
+		panel.setLayout(null);
 		
 		JLabel questionTitle = new JLabel("");
-		GridBagConstraints gbc_questionTitle = new GridBagConstraints();
-		gbc_questionTitle.fill = GridBagConstraints.BOTH;
-		gbc_questionTitle.insets = new Insets(10, 50, 10, 20);
-		gbc_questionTitle.gridx = 0;
-		gbc_questionTitle.gridy = 0;
-		panel.add(questionTitle, gbc_questionTitle);
+		questionTitle.setBounds(50, 10, 237, 10);
+		panel.add(questionTitle);
 		questionTitle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		
 		JLabel labelTitle = new JLabel("");
-		GridBagConstraints gbc_labelTitle = new GridBagConstraints();
-		gbc_labelTitle.fill = GridBagConstraints.BOTH;
-		gbc_labelTitle.insets = new Insets(0, 0, 5, 0);
-		gbc_labelTitle.gridx = 0;
-		gbc_labelTitle.gridy = 0;
-		panel.add(labelTitle, gbc_labelTitle);
+		labelTitle.setBounds(0, 0, 307, 25);
+		panel.add(labelTitle);
 		questionTitle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		
 		JTextArea questionText = new JTextArea("Select a Question");
+		questionText.setBounds(0, 48, 307, 31);
+		questionText.setFont(new Font("Monospaced", Font.PLAIN, 15));
 		questionText.setWrapStyleWord(true);
 		questionText.setEditable(false);
 		questionText.setBackground(SystemColor.window);
 		questionText.setLineWrap(true);
-		
-		//lblQuestion.setHorizontalAlignment(SwingConstants.LEFT);
-		GridBagConstraints gbc_questionText = new GridBagConstraints();
-		gbc_questionText.gridheight = 2;
-		gbc_questionText.fill = GridBagConstraints.HORIZONTAL;
-		gbc_questionText.insets = new Insets(0, 0, 5, 0);
-		gbc_questionText.gridx = 0;
-		gbc_questionText.gridy = 1;
-		questionText.setSize(gbl_panel.columnWidths[0], gbl_panel.rowHeights[2]);
-		panel.add(questionText, gbc_questionText);
+		panel.add(questionText);
 		
 		JLabel lblPts = new JLabel("");
-		GridBagConstraints gbc_lblPts = new GridBagConstraints();
-		gbc_lblPts.insets = new Insets(0, 0, 5, 0);
-		gbc_lblPts.gridheight = 2;
-		gbc_lblPts.fill = GridBagConstraints.BOTH;
-		gbc_lblPts.gridx = 0;
-		gbc_lblPts.gridy = 3;
-		panel.add(lblPts, gbc_lblPts);
+		lblPts.setBounds(0, 109, 307, 82);
+		panel.add(lblPts);
 		lblPts.setAutoscrolls(true);
 		lblPts.setVerticalAlignment(SwingConstants.TOP);
 		
 		JLabel lblAnswer = new JLabel("");
-		GridBagConstraints gbc_lblAnswer = new GridBagConstraints();
-		gbc_lblAnswer.gridx = 0;
-		gbc_lblAnswer.gridy = 5;
-		gbc_lblAnswer.fill = GridBagConstraints.BOTH;
-		panel.add(lblAnswer, gbc_lblAnswer);
+		lblAnswer.setBounds(0, 196, 307, 9);
+		panel.add(lblAnswer);
 		
 			
 		

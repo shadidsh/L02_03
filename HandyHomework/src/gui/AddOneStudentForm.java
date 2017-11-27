@@ -27,9 +27,6 @@ import login.UserLogin;
 public class AddOneStudentForm extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField studentNumField;
-	private JTextField firstName;
-	private JTextField lastName;
 	private JTextField usernameField;
 
 	/**
@@ -55,7 +52,7 @@ public class AddOneStudentForm extends JFrame {
 		SwitchForm sf = new SwitchForm();
 		setTitle("HandyHomework - Add A Student");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 345, 302);
+		setBounds(100, 100, 368, 240);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -66,52 +63,13 @@ public class AddOneStudentForm extends JFrame {
 		lblStudentInformation.setBounds(70, 44, 242, 31);
 		contentPane.add(lblStudentInformation);
 		
-		JLabel lblStudentNumber = new JLabel("Student Number:");
-		lblStudentNumber.setEnabled(false);
-		lblStudentNumber.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		lblStudentNumber.setBounds(37, 90, 116, 17);
-		contentPane.add(lblStudentNumber);
-		
-		JLabel lblFirstName = new JLabel("First Name:");
-		lblFirstName.setEnabled(false);
-		lblFirstName.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		lblFirstName.setBounds(37, 153, 77, 17);
-		contentPane.add(lblFirstName);
-		
-		JLabel lblLastName = new JLabel("Last Name:");
-		lblLastName.setEnabled(false);
-		lblLastName.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		lblLastName.setBounds(37, 182, 74, 17);
-		contentPane.add(lblLastName);
-		
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		lblUsername.setBounds(37, 123, 73, 17);
+		lblUsername.setBounds(54, 102, 73, 17);
 		contentPane.add(lblUsername);
 		
-		studentNumField = new JTextField();
-		studentNumField.setEnabled(false);
-		studentNumField.setBounds(154, 86, 130, 26);
-		contentPane.add(studentNumField);
-		studentNumField.setColumns(10);
-		studentNumField.setName("studentNum");
-		
-		firstName = new JTextField();
-		firstName.setEnabled(false);
-		firstName.setBounds(154, 150, 130, 26);
-		contentPane.add(firstName);
-		firstName.setColumns(10);
-		firstName.setName("firstname");
-		
-		lastName = new JTextField();
-		lastName.setEnabled(false);
-		lastName.setBounds(154, 179, 130, 26);
-		contentPane.add(lastName);
-		lastName.setColumns(10);
-		lastName.setName("lastname");
-		
 		usernameField = new JTextField();
-		usernameField.setBounds(154, 118, 130, 26);
+		usernameField.setBounds(139, 98, 130, 26);
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
 		usernameField.setName("username");
@@ -120,9 +78,9 @@ public class AddOneStudentForm extends JFrame {
 		btnAddStudent.setName("addStudent");
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String studID = studentNumField.getText();
-				String fName = firstName.getText();
-				String lName = lastName.getText();
+			//	String studID = studentNumField.getText();
+			///	String fName = firstName.getText();
+			///	String lName = lastName.getText();
 				String username = usernameField.getText();
 				
 				if (username.isEmpty()){
@@ -150,7 +108,7 @@ public class AddOneStudentForm extends JFrame {
 				}
 			}
 		});
-		btnAddStudent.setBounds(167, 218, 117, 29);
+		btnAddStudent.setBounds(113, 153, 117, 29);
 		contentPane.add(btnAddStudent);
 	
 		JButton btnBack = new JButton("\u2190 Back");

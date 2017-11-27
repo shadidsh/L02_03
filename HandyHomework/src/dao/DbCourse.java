@@ -54,7 +54,7 @@ public class DbCourse extends DbConnection implements CourseAccessDAO {
     		stat.setString(1, courseCode);
     		stat.setString(2, name);
     		stat.setString(3, term);
-
+    		System.out.println(stat);
     		ResultSet Rs = stat.executeQuery();
     		Rs.next();
     		result =  Rs.getInt(1);
@@ -178,14 +178,14 @@ public class DbCourse extends DbConnection implements CourseAccessDAO {
 	}
 
 	@Override
-	public void unEnrollFromCourse(int cid) {
+	public void unEnrollFromCourse(int uid) {
     	Connection conn = getConnection();
 		String delete = "DELETE FROM " +
 				constants.Constants.DataConstants.COURSECONTROL 
-				+ " WHERE cid = ?";
+				+ " WHERE user_id = ?";
     	try { 
     		PreparedStatement stat = conn.prepareStatement(delete);
-    		stat.setInt(1, cid);
+    		stat.setInt(1, uid);
     		stat.executeUpdate(); 
     		conn.close();
     	} catch(Exception ex) {

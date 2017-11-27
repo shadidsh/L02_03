@@ -18,7 +18,7 @@ public class DbAssessment extends DbConnection  implements AssessmentDAO {
     	try{
     		String insert = "INSERT INTO " + constants.Constants.DataConstants.ASSESSMENTS 
     				+ "(title, cid, name, due_date, weight, is_opt) " +
-    				" VALUES(?,?,?,?,?,?) RETURNING cid";
+    				" VALUES(?,?,?,?,?,?) RETURNING aid";
     		
     		PreparedStatement stat = conn.prepareStatement(insert);
     		stat.setString(1, title);
@@ -31,7 +31,7 @@ public class DbAssessment extends DbConnection  implements AssessmentDAO {
     		stat.setTimestamp(4, inDate);		
     		stat.setFloat(5, weight);
     		stat.setBoolean(6, isOpt);	
-    		
+    		System.out.println(stat);
     		ResultSet Rs = stat.executeQuery();
     		Rs.next();
     		result =  Rs.getInt(1); 

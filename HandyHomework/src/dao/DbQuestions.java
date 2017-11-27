@@ -64,7 +64,7 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 	public List<TextQuestion> TextQuestions(int aid) {
 		Connection conn = getConnection();
 		try {
-    		String query = "Select qid, name, question, points from "
+    		String query = "Select qid, name, question, points, is_latex from "
     				+ constants.Constants.DataConstants.QUESTIONS + " where "
     						+ " aid = ? and is_mult = false";
     		PreparedStatement stat = conn.prepareStatement(query);
@@ -79,8 +79,9 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
     			String name = Rs.getString(2);
     			String question = Rs.getString(3);
     			int points = Rs.getInt(4);
+    			boolean isLat = Rs.getBoolean(5);
 
-    			TextQuestion tq = new TextQuestion(qid, name, question, points);
+    			TextQuestion tq = new TextQuestion(qid, name, question, points, isLat);
     			ta = this.singleAnswerQuestion(qid);
     			tq.setAnswer(ta);
     			questions.add(tq);
@@ -179,12 +180,12 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 			stat.setInt(4, points);
 			stat.setBoolean(5, isMult);
 			stat.setBoolean(6, isLat);
-
+			System.out.println(stat);
 			ResultSet Rs = stat.executeQuery();
 			Rs.next();
 			res =  Rs.getInt(1); 
-    		
-			conn.close();		
+			conn.close();
+			return res;
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());  
 		}
@@ -258,8 +259,8 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
 			ResultSet Rs = stat.executeQuery();
 			Rs.next();
 			res =  Rs.getInt(1); 
-    		
-			conn.close();		
+			conn.close();
+			return res;
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());  
 		}
@@ -279,6 +280,7 @@ public class DbQuestions extends DbConnection implements QuestionDAO {
     		PreparedStatement stat2 = conn.prepareStatement(deleteQuest);
     		stat2.setInt(1, qid);
     		stat2.executeUpdate();
+    		conn.close();
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());  
 		}
