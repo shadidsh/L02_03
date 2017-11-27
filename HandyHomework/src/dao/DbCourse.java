@@ -62,7 +62,7 @@ public class DbCourse extends DbConnection implements CourseAccessDAO {
     		int user = insertManagedCourses(pid, result, false);    		
     		
     		conn.close();
-    		
+    		return result; 
     	}catch(Exception ex) {
     		System.out.println(ex.getMessage());    		
     	}    	
