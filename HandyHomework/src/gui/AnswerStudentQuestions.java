@@ -109,7 +109,6 @@ public class AnswerStudentQuestions extends JFrame {
 		JButton btnback = new JButton(" Back");
 		btnback.setName("back");
 		btnback.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnback.setName("back");
 		btnback.setBounds(12, 454, 141, 49);
 		getContentPane().add(btnback);
 		
@@ -173,6 +172,7 @@ public class AnswerStudentQuestions extends JFrame {
 
 		
 		JButton btnSubmit = new JButton("Submit Answer");
+		btnSubmit.setName("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -200,7 +200,7 @@ public class AnswerStudentQuestions extends JFrame {
 					TextAnswer ta = tq.getCorrectAnswer();
 					if (ta.isCorrect(answer.toString())) {
 						totalPts += tq.getPoints();
-					}					
+					} 
 					
 					int aid = SelectedAssessment.getAssess().getAid();					
 					if (!textQ.hasNext()) {
@@ -212,10 +212,9 @@ public class AnswerStudentQuestions extends JFrame {
 								dispose();
 							}
 						} else {
-							
 							//DUPLICATE COOOOODE!!!!!!!!
 							JOptionPane.showMessageDialog(
-									AnswerStudentQuestions.this, "Finished assessment, points earned : " + totalPts);
+									AnswerStudentQuestions.this, "Finished assessment, points earned: " + totalPts);
 							HHSavedAssessments frame = new HHSavedAssessments();
 							sf.switchForm(frame);
 							if (frame.isShowing()){
@@ -238,7 +237,6 @@ public class AnswerStudentQuestions extends JFrame {
 			}
 		});
 		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnSubmit.setName("Submit");
 		btnSubmit.setBounds(652, 454, 171, 52);
 		contentPane.add(btnSubmit);
 		

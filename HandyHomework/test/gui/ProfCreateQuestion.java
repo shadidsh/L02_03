@@ -47,10 +47,6 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
             	return frame;
             }
         });
-		
-		//HHCreateTextQuestion frame = GuiActionRunner.execute(() -> new HHCreateTextQuestion());
-	//	frame.setVisible(true);
-	//	frame.showWindow();
 		window = new FrameFixture(robot(), frame);
 	}
 	

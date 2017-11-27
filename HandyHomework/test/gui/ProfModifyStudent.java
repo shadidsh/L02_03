@@ -2,7 +2,10 @@ package gui;
 
 import static org.junit.Assert.*;
 
+import java.awt.Dimension;
+
 import org.assertj.swing.edt.GuiActionRunner;
+import org.assertj.swing.edt.GuiQuery;
 import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.fixture.JTableFixture;
@@ -24,8 +27,22 @@ public class ProfModifyStudent  extends AssertJSwingJUnitTestCase  {
 		Course cs = new Course(2, "CSC130H3", "Intro to its late.", "Winter 2017");
 		SelectedCourse.setCourse(cs);
 		
-		AddOneStudentForm frame = GuiActionRunner.execute(() -> new AddOneStudentForm());
-		frame.setVisible(true);
+		AddOneStudentForm frame = GuiActionRunner.execute(new GuiQuery<AddOneStudentForm>() {
+
+            @Override
+            protected AddOneStudentForm executeInEDT() throws Exception {
+            	AddOneStudentForm frame = new AddOneStudentForm();
+            	frame.setVisible(true);
+            	frame.setPreferredSize(new Dimension(368, 240));
+            	frame.setBounds(0, 0, 368, 240);
+            	frame.pack();
+            	return frame;
+            }
+        });
+		
+		
+//		AddOneStudentForm frame = GuiActionRunner.execute(() -> new AddOneStudentForm());
+//		frame.setVisible(true);
 		window = new FrameFixture(robot(), frame);
 		
 	}

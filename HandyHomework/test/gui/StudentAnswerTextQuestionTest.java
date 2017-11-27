@@ -1,4 +1,4 @@
-package test;
+package gui;
 
 import static org.junit.Assert.*;
 
@@ -34,26 +34,30 @@ public class StudentAnswerTextQuestionTest extends AssertJSwingJUnitTestCase {
 
 	@Override
 	protected void onSetUp() {		
-		// set up student user
-		StudentLogin student = new StudentLogin(1, "student", "password");
+		StudentLogin student = new StudentLogin(149, "stud01", "password");
 		SelectedUser.setUser(student);
-		// set up course
-		Course course = new Course(2, "CSCC01H5F", "Software Engineering", "Fall 2017");
-		SelectedCourse.setCourse(course);
-		// set up assessment
+		Course cs = new Course(2, "CSC130H3", "Intro to its late.", "Winter 2017");
+		SelectedCourse.setCourse(cs);
 		Assessment assessment = new Assessment(
-				3, "Intro to comp sci", "Title vs name", true, null, (float) 0.99);
-		// set up text question with answer
-		TextQuestion text = new TextQuestion(4, "write answer", "just write answer", 5);
-		TextAnswer forText = new TextAnswer(4, "answer", true); 
+				220, "Title", "Name", true, null, (float) 100);
+		SelectedAssessment.setAssess(assessment);
+		TextQuestion tq = new TextQuestion(182, "Name", "Content", 5);		
+		
+//		Course course = new Course(2, "CSCC01H5F", "Software Engineering", "Fall 2017");
+//		SelectedCourse.setCourse(course);
+//		Assessment assessment = new Assessment(
+//				3, "Intro to comp sci", "Title vs name", true, null, (float) 0.99);
+//		// set up text question with answer
+//		TextQuestion text = new TextQuestion(4, "write answer", "just write answer", 5);
+//		TextAnswer forText = new TextAnswer(4, "answer", true); 
 		//DbAssessment dbA = new DbAssessment();
 		//dbA.insertAssessment("CSCC01H5F", 2, "Software Engineering", null, true, 0);
 		//DbQuestions dbQ = new DbQuestions();
 		//dbQ.insertQuestions(2, "write answer", "just write answer", 5, false, false);
 		//dbQ.insertAnswers(4, true, "answer");
 		//
-		SelectedAssessment.setAssess(assessment);
-		SelectedAssessment.getAssess().addQuestions(text);
+//		SelectedAssessment.setAssess(assessment);
+//		SelectedAssessment.getAssess().addQuestions(text);
 		AnswerStudentQuestions frame = GuiActionRunner.execute(() -> new AnswerStudentQuestions() {
 			protected AnswerStudentQuestions executeInEDT() throws Exception {
 				AnswerStudentQuestions frame = new AnswerStudentQuestions();
@@ -67,17 +71,18 @@ public class StudentAnswerTextQuestionTest extends AssertJSwingJUnitTestCase {
 	}
 	
 	@Test
-	public void studentAnswerCorrect() {
-		
-		window.textBox("txtAns").setText("answer");
-		window.button("btnSubmit").click();
+	public void studentPointsCalcAnswerCorrect() {
+		window.textBox("Ans").setText("Answer");
+		window.button("Submit").click();
 		window.optionPane().requireVisible().requireMessage("Finished assessment, points earned: 5");
 		tearDown();
 	}
 	
 	@Test
-	public void studentAnswerWrong() {
-		fail("Not yet implemented");
+	public void studentPointsCalcAnswerWrong() {
+		window.textBox("Ans").setText("answer");
+		window.button("Submit").click();
+		window.optionPane().requireVisible().requireMessage("Finished assessment, points earned: 0");
 		tearDown();
 	}
 
