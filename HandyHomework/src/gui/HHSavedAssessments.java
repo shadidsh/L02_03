@@ -204,7 +204,7 @@ public class HHSavedAssessments extends JFrame {
 				int index = list.getSelectedIndex();
 				if (index != -1) {
 					Assessment as = assess.get(list.getSelectedIndex());
-					res =  String.valueOf(as.getWeight()); //"<html>This assessment is worth " + String.valueOf(as.getWeight())  + "%</html>";
+					res =  String.valueOf(as.getWeight());
 					
 					lblAssessment.setText(as.getName());
 					lblPts.setText("Total Marks: " + res);
@@ -283,14 +283,12 @@ public class HHSavedAssessments extends JFrame {
 				if (selectedAs == null || selInd < 0 ) {
 					JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment to remove.");
 				} else {
-					
 					dbAssess.removeAssessment(selectedAs.getAid());
 					lstAssess.remove(selInd);
 					assess.remove(selInd);	
 				}
 			} 
-		}); 	
-		
+		});	
 		
 		if (SelectedUser.getUser().isProf()) {
 			JButton btnViewStudents = new JButton("View Students");
@@ -310,25 +308,6 @@ public class HHSavedAssessments extends JFrame {
 			contentPane.add(btnRemove);
 			contentPane.add(btnNewAssessment);
 			btnNewAssessment.setBounds(257, 257, 160, 30);
-		} else if (!SelectedUser.getUser().isProf()) {
-			/*
-			JButton btnViewMarks = new JButton("View Grades");
-			btnViewMarks.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					// pop-up looking at the grades for the assessment, if one is selected 
-					if (selectedAs == null ) {
-						JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment.");
-					} else {
-						// use selectedAs to get the score from the db? selectedAs;
-						JOptionPane.showMessageDialog(HHSavedAssessments.this, "This\nis\nwhere\nthe\nresults\ngo");
-					}	
-				}
-				
-			}
-			);
-			
-			btnViewMarks.setBounds(309, 326, 160, 30);
-			contentPane.add(btnViewMarks);*/
-		}
+		} 
 	}
 }

@@ -1,4 +1,4 @@
-package test.gui;
+package gui;
 
 import static org.junit.Assert.*;
 

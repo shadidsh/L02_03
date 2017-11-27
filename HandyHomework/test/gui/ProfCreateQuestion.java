@@ -22,6 +22,8 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 	protected void onSetUp() {
 		ProfessorLogin user = new ProfessorLogin(1, "user", "pass");
 		SelectedUser.setUser(user);
+		
+		
 		Course cs = new Course(2, "CSC130H3", "Intro to its late.", "Winter 2017");
 		SelectedCourse.setCourse(cs);
 		Assessment tq = new Assessment(
@@ -33,7 +35,7 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 		window = new FrameFixture(robot(), frame);
 		
 	}
-	
+	/*
 	@Test
 	public void createQuestionError1() {
 		window.textBox("questionName").setText("assess");
@@ -61,7 +63,7 @@ public class ProfCreateQuestion extends AssertJSwingJUnitTestCase  {
 		window.button("submit").click();
 		window.optionPane().requireVisible().requireMessage("One or more fields are empty.").click();
 	}
-	
+	*/
 	
 	@Test
 	public void createViewAndRemoveQuestion() {

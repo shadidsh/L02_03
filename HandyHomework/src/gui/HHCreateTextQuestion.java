@@ -48,8 +48,8 @@ public class HHCreateTextQuestion extends JFrame {
 	private JCheckBox chckbxLatex;
 	private JTextArea questionContentField;
 	private JPanel drawingArea;
-	private Container content = this.getContentPane();
 	
+	private Container content = this.getContentPane();
 	private JPanel shiftPanel;
 	private JButton btnPrev;
 	private JFrame frame;
@@ -217,8 +217,8 @@ public class HHCreateTextQuestion extends JFrame {
 				
 				}  catch (Exception ex) {
 					ex.printStackTrace();
-				//	JOptionPane.showMessageDialog(null, ex.getMessage(), "Error",
-				//			JOptionPane.INFORMATION_MESSAGE);		
+					JOptionPane.showMessageDialog(HHCreateTextQuestion.this, 
+							"Latex Parsing error, please entor a valid latex input.");		
 				}
 			}
 		});
@@ -260,22 +260,11 @@ public class HHCreateTextQuestion extends JFrame {
 						questionAnswerField.setText("");
 						spinMarks.setValue(0);
 						
-						
-						for(ActionListener a: chckbxLatex.getActionListeners()) {
-						    a.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null) {
-
-								/**
-								 * 
-								 */
-								private static final long serialVersionUID = 1L;
-						          //Nothing need go here, the actionPerformed method (with the
-						          //above arguments) will trigger the respective listener
-						    });
-						}
 					} catch (NullPointerException e1){
 						System.out.println("Could not insert question into database."); 
 						e1.printStackTrace();
-						JOptionPane.showMessageDialog(HHCreateTextQuestion.this, "Could not save question - please check your connection and try again.");
+						JOptionPane.showMessageDialog(HHCreateTextQuestion.this, 
+								"Could not save question - please check your connection and try again.");
 					}
 				}
 			}
