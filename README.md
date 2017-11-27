@@ -17,12 +17,13 @@ Welcome to the Project Repo for Team SWare.
     1. [jlatex](https://jar-download.com/?search_box=jlatexmath)
 
 ## Backlog
-[Project Backlog v4](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_5/Project_Backlog_v4.pdf)  
+[Project Backlog v5](https://github.com/CSCC01F17/L02_03/blob/ustory08/Deliverables/Deliverable_6/Project_Backlog_v5.pdf)  
 [Sprint 01 Backlog](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_3/Sprint_01_Backlog.pdf)  
 [Sprint 02 Backlog](https://github.com/CSCC01F17/L02_03/blob/ustory03/Deliverables/Deliverable_4/Sprint_02_Backlog.pdf)  
 [Sprint 03 Backlog](https://github.com/CSCC01F17/L02_03/blob/ustory03/Deliverables/Deliverable_4/Sprint_03_Backlog.pdf)  
 [Sprint 04 Backlog](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_5/Sprint_04_Backlog.pdf)  
 [Sprint 05 Backlog](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_5/Sprint_05_Backlog.pdf)  
+[Sprint 06 Backlog](https://github.com/CSCC01F17/L02_03/blob/ustory08/Deliverables/Deliverable_6/Sprint_06_Backlog.pdf)  
 
 [Code Review Debrief Video](https://drive.google.com/file/d/1gh6kGl7ygeRDOReZ5Xuvtna7WPnH_0U0/view?usp=sharing)  
 [Verification & Validation Report](https://github.com/CSCC01F17/L02_03/blob/master/Deliverables/Deliverable_5/Report.pdf)  
