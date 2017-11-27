@@ -232,7 +232,8 @@ public class AnswerStudentQuestions extends JFrame {
 		btnSubmit.setName("Submit");
 		btnSubmit.setBounds(652, 454, 171, 52);
 		contentPane.add(btnSubmit);
-		/// this below is the navigation tool
+		
+		// below is the navigation tool
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(12, 229, 141, 212);
 		contentPane.add(scrollPane);
@@ -260,37 +261,38 @@ public class AnswerStudentQuestions extends JFrame {
 		listQuestions.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				String qName = listQuestions.getSelectedValue();
-				if (e.getClickCount() == 2 && qName != tq.getName()) {
+				if ((e.getClickCount() == 2) && (!qName.equals(tq.getName()))) {
+					// make db connection
 					DbQuestions dbQ = new DbQuestions();
+					// get assessment id
 					int aid = SelectedAssessment.getAssess().getAid();
+					// get list of questions in assessment
 					List<Question> questions = dbQ.allQuestions(aid);
-					//ListIterator<Question>// sdcsdcs
-					for (int i = 0; i < questions.size(); i++) {
-						if (questions.get(i).getName() == qName) {
-							//dcsd
+					System.out.println(questions);
+					ListIterator<Question> questionIterator = questions.listIterator();
+					System.out.println("curr next: " + questionIterator.next());
+					int newQid = 0;
+					int i;
+					for (i = 0; i < questions.size(); i++) {
+						if (questions.get(i).getName().equals(qName)) {
+							newQid = questions.get(i).getQid();
+							break;
 						}
 					}
-					//dasdasd  use aid (assignment id) to get list of all questions and go to that question by looking at the index of the question in the display and setting that to the .next()
-					if (dbQ.hasTextQuestions(aid)) {
-						List<TextQuestion> qns = dbQ.TextQuestions(aid);
-						ListIterator<TextQuestion>  multQ = qns.listIterator();
-						AnswerStudentQuestions frame = new AnswerStudentQuestions();
-						frame.setVisible(true);	
-						frame.setResizable(false);
-						frame.setLocationRelativeTo(null);
-						if (frame.isShowing()){
-							dispose();
-						}							
-					} else if (dbQ.hasMultChoice(aid)){
-						List<MultQuestion> qns = dbQ.multChoiceQuestions(aid);
-						ListIterator<MultQuestion>  multQ = qns.listIterator();
+					//questionIterator.set(questions.get(i));
+					System.out.println("new next: " + questionIterator.next());
+					if (questions.get(i).hasMultAnswer()) {
 						AnswerMultipleChoice frame = new AnswerMultipleChoice();
-						frame.setVisible(true);	
-						frame.setResizable(false);
-						frame.setLocationRelativeTo(null);
+						sf.switchForm(frame);
 						if (frame.isShowing()){
 							dispose();
 						}
+					} else {
+						// then it is a text question
+						tq = (TextQuestion) questions.get(i);
+						lblQuestions.setText("Questions: " + tq.getQuestion());
+						lblQuestName.setText("Name: " + tq.getName());
+						lblPointsWorth.setText("Points: " + new Integer(tq.getPoints()).toString() );
 					}
 				}
 			}

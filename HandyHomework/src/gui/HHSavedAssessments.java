@@ -152,6 +152,8 @@ public class HHSavedAssessments extends JFrame {
 						//DUPLICATE COOODE from actionPerformed
 						DbQuestions dbQ = new DbQuestions();
 						int aid = SelectedAssessment.getAssess().getAid();
+						// logic error- the if statement checks that a text question exists, 
+						// not that the first question is a text question
 						if (dbQ.hasTextQuestions(aid)) {
 							AnswerStudentQuestions frame = new AnswerStudentQuestions();
 							sf.switchForm(frame);

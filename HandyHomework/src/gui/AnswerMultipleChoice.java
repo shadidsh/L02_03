@@ -11,9 +11,11 @@ import answer.TextAnswer;
 import assessment.SelectedAssessment;
 import dao.DbQuestions;
 import question.MultQuestion;
+import question.Question;
 import question.TextQuestion;
 
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
@@ -22,7 +24,9 @@ import java.util.List;
 import java.util.ListIterator;
 
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -70,42 +74,42 @@ public class AnswerMultipleChoice extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblQuestionName = new JLabel("Question Name");
-		lblQuestionName.setBounds(141, 18, 150, 33);
+		lblQuestionName.setBounds(166, 11, 150, 33);
 		lblQuestionName.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		contentPane.add(lblQuestionName);
 		
 		JLabel lblquestion = new JLabel("Question: ...");
 		lblquestion.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		lblquestion.setBounds(48, 74, 354, 71);
+		lblquestion.setBounds(20, 62, 430, 71);
 		contentPane.add(lblquestion);
 		
 		JRadioButton rdbtnA1 = new JRadioButton();
-		rdbtnA1.setBounds(80, 157, 312, 23);
+		rdbtnA1.setBounds(166, 153, 312, 23);
 		contentPane.add(rdbtnA1);
 		rdbtnA1.setVisible(false);
 		
 		JRadioButton rdbtnA2 = new JRadioButton();
-		rdbtnA2.setBounds(80, 192, 312, 23);
+		rdbtnA2.setBounds(166, 189, 312, 23);
 		contentPane.add(rdbtnA2);
 		rdbtnA2.setVisible(false);
 		
 		JRadioButton rdbtnA3 = new JRadioButton();
-		rdbtnA3.setBounds(80, 227, 312, 23);
+		rdbtnA3.setBounds(166, 229, 312, 23);
 		contentPane.add(rdbtnA3);
 		rdbtnA3.setVisible(false);
 		
 		JRadioButton rdbtnA4 = new JRadioButton();
-		rdbtnA4.setBounds(80, 262, 312, 23);
+		rdbtnA4.setBounds(166, 265, 312, 23);
 		contentPane.add(rdbtnA4);
 		rdbtnA4.setVisible(false);
 		
 		JRadioButton rdbtnA5 = new JRadioButton();
-		rdbtnA5.setBounds(80, 297, 312, 23);
+		rdbtnA5.setBounds(166, 297, 312, 23);
 		contentPane.add(rdbtnA5);
 		rdbtnA5.setVisible(false);
 		
 		JRadioButton rdbtnA6 = new JRadioButton();
-		rdbtnA6.setBounds(80, 338, 312, 23);
+		rdbtnA6.setBounds(166, 323, 312, 23);
 		contentPane.add(rdbtnA6);
 		rdbtnA6.setVisible(false);
 		
@@ -194,6 +198,74 @@ public class AnswerMultipleChoice extends JFrame {
 				
 			}
 		});
+		
+    // below is the navigation tool
+	JScrollPane scrollPane = new JScrollPane();
+	scrollPane.setBounds(10, 153, 141, 212);
+	contentPane.add(scrollPane);
+	
+	JPanel navigationPanel = new JPanel();
+	scrollPane.setViewportView(navigationPanel);
+	
+	JLabel lblNavigateAssessment = new JLabel("Navigate Assessment");
+	scrollPane.setColumnHeaderView(lblNavigateAssessment);
+	
+	// make container for list of questions
+	DefaultListModel<String> lstQuestion = new DefaultListModel<>();	
+	// get list of questions from db
+	List<Question> questions = MCQ.allQuestions(aid);
+	// fill lstQuestion with list of questions
+	for (Question tq: questions ) {
+		lstQuestion.addElement(tq.getName());
+	}
+	// create list
+	JList<String> listQuestions = new JList<>(lstQuestion);
+	listQuestions.setFixedCellWidth(100);
+	// add to navigationPanel
+	navigationPanel.add(listQuestions);
+	// double click element to go to that question
+	listQuestions.addMouseListener(new MouseAdapter() {
+		public void mouseClicked(MouseEvent e) {
+			String qName = listQuestions.getSelectedValue();
+			if ((e.getClickCount() == 2) && (!qName.equals(mq.getName()))) {
+				// make db connection
+				DbQuestions dbQ = new DbQuestions();
+				// get assessment id
+				int aid = SelectedAssessment.getAssess().getAid();
+				// get list of questions in assessment
+				List<Question> questions = dbQ.allQuestions(aid);
+				ListIterator<Question> questionIterator = questions.listIterator();
+				int newQid = 0;
+				int i;
+				for (i = 0; i < questions.size(); i++) {
+					if (questions.get(i).getName().equals(qName)) {
+						newQid = questions.get(i).getQid();
+						break;
+					}
+				}
+				if (questions.get(i).hasMultAnswer()) {
+					mq = (MultQuestion) questions.get(i);
+					lblquestion.setText("Questions: " + mq.getQuestion());
+					List<TextAnswer> mqAnswers = mq.getAnswers();
+					setButtonText(buttons, mqAnswers);
+					/*
+					AnswerMultipleChoice frame = new AnswerMultipleChoice();
+					frame.mq = (MultQuestion) questions.get(i);
+					sf.switchForm(frame);
+					if (frame.isShowing()){
+						dispose();
+					}*/
+				} else {
+					// then it is a text question
+					AnswerStudentQuestions frame = new AnswerStudentQuestions();
+					sf.switchForm(frame);
+					if (frame.isShowing()){
+						dispose();
+					}
+				}
+			}
+		}
+	});
 		
 		btnSubmit.setBounds(285, 370, 117, 29);
 		contentPane.add(btnSubmit);

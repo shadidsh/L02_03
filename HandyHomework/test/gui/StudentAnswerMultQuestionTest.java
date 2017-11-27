@@ -25,7 +25,7 @@ import login.SelectedUser;
 import login.StudentLogin;
 import question.MultQuestion;
 
-public class StudentAnswerMultQuestionTest {
+public class StudentAnswerMultQuestionTest extends AssertJSwingJUnitTest {
 /*
 	protected void onSetUp() {
 		// set up student user
