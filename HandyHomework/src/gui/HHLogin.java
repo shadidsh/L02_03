@@ -41,6 +41,7 @@ public class HHLogin extends JFrame {
 				try {
 					HHLogin frame = new HHLogin();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,7 +53,8 @@ public class HHLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public HHLogin() {
-		setTitle("HandyHomework");
+		SwitchForm sf = new SwitchForm();
+		setTitle("HandyHomework - Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 420, 300);
 		contentPane = new JPanel();
@@ -100,11 +102,9 @@ public class HHLogin extends JFrame {
 						JOptionPane.showMessageDialog(HHLogin.this, 
 								"Incorrect credentials entered.");
 					} else {					
-						SelectedUser.setUser(uf);
-						
+						SelectedUser.setUser(uf);		
 						HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
-						frame.setVisible(true);
-						frame.setResizable(false);
+						sf.switchForm(frame);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -132,8 +132,7 @@ public class HHLogin extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				HHRegister frame = new HHRegister();
-				frame.setVisible(true);
-				frame.setResizable(false);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}

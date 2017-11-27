@@ -50,7 +50,8 @@ public class HHRegister extends JFrame {
 	 * Create the frame.
 	 */
 	public HHRegister() {
-		setTitle("HandyHomework");
+		SwitchForm sf = new SwitchForm();
+		setTitle("HandyHomework - Register User");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 300);
 		contentPane = new JPanel();
@@ -98,8 +99,7 @@ public class HHRegister extends JFrame {
 					} else {
 						db.addUser(userName, password, isProf);
 						HHLogin frame = new HHLogin();
-						frame.setVisible(true);
-						frame.setResizable(false);
+						sf.switchForm(frame);
 						if (frame.isShowing()){
 							dispose();
 						}
@@ -123,8 +123,7 @@ public class HHRegister extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHLogin frame = new HHLogin();
-				frame.setVisible(true);
-				frame.setResizable(false);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}

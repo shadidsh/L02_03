@@ -73,6 +73,8 @@ public class HHSavedAssessments extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedAssessments() {
+		SwitchForm sf = new SwitchForm();
+		setTitle("HandyHomework - Assessments");
 		this.setName("SavedAssess");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 395);
@@ -96,8 +98,6 @@ public class HHSavedAssessments extends JFrame {
 		assessmentTitle.setWrapStyleWord(true);
 		contentPane.add(assessmentTitle);
 		
-		String res = "";
-		
 		DefaultListModel<String> lstAssess = new DefaultListModel<>();
 		ArrayList<Assessment> assess = new ArrayList<Assessment>();
 		DbAssessment dbAssess = new DbAssessment();
@@ -115,8 +115,7 @@ public class HHSavedAssessments extends JFrame {
 			JOptionPane.showMessageDialog(HHSavedAssessments.this, 
 					"No Courses have been selected, Logging out ");
 			HHLogin frame = new HHLogin();
-			frame.setVisible(true);
-			frame.setResizable(false);
+			sf.switchForm(frame);
 			if (frame.isShowing()){
 				dispose();
 			}
@@ -128,12 +127,10 @@ public class HHSavedAssessments extends JFrame {
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HandyHomeworkMainPage frame = new HandyHomeworkMainPage();
-				frame.setVisible(true);	
-				frame.setResizable(false);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
-
 			}
 		});
 		JButton btnView = new JButton("Select Assessment");
@@ -146,21 +143,31 @@ public class HHSavedAssessments extends JFrame {
 					SelectedAssessment.setAssess(selectedAs);
 					if (SelectedUser.getUser().isProf()) {
 						HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-						frame.setVisible(true);
-						frame.setResizable(false);
+						sf.switchForm(frame);
 						if (frame.isShowing()){
 							dispose();
 						}
 					} else {
-						AnswerStudentQuestions frame = new AnswerStudentQuestions();
-						frame.setVisible(true);
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
+						
+						//DUPLICATE COOODE from actionPerformed
+						DbQuestions dbQ = new DbQuestions();
+						int aid = SelectedAssessment.getAssess().getAid();
+						if (dbQ.hasTextQuestions(aid)) {
+							AnswerStudentQuestions frame = new AnswerStudentQuestions();
+							sf.switchForm(frame);
+							if (frame.isShowing()){
+								dispose();
+							}							
+						} else if (dbQ.hasMultChoice(aid)){
+							AnswerMultipleChoice frame = new AnswerMultipleChoice();
+							sf.switchForm(frame);
+							if (frame.isShowing()){
+								dispose();
+							}
 						}
 					}
 				}
-				}
+			}
 		});
 		contentPane.add(btnView);
 		
@@ -215,17 +222,27 @@ public class HHSavedAssessments extends JFrame {
 					SelectedAssessment.setAssess(selectedAs);
 					if (SelectedUser.getUser().isProf()) {
 						HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-						frame.setVisible(true);	
-						frame.setResizable(false);
+						sf.switchForm(frame);
 						if (frame.isShowing()){
 							dispose();
 						}
 					} else {
-						AnswerStudentQuestions frame = new AnswerStudentQuestions();
-						frame.setVisible(true);	
-						frame.setResizable(false);
-						if (frame.isShowing()){
-							dispose();
+						
+						//DUPLICATE COOODE from actionPerformed
+						DbQuestions dbQ = new DbQuestions();
+						int aid = SelectedAssessment.getAssess().getAid();
+						if (dbQ.hasTextQuestions(aid)) {
+							AnswerStudentQuestions frame = new AnswerStudentQuestions();
+							sf.switchForm(frame);
+							if (frame.isShowing()){
+								dispose();
+							}							
+						} else if (dbQ.hasMultChoice(aid)){
+							AnswerMultipleChoice frame = new AnswerMultipleChoice();
+							sf.switchForm(frame);
+							if (frame.isShowing()){
+								dispose();
+							}
 						}
 					}
 				}
@@ -238,8 +255,7 @@ public class HHSavedAssessments extends JFrame {
 		btnNewAssessment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHCreateAssessmentFrame frame = new HHCreateAssessmentFrame();
-				frame.setVisible(true);	
-				frame.setResizable(false);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -251,8 +267,7 @@ public class HHSavedAssessments extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				HHViewCoursesPage frame = new HHViewCoursesPage();
-				frame.setVisible(true);
-				frame.setResizable(false);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -277,14 +292,12 @@ public class HHSavedAssessments extends JFrame {
 		}); 	
 		
 		
-		
 		if (SelectedUser.getUser().isProf()) {
 			JButton btnViewStudents = new JButton("View Students");
 			btnViewStudents.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					ViewStudentsPage frame = new ViewStudentsPage();
-					frame.setVisible(true);	
-					frame.setResizable(false);
+					sf.switchForm(frame);
 					if (frame.isShowing()){
 						dispose();
 					} 
@@ -297,8 +310,25 @@ public class HHSavedAssessments extends JFrame {
 			contentPane.add(btnRemove);
 			contentPane.add(btnNewAssessment);
 			btnNewAssessment.setBounds(257, 257, 160, 30);
+		} else if (!SelectedUser.getUser().isProf()) {
+			/*
+			JButton btnViewMarks = new JButton("View Grades");
+			btnViewMarks.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					// pop-up looking at the grades for the assessment, if one is selected 
+					if (selectedAs == null ) {
+						JOptionPane.showMessageDialog(HHSavedAssessments.this, "Please select an assessment.");
+					} else {
+						// use selectedAs to get the score from the db? selectedAs;
+						JOptionPane.showMessageDialog(HHSavedAssessments.this, "This\nis\nwhere\nthe\nresults\ngo");
+					}	
+				}
+				
+			}
+			);
+			
+			btnViewMarks.setBounds(309, 326, 160, 30);
+			contentPane.add(btnViewMarks);*/
 		}
-		
-		
 	}
 }

@@ -67,7 +67,8 @@ public class AddMultipleChoice extends JFrame {
 	 * Create the frame.
 	 */
 	public AddMultipleChoice() {
-		setTitle("questionCreate");
+		SwitchForm sf = new SwitchForm();
+		setTitle("HandyHomework - Create Multiple Choice Question");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 778, 531);
 		contentPane = new JPanel();
@@ -153,8 +154,7 @@ public class AddMultipleChoice extends JFrame {
 				textQ = null;
 				
 				HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-				frame.setVisible(true);
-				frame.setResizable(false);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -190,7 +190,6 @@ public class AddMultipleChoice extends JFrame {
 		});
 		btnAddAnswer.setBounds(334, 406, 125, 50);
 		contentPane.add(btnAddAnswer);
-		
 		table = new JTable(model);
 		model.setColumnIdentifiers(colHeadings);
 		JScrollPane scrollPane = new JScrollPane(table);
@@ -314,7 +313,7 @@ public class AddMultipleChoice extends JFrame {
 						Assessment as = SelectedAssessment.getAssess();
 						DbQuestions dbQuest = new DbQuestions();
 						
-						int qid = dbQuest.insertQuestions(as.getAid(), name, questionContent, value);
+						int qid = dbQuest.insertQuestions(as.getAid(), name, questionContent, value, true, false);
 						MultQuestion mc = new MultQuestion(qid, questionContent, questionContent, qid);
 						
 						lblSelectedQn.setText(mc.getQuestion());

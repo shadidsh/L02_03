@@ -50,7 +50,7 @@ public class DbUser extends DbConnection implements UserDAO  {
     		stat.setInt(1, id);
     		
     		ResultSet Rs = stat.executeQuery(); 
-    		UserLogin userLog;
+    		UserLogin userLog ;
     		if (Rs.next()) { 
     			Integer userId = Rs.getInt(1);
     			String username = Rs.getString(2);
@@ -58,13 +58,16 @@ public class DbUser extends DbConnection implements UserDAO  {
     			boolean isProf = Rs.getBoolean(4);
     			//String email = Rs.getString(5);
     			
+    			
     			if (isProf) {
     				userLog = new ProfessorLogin(userId, username, password);
     			} else {
     				userLog = new StudentLogin(userId, username, password);
     			}
+    			conn.close();
     			return userLog;
-    		} 
+    		}    		
+    		conn.close();    		
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
     	}
@@ -74,14 +77,18 @@ public class DbUser extends DbConnection implements UserDAO  {
 	@Override
 	public UserLogin getUser(String user, String pass) {
     	Connection conn = getConnection();
+    	
     	try { 
     		
-    		String query = "select * from " + constants.Constants.DataConstants.USERS 
+    		String query = "select user_id, username, password, is_prof from "
+    				+ constants.Constants.DataConstants.USERS 
     				+  " where username = ? and password = ?";
     		PreparedStatement stat = conn.prepareStatement(query);
     		stat.setString(1, user);
     		stat.setString(2, pass);
+    		System.out.println(stat);
     		ResultSet Rs = stat.executeQuery(); 
+    		
     		UserLogin userLog;
     		if (Rs.next()) { 
     			Integer userId = Rs.getInt(1);
@@ -90,14 +97,18 @@ public class DbUser extends DbConnection implements UserDAO  {
     			boolean isProf = Rs.getBoolean(4);
     			//String email = Rs.getString(5);
     			
+    			
     			if (isProf) {
     				userLog = new ProfessorLogin(userId, username, password);
     			} else {
     				userLog = new StudentLogin(userId, username, password);
     			}
     			System.out.println(userId);
+    			
+    			conn.close();
     			return userLog;
-    		} 
+    		}
+    		conn.close();
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
     	}
@@ -121,14 +132,17 @@ public class DbUser extends DbConnection implements UserDAO  {
     			String password = Rs.getString(3);
     			boolean isProf = Rs.getBoolean(4);
     			//String email = Rs.getString(5);
-    			
+    			conn.close();
     			if (isProf) {
     				userLog = new ProfessorLogin(userId, username, password);
     			} else {
     				userLog = new StudentLogin(userId, username, password);
     			}
+    			conn.close();
     			return userLog;
-    		} 
+    		}
+    		
+    		conn.close();
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
     	}
@@ -147,7 +161,10 @@ public class DbUser extends DbConnection implements UserDAO  {
     		
     		ResultSet Rs = stat.executeQuery(); 
     		Rs.next();
-    		return Rs.getBoolean(1);
+    		boolean res = Rs.getBoolean(1);
+    		conn.close();
+    		return res;
+    		
     	} catch(Exception ex) {
     		System.out.print(ex.getMessage());    		
     	}
@@ -198,10 +215,26 @@ public class DbUser extends DbConnection implements UserDAO  {
     		PreparedStatement stat = conn.prepareStatement(deleteAns);
     		stat.setInt(1, uid);
     		stat.executeUpdate();
-    		
+    		conn.close();
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());  
 		}		
 	}
-	
+	@Override
+	public int removeUser(String user) {
+		Connection conn = getConnection();
+		try {
+    		String deleteAns = "DELETE FROM " 
+		+ constants.Constants.DataConstants.USERS + " WHERE username = ?";
+    		PreparedStatement stat = conn.prepareStatement(deleteAns);
+    		stat.setString(1, user);
+    		stat.executeUpdate();
+    		conn.close();
+    		return 0;
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		return -1;
+	}
+
 }

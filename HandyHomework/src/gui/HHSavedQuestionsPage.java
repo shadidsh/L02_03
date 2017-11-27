@@ -1,5 +1,6 @@
 package gui;
 import login.SelectedUser;
+import question.Question;
 import question.TextQuestion;
 
 import java.awt.EventQueue;
@@ -55,7 +56,7 @@ public class HHSavedQuestionsPage extends JFrame {
 	private JLabel ans;
 	private TextAnswer questAnswer;
 	
-	private TextQuestion selQuestion;
+	private Question selQuestion;
 	private int selInd;
 	private String selected = "";
 
@@ -80,6 +81,8 @@ public class HHSavedQuestionsPage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHSavedQuestionsPage() {
+		SwitchForm sf = new SwitchForm();
+		setTitle("HandyHomework - Questions");
 		setName("SavedQuestions");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 569, 420);
@@ -167,8 +170,7 @@ public class HHSavedQuestionsPage extends JFrame {
 			JOptionPane.showMessageDialog(HHSavedQuestionsPage.this, 
 					"No Assessments have been selected, returning to login");
 			HHLogin frame = new HHLogin();
-			frame.setVisible(true);
-			frame.setResizable(false);
+			sf.switchForm(frame);
 			if (frame.isShowing()){
 				dispose();
 			}
@@ -178,10 +180,10 @@ public class HHSavedQuestionsPage extends JFrame {
 		Assessment as = SelectedAssessment.getAssess();
 		DbQuestions dbQuest = new DbQuestions();
 		aid = as.getAid();
-		List<TextQuestion> questions = dbQuest.TextQuestions(aid);
+		List<Question> questions = dbQuest.allQuestions(aid);
 				
 		lblAssessmentName.setText(as.getName());
-		for (TextQuestion tq: questions ) {
+		for (Question tq: questions ) {
 			lstQuestion.addElement(tq.getName());
 		}
 			
@@ -192,8 +194,7 @@ public class HHSavedQuestionsPage extends JFrame {
 		btnback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHSavedAssessments frame = new HHSavedAssessments();
-				frame.setVisible(true);		
-				frame.setResizable(false);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
@@ -214,7 +215,7 @@ public class HHSavedQuestionsPage extends JFrame {
 				JList<?> list = (JList<?>) e.getSource();
 				int index = list.getSelectedIndex();
 				if (index != -1) {
-					TextQuestion question = questions.get(list.getSelectedIndex());
+					Question question = questions.get(list.getSelectedIndex());
 					questionText.setText("Q: " + question.getQuestion());
 					questionText.setSize(questionText.getPreferredSize());
 					res = "<html>This question is worth <html>" + new Integer(question.getPoints()).toString() + "<html> marks</html>" ;
@@ -244,31 +245,6 @@ public class HHSavedQuestionsPage extends JFrame {
 			
 		});
 		
-//		*** not yet functional so its commented out
-//		listQuestion.addMouseListener(new MouseAdapter() {
-//			public void mouseClicked(MouseEvent e) {
-//				JList listQuestion = (JList)e.getSource();
-//				if (e.getClickCount() == 2) {
-//					sfdfsdfsSelectedAssessment.setAssess(selectedAs);
-//					if (SelectedUser.getUser().isProf()) {
-//						HHSavedQuestionsPage frame = new HHSavedQuestionsPage();
-//						frame.setVisible(true);	
-//						frame.setResizable(false);
-//						if (frame.isShowing()){
-//							dispose();
-//						}
-//					} else {
-//						AnswerStudentQuestions frame = new AnswerStudentQuestions();
-//						frame.setVisible(true);	
-//						frame.setResizable(false);
-//						if (frame.isShowing()){
-//							dispose();
-//						}
-//					}
-//				}
-//			}
-//		});
-//		
 		String[] cBoxStrings = {"Text Question", "Multiple Choice Question"};
 		JComboBox<Object> cBox = new JComboBox<Object>(cBoxStrings);
 		cBox.setSelectedIndex(0);
@@ -304,17 +280,15 @@ public class HHSavedQuestionsPage extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (selected.equals("Text Question")) {
-					HHFormFrame frame = new HHFormFrame();
-					frame.setVisible(true);	
-					frame.setResizable(false);
+					HHCreateTextQuestion frame = new HHCreateTextQuestion();
+					sf.switchForm(frame);
 					if (frame.isShowing()){
 						dispose();
 					}
 				}
 				else if (selected.equals("Multiple Choice Question")) {
 					AddMultipleChoice frame = new AddMultipleChoice();
-					frame.setVisible(true);	
-					frame.setResizable(false);
+					sf.switchForm(frame);
 					if (frame.isShowing()){
 						dispose();
 					}
@@ -322,13 +296,13 @@ public class HHSavedQuestionsPage extends JFrame {
 			}
 		});
 		btnAdd.setMaximumSize(new Dimension(139, 23));
-		btnAdd.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		btnAdd.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 				
 		if (SelectedUser.getUser().isProf()){
-			btnAdd.setBounds(58, 301, 130, 36);
+			btnAdd.setBounds(58, 301, 133, 36);
 			contentPane.add(btnAdd);
 			
-			btnRemove.setBounds(58, 342, 130, 35);
+			btnRemove.setBounds(58, 342, 133, 35);
 			contentPane.add(btnRemove);
 		} else {
 			questionAnswerField = new JTextField();

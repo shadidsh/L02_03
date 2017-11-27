@@ -52,6 +52,8 @@ public class HHCreateCoursePage extends JFrame {
 	 * Create the frame.
 	 */
 	public HHCreateCoursePage() {
+		SwitchForm sf = new SwitchForm();
+		setTitle("HandyHomework - Create Course");
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 350, 250);
@@ -97,8 +99,7 @@ public class HHCreateCoursePage extends JFrame {
 					DbCourse dbCourse = new DbCourse();
 					dbCourse.insertCourses(pid, courseCode, name, courseTerm);
 					HHViewCoursesPage frame = new HHViewCoursesPage();
-					frame.setVisible(true);
-					frame.setResizable(false);
+					sf.switchForm(frame);
 					if (frame.isShowing()){
 						dispose();
 					}
@@ -118,8 +119,7 @@ public class HHCreateCoursePage extends JFrame {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HHViewCoursesPage frame = new HHViewCoursesPage();
-				frame.setVisible(true);
-				frame.setResizable(false);
+				sf.switchForm(frame);
 				if (frame.isShowing()){
 					dispose();
 				}
